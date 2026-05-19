@@ -1,0 +1,2462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Threefold Supply Co. — Made by Three, Worn by All</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=block" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+:root{
+  --black:#080808;
+  --charcoal:#111111;
+  --surface:#181818;
+  --surface-2:#1e1e1e;
+  --border:#252525;
+  --border-hi:#363636;
+  --gold:#C49A2A;
+  --gold-light:#DFB84A;
+  --gold-dim:rgba(196,154,42,0.12);
+  --gold-rule:rgba(196,154,42,0.4);
+  --off-white:#F0EDE7;
+  --muted:#888880;
+  --muted-2:#4a4a46;
+  --text:#EDEBE6;
+  --nav-h:72px;
+}
+body{background:var(--black);color:var(--text);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+
+/* ── TYPOGRAPHY ── */
+.f-display{font-family:'Bebas Neue',sans-serif;letter-spacing:.03em;line-height:.93}
+.f-label{font-family:'Barlow Condensed',sans-serif;font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:11px}
+.f-label-lg{font-family:'Barlow Condensed',sans-serif;font-weight:500;letter-spacing:.1em;text-transform:uppercase;font-size:14px}
+
+/* ── LAYOUT ── */
+.wrap{max-width:1320px;margin:0 auto;padding:0 48px}
+@media(max-width:768px){.wrap{padding:0 20px}}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .75s ease,transform .75s ease}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+/* ── GOLD RULE ── */
+.gold-rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold-rule),transparent)}
+
+/* ── SECTION EYEBROW ── */
+.eyebrow{display:inline-flex;align-items:center;gap:10px;margin-bottom:1.25rem}
+.eyebrow::before{content:'';display:block;width:28px;height:1px;background:var(--gold)}
+.eyebrow span{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+#nav{position:fixed;top:0;left:0;right:0;z-index:200;transition:background .35s ease,border-color .35s ease;border-bottom:1px solid transparent}
+#nav.dark{background:rgba(8,8,8,.93);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom-color:var(--border)}
+.nav-inner{max-width:1320px;margin:0 auto;padding:0 48px;height:var(--nav-h);display:flex;align-items:center;justify-content:space-between}
+@media(max-width:768px){.nav-inner{padding:0 20px}}
+.nav-logo-wrap{display:flex;flex-direction:column;line-height:1;gap:1px}
+.nav-logo-main{font-family:'Bebas Neue',sans-serif;font-size:21px;letter-spacing:.08em;color:var(--off-white)}
+.nav-logo-tag{font-family:'Barlow Condensed',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-family:'Barlow Condensed',sans-serif;font-size:12.5px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);transition:color .25s}
+.nav-links a:hover{color:var(--off-white)}
+.nav-cta{color:var(--gold)!important;border:1px solid rgba(196,154,42,.5);padding:8px 20px;transition:background .25s,color .25s!important}
+.nav-cta:hover{background:var(--gold);color:var(--black)!important}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:6px}
+.nav-burger span{display:block;width:22px;height:1.5px;background:var(--off-white);transition:.3s}
+@media(max-width:900px){
+  .nav-links{display:none}
+  .nav-burger{display:flex}
+  .nav-links.open{
+    display:flex;
+    position:absolute;
+    top:var(--nav-h);
+    left:20px;
+    right:20px;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:0;
+    padding:16px 18px;
+    background:rgba(248,245,240,.98);
+    border:1px solid var(--border-l);
+    box-shadow:0 18px 45px rgba(0,0,0,.18);
+    z-index:250;
+  }
+  .nav-links.open li{width:100%}
+  .nav-links.open a{display:block;width:100%;padding:12px 0;color:var(--text-1)!important;border-bottom:1px solid rgba(214,206,189,.75)}
+  .nav-links.open li:last-child a{border-bottom:none}
+  .nav-burger.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+  .nav-burger.open span:nth-child(2){opacity:0}
+  .nav-burger.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+  #nav.dark .nav-burger span{background:var(--text-1)}
+}
+
+/* ══════════════════════════════════════════
+   HERO — Full bleed cinematic
+══════════════════════════════════════════ */
+#hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background-image:url(HERO_IMG);background-size:cover;background-position:center 30%}
+.hero-vignette{position:absolute;inset:0;background:linear-gradient(95deg,rgba(8,8,8,.82) 0%,rgba(8,8,8,.55) 45%,rgba(8,8,8,.1) 100%)}
+.hero-vignette-bottom{position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to top,rgba(8,8,8,.9),transparent)}
+.hero-content{position:relative;z-index:2;height:100%;display:flex;align-items:center;padding-top:var(--nav-h)}
+.hero-text{max-width:680px;padding:0 48px}
+@media(max-width:768px){.hero-text{padding:0 20px}}
+.hero-label{display:flex;align-items:center;gap:10px;margin-bottom:1.5rem;opacity:0;animation:fadeUp .8s ease .2s forwards}
+.hero-pulse{width:7px;height:7px;background:var(--gold);border-radius:50%;animation:pulse 2.2s ease infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero-label-text{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.hero-headline{font-family:'Bebas Neue',sans-serif;font-size:clamp(80px,10vw,140px);line-height:.91;letter-spacing:.03em;color:var(--off-white);margin-bottom:1.75rem;opacity:0;animation:fadeUp .85s ease .35s forwards}
+.hero-headline .acc{color:var(--gold)}
+.hero-rule{width:72px;height:1px;background:var(--gold);margin-bottom:1.25rem;opacity:0;animation:fadeUp .7s ease .55s forwards}
+.hero-sub{font-size:16px;color:rgba(240,237,231,.75);line-height:1.75;max-width:440px;margin-bottom:2.25rem;opacity:0;animation:fadeUp .7s ease .65s forwards}
+.hero-sub strong{color:var(--off-white);font-weight:500}
+.hero-btns{display:flex;gap:14px;align-items:center;flex-wrap:wrap;opacity:0;animation:fadeUp .7s ease .8s forwards}
+.btn-gold{background:var(--gold);color:var(--black);font-family:'Barlow Condensed',sans-serif;font-size:12.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:13px 30px;border:none;cursor:pointer;transition:background .25s,transform .2s;display:inline-block}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--off-white);font-family:'Barlow Condensed',sans-serif;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:13px 30px;border:1px solid rgba(240,237,231,.3);cursor:pointer;transition:border-color .25s;display:inline-block}
+.btn-ghost:hover{border-color:var(--off-white)}
+.hero-stats{position:absolute;bottom:48px;left:48px;right:auto;z-index:2;display:flex;gap:48px;opacity:0;animation:fadeUp .7s ease 1s forwards}
+@media(max-width:768px){.hero-stats{left:20px;gap:28px;bottom:32px}}
+.hero-stat-n{font-family:'Bebas Neue',sans-serif;font-size:38px;color:var(--off-white);line-height:1}
+.hero-stat-l{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+.hero-badge{position:absolute;bottom:48px;right:48px;z-index:2;border:1px solid rgba(196,154,42,.3);background:rgba(8,8,8,.8);padding:14px 18px;opacity:0;animation:fadeUp .7s ease 1.1s forwards}
+@media(max-width:768px){.hero-badge{display:none}}
+.hero-badge-code{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--gold);line-height:1}
+.hero-badge-label{font-family:'Barlow Condensed',sans-serif;font-size:9.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-top:2px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+
+/* ══════════════════════════════════════════
+   DIFFERENTIATOR
+══════════════════════════════════════════ */
+#diff{background:var(--charcoal);overflow:hidden}
+.diff-grid{display:grid;grid-template-columns:1fr 1fr;min-height:680px}
+.diff-text-col{padding:100px 64px 100px 48px;display:flex;flex-direction:column;justify-content:center}
+.diff-img-col{position:relative;overflow:hidden}
+.diff-img-col img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
+.diff-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,5.5vw,78px);line-height:.93;color:var(--off-white);margin-bottom:1.5rem}
+.diff-h .acc{color:var(--gold)}
+.diff-intro{font-size:15px;color:var(--muted);line-height:1.8;max-width:420px;margin-bottom:2.5rem}
+.diff-intro strong{color:var(--off-white);font-weight:500}
+.diff-list{list-style:none;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
+.diff-list li{padding:18px 0;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start}
+.diff-list-num{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold);min-width:24px;margin-top:3px}
+.diff-list-text{font-size:14.5px;color:var(--muted);line-height:1.6}
+.diff-list-text strong{color:var(--off-white);font-weight:500;display:block;margin-bottom:3px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
+.diff-quote-strip{margin-top:2rem;padding:20px 24px;border-left:2px solid var(--gold);background:rgba(196,154,42,.05)}
+.diff-quote-text{font-size:14px;color:rgba(240,237,231,.7);line-height:1.75;font-style:italic}
+.diff-quote-source{margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+@media(max-width:900px){.diff-grid{grid-template-columns:1fr}.diff-img-col{height:55vw;min-height:320px;position:relative}.diff-img-col img{position:absolute}.diff-text-col{padding:64px 20px}}
+
+/* ══════════════════════════════════════════
+   COLLECTION GALLERY
+══════════════════════════════════════════ */
+#collection{background:var(--black);padding:0}
+.coll-header{padding:100px 48px 56px}
+@media(max-width:768px){.coll-header{padding:72px 20px 40px}}
+.coll-header-inner{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap}
+.coll-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,7vw,96px);line-height:.9;color:var(--off-white)}
+.coll-h .gold-line{color:var(--gold);display:block}
+.coll-client-tag{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim);border:1px solid rgba(196,154,42,.25);padding:6px 14px;margin-bottom:12px}
+.coll-client-dot{width:5px;height:5px;background:var(--gold);border-radius:50%}
+.coll-client-text{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.coll-meta-body{font-size:14px;color:var(--muted);line-height:1.75;max-width:320px}
+
+/* Gallery grid — editorial mosaic */
+.gallery-mosaic{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:420px 320px 480px;gap:3px}
+.g-item{position:relative;overflow:hidden;cursor:pointer;background:var(--surface)}
+.g-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .55s ease}
+.g-item:hover img{transform:scale(1.04)}
+.g-item-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(8,8,8,.88) 100%);opacity:.7;transition:opacity .4s ease}
+.g-item:hover .g-item-overlay{opacity:1}
+.g-item-info{position:absolute;bottom:0;left:0;right:0;padding:22px 24px 26px;z-index:2;transform:translateY(6px);transition:transform .35s ease}
+.g-item:hover .g-item-info{transform:none}
+.g-item-num{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:5px}
+.g-item-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.04em;color:var(--off-white);line-height:1;margin-bottom:6px}
+.g-item-desc{font-size:11.5px;color:rgba(240,237,231,.55);line-height:1.55}
+
+/* Grid placement */
+.g0{grid-column:1;grid-row:1/3}   /* journey portrait spans 2 rows */
+.g1{grid-column:2/4;grid-row:1}   /* highway landscape wide */
+.g2{grid-column:2;grid-row:2}     /* dotted landscape */
+.g3{grid-column:3;grid-row:2}     /* golden landscape */
+.g4{grid-column:1/3;grid-row:3}   /* classic wide */
+.g5{grid-column:3;grid-row:3}     /* delivery portrait */
+
+@media(max-width:900px){
+  .gallery-mosaic{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+  .g0,.g1,.g2,.g3,.g4,.g5{grid-column:auto;grid-row:auto}
+  .g-item{height:56vw;min-height:240px}
+}
+@media(max-width:560px){
+  .gallery-mosaic{grid-template-columns:1fr}
+  .g-item{height:80vw}
+}
+
+/* Sleeve detail strip */
+.sleeve-strip{background:var(--surface);border-top:3px solid var(--gold);padding:60px 48px}
+@media(max-width:768px){.sleeve-strip{padding:48px 20px}}
+.sleeve-inner{display:grid;grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr;gap:0;border:1px solid var(--border)}
+@media(max-width:900px){.sleeve-inner{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.sleeve-inner{grid-template-columns:1fr}}
+.sleeve-cell{padding:28px 24px;border-right:1px solid var(--border)}
+.sleeve-cell:last-child{border-right:none}
+@media(max-width:900px){.sleeve-cell:nth-child(2n){border-right:none}}
+.sleeve-cell-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.sleeve-cell-val{font-size:13.5px;color:var(--off-white);line-height:1.5}
+
+/* ══════════════════════════════════════════
+   COMPARISON — Typography approach
+══════════════════════════════════════════ */
+#comparison{background:var(--charcoal);padding:100px 0}
+.comp-header{margin-bottom:64px;text-align:center}
+.comp-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,6vw,80px);color:var(--off-white);line-height:.93;margin-bottom:14px}
+.comp-sub{font-size:15px;color:var(--muted);max-width:480px;margin:0 auto}
+.comp-grid{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);overflow:hidden}
+.comp-col{padding:0}
+.comp-col-head{padding:24px 36px;border-bottom:1px solid var(--border)}
+.comp-col-head-label{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:6px}
+.comp-col-head-name{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:.04em;line-height:1}
+.comp-col-left .comp-col-head-label{color:var(--muted-2)}
+.comp-col-left .comp-col-head-name{color:var(--muted)}
+.comp-col-right .comp-col-head-label{color:var(--gold)}
+.comp-col-right .comp-col-head-name{color:var(--off-white)}
+.comp-col-right{background:rgba(196,154,42,.04);border-left:2px solid var(--gold)}
+.comp-col-right .comp-col-head{border-bottom-color:var(--gold);border-bottom-width:1px}
+.comp-row{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border)}
+.comp-cell{padding:18px 36px;font-size:14px;line-height:1.65}
+.comp-cell-left{color:var(--muted-2);font-style:italic;border-right:2px solid var(--gold)}
+.comp-cell-right{color:var(--off-white)}
+.comp-row:hover .comp-cell{background:rgba(255,255,255,.02)}
+@media(max-width:768px){
+  .comp-grid{grid-template-columns:1fr}
+  .comp-col-right{border-left:none;border-top:2px solid var(--gold)}
+  .comp-row{grid-template-columns:1fr}
+  .comp-cell-left{border-right:none;border-bottom:1px solid var(--border)}
+  .comp-cell{padding:14px 20px}
+  .comp-col-head{padding:20px}
+}
+
+/* ══════════════════════════════════════════
+   PROCESS
+══════════════════════════════════════════ */
+#process{background:var(--black);padding:100px 0 0}
+.proc-header{text-align:center;margin-bottom:72px}
+.proc-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,6vw,80px);color:var(--off-white);line-height:.93;margin-bottom:14px}
+.proc-sub{font-size:15px;color:var(--muted);max-width:420px;margin:0 auto}
+.proc-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;background:var(--border)}
+.proc-step{background:var(--black);position:relative;overflow:hidden}
+.proc-step-img{height:340px;position:relative;overflow:hidden}
+.proc-step-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s ease}
+.proc-step:hover .proc-step-img img{transform:scale(1.03)}
+.proc-step-img-vignette{position:absolute;bottom:0;left:0;right:0;height:180px;background:linear-gradient(to top,var(--black),transparent);z-index:1}
+.proc-step-body{padding:32px 32px 48px}
+.proc-step-num{font-family:'Bebas Neue',sans-serif;font-size:80px;color:var(--border-hi);line-height:1;margin-bottom:8px;transition:color .3s}
+.proc-step:hover .proc-step-num{color:var(--gold-dim)}
+.proc-step-label{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.proc-step-title{font-family:'Bebas Neue',sans-serif;font-size:30px;letter-spacing:.04em;color:var(--off-white);line-height:1.05;margin-bottom:14px}
+.proc-step-text{font-size:13.5px;color:var(--muted);line-height:1.8}
+@media(max-width:900px){.proc-steps{grid-template-columns:1fr}}
+
+/* ══════════════════════════════════════════
+   QUOTE FORM
+══════════════════════════════════════════ */
+#quote{background:var(--charcoal);padding:100px 0}
+.quote-layout{display:grid;grid-template-columns:minmax(280px,.95fr) minmax(0,1.45fr);gap:56px;align-items:start}
+@media(max-width:1000px){.quote-layout{grid-template-columns:1fr;gap:40px}}
+.quote-sidebar{}
+.quote-sidebar-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,5.5vw,72px);color:var(--off-white);line-height:.93;margin-bottom:16px}
+.quote-sidebar-h .acc{color:var(--gold)}
+.quote-sidebar-body{font-size:14.5px;color:var(--muted);line-height:1.8;margin-bottom:1.25rem}
+.quote-sidebar-body strong{color:var(--off-white);font-weight:500}
+.quote-sidebar-note{padding:16px 18px;border-left:2px solid var(--gold);background:var(--gold-dim);font-size:13.5px;color:var(--off-white);line-height:1.7;font-style:italic;margin-top:1.5rem}
+.quote-support{display:grid;gap:10px;margin-top:24px}
+.quote-support-card{border:1px solid var(--border);background:rgba(255,255,255,.025);padding:16px 18px}
+.quote-support-k{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.quote-support-v{font-size:12.5px;color:var(--muted);line-height:1.65}
+
+/* Form */
+.qform{background:var(--surface);border:1px solid var(--border)}
+.fsec{padding:36px 44px;border-bottom:1px solid var(--border)}
+.fsec:last-of-type{border-bottom:none}
+@media(max-width:768px){.fsec{padding:28px 20px}}
+.fsec-title{font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.fsec-title::after{content:'';flex:1;height:1px;background:var(--border)}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.frow.full{grid-template-columns:1fr}
+.frow.three{grid-template-columns:1fr 1fr 1fr}
+@media(max-width:768px){.frow,.frow.three{grid-template-columns:1fr}}
+.fgroup{display:flex;flex-direction:column;gap:7px}
+.flabel{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.flabel .req{color:var(--gold);margin-left:2px}
+.finput,.fselect,.ftextarea{
+  background:var(--surface-2);border:1px solid var(--border);color:var(--off-white);
+  font-family:'DM Sans',sans-serif;font-size:14px;padding:11px 14px;
+  outline:none;width:100%;transition:border-color .2s;-webkit-appearance:none;appearance:none;
+  border-radius:0
+}
+.finput::placeholder,.ftextarea::placeholder{color:var(--muted-2)}
+.finput:focus,.fselect:focus,.ftextarea:focus{border-color:var(--gold)}
+.fselect{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%23888880' stroke-width='1.5' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer
+}
+.fselect option{background:var(--surface-2);color:var(--off-white)}
+.ftextarea{resize:vertical;min-height:90px}
+.fhint{font-size:11.5px;color:var(--muted-2);margin-top:5px;line-height:1.5}
+.fcheck-wrap{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:6px}
+.fcheck-item{display:flex;align-items:center;gap:9px;cursor:pointer;padding:9px 14px;border:1px solid var(--border);background:var(--surface-2);transition:border-color .2s;font-size:13px;color:var(--muted);-webkit-user-select:none;user-select:none}
+.fcheck-item:hover{border-color:var(--border-hi);color:var(--off-white)}
+.fcheck-item.sel{border-color:var(--gold);background:var(--gold-dim);color:var(--off-white)}
+.fcheck-box{width:15px;height:15px;border:1px solid var(--border-hi);background:var(--surface);flex-shrink:0;position:relative;transition:.2s}
+.fcheck-item.sel .fcheck-box{background:var(--gold);border-color:var(--gold)}
+.fcheck-item.sel .fcheck-box::after{content:'';position:absolute;top:2px;left:5px;width:5px;height:8px;border:1.5px solid var(--black);border-top:none;border-left:none;transform:rotate(45deg)}
+.ffile-area{border:1px dashed var(--border-hi);background:var(--surface-2);padding:28px;text-align:center;cursor:pointer;transition:border-color .2s}
+.ffile-area:hover{border-color:var(--gold)}
+.ffile-area.error{border-color:#c0392b!important}
+.ffile-icon{font-size:24px;opacity:.3;margin-bottom:8px}
+.ffile-text{font-size:12.5px;color:var(--muted);line-height:1.6}
+.ffile-text strong{color:var(--gold)}
+.ffile-error-msg{font-size:11.5px;color:#c0392b;margin-top:6px;display:none}
+.ffile-error-msg.show{display:block}
+.ffile-list{margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.ffile-list-item{display:flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid var(--border);background:var(--surface-2)}
+.ffile-list-name{font-size:12px;color:var(--off-white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;flex:1}
+.ffile-list-size{font-size:11px;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.ffile-list-remove{font-size:15px;line-height:1;color:var(--muted);background:none;border:none;cursor:pointer;padding:0 2px;flex-shrink:0;transition:color .15s}
+.ffile-list-remove:hover{color:#c0392b}
+.fsubmit-row{display:flex;align-items:center;justify-content:center;padding:36px 44px 44px}
+@media(max-width:768px){.fsubmit-row{padding:24px 20px 32px}}
+.fsubmit-note{font-size:13px;color:var(--muted);max-width:360px;line-height:1.65}
+.fsubmit-note strong{color:var(--off-white);font-weight:500}
+.btn-submit{background:var(--gold);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;padding:15px 44px;border:none;cursor:pointer;transition:background .25s,transform .2s;flex-shrink:0}
+.btn-submit:hover{background:var(--gold-light);transform:translateY(-1px)}
+.form-success{display:none;text-align:center;padding:64px 40px}
+.form-success.show{display:block}
+.form-success-check{width:52px;height:52px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:18px;color:var(--gold)}
+.form-success-h{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--off-white);line-height:1;margin-bottom:12px}
+.form-success-body{font-size:15px;color:var(--muted);max-width:380px;margin:0 auto}
+
+/* ══════════════════════════════════════════
+   PORTAL CTA
+══════════════════════════════════════════ */
+#portal{background:var(--black);overflow:hidden}
+.portal-grid{display:grid;grid-template-columns:1fr 1fr;min-height:640px}
+.portal-img-col{position:relative;overflow:hidden}
+.portal-img-col img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.portal-text-col{padding:100px 64px 100px 60px;display:flex;flex-direction:column;justify-content:center}
+@media(max-width:768px){.portal-text-col{padding:64px 20px}}
+.portal-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,5vw,72px);color:var(--off-white);line-height:.93;margin-bottom:18px}
+.portal-h .acc{color:var(--gold)}
+.portal-body{font-size:15px;color:var(--muted);line-height:1.8;margin-bottom:2rem;max-width:420px}
+.portal-list{list-style:none;display:flex;flex-direction:column;gap:0;margin-bottom:2.5rem;border-top:1px solid var(--border)}
+.portal-list li{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--border);font-size:14px;color:var(--muted)}
+.portal-check{width:16px;height:16px;border:1px solid var(--gold);background:var(--gold-dim);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;font-size:9px;color:var(--gold)}
+.portal-list li strong{color:var(--off-white);font-weight:500}
+.portal-cta-label{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-top:1rem}
+@media(max-width:900px){
+  .portal-grid{grid-template-columns:1fr}
+  .portal-img-col{height:56vw;min-height:300px;position:relative}
+  .portal-img-col img{position:absolute}
+}
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer{background:var(--charcoal);border-top:1px solid var(--border);padding:80px 0 40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+@media(max-width:900px){.footer-grid{grid-template-columns:1fr 1fr;gap:36px}}
+@media(max-width:560px){.footer-grid{grid-template-columns:1fr;gap:28px}}
+.footer-brand-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:.08em;color:var(--off-white);margin-bottom:2px}
+.footer-brand-tag{font-family:'Barlow Condensed',sans-serif;font-size:8.5px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.footer-brand-bio{font-size:13px;color:var(--muted);line-height:1.75;max-width:280px;margin-bottom:20px}
+.footer-tagline{font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--border-hi);font-style:italic}
+.footer-col-title{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-links a{font-size:13px;color:var(--muted);transition:color .25s}
+.footer-links a:hover{color:var(--off-white)}
+.footer-founders{display:flex;flex-direction:column;gap:14px}
+.footer-founder{font-size:13px;color:var(--muted);line-height:1.45}
+.footer-founder strong{display:block;font-family:'Barlow Condensed',sans-serif;font-size:14px;font-weight:600;letter-spacing:.04em;color:var(--off-white);text-transform:uppercase;margin-bottom:1px}
+.footer-contact a{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;transition:color .25s}
+.footer-contact a:hover{color:var(--gold)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border);flex-wrap:wrap;gap:10px}
+.footer-copy{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2)}
+.footer-legal{display:flex;gap:20px}
+.footer-legal span{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-2);transition:color .25s}
+
+/* ══════════════════════════════════════════
+   LIGHTBOX
+══════════════════════════════════════════ */
+#lightbox{display:none;position:fixed;inset:0;z-index:500;background:rgba(4,4,4,.96);align-items:center;justify-content:center;cursor:zoom-out}
+#lightbox.open{display:flex}
+#lightbox img{max-width:90vw;max-height:90vh;width:auto;height:auto;object-fit:contain;object-position:center;cursor:default;box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+#lb-close{position:fixed;top:24px;right:28px;width:40px;height:40px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:var(--off-white);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.25s;z-index:10}
+#lb-close:hover{background:rgba(255,255,255,.15)}
+#lb-caption{position:fixed;bottom:28px;left:50%;transform:translateX(-50%);font-family:'Barlow Condensed',sans-serif;font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(240,237,231,.5);white-space:nowrap}
+
+/* ── COMPARISON (image-based) ── */
+.comp-intro{text-align:center;padding:52px 0 48px;max-width:760px;margin:0 auto}
+.comp-intro-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,5.5vw,68px);color:var(--off-white);line-height:.93;margin-bottom:18px}
+.comp-intro-body{font-size:15px;color:var(--muted);line-height:1.8;max-width:620px;margin:0 auto;margin-bottom:10px}
+.comp-img-outer{padding:0 32px 96px;max-width:1440px;margin:0 auto}
+.comp-img-outer img{width:100%;height:auto;display:block}
+@media(max-width:900px){.comp-img-outer{padding:0 16px 72px}}
+@media(max-width:560px){.comp-img-outer{padding:0 0 64px}}
+
+/* ── SPLIT COMPARISON ── */
+.split-wrap{display:flex;height:82vh;min-height:580px;max-height:860px;position:relative;overflow:hidden}
+.split-panel{flex:1;position:relative;overflow:hidden;transition:flex .65s cubic-bezier(.4,0,.2,1);cursor:pointer}
+.split-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .65s cubic-bezier(.4,0,.2,1)}
+.split-panel:hover .split-bg{transform:scale(1.04)}
+.split-overlay{position:absolute;inset:0;transition:background .5s ease}
+.split-overlay-left{background:linear-gradient(160deg,rgba(8,8,8,.45) 0%,rgba(8,8,8,.82) 100%)}
+.split-overlay-right{background:linear-gradient(160deg,rgba(8,8,8,.3) 0%,rgba(8,8,8,.75) 100%)}
+.split-wrap.hl .split-right .split-overlay{background:linear-gradient(160deg,rgba(8,8,8,.6) 0%,rgba(8,8,8,.9) 100%)}
+.split-wrap.hr .split-left .split-overlay{background:linear-gradient(160deg,rgba(8,8,8,.6) 0%,rgba(8,8,8,.9) 100%)}
+.split-content{position:absolute;bottom:0;left:0;right:0;padding:44px 48px 52px;z-index:2}
+.split-cat{font-family:'Barlow Condensed',sans-serif;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.split-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,6.5vw,96px);line-height:.9;letter-spacing:.03em;margin-bottom:26px;transition:transform .4s ease}
+.split-panel:hover .split-title{transform:translateY(-3px)}
+.split-title-left{color:rgba(240,237,231,.7)}
+.split-title-right{color:var(--gold)}
+.split-list{list-style:none;display:flex;flex-direction:column;gap:9px;opacity:0;transform:translateY(14px);transition:opacity .38s ease .08s,transform .38s ease .08s}
+.split-panel:hover .split-list{opacity:1;transform:none}
+.split-list li{display:flex;align-items:baseline;gap:10px;font-size:13.5px;line-height:1.45;color:rgba(240,237,231,.82)}
+.si{flex-shrink:0;font-size:12px;width:16px;text-align:center}
+.si-x{color:#b84040}
+.si-check{color:var(--gold)}
+.split-vs{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:10;width:62px;height:62px;background:var(--black);border:1px solid var(--border-hi);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:20px;color:var(--muted);letter-spacing:0;pointer-events:none;transition:left .65s cubic-bezier(.4,0,.2,1),border-color .4s,color .4s}
+.split-wrap.hl .split-vs,.split-wrap.hr .split-vs{border-color:var(--gold);color:var(--gold)}
+@media(max-width:900px){
+  .split-wrap{flex-direction:column;height:auto;max-height:none}
+  .split-panel{flex:none!important;height:72vw;min-height:340px}
+  .split-list{opacity:1;transform:none}
+  .split-vs{top:calc(72vw - 31px);left:50%}
+  .split-content{padding:24px 24px 32px}
+  .split-title{font-size:clamp(48px,12vw,72px);margin-bottom:16px}
+}
+@media(max-width:560px){
+  .split-panel{height:88vw;min-height:300px}
+  .split-vs{top:calc(88vw - 31px)}
+}
+
+/* ══════════════════════════════════════════
+   PALETTE REBALANCE — Warm Industrial
+   Shift from pure-black luxury → concrete studio warmth
+══════════════════════════════════════════ */
+
+:root {
+  --black: #0E0D0B;
+  --charcoal: #1A1815;
+  --surface: #222019;
+  --surface-2: #2B2921;
+  --border: #363228;
+  --border-hi: #4B4639;
+  --gold: #C49A2A;
+  --gold-light: #DFB84A;
+  --gold-dim: rgba(196,154,42,0.12);
+  --gold-rule: rgba(196,154,42,0.32);
+  --off-white: #F0EDE7;
+  --muted: #8A8578;
+  --muted-2: #524E44;
+  --text: #EDEBE6;
+  --nav-h: 72px;
+}
+
+/* ── Tonal variation — section rhythm ── */
+/* Sections intentionally use slightly different warm tones
+   so the site flows rather than repeating identical black rectangles */
+
+body { background: #0E0D0B; }
+
+#nav.dark {
+  background: rgba(12,11,9,.95);
+  border-bottom-color: rgba(54,50,40,.8);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+#hero .hero-vignette {
+  background: linear-gradient(95deg, rgba(8,7,5,.68) 0%, rgba(8,7,5,.38) 50%, transparent 100%);
+}
+#hero .hero-vignette-bottom {
+  background: linear-gradient(to top, rgba(14,13,11,.92), transparent);
+}
+
+/* Differentiator — warm concrete dark */
+#diff { background: #1C1A15; }
+
+/* Gallery — very warm deep */
+#collection { background: #161410; }
+.sleeve-strip { background: #1E1C17; border-top-color: var(--gold); }
+
+/* Comparison — warm industrial mid */
+#comparison { background: #1A1814; }
+
+/* Process — warm near-black */
+#process { background: #191714; }
+.proc-step { background: #191714; }
+.proc-step-img-vignette {
+  background: linear-gradient(to top, #191714 0%, transparent 100%);
+}
+.proc-step-body { border-top: 1px solid #363228; }
+
+/* Quote — warmest section, most breathing room, feels like a lit workspace */
+#quote { background: #232019; }
+.qform { background: #1D1B16; border-color: #363228; }
+.fsec { border-bottom-color: #363228; }
+.fsec-title::after { background: #363228; }
+.finput, .fselect, .ftextarea {
+  background: #28251D;
+  border-color: #424038;
+  color: var(--off-white);
+}
+.finput:focus, .fselect:focus, .ftextarea:focus { border-color: var(--gold); }
+.fcheck-item { background: #28251D; border-color: #424038; }
+.ffile-area { background: #28251D; border-color: #424038; }
+.ffile-list-item { background: #28251D; border-color: #424038; }
+
+/* Portal — warm dark */
+#portal { background: #161410; }
+
+/* Footer — warm concrete */
+footer { background: #1C1A15; border-top-color: #363228; }
+.footer-bottom { border-top-color: #363228; }
+
+/* Diff section text column */
+.diff-text-col {}
+.diff-list li { border-bottom-color: #2E2C25; }
+.diff-list li:first-child, .diff-list { border-top-color: #2E2C25; }
+.diff-quote-strip { background: rgba(196,154,42,0.06); }
+
+/* Sleeve strip cells */
+.sleeve-cell { border-right-color: #363228; }
+.sleeve-inner { border-color: #363228; background: transparent; }
+
+/* Process step num color shift — less pure border */
+.proc-step-num { color: #3A3830; }
+
+/* Gallery mosaic gap color — warm border instead of pure dark */
+.gallery-mosaic { background: #2E2C25; }
+
+/* Split comparison overlays — warm them */
+.split-overlay-left {
+  background: linear-gradient(160deg, rgba(10,9,7,.42) 0%, rgba(10,9,7,.82) 100%);
+}
+.split-overlay-right {
+  background: linear-gradient(160deg, rgba(10,9,7,.28) 0%, rgba(10,9,7,.72) 100%);
+}
+
+/* Comparison intro section bg */
+#comparison /* comp-intro padding override removed */
+
+/* Portal text col bg continuity */
+.portal-text-col { background: #161410; }
+
+/* ── Subtle grain texture overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  opacity: 0.018;
+  background-image: url("./images/hero.png");
+  background-size: 200px 200px;
+  background-repeat: repeat;
+}
+
+/* ══════════════════════════════════════════
+   LIGHT EDITORIAL REBALANCE
+   Light canvas · Dark imagery · Dark type
+   Carhartt WIP / Nike campaign approach
+══════════════════════════════════════════ */
+
+/* ── New root palette ── */
+:root {
+  --bg-0: #F8F5F0;
+  --bg-1: #F2EDE5;
+  --bg-2: #EAE4DA;
+  --bg-3: #E2DBD0;
+  --bg-dark: #1A1815;
+  --bg-dark-2: #141210;
+  --text-1: #111111;
+  --text-2: #2E2B26;
+  --text-3: #524E47;
+  --text-4: #7A7469;
+  --border-l: #D6CEBD;
+  --border-l2: #C8BFA9;
+  --gold: #B8891A;
+  --gold-light: #D4A42A;
+  --gold-dim: rgba(184,137,26,0.1);
+  --gold-rule: rgba(184,137,26,0.35);
+  --off-white: #F8F5F0;
+  --muted: #7A7469;
+  --muted-2: #B0A898;
+  --text: #111111;
+  --black: #0E0C09;
+  --charcoal: #1A1815;
+  --surface: #FDFAF6;
+  --surface-2: #F5F1EA;
+  --border: #D6CEBD;
+  --border-hi: #C8BFA9;
+}
+
+/* ── Body ── */
+body {
+  background: var(--bg-0);
+  color: var(--text-1);
+}
+
+/* ── Gold rule — visible on light bg ── */
+.gold-rule {
+  background: linear-gradient(90deg, transparent, rgba(184,137,26,.38), transparent);
+}
+
+/* ══ NAV ══ */
+/* Transparent state — over dark hero image, keep light text */
+.nav-links a { color: rgba(248,245,240,.78); }
+.nav-logo-main { color: var(--off-white); }
+.nav-logo-tag { color: var(--gold); }
+.nav-cta { color: var(--gold) !important; border-color: rgba(184,137,26,.55); }
+
+/* Scrolled state — light bg, dark text */
+#nav.dark {
+  background: rgba(248,245,240,.97);
+  border-bottom-color: var(--border-l);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+#nav.dark .nav-links a { color: var(--text-3); }
+#nav.dark .nav-links a:hover { color: var(--text-1); }
+#nav.dark .nav-logo-main { color: var(--text-1); }
+#nav.dark .nav-logo-tag { color: var(--gold); }
+#nav.dark .nav-cta {
+  color: var(--gold) !important;
+  border-color: var(--gold);
+}
+#nav.dark .nav-cta:hover {
+  background: var(--gold) !important;
+  color: #fff !important;
+}
+
+/* ══ HERO — stays cinematic dark ══ */
+#hero .hero-vignette {
+  background: linear-gradient(95deg, rgba(8,7,5,.72) 0%, rgba(8,7,5,.4) 50%, transparent 100%);
+}
+#hero .hero-vignette-bottom {
+  background: linear-gradient(to top, rgba(10,9,7,.9), transparent);
+}
+/* Ghost btn in hero stays light */
+.hero-btns .btn-ghost {
+  color: rgba(248,245,240,.9);
+  border-color: rgba(248,245,240,.3);
+}
+.hero-btns .btn-ghost:hover {
+  color: #fff;
+  border-color: rgba(248,245,240,.75);
+}
+
+/* ══ DIFFERENTIATOR — light canvas ══ */
+#diff { background: var(--bg-0); }
+.diff-h { color: var(--text-1); }
+.diff-h .acc { color: var(--gold); }
+.diff-intro { color: var(--text-3); }
+.diff-intro strong { color: var(--text-1); }
+.diff-list { border-top-color: var(--border-l); }
+.diff-list li { border-bottom-color: var(--border-l); }
+.diff-list-num { color: var(--gold); }
+.diff-list-text { color: var(--text-3); }
+.diff-list-text strong { color: var(--text-1); font-family: 'Barlow Condensed', sans-serif; }
+.diff-quote-strip { background: rgba(184,137,26,.05); border-left-color: var(--gold); }
+.diff-quote-text { color: var(--text-3); }
+.diff-quote-source { color: var(--gold); }
+
+/* ══ GALLERY / COLLECTION — light ══ */
+#collection { background: var(--bg-0); }
+.coll-h { color: var(--text-1); }
+.coll-h .gold-line { color: var(--gold); }
+.coll-meta-body { color: var(--text-3); }
+.gallery-mosaic { background: var(--border-l); }
+.sleeve-strip {
+  background: var(--bg-1);
+  border-top: 2px solid var(--gold);
+}
+.sleeve-inner { border-color: var(--border-l); }
+.sleeve-cell { border-right-color: var(--border-l); }
+.sleeve-cell-label { color: var(--gold); }
+.sleeve-cell-val { color: var(--text-1); }
+
+/* ══ COMPARISON — light canvas ══ */
+#comparison { background: var(--bg-1); }
+.comp-intro-h { color: var(--text-1); }
+.comp-intro-body { color: var(--text-3); }
+
+/* ══ PROCESS — light canvas ══ */
+#process { background: var(--bg-1); }
+.proc-header .proc-h { color: var(--text-1); }
+.proc-header .proc-sub { color: var(--text-3); }
+.proc-steps { background: var(--border-l); }
+.proc-step { background: var(--bg-0); }
+.proc-step-img-vignette {
+  background: linear-gradient(to top, var(--bg-0) 0%, transparent 100%);
+}
+.proc-step-num { color: #E0D8CC; }
+.proc-step:hover .proc-step-num { color: rgba(184,137,26,.14); }
+.proc-step-label { color: var(--gold); }
+.proc-step-title { color: var(--text-1); }
+.proc-step-text { color: var(--text-3); }
+.proc-step-body { border-top: 1px solid var(--border-l); }
+
+/* ══ QUOTE FORM — lightest section, workspace feel ══ */
+#quote { background: var(--bg-2); }
+.quote-sidebar-h { color: var(--text-1); }
+.quote-sidebar-h .acc { color: var(--gold); }
+.quote-sidebar-body { color: var(--text-3); }
+.quote-sidebar-body strong { color: var(--text-1); }
+.quote-sidebar-note {
+  background: rgba(184,137,26,.07);
+  border-left-color: var(--gold);
+  color: var(--text-2);
+}
+.qform {
+  background: var(--bg-0);
+  border-color: var(--border-l);
+}
+.fsec { border-bottom-color: var(--border-l); }
+.fsec-title { color: var(--gold); }
+.fsec-title::after { background: var(--border-l); }
+.flabel { color: var(--text-4); }
+.flabel .req { color: var(--gold); }
+.finput,
+.fselect,
+.ftextarea {
+  background: #FDFAF6;
+  border-color: var(--border-l);
+  color: var(--text-1);
+}
+.finput::placeholder,
+.ftextarea::placeholder { color: var(--muted-2); }
+.finput:focus,
+.fselect:focus,
+.ftextarea:focus { border-color: var(--gold); }
+.fselect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath fill='none' stroke='%237A7469' stroke-width='1.5' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+}
+.fcheck-item {
+  background: #FDFAF6;
+  border-color: var(--border-l);
+  color: var(--text-3);
+}
+.fcheck-item:hover { border-color: var(--border-l2); color: var(--text-1); }
+.fcheck-item.sel {
+  border-color: var(--gold);
+  background: rgba(184,137,26,.07);
+  color: var(--text-1);
+}
+.fcheck-box { background: #F5F1EA; border-color: var(--border-l); }
+.ffile-area {
+  background: #FDFAF6;
+  border-color: var(--border-l2);
+}
+.ffile-area:hover { border-color: var(--gold); }
+.ffile-text { color: var(--text-4); }
+.ffile-text strong { color: var(--gold); }
+.ffile-list-item { background: #FDFAF6; border-color: var(--border-l2); }
+.ffile-list-name { color: var(--text-1); }
+.ffile-list-size { color: var(--text-4); }
+.fhint { color: var(--muted-2); }
+.fsubmit-row { border-top-color: var(--border-l); }
+.fsubmit-note { color: var(--text-3); }
+.fsubmit-note strong { color: var(--text-1); }
+.form-success-h { color: var(--text-1); }
+.form-success-body { color: var(--text-3); }
+
+/* ══ PORTAL — KEEP DARK (contrast callout) ══ */
+#portal { background: var(--bg-dark-2); }
+.portal-text-col { background: var(--bg-dark-2); }
+.portal-h { color: var(--off-white); }
+.portal-h .acc { color: var(--gold); }
+.portal-body { color: #7A7469; }
+.portal-list { border-top-color: #2E2C25; }
+.portal-list li { border-bottom-color: #2E2C25; color: #7A7469; }
+.portal-list li strong { color: var(--off-white); }
+.portal-check { border-color: var(--gold); background: rgba(184,137,26,.12); color: var(--gold); }
+.portal-cta-label { color: #525048; }
+
+/* ══ FOOTER — KEEP DARK ══ */
+footer { background: #1A1815; border-top-color: #2C2A22; }
+.footer-brand-name { color: var(--off-white); }
+.footer-brand-tag { color: var(--gold); }
+.footer-brand-bio { color: #6A655C; }
+.footer-tagline { color: #3E3B34; }
+.footer-col-title { color: var(--gold); }
+.footer-links a { color: #6A655C; }
+.footer-links a:hover { color: var(--off-white); }
+.footer-founder { color: #6A655C; }
+.footer-founder strong { color: var(--off-white); }
+.footer-contact a { color: #6A655C; }
+.footer-contact a:hover { color: var(--gold); }
+.footer-bottom { border-top-color: #252320; }
+.footer-copy { color: #3E3B34; }
+.footer-legal span { color: #3E3B34; }
+
+/* ══ SHARED ELEMENTS ══ */
+/* Eyebrow labels — gold on light bg works */
+.eyebrow::before { background: var(--gold); }
+.eyebrow span { color: var(--gold); }
+
+/* Ghost btn — dark on light sections */
+.btn-ghost {
+  color: var(--text-1);
+  border-color: rgba(17,17,17,.28);
+}
+.btn-ghost:hover {
+  border-color: var(--text-1);
+  color: var(--text-1);
+}
+
+/* Gold btn stays */
+.btn-gold { background: var(--gold); color: #fff; }
+.btn-gold:hover { background: var(--gold-light); }
+.btn-submit { background: var(--gold); color: #fff; }
+.btn-submit:hover { background: var(--gold-light); }
+
+/* Scroll reveal stays — no color changes needed */
+
+/* Grain — lighten for light bg */
+body::after { opacity: 0.012; }
+
+/* ══ COLLECTION TAG ══ */
+.coll-client-tag {
+  background: rgba(184,137,26,.09);
+  border-color: rgba(184,137,26,.28);
+}
+.coll-client-text { color: var(--gold); }
+.coll-client-dot { background: var(--gold); }
+
+/* ══ HERO STATS — still on dark hero ══ */
+.hero-stat-n { color: var(--off-white); }
+.hero-stat-l { color: rgba(248,245,240,.55); }
+.hero-badge { background: rgba(8,7,5,.8); border-color: rgba(184,137,26,.3); }
+.hero-badge-code { color: var(--gold); }
+.hero-badge-label { color: rgba(248,245,240,.5); }
+
+/* Portal section button */
+#portal .btn-gold { color: #111; }
+
+/* ══ REVEAL animation works on light bg ══ */
+.reveal { opacity: 0; transform: translateY(28px); }
+.reveal.in { opacity: 1; transform: none; }
+
+/* ══════════════════════════════════════════
+   POLISH PASS — Targeted fixes
+══════════════════════════════════════════ */
+
+/* Fix 1 — Remove grain overlay (causes patterned texture on light inputs) */
+body::after { display: none !important; }
+
+/* Fix 1b — Clean form inputs and selects, no patterns */
+.finput,
+.fselect,
+.ftextarea {
+  background-color: #FDFAF6 !important;
+  background-image: none !important;
+  border: 1px solid #D6CEBD !important;
+  color: #111111 !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.fselect {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='7' viewBox='0 0 11 7'%3E%3Cpath d='M1 1l4.5 4.5L10 1' stroke='%237A7469' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 14px center !important;
+  background-size: 11px 7px !important;
+  padding-right: 36px !important;
+  cursor: pointer;
+}
+.fcheck-item {
+  background-color: #FDFAF6 !important;
+  background-image: none !important;
+}
+.ffile-area {
+  background-color: #FDFAF6 !important;
+  background-image: none !important;
+}
+.ffile-list-item {
+  background-color: #FDFAF6 !important;
+  background-image: none !important;
+}
+
+/* Fix 2 — Process vignette: smooth, natural, no cloud/fog */
+.proc-step-img-vignette {
+  height: 240px !important;
+  background: linear-gradient(
+    to top,
+    #F8F5F0 0%,
+    rgba(248,245,240,.86) 18%,
+    rgba(248,245,240,.56) 42%,
+    rgba(248,245,240,.18) 68%,
+    transparent 100%
+  ) !important;
+}
+
+/* Fix 4 — Hero overlay: significantly lighter, image breathes */
+#hero .hero-vignette {
+  background: linear-gradient(
+    95deg,
+    rgba(6,5,3,.48) 0%,
+    rgba(6,5,3,.14) 52%,
+    transparent 100%
+  ) !important;
+}
+#hero .hero-vignette-bottom {
+  background: linear-gradient(to top, rgba(8,7,5,.58), transparent) !important;
+}
+
+/* Fix 5 — Gallery card object-position consistency */
+/* Portrait images in landscape slots — show upper portion (shirt/design area) */
+.g0 img { object-position: center 18% !important; }  /* journey portrait, 2-row */
+.g4 img { object-position: center 22% !important; }  /* classic white — portrait in wide slot */
+.g5 img { object-position: center 14% !important; }  /* delivery badge portrait */
+
+/* Fix 6 — VS badge: move up above title area, prevent overlap */
+.split-vs {
+  top: 24% !important;
+  width: 56px !important;
+  height: 56px !important;
+  font-size: 17px !important;
+}
+/* VS badge left position is now controlled by JS inline style */
+
+/* Extra: ensure split title content is always above VS */
+.split-content { z-index: 5 !important; }
+.split-vs { z-index: 4 !important; }
+
+/* Fix 7 — Section spacing polish */
+.proc-header { padding-bottom: 80px; }
+.proc-step-body { padding: 28px 32px 48px; }
+
+/* Sleeve strip spacing */
+.sleeve-strip { padding: 56px 48px; }
+@media(max-width:768px) { .sleeve-strip { padding: 40px 20px; } }
+
+/* Gallery header more breathing room */
+.coll-header { padding: 96px 48px 52px; }
+@media(max-width:768px) { .coll-header { padding: 64px 20px 36px; } }
+
+/* Form section inner padding */
+.fsec { padding: 40px 48px; }
+@media(max-width:768px) { .fsec { padding: 28px 20px; } }
+
+/* Quote sidebar spacing */
+.quote-sidebar { padding-top: 4px; }
+.quote-sidebar-note { margin-top: 2rem; padding: 18px 22px; line-height: 1.75; }
+
+/* Process section spacing */
+#process { padding-bottom: 0; }
+
+/* ══════════════════════════════════════════
+   FINAL POLISH PASS — Targeted refinements
+══════════════════════════════════════════ */
+
+/* ── Fix 1: Anti-ghosting for animated elements ── */
+/* Force GPU isolation so animated layers don't bleed into each other */
+/* hero-content GPU hacks removed — were causing stacking artifact */
+.hero-content { isolation: auto; }
+/* hero backface-visibility removed */
+
+/* Consolidate reveal — remove the double definition conflict */
+/* reveal - clean version, no !important conflicts */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.in { opacity: 1; transform: translateY(0); }
+
+/* Split comparison — isolate compositing layers */
+/* split-panel isolation removed */
+.split-bg { will-change: transform; }
+.split-overlay { will-change: opacity, background; }
+.split-list {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ── Fix 2: Comparison — left content toward center ── */
+/* Left content now starts ~14% in from panel edge, facing the divider */
+/* split-left conflict removed */
+/* Right content mirrors — starts close to divider and opens outward */
+.split-right .split-content {
+  padding-left: 48px !important;
+  padding-right: clamp(48px, 8%, 72px) !important;
+}
+
+/* ── Fix 3: Comp-intro — vertically centered, less top-heavy ── */
+/* comp-intro override removed */
+.comp-intro-h {
+  font-size: clamp(40px, 5vw, 62px) !important;
+  margin-bottom: 20px !important;
+}
+.comp-intro-body {
+  font-size: 15px !important;
+  margin-bottom: 10px !important;
+}
+
+/* ── Fix 4: General composition polish ── */
+
+/* Hero — tighten vertical rhythm */
+.hero-sub { max-width: 460px; }
+.hero-headline { letter-spacing: .025em; }
+
+/* Process — visual hierarchy */
+.proc-step-title {
+  font-size: clamp(24px, 2.8vw, 34px) !important;
+  margin-bottom: 12px !important;
+}
+.proc-step-body { padding: 26px 32px 52px !important; }
+
+/* Diff section — breathing room */
+.diff-text-col { padding: 80px 56px 80px 48px; }
+
+/* Gallery — title breathing */
+.coll-h { letter-spacing: 0.02em; }
+.coll-header-inner { align-items: center; }
+
+/* Quote sidebar vertical spacing */
+.quote-sidebar-body + .quote-sidebar-body { margin-top: .75rem; }
+
+/* Sleeve cells — better vertical rhythm */
+.sleeve-cell { padding: 26px 28px; }
+
+/* Footer founders spacing */
+.footer-founders { gap: 16px; }
+
+/* Portal list spacing */
+.portal-list li { padding: 13px 0; gap: 14px; }
+
+/* Section label consistency */
+.proc-step-label { letter-spacing: .22em; }
+
+/* Split title — tighter line height on smaller viewports */
+@media(max-width: 1100px) {
+  .split-title { font-size: clamp(48px, 5.5vw, 80px) !important; }
+}
+
+/* Mobile split — readability */
+@media(max-width: 900px) {
+  /* split-left conflict removed */
+  .split-right .split-content { padding-left: 24px !important; padding-right: 24px !important; }
+}
+
+/* VS badge — polish */
+.split-vs {
+  font-size: 16px !important;
+  width: 52px !important;
+  height: 52px !important;
+  letter-spacing: .08em !important;
+}
+
+/* Eyebrow gap fix */
+.eyebrow { gap: 12px !important; margin-bottom: 1.1rem !important; }
+
+/* Typography optical alignment */
+.f-display { text-rendering: optimizeLegibility; }
+
+/* ── COMPARISON: left content moved toward center ── */
+/* Single authoritative rule — no conflicts */
+.split-left .split-content {
+  padding-left: 88px !important;
+}
+@media(max-width:900px){
+  .split-left .split-content { padding-left: 24px !important; }
+}
+
+/* ══════════════════════════════════════════
+   CHATGPT DIRECT FIX PASS — FINAL OVERRIDES
+   Purpose: fix the 3 persistent issues without changing brand direction.
+══════════════════════════════════════════ */
+
+/* 1) HERO: stop stacked / ghosted text rendering */
+.hero-content,
+.hero-text,
+.hero-label,
+.hero-headline,
+.hero-rule,
+.hero-sub,
+.hero-btns {
+  isolation: auto !important;
+  transform: none !important;
+  filter: none !important;
+  text-shadow: none !important;
+  mix-blend-mode: normal !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  will-change: auto !important;
+}
+
+.hero-label,
+.hero-headline,
+.hero-rule,
+.hero-sub,
+.hero-btns {
+  opacity: 1 !important;
+  animation: none !important;
+}
+
+.hero-headline::before,
+.hero-headline::after,
+.hero-text::before,
+.hero-text::after,
+.hero-content::before,
+.hero-content::after {
+  content: none !important;
+  display: none !important;
+}
+
+.hero-headline {
+  position: relative !important;
+  z-index: 5 !important;
+  color: #F8F5F0 !important;
+  text-rendering: geometricPrecision !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.hero-sub,
+.hero-rule,
+.hero-btns,
+.hero-label {
+  position: relative !important;
+  z-index: 5 !important;
+}
+
+/* 2) DESIGNED WITH PURPOSE: reduce dead space and center the intro better */
+#comparison {
+  padding-top: 56px !important;
+  padding-bottom: 0 !important;
+}
+
+#comparison .wrap {
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.comp-intro {
+  padding: 0 0 52px !important;
+  margin: 0 auto !important;
+  max-width: 820px !important;
+  text-align: center !important;
+}
+
+.comp-intro .eyebrow {
+  justify-content: center !important;
+  margin-bottom: 18px !important;
+}
+
+.comp-intro-h {
+  margin-bottom: 18px !important;
+}
+
+.comp-intro-body {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 3) PRINT SHOPS VS THREEFOLD: make both lists face the center divider */
+.split-wrap {
+  position: relative !important;
+}
+
+.split-panel {
+  position: relative !important;
+}
+
+.split-content {
+  position: absolute !important;
+  bottom: 0 !important;
+  top: auto !important;
+  z-index: 6 !important;
+  max-width: none !important;
+}
+
+.split-left .split-content {
+  left: auto !important;
+  right: 0 !important;
+  width: min(540px, 82%) !important;
+  padding: 44px 78px 56px 24px !important;
+  text-align: left !important;
+}
+
+.split-right .split-content {
+  left: 0 !important;
+  right: auto !important;
+  width: min(540px, 82%) !important;
+  padding: 44px 24px 56px 78px !important;
+  text-align: left !important;
+}
+
+.split-list {
+  max-width: 430px !important;
+}
+
+/* keep the VS badge visible but never on top of titles/list text */
+.split-vs {
+  z-index: 3 !important;
+  top: 50% !important;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  pointer-events: none !important;
+}
+
+.split-wrap.hl .split-vs,
+.split-wrap.hr .split-vs {
+  /* left position handled by JS inline style */
+}
+
+/* Mobile: stack cleanly and remove center-facing padding */
+@media (max-width: 900px) {
+  #comparison {
+    padding-top: 42px !important;
+  }
+
+  #comparison .wrap {
+    display: block !important;
+  }
+
+  .comp-intro {
+    padding: 0 0 40px !important;
+  }
+
+  .split-left .split-content,
+  .split-right .split-content {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    padding: 28px 24px 34px !important;
+  }
+
+  .split-vs {
+    top: calc(72vw - 26px) !important;
+    left: 50% !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .split-vs {
+    top: calc(88vw - 26px) !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   CHATGPT DIRECT FIX PASS 2
+   Remove inactive hero CTA buttons and rebalance split title alignment.
+══════════════════════════════════════════ */
+
+/* HERO: keep only the three proof stats. No fake CTA/button containers. */
+.hero-btns {
+  display: none !important;
+}
+
+.hero-stats {
+  position: absolute !important;
+  left: 48px !important;
+  bottom: 58px !important;
+  right: auto !important;
+  z-index: 6 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: clamp(34px, 5vw, 68px) !important;
+  opacity: 1 !important;
+  animation: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+.hero-stats > div {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  min-width: auto !important;
+}
+
+.hero-stat-n {
+  font-family: 'Bebas Neue', sans-serif !important;
+  font-size: clamp(42px, 5vw, 64px) !important;
+  line-height: .84 !important;
+  color: #F8F5F0 !important;
+  letter-spacing: .025em !important;
+  text-shadow: none !important;
+}
+
+.hero-stat-l {
+  font-family: 'Barlow Condensed', sans-serif !important;
+  font-size: 12px !important;
+  line-height: 1.1 !important;
+  margin-top: 8px !important;
+  color: rgba(248,245,240,.78) !important;
+  letter-spacing: .18em !important;
+  text-transform: uppercase !important;
+  text-shadow: none !important;
+  white-space: nowrap !important;
+}
+
+/* VERSUS: move Threefold title/content farther into the right panel so it visually matches Print Shops. */
+.split-right .split-content {
+  left: 0 !important;
+  right: auto !important;
+  width: min(560px, 84%) !important;
+  padding: 44px 24px 56px clamp(118px, 10vw, 158px) !important;
+  text-align: left !important;
+}
+
+.split-left .split-content {
+  right: 0 !important;
+  left: auto !important;
+  width: min(560px, 84%) !important;
+  padding: 44px clamp(118px, 10vw, 158px) 56px 24px !important;
+  text-align: left !important;
+}
+
+.split-title-right,
+.split-title-left {
+  text-align: left !important;
+}
+
+@media (max-width: 900px) {
+  .hero-stats {
+    left: 22px !important;
+    right: 22px !important;
+    bottom: 30px !important;
+    gap: 24px !important;
+    justify-content: space-between !important;
+  }
+
+  .hero-stat-n {
+    font-size: 40px !important;
+  }
+
+  .hero-stat-l {
+    font-size: 10px !important;
+    letter-spacing: .14em !important;
+    white-space: normal !important;
+  }
+
+  .split-left .split-content,
+  .split-right .split-content {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    padding: 28px 24px 34px !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   CHATGPT DIRECT FIX PASS 3
+   Final hero stat placement + split title centering
+══════════════════════════════════════════ */
+
+/* HERO: stats now live under the paragraph in the hero text flow, never over it. */
+.hero-text .hero-stats {
+  position: relative !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin-top: 32px !important;
+  z-index: 6 !important;
+  display: flex !important;
+  align-items: flex-start !important;
+  gap: clamp(34px, 5vw, 70px) !important;
+  opacity: 1 !important;
+  animation: none !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  pointer-events: none !important;
+}
+
+.hero-sub {
+  margin-bottom: 0 !important;
+}
+
+/* VERSUS: nudge Threefold farther into its panel so it visually mirrors Print Shops. */
+.split-right .split-content {
+  left: 0 !important;
+  right: auto !important;
+  width: min(560px, 84%) !important;
+  padding: 44px 24px 56px clamp(170px, 13vw, 220px) !important;
+  text-align: left !important;
+}
+
+/* Keep the VS letters optically centered inside the circle. */
+.split-vs {
+  display: grid !important;
+  place-items: center !important;
+  line-height: 1 !important;
+  padding-top: 2px !important;
+  text-align: center !important;
+}
+
+@media (max-width: 900px) {
+  .hero-text .hero-stats {
+    margin-top: 28px !important;
+    gap: 24px !important;
+    justify-content: space-between !important;
+  }
+
+  .split-right .split-content,
+  .split-left .split-content {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    padding: 28px 24px 34px !important;
+  }
+}
+
+</style>
+</head>
+<body>
+<!-- TODO before final launch: extract embedded base64 images into /images files for faster mobile loading and cleaner Netlify deploys. -->
+
+<!-- LIGHTBOX -->
+<div id="lightbox" aria-label="Image lightbox">
+  <button id="lb-close" aria-label="Close">&times;</button>
+  <img id="lb-img" src="" alt="">
+  <div id="lb-caption"></div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo-wrap">
+      <span class="nav-logo-main">Threefold Supply Co.</span>
+      <span class="nav-logo-tag">Made by Three, Worn by All</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#diff">Our Approach</a></li>
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#portal">Portal</a></li>
+      <li><a href="#quote" class="nav-cta">Start a Project</a></li>
+    </ul>
+    <button class="nav-burger" id="nav-burger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-bg" style="background-image:url(./images/gallery-01.jpg)"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-vignette-bottom"></div>
+
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-label">
+        <div class="hero-pulse"></div>
+        <span class="hero-label-text">B2B Custom Apparel &mdash; Bay Area, CA</span>
+      </div>
+      <h1 class="hero-headline f-display">
+        Designed<br>
+        with<br>
+        <span class="acc">Purpose.</span>
+      </h1>
+      <div class="hero-rule"></div>
+      <p class="hero-sub">
+        <strong>We don't take orders. We build identities.</strong><br>
+        Custom apparel designed around your culture, your people, and your story — the kind your team wears on and off the clock.
+      </p>
+
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-n">100%</div>
+          <div class="hero-stat-l">Custom Design</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">0</div>
+          <div class="hero-stat-l">Generic Templates</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">&infin;</div>
+          <div class="hero-stat-l">Revisions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-code">DSF7</div>
+    <div class="hero-badge-label">Piranha Ops &mdash; Bay Area</div>
+    <div class="hero-badge-label" style="color:var(--gold);margin-top:3px">First Client &middot; 2026</div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ══════════════════════════════════════════
+     DIFFERENTIATOR
+══════════════════════════════════════════ -->
+<section id="diff">
+  <div class="diff-grid">
+
+    <div class="diff-text-col">
+      <div class="eyebrow reveal"><span>Not a Print Shop</span></div>
+      <h2 class="diff-h f-display reveal">
+        Built<br>around<br>your<br><span class="acc">culture.</span>
+      </h2>
+      <p class="diff-intro reveal">
+        <strong>CustomInk and 4imprint are order takers.</strong> You upload a logo, pick a blank, and get something your team tolerates.<br><br>
+        Threefold is a design partner. We learn who you are before we design anything.
+      </p>
+      <ul class="diff-list reveal">
+        <li>
+          <span class="diff-list-num">01</span>
+          <div class="diff-list-text">
+            <strong>Identity First</strong>
+            Before any design starts, we understand your company — the culture, the people, and the story behind the brand.
+          </div>
+        </li>
+        <li>
+          <span class="diff-list-num">02</span>
+          <div class="diff-list-text">
+            <strong>Mockup Before Production</strong>
+            You see the full design — on a real model, in your colors — before a single item is printed. Unlimited revisions until it&rsquo;s right.
+          </div>
+        </li>
+        <li>
+          <span class="diff-list-num">03</span>
+          <div class="diff-list-text">
+            <strong>Pieces That Last</strong>
+            Premium blanks. Quality-checked production. Designs built to carry your brand season after season, not just one order.
+          </div>
+        </li>
+      </ul>
+      <div class="diff-quote-strip reveal">
+        <div class="diff-quote-text">&ldquo;Workers wear gear they&rsquo;re proud of. Proud workers in branded gear is free advertising, team identity, and repeat orders — all in one piece of apparel.&rdquo;</div>
+        <div class="diff-quote-source">— Threefold Supply Co. &middot; Bay Area &middot; 2026</div>
+      </div>
+    </div>
+
+    <div class="diff-img-col reveal">
+      <img src="./images/gallery-02.jpg" alt="Threefold founders reviewing POPS 2026 collection designs" loading="lazy">
+    </div>
+
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ══════════════════════════════════════════
+     COLLECTION GALLERY
+══════════════════════════════════════════ -->
+<section id="collection">
+  <div class="coll-header">
+    <div class="coll-header-inner">
+      <div class="reveal">
+        <div class="eyebrow"><span>Featured Work</span></div>
+        <h2 class="coll-h f-display">
+          POPS
+          <span class="gold-line">2026</span>
+          Collection
+        </h2>
+      </div>
+      <div class="reveal d1">
+        <div class="coll-client-tag">
+          <div class="coll-client-dot"></div>
+          <span class="coll-client-text">Piranha Ops &middot; DSF7 &middot; Bay Area</span>
+        </div>
+        <p class="coll-meta-body">Six designs. Black oversized heavyweight tees. Navy, gold, and white on black. Every piece carries the story of a team that moves.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="gallery-mosaic">
+
+    <!-- g0: Let's Start The Journey (portrait, spans 2 rows) -->
+    <div class="g-item g0 reveal" data-lb-src="./images/gallery-03.jpg" data-lb-cap="Let's Start The Journey — POPS 2026">
+      <img src="./images/gallery-03.jpg" alt="Let's Start The Journey — POPS 2026" loading="lazy">
+      <div class="g-item-overlay"></div>
+      <div class="g-item-info">
+        <div class="g-item-num">Design 06</div>
+        <div class="g-item-name f-display">Let's Start<br>The Journey</div>
+        <div class="g-item-desc">Gold aircraft illustration &middot; POPS + PRIME 2026 sleeves</div>
+      </div>
+    </div>
+
+    <!-- g1: Highway Badge (landscape, 2-col) -->
+    <div class="g-item g1 reveal d1" data-lb-src="./images/gallery-04.jpg" data-lb-cap="Highway Badge — POPS 2026">
+      <img src="./images/gallery-04.jpg" alt="Highway Badge — POPS 2026" loading="lazy">
+      <div class="g-item-overlay"></div>
+      <div class="g-item-info">
+        <div class="g-item-num">Design 01</div>
+        <div class="g-item-name f-display">Highway Badge</div>
+        <div class="g-item-desc">Circular badge &middot; road illustration &middot; Amazon boxes &middot; PRIME 2026</div>
+      </div>
+    </div>
+
+    <!-- g2: Dotted Circle (landscape) -->
+    <div class="g-item g2 reveal d2" data-lb-src="./images/gallery-05.jpg" data-lb-cap="Dotted Circle — POPS 2026">
+      <img src="./images/gallery-05.jpg" alt="Dotted Circle — POPS 2026" loading="lazy">
+      <div class="g-item-overlay"></div>
+      <div class="g-item-info">
+        <div class="g-item-num">Design 02</div>
+        <div class="g-item-name f-display">Dotted Circle</div>
+        <div class="g-item-desc">POPS + PRIME 2026 curved text &middot; isometric box badge</div>
+      </div>
+    </div>
+
+    <!-- g3: Golden Gate (landscape) -->
+    <div class="g-item g3 reveal d3" data-lb-src="./images/gallery-06.jpg" data-lb-cap="Golden Gate — POPS 2026">
+      <img src="./images/gallery-06.jpg" alt="Golden Gate — POPS 2026" loading="lazy">
+      <div class="g-item-overlay"></div>
+      <div class="g-item-info">
+        <div class="g-item-num">Design 03</div>
+        <div class="g-item-name f-display">Golden Gate</div>
+        <div class="g-item-desc">Bay Area exclusive &middot; DSF7 &middot; Golden Gate Bridge &middot; PRIME 2026</div>
+      </div>
+    </div>
+
+    <!-- g4: Classic White on Black (landscape, 2-col) -->
+    <div class="g-item g4 reveal d1" data-lb-src="./images/process-01.jpg" data-lb-cap="Classic White on Black — POPS 2026">
+      <img src="./images/process-01.jpg" alt="Classic White on Black — POPS 2026" loading="lazy">
+      <div class="g-item-overlay"></div>
+      <div class="g-item-info">
+        <div class="g-item-num">Design 04</div>
+        <div class="g-item-name f-display">Classic W/B</div>
+        <div class="g-item-desc">Oversized POPS &middot; ghost piranha watermark &middot; DSF7 coordinates</div>
+      </div>
+    </div>
+
+    <!-- g5: Delivery Badge (portrait) -->
+    <div class="g-item g5 reveal d2" data-lb-src="./images/process-02.jpg" data-lb-cap="Delivery Badge — POPS 2026">
+      <img src="./images/process-02.jpg" alt="Delivery Badge — POPS 2026" loading="lazy">
+      <div class="g-item-overlay"></div>
+      <div class="g-item-info">
+        <div class="g-item-num">Design 05</div>
+        <div class="g-item-name f-display">Delivery Badge</div>
+        <div class="g-item-desc">Shield badge &middot; Piranha Ops Delivery &middot; DSF7 Bay Area</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Sleeve detail strip -->
+  <div class="sleeve-strip">
+    <div class="eyebrow" style="margin-bottom:1.25rem;margin-left:0"><span>All Six Designs Include</span></div>
+    <div class="sleeve-inner">
+      <div class="sleeve-cell reveal">
+        <div class="sleeve-cell-label">Left Sleeve</div>
+        <div class="sleeve-cell-val">PRIME 2026 + speed lines</div>
+      </div>
+      <div class="sleeve-cell reveal d1">
+        <div class="sleeve-cell-label">Right Sleeve</div>
+        <div class="sleeve-cell-val">POPS + speed lines</div>
+      </div>
+      <div class="sleeve-cell reveal d2">
+        <div class="sleeve-cell-label">Back Bottom</div>
+        <div class="sleeve-cell-val">Made by three, worn by all</div>
+      </div>
+      <div class="sleeve-cell reveal d3">
+        <div class="sleeve-cell-label">Color Palette</div>
+        <div class="sleeve-cell-val">Navy &middot; Gold &middot; White on Black</div>
+      </div>
+      <div class="sleeve-cell reveal d2">
+        <div class="sleeve-cell-label">Blank</div>
+        <div class="sleeve-cell-val">Oversized heavyweight tee</div>
+      </div>
+      <div class="sleeve-cell reveal d3">
+        <div class="sleeve-cell-label">Credit</div>
+        <div class="sleeve-cell-val">Threefold Supply Co.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ════════════════════════════════════════════
+     COMPARISON
+════════════════════════════════════════════ -->
+<section id="comparison">
+
+  <div class="wrap">
+    <div class="comp-intro reveal">
+      <div class="eyebrow" style="justify-content:center"><span>What Makes Us Different</span></div>
+      <h2 class="comp-intro-h f-display">Designed with purpose.<br>Built around your culture.</h2>
+      <p class="comp-intro-body">More than branded apparel. A reflection of the people behind the company.</p>
+      <p class="comp-intro-body">At Threefold, we work closely with teams to understand what their brand stands for, what their people take pride in, and how they want to be represented. From first concept to final production, every collection is created with identity, story, and wearability in mind.</p>
+    </div>
+  </div>
+
+  <div class="split-wrap reveal" id="split-wrap">
+
+    <!-- LEFT: Generic Print Shop -->
+    <div class="split-panel split-left" id="split-left">
+      <div class="split-bg" style="background-image:url(./images/process-03.jpg);background-position:center center"></div>
+      <div class="split-overlay split-overlay-left"></div>
+      <div class="split-content">
+        <div class="split-cat">Generic Print Shop</div>
+        <h3 class="split-title split-title-left f-display">Print<br>Shops</h3>
+        <ul class="split-list">
+          <li><span class="si si-x">&#10005;</span>Take your logo and print it.</li>
+          <li><span class="si si-x">&#10005;</span>Limited design collaboration.</li>
+          <li><span class="si si-x">&#10005;</span>Generic templates.</li>
+          <li><span class="si si-x">&#10005;</span>No story or identity.</li>
+          <li><span class="si si-x">&#10005;</span>One-size-fits-all approach.</li>
+          <li><span class="si si-x">&#10005;</span>Transactional experience.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- VS badge -->
+    <div class="split-vs">VS</div>
+
+    <!-- RIGHT: Threefold -->
+    <div class="split-panel split-right" id="split-right">
+      <div class="split-bg" style="background-image:url(./images/portal.jpg);background-position:center top"></div>
+      <div class="split-overlay split-overlay-right"></div>
+      <div class="split-content">
+        <div class="split-cat" style="color:var(--gold)">Design Partner</div>
+        <h3 class="split-title split-title-right f-display">Three<br>fold</h3>
+        <ul class="split-list">
+          <li><span class="si si-check">&#10003;</span>Built around your team and culture.</li>
+          <li><span class="si si-check">&#10003;</span>Custom concepts with intention.</li>
+          <li><span class="si si-check">&#10003;</span>Real mockups before production.</li>
+          <li><span class="si si-check">&#10003;</span>Collaborative creative process.</li>
+          <li><span class="si si-check">&#10003;</span>Unlimited revisions.</li>
+          <li><span class="si si-check">&#10003;</span>Apparel designed to actually be worn.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ══════════════════════════════════════════
+     PROCESS
+══════════════════════════════════════════ -->
+<section id="process">
+  <div class="proc-header wrap reveal">
+    <div class="eyebrow" style="justify-content:center"><span>How It Works</span></div>
+    <h2 class="proc-h f-display">The Threefold Method</h2>
+    <p class="proc-sub">Three steps. One outcome: apparel your team is proud to represent.</p>
+  </div>
+
+  <div class="proc-steps">
+
+    <div class="proc-step reveal">
+      <div class="proc-step-img">
+        <img src="./images/comparison-left.jpg" alt="Design consultation at DSF7 warehouse — Threefold meeting the POPS team on their floor" loading="lazy">
+        <div class="proc-step-img-vignette"></div>
+      </div>
+      <div class="proc-step-body">
+        <div class="proc-step-num f-display">01</div>
+        <div class="proc-step-label">Step One</div>
+        <div class="proc-step-title f-display">Design<br>Consultation</div>
+        <p class="proc-step-text">We learn your brand — the company, the culture, the people. What do you want this apparel to say? That conversation shapes everything before a design starts.</p>
+      </div>
+    </div>
+
+    <div class="proc-step reveal d1">
+      <div class="proc-step-img">
+        <img src="./images/comparison-right.jpg" alt="Mockup review — full POPS collection presented on screen" loading="lazy">
+        <div class="proc-step-img-vignette"></div>
+      </div>
+      <div class="proc-step-body">
+        <div class="proc-step-num f-display">02</div>
+        <div class="proc-step-label">Step Two</div>
+        <div class="proc-step-title f-display">Custom<br>Mockup</div>
+        <p class="proc-step-text">We design and deliver a full editorial mockup before anything is printed. You see exactly what you're getting — on a real model, in your colors, with your identity.</p>
+      </div>
+    </div>
+
+    <div class="proc-step reveal d2">
+      <div class="proc-step-img">
+        <img src="./images/texture.jpg" alt="Production and delivery — POPS order being QC'd and packed" loading="lazy">
+        <div class="proc-step-img-vignette"></div>
+      </div>
+      <div class="proc-step-body">
+        <div class="proc-step-num f-display">03</div>
+        <div class="proc-step-label">Step Three &amp; Four</div>
+        <div class="proc-step-title f-display">Approval &amp;<br>Delivery</div>
+        <p class="proc-step-text">Revise until it's perfect — unlimited rounds. Then we personally QC every order before it ships. No surprises. Your team gets exactly what was approved.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="gold-rule" style="margin-top:0"></div>
+
+<!-- ══════════════════════════════════════════
+     QUOTE FORM
+══════════════════════════════════════════ -->
+<section id="quote">
+  <div class="wrap">
+    <div class="quote-layout">
+
+      <div class="quote-sidebar">
+        <div class="eyebrow reveal"><span>Start Your Project</span></div>
+        <h2 class="quote-sidebar-h f-display reveal">
+          Tell us<br>about your<br><span class="acc">team.</span>
+        </h2>
+        <p class="quote-sidebar-body reveal">This isn&rsquo;t a basic quote form. We need to understand who you are before we design anything.</p>
+        <p class="quote-sidebar-body reveal">Fill this out honestly and completely. The more you share, the better we can design something your team is proud to represent.</p>
+        <p class="quote-sidebar-body reveal">Bay Area clients can book an <strong>in-person consultation</strong> at your location. We&rsquo;ll reach out within <strong>24 hours</strong>.</p>
+        <div class="quote-sidebar-note reveal">No obligation until you approve the mockup. Mockup is free. Production only begins when you say go.
+        </div>
+        <div class="quote-support reveal d2">
+          <div class="quote-support-card">
+            <div class="quote-support-k">What happens next</div>
+            <div class="quote-support-v">We review the brief, clarify the pieces that matter, then shape a direction before production talk.</div>
+          </div>
+          <div class="quote-support-card">
+            <div class="quote-support-k">Mockup process</div>
+            <div class="quote-support-v">You&rsquo;ll see the concept first, with room for revision before anything moves forward.</div>
+          </div>
+          <div class="quote-support-card">
+            <div class="quote-support-k">Upload guidance</div>
+            <div class="quote-support-v">Logos, old merch, reference photos, deck files, or rough screenshots all help us read the brand.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal d1" id="qform-wrap">
+        <div class="qform" id="qform-inner">
+          <form id="qform" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/" novalidate>
+            <input type="hidden" name="form-name" value="quote-request">
+            <p style="display:none"><label>Do not fill this out: <input name="bot-field"></label></p>
+            <input type="hidden" name="apparel_types" id="apparel-types-input" value="">
+
+            <!-- 01: Company -->
+            <div class="fsec">
+              <div class="fsec-title">01 &nbsp;About Your Company</div>
+              <div class="frow">
+                <div class="fgroup">
+                  <label class="flabel">Company Name <span class="req">*</span></label>
+                  <input class="finput" type="text" name="company_name" placeholder="Piranha Ops (POPS)" required>
+                </div>
+                <div class="fgroup">
+                  <label class="flabel">Company Type <span class="req">*</span></label>
+                  <select class="fselect" name="company_type" required>
+                    <option value="" disabled selected>Select one</option>
+                    <option>Amazon DSP Operator</option>
+                    <option>Dental / Medical Practice</option>
+                    <option>Warehouse / Logistics</option>
+                    <option>Gym / Fitness Studio</option>
+                    <option>Sports Team</option>
+                    <option>Local Small Business</option>
+                    <option>Corporation / Enterprise</option>
+                    <option>Contractor / Trades</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="frow full">
+                <div class="fgroup">
+                  <label class="flabel">What does your company do? <span class="req">*</span></label>
+                  <textarea class="ftextarea" name="company_description" placeholder="Brief overview of your company, what you do, and who your team is." rows="3" required></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- 02: Contact -->
+            <div class="fsec">
+              <div class="fsec-title">02 &nbsp;About You</div>
+              <div class="frow three">
+                <div class="fgroup">
+                  <label class="flabel">Contact Name <span class="req">*</span></label>
+                  <input class="finput" type="text" name="contact_name" placeholder="First and last name" required>
+                </div>
+                <div class="fgroup">
+                  <label class="flabel">Your Role / Title</label>
+                  <input class="finput" type="text" name="contact_title" placeholder="Owner, Ops Manager, etc.">
+                </div>
+                <div class="fgroup">
+                  <label class="flabel">Phone <span class="req">*</span></label>
+                  <input class="finput" type="tel" name="contact_phone" placeholder="(415) 000-0000" required>
+                </div>
+              </div>
+              <div class="frow">
+                <div class="fgroup">
+                  <label class="flabel">Email <span class="req">*</span></label>
+                  <input class="finput" type="email" name="contact_email" placeholder="you@company.com" required>
+                </div>
+                <div class="fgroup">
+                  <label class="flabel">Preferred Contact Method <span class="req">*</span></label>
+                  <select class="fselect" name="contact_method" required>
+                    <option value="" disabled selected>How should we reach you?</option>
+                    <option>Email first, then phone</option>
+                    <option>Phone call</option>
+                    <option>Virtual meeting (Zoom / Google Meet)</option>
+                    <option>In-person consultation (Bay Area only)</option>
+                    <option>Text message</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- 03: Order -->
+            <div class="fsec">
+              <div class="fsec-title">03 &nbsp;Order Details</div>
+              <div class="frow three">
+                <div class="fgroup">
+                  <label class="flabel">Quantity Range <span class="req">*</span></label>
+                  <select class="fselect" name="quantity" required>
+                    <option value="" disabled selected>Estimate</option>
+                    <option>24&ndash;50 pieces</option>
+                    <option>51&ndash;100 pieces</option>
+                    <option>101&ndash;250 pieces</option>
+                    <option>251&ndash;500 pieces</option>
+                    <option>500+ pieces</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+                <div class="fgroup">
+                  <label class="flabel">Project timeline</label>
+                  <textarea class="ftextarea" name="project_timeline" placeholder="PRIME week rollout, team onboarding in August, holiday event, recruiting launch, or no hard deadline yet." rows="3"></textarea>
+                  <div class="fhint">Any important dates, launches, events, or deadlines we should know about?</div>
+                </div>
+                <div class="fgroup">
+                  <label class="flabel">Budget Range</label>
+                  <select class="fselect" name="budget">
+                    <option value="" disabled selected>Approximate</option>
+                    <option>Under $500</option>
+                    <option>$500&ndash;$1,000</option>
+                    <option>$1,000&ndash;$2,500</option>
+                    <option>$2,500&ndash;$5,000</option>
+                    <option>$5,000&ndash;$10,000</option>
+                    <option>$10,000+</option>
+                    <option>Flexible / unknown</option>
+                  </select>
+                </div>
+              </div>
+              <div class="fgroup" style="margin-bottom:16px">
+                <label class="flabel">Apparel Type <span class="req">*</span> &mdash; Select all that apply</label>
+                <div class="fcheck-wrap" id="apparel-checks">
+                  <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>T-Shirts</div>
+                  <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Hoodies</div>
+                  <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Jackets</div>
+                  <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Hats</div>
+                  <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Tumblers</div>
+                  <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Mugs</div>
+                  <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Accessories</div>
+                  <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Not sure yet</div>
+                </div>
+              </div>
+              <div class="frow">
+                <div class="fgroup">
+                  <label class="flabel">Who is the apparel for? <span class="req">*</span></label>
+                  <select class="fselect" name="audience" required>
+                    <option value="" disabled selected>Select</option>
+                    <option>Drivers / Delivery Team</option>
+                    <option>Warehouse Staff</option>
+                    <option>Office / Admin Team</option>
+                    <option>All Employees</option>
+                    <option>Client Gifts / Corporate</option>
+                    <option>Event / Team</option>
+                    <option>Customers / Public</option>
+                    <option>Mixed</option>
+                  </select>
+                </div>
+                <div class="fgroup">
+                  <label class="flabel">Station Code / Location</label>
+                  <input class="finput" type="text" name="station_code" placeholder="e.g. DSF7 — Bay Area">
+                  <div class="fhint">DSP operators: include your station code — we&rsquo;ll build it into the design.</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 04: Design -->
+            <div class="fsec">
+              <div class="fsec-title">04 &nbsp;Design Direction</div>
+              <div class="frow full" style="margin-bottom:16px">
+                <div class="fgroup">
+                  <label class="flabel">What do you want this apparel to represent? <span class="req">*</span></label>
+                  <textarea class="ftextarea" name="meaning" placeholder="Team pride? A launch? Company culture? The vibe you want to put out there? Tell us what this collection needs to say." rows="4" required></textarea>
+                </div>
+              </div>
+              <div class="frow">
+                <div class="fgroup">
+                  <label class="flabel">Style Direction</label>
+                  <select class="fselect" name="style">
+                    <option value="" disabled selected>General aesthetic</option>
+                    <option>Streetwear / Urban</option>
+                    <option>Premium / Minimalist</option>
+                    <option>Workwear / Uniform</option>
+                    <option>Bold / Graphic</option>
+                    <option>Classic / Corporate</option>
+                    <option>Athletic / Sport</option>
+                    <option>Open to your recommendation</option>
+                  </select>
+                </div>
+                <div class="fgroup">
+                  <label class="flabel">Color Preferences</label>
+                  <input class="finput" type="text" name="colors" placeholder="Company colors, palette, or &apos;open to ideas&apos;">
+                </div>
+              </div>
+              <div class="frow full">
+                <div class="fgroup">
+                  <label class="flabel">Notes, Inspiration, Additional Context</label>
+                  <textarea class="ftextarea" name="notes" placeholder="Links, references, brands you admire, things you don&apos;t want, specific text or details. More detail = better design." rows="4"></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- 05: Files -->
+            <div class="fsec">
+              <div class="fsec-title">05 &nbsp;Existing Assets</div>
+              <div class="fgroup">
+                <label class="flabel">Logo, Existing Designs, or Brand Assets</label>
+                <div class="ffile-area" id="ffile-area">
+                  <div class="ffile-icon">&#8593;</div>
+                  <div class="ffile-text"><strong>Drop files or click to upload</strong><br>PNG, JPG, WEBP, SVG, PDF &middot; Max 5 files &middot; 10MB each</div>
+                  <input type="file" id="ffile-input" name="brand_assets" style="display:none" multiple accept=".png,.jpg,.jpeg,.webp,.svg,.pdf">
+                </div>
+                <div class="ffile-error-msg" id="ffile-error"></div>
+                <div id="ffile-list" class="ffile-list"></div>
+                <div class="fhint">Optional &mdash; skip if you don&rsquo;t have assets yet. For large brand kits or folders, paste a <strong>Google Drive link</strong> in the Notes field above instead.</div>
+              </div>
+            </div>
+
+            <!-- Submit -->
+            <div class="fsubmit-row">
+              <button type="submit" class="btn-submit">Submit Request &rarr;</button>
+            </div>
+
+          </form>
+
+          <div class="form-success" id="form-success">
+            <div class="form-success-check">&#10003;</div>
+            <h3 class="form-success-h f-display">We Got You.</h3>
+            <p class="form-success-body">Your project brief is in. We&rsquo;ll reach out within 24 hours to schedule your design consultation. Keep an eye on your inbox.</p>
+            <p style="margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)">— Threefold Supply Co.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="gold-rule"></div>
+
+<!-- ══════════════════════════════════════════
+     PORTAL CTA
+══════════════════════════════════════════ -->
+<section id="portal">
+  <div class="portal-grid">
+
+    <div class="portal-img-col reveal">
+      <img src="./images/image-15.jpg" alt="Threefold order QC and production — POPS collection" loading="lazy">
+    </div>
+
+    <div class="portal-text-col">
+      <div class="eyebrow reveal"><span>Client Portal</span></div>
+      <h2 class="portal-h f-display reveal">
+        Track every<br>step of your<br><span class="acc">order.</span>
+      </h2>
+      <p class="portal-body reveal">Once your project is live, you get a dedicated client portal. Live order status, design files, invoices, and your full history — all in one place.</p>
+
+      <ul class="portal-list reveal d1">
+        <li><span class="portal-check">&#10003;</span><span><strong>Live order timeline</strong> — see exactly where your order is at every stage</span></li>
+        <li><span class="portal-check">&#10003;</span><span><strong>Design file access</strong> — download approved files anytime</span></li>
+        <li><span class="portal-check">&#10003;</span><span><strong>Invoice history</strong> — all billing in one clean view</span></li>
+
+        <li><span class="portal-check">&#10003;</span><span><strong>Full stage tracking:</strong> Design &rarr; Revision &rarr; Approved &rarr; Production &rarr; QC &rarr; Shipped &rarr; Delivered</span></li>
+      </ul>
+
+      <a href="#quote" class="btn-gold reveal d2" style="display:inline-block;align-self:flex-start">Start a Project &rarr;</a>
+      <p class="portal-cta-label reveal d3">Portal access granted upon project confirmation</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">Threefold Supply Co.</div>
+        <div class="footer-brand-tag">Made by Three, Worn by All</div>
+        <p class="footer-brand-bio">B2B custom apparel designed around your brand&rsquo;s identity, story, and culture. Not a print shop. A design partner built for real teams.</p>
+        <div class="footer-tagline">Bay Area &middot; est. 2026</div>
+      </div>
+      <div>
+        <div class="footer-col-title">Navigate</div>
+        <ul class="footer-links">
+          <li><a href="#diff">Our Approach</a></li>
+          <li><a href="#comparison">How We Compare</a></li>
+          <li><a href="#collection">POPS 2026 Collection</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#portal">Client Portal</a></li>
+          <li><a href="#quote">Start a Project</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">The Team</div>
+        <div class="footer-founders">
+          <div class="footer-founder"><strong>Alliyah</strong>Sales &amp; Business Development</div>
+          <div class="footer-founder"><strong>Hannah</strong>Creative &amp; Concept</div>
+          <div class="footer-founder"><strong>Jordan</strong>Operations &amp; Fulfillment</div>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Contact</div>
+        <div class="footer-contact">
+          <a href="mailto:threefoldsupplycompany@gmail.com">threefoldsupplycompany@gmail.com</a>
+          <a href="#quote">Start a Project &rarr;</a>
+          <a href="#portal">Client Portal &rarr;</a>
+        </div>
+        <div style="margin-top:24px">
+          <div class="footer-col-title">We Serve</div>
+          <ul class="footer-links" style="font-size:12px">
+            <li><a href="#quote">Amazon DSP Operators</a></li>
+            <li><a href="#quote">Dental &amp; Medical Practices</a></li>
+            <li><a href="#quote">Local Businesses</a></li>
+            <li><a href="#quote">Corporate Teams</a></li>
+            <li><a href="#quote">Sports &amp; Fitness</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">&copy; 2026 Threefold Supply Co. &mdash; All Rights Reserved</span>
+      <div class="footer-legal" aria-label="Legal pages coming soon">
+        <span>Privacy Coming Soon</span>
+        <span>Terms Coming Soon</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+// ── Split comparison hover
+const sw = document.getElementById('split-wrap');
+const sl = document.getElementById('split-left');
+const sr = document.getElementById('split-right');
+const vs = sw ? sw.querySelector('.split-vs') : null;
+if(sw && sl && sr){
+  sl.addEventListener('mouseenter',()=>{sl.style.flex='1.28';sr.style.flex='.72';sw.classList.add('hl');sw.classList.remove('hr');if(vs)vs.style.left='64%'});
+  sl.addEventListener('mouseleave',()=>{sl.style.flex='1';sr.style.flex='1';sw.classList.remove('hl');if(vs)vs.style.left='50%'});
+  sr.addEventListener('mouseenter',()=>{sr.style.flex='1.28';sl.style.flex='.72';sw.classList.add('hr');sw.classList.remove('hl');if(vs)vs.style.left='36%'});
+  sr.addEventListener('mouseleave',()=>{sr.style.flex='1';sl.style.flex='1';sw.classList.remove('hr');if(vs)vs.style.left='50%'});
+}
+
+// ── Nav scroll
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>{nav.classList.toggle('dark',window.scrollY>30)},{passive:true});
+
+// ── Scroll reveal
+const revEls=document.querySelectorAll('.reveal');
+const ro=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})
+},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+revEls.forEach(el=>ro.observe(el));
+
+// ── Lightbox
+const lb=document.getElementById('lightbox');
+const lbImg=document.getElementById('lb-img');
+const lbCap=document.getElementById('lb-caption');
+const lbClose=document.getElementById('lb-close');
+document.querySelectorAll('.g-item[data-lb-src]').forEach(item=>{
+  item.addEventListener('click',()=>{
+    lbImg.src=item.dataset.lbSrc;
+    lbCap.textContent=item.dataset.lbCap||'';
+    lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+});
+function closeLb(){lb.classList.remove('open');document.body.style.overflow=''}
+lbClose.addEventListener('click',closeLb);
+lb.addEventListener('click',e=>{if(e.target===lb)closeLb()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
+
+// ── Mobile nav menu
+const navBurger=document.getElementById('nav-burger');
+const navLinks=document.querySelector('.nav-links');
+function closeMobileNav(){
+  if(!navBurger||!navLinks)return;
+  navBurger.classList.remove('open');
+  navLinks.classList.remove('open');
+  navBurger.setAttribute('aria-expanded','false');
+}
+if(navBurger&&navLinks){
+  navBurger.setAttribute('aria-expanded','false');
+  navBurger.setAttribute('aria-controls','primary-nav-links');
+  navLinks.id='primary-nav-links';
+  navBurger.addEventListener('click',e=>{
+    e.stopPropagation();
+    const open=!navLinks.classList.contains('open');
+    navBurger.classList.toggle('open',open);
+    navLinks.classList.toggle('open',open);
+    navBurger.setAttribute('aria-expanded',String(open));
+  });
+  navLinks.querySelectorAll('a').forEach(link=>link.addEventListener('click',closeMobileNav));
+  document.addEventListener('click',e=>{
+    if(!navLinks.contains(e.target)&&!navBurger.contains(e.target)) closeMobileNav();
+  });
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobileNav()});
+}
+
+// ── Checkbox items
+const apparelInput=document.getElementById('apparel-types-input');
+function updateApparelInput(){
+  if(!apparelInput)return;
+  const selected=Array.from(document.querySelectorAll('.fcheck-item.sel')).map(item=>item.textContent.trim());
+  apparelInput.value=selected.join(', ');
+}
+document.querySelectorAll('.fcheck-item').forEach(item=>{
+  const toggle=()=>{
+    item.classList.toggle('sel');
+    item.setAttribute('aria-checked',String(item.classList.contains('sel')));
+    updateApparelInput();
+  };
+  item.addEventListener('click',toggle);
+  item.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();toggle();}
+  });
+});
+
+// ── Supabase Storage
+const SB_URL='https://frfpmsjfjsiffkuhgvri.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZyZnBtc2pmanNpZmZrdWhndnJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg3MTE0NzUsImV4cCI6MjA5NDI4NzQ3NX0._3ZGiixXAvQruOzUE5G1CtfT3_yQh8VQmQsEJ8PUrL4';
+const SB_BUCKET='intake-files';
+
+function sbCategory(mime){
+  if(mime==='image/svg+xml')return'logo';
+  if(mime==='application/pdf')return'pdf';
+  return'inspiration';
+}
+
+async function uploadFilesToStorage(files){
+  if(!files.length)return{succeeded:[],failedCount:0};
+  const folder='questionnaire/'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+  const results=await Promise.allSettled(files.map(async f=>{
+    const safeName=f.name.replace(/\s+/g,'_');
+    const path=folder+'/'+safeName;
+    const res=await fetch(SB_URL+'/storage/v1/object/'+SB_BUCKET+'/'+path,{
+      method:'POST',
+      headers:{
+        'Authorization':'Bearer '+SB_KEY,
+        'Content-Type':f.type||'application/octet-stream',
+        'x-upsert':'false',
+      },
+      body:f,
+    });
+    if(!res.ok){const t=await res.text();throw new Error('"'+f.name+'": '+t);}
+    return{
+      id:Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2),
+      name:f.name,
+      path:path,
+      size:f.size,
+      mime_type:f.type,
+      category:sbCategory(f.type),
+      visible_to_client:true,
+      uploaded_at:new Date().toISOString(),
+    };
+  }));
+  const succeeded=[];
+  let failedCount=0;
+  results.forEach(r=>{
+    if(r.status==='fulfilled')succeeded.push(r.value);
+    else{failedCount++;console.warn('File upload failed:',r.reason?.message||String(r.reason));}
+  });
+  return{succeeded,failedCount};
+}
+
+// ── File upload
+const farea=document.getElementById('ffile-area');
+const finput=document.getElementById('ffile-input');
+const flist=document.getElementById('ffile-list');
+const ferror=document.getElementById('ffile-error');
+const ALLOWED_EXT=['.png','.jpg','.jpeg','.webp','.svg','.pdf'];
+const MAX_FILES=5;
+const MAX_BYTES=10*1024*1024;
+let stagedFiles=[];
+let uploadedFileMeta=[];
+function fmtSize(b){if(b<1024)return b+' B';if(b<1024*1024)return(b/1024).toFixed(1)+' KB';return(b/(1024*1024)).toFixed(1)+' MB'}
+function validateFiles(files){
+  if(files.length>MAX_FILES)return`Maximum ${MAX_FILES} files allowed. You selected ${files.length}.`;
+  for(const f of files){
+    const ext='.'+f.name.split('.').pop().toLowerCase();
+    if(!ALLOWED_EXT.includes(ext))return`"${f.name}" is not an accepted type. Use PNG, JPG, WEBP, SVG, or PDF.`;
+    if(f.size>MAX_BYTES)return`"${f.name}" is too large (${fmtSize(f.size)}). Max 10MB per file.`;
+  }
+  return null;
+}
+function setFileError(msg){
+  if(msg){ferror.textContent=msg;ferror.classList.add('show');farea.classList.add('error');}
+  else{ferror.classList.remove('show');farea.classList.remove('error');}
+}
+function syncInputFiles(){
+  try{const dt=new DataTransfer();stagedFiles.forEach(f=>dt.items.add(f));finput.files=dt.files;}catch(e){}
+}
+function renderFileList(){
+  flist.innerHTML='';
+  stagedFiles.forEach((f,i)=>{
+    const row=document.createElement('div');
+    row.className='ffile-list-item';
+    row.innerHTML=`<span class="ffile-list-name">${f.name}</span><span class="ffile-list-size">${fmtSize(f.size)}</span><button type="button" class="ffile-list-remove" aria-label="Remove">&times;</button>`;
+    row.querySelector('.ffile-list-remove').addEventListener('click',()=>{
+      stagedFiles.splice(i,1);syncInputFiles();setFileError(null);renderFileList();
+    });
+    flist.appendChild(row);
+  });
+}
+function addFiles(newFiles){
+  const combined=[...stagedFiles,...Array.from(newFiles)];
+  const err=validateFiles(combined);
+  if(err){setFileError(err);return;}
+  setFileError(null);stagedFiles=combined;syncInputFiles();renderFileList();
+}
+if(farea&&finput){
+  farea.addEventListener('click',()=>finput.click());
+  farea.addEventListener('dragover',e=>{e.preventDefault();farea.style.borderColor='var(--gold)'});
+  farea.addEventListener('dragleave',()=>{farea.style.borderColor=''});
+  farea.addEventListener('drop',e=>{
+    e.preventDefault();farea.style.borderColor='';
+    if(e.dataTransfer.files.length)addFiles(e.dataTransfer.files);
+  });
+  finput.addEventListener('change',()=>{if(finput.files.length)addFiles(finput.files);finput.value='';});
+}
+
+// ── Netlify form submit
+const form=document.getElementById('qform');
+const successBox=document.getElementById('form-success');
+function shouldSubmitToNetlify(){
+  return !['localhost','127.0.0.1','::1'].includes(window.location.hostname);
+}
+async function submitToNetlify(form){
+  if(!shouldSubmitToNetlify())return;
+  const netlifyData=new FormData(form);
+  netlifyData.set('form-name',form.getAttribute('name')||'quote-request');
+  // Files are already stored in Supabase — don't send binaries to Netlify to avoid size limits
+  netlifyData.delete('brand_assets');
+  const res=await fetch('/',{
+    method:'POST',
+    body:netlifyData,
+  });
+  if(!res.ok)throw new Error(`Netlify submission failed with status ${res.status}`);
+}
+async function submitToHq(form,files){
+  const formData=new FormData(form);
+  const json={};
+  formData.forEach((v,k)=>{ json[k]=v; });
+  json.questionnaire_files=files;
+  const res=await fetch('https://three-fold-hq.vercel.app/api/public-lead',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify(json)
+  });
+  if(!res.ok)throw new Error(`HQ submission failed with status ${res.status}`);
+}
+if(form){
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    updateApparelInput();
+    let ok=true;
+    form.querySelectorAll('[required]').forEach(f=>{
+      f.style.borderColor='';
+      if(!String(f.value||'').trim()){f.style.borderColor='#c0392b';ok=false}
+    });
+    if(!apparelInput.value.trim()){
+      const apparelWrap=document.getElementById('apparel-checks');
+      if(apparelWrap){
+        apparelWrap.style.outline='1px solid #c0392b';
+        apparelWrap.style.outlineOffset='4px';
+        apparelWrap.scrollIntoView({behavior:'smooth',block:'center'});
+      }
+      ok=false;
+    }else{
+      const apparelWrap=document.getElementById('apparel-checks');
+      if(apparelWrap){apparelWrap.style.outline='';apparelWrap.style.outlineOffset=''}
+    }
+    const fileErr=validateFiles(stagedFiles);
+    if(fileErr){setFileError(fileErr);if(farea)farea.scrollIntoView({behavior:'smooth',block:'center'});ok=false;}
+    if(!ok){
+      const first=form.querySelector('[style*="c0392b"]');
+      if(first&&!fileErr){first.scrollIntoView({behavior:'smooth',block:'center'});first.focus()}
+      return;
+    }
+
+    const btn=form.querySelector('.btn-submit');
+    const originalText=btn.textContent;
+    btn.disabled=true;
+
+    try{
+      uploadedFileMeta=[];
+      if(stagedFiles.length){
+        btn.textContent='Uploading files…';
+        const uploadResult=await uploadFilesToStorage(stagedFiles);
+        if(uploadResult.failedCount>0){
+          const noun=uploadResult.failedCount===1?'file':'files';
+          setFileError(uploadResult.failedCount+' '+noun+' failed to upload. Please check your connection and try again, or remove the affected file(s).');
+          if(farea)farea.scrollIntoView({behavior:'smooth',block:'center'});
+          btn.textContent=originalText;
+          btn.disabled=false;
+          return;
+        }
+        uploadedFileMeta=uploadResult.succeeded;
+      }
+      btn.textContent='Sending…';
+      // HQ/CRM submission is the authoritative gate
+      await submitToHq(form,uploadedFileMeta);
+      // Netlify form submission is best-effort backup — its failures must not surface to the user
+      submitToNetlify(form).catch(err=>console.warn('[Netlify form] non-critical:',err));
+      form.style.display='none';
+      successBox.classList.add('show');
+      successBox.scrollIntoView({behavior:'smooth',block:'center'});
+    }catch(err){
+      console.error(err);
+      alert('Something went wrong submitting your request. Please email threefoldsupplycompany@gmail.com.');
+      btn.textContent=originalText;
+      btn.disabled=false;
+    }
+  });
+}
+
+// ── Phone number auto-format
+(function(){
+  const phoneInput=document.querySelector('input[name="contact_phone"]');
+  if(!phoneInput)return;
+  phoneInput.addEventListener('input',function(){
+    const digits=this.value.replace(/\D/g,'').slice(0,10);
+    if(digits.length<4){this.value=digits;}
+    else if(digits.length<7){this.value='('+digits.slice(0,3)+') '+digits.slice(3);}
+    else{this.value='('+digits.slice(0,3)+') '+digits.slice(3,6)+'-'+digits.slice(6);}
+  });
+})();
+
+// ── Smooth scroll with nav offset
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const href=a.getAttribute('href');
+    if(href==='#')return;
+    const target=document.querySelector(href);
+    if(!target)return;
+    e.preventDefault();
+    const top=target.getBoundingClientRect().top+window.scrollY-72;
+    window.scrollTo({top,behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
