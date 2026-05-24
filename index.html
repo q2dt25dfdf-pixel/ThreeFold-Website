@@ -3740,6 +3740,111 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
   }
 }
 
+/* ══════════════════════════════════════════
+   PROCESS SPACING REFINEMENT
+══════════════════════════════════════════ */
+
+#process {
+  padding: clamp(86px, 8vw, 124px) 0 !important;
+}
+#process .proc-header {
+  max-width: 860px;
+}
+#process .proc-steps {
+  max-width: 1180px;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(34px, 5vw, 64px);
+}
+#process .proc-steps::before {
+  left: 50%;
+  right: auto;
+  top: 260px;
+  bottom: 260px;
+  width: 1px;
+  height: auto;
+  transform: none;
+  border: 0;
+  border-left: 1px solid rgba(184,137,26,.28);
+  opacity: .75;
+}
+#process .proc-step {
+  display: grid;
+  grid-template-columns: minmax(0, 1.18fr) minmax(300px, .82fr);
+  align-items: stretch;
+  min-height: 430px;
+  overflow: visible;
+}
+#process .proc-step:nth-child(even) {
+  grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+}
+#process .proc-step:nth-child(even) .proc-step-img {
+  order: 2;
+}
+#process .proc-step:nth-child(even) .proc-step-body {
+  order: 1;
+}
+#process .proc-step::after {
+  left: 50%;
+  right: auto;
+  top: auto;
+  bottom: calc(clamp(34px, 5vw, 64px) * -0.5 - 15px);
+  transform: translateX(-50%) rotate(90deg);
+}
+#process .proc-step-img {
+  aspect-ratio: auto;
+  min-height: clamp(360px, 34vw, 520px);
+}
+#process .proc-step-img img {
+  object-fit: contain;
+  background: #0E0C09;
+}
+#process .proc-step-body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(34px, 5vw, 62px) !important;
+}
+#process .proc-step-title {
+  font-size: clamp(38px, 4.5vw, 66px) !important;
+  line-height: .88;
+  margin-bottom: 18px !important;
+}
+#process .proc-step-text {
+  max-width: 390px;
+  font-size: 15px;
+}
+@media(max-width:900px) {
+  #process .proc-steps {
+    max-width: 680px;
+    gap: 34px;
+  }
+  #process .proc-steps::before {
+    top: 180px;
+    bottom: 180px;
+  }
+  #process .proc-step,
+  #process .proc-step:nth-child(even) {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  #process .proc-step:nth-child(even) .proc-step-img,
+  #process .proc-step:nth-child(even) .proc-step-body {
+    order: initial;
+  }
+  #process .proc-step-img {
+    min-height: 0;
+    aspect-ratio: 3 / 2;
+  }
+  #process .proc-step-body {
+    padding: 30px 26px 34px !important;
+  }
+  #process .proc-step-title {
+    font-size: clamp(34px, 10vw, 52px) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3941,13 +4046,13 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
-          <span>Threefold Design Direction</span>
+          <span>Threefold Design Direction 01</span>
           <img src="./images/work/POPS/PIRANHA OPS - DESIGN 2 .png" alt="POPS design direction">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
-          <span>Final Apparel</span>
-          <img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS final apparel">
+          <span>Threefold Design Direction 02</span>
+          <img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS design direction 02">
         </div>
       </div>
       <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around DSF7, Prime Week energy, Bay Area delivery culture, and a team identity bold enough to wear beyond work.</p>
@@ -3965,13 +4070,13 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
-          <span>Threefold Design Direction</span>
+          <span>Threefold Design Direction 01</span>
           <img src="./images/work/HELE/HELE - DESIGN 3.png" alt="HELE design direction">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
-          <span>Final Apparel</span>
-          <img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE final apparel">
+          <span>Threefold Design Direction 02</span>
+          <img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE design direction 02">
         </div>
       </div>
       <p class="case-study-why"><strong>Why we designed it this way:</strong> Built from a clean transportation identity and expanded into a stronger apparel system using movement, route-inspired graphics, and premium teamwear styling.</p>
@@ -3989,13 +4094,13 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
-          <span>Threefold Design Direction</span>
+          <span>Threefold Design Direction 01</span>
           <img src="./images/work/R2GO/R2GO - We do it together Design .png" alt="R2GO design direction">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
-          <span>Final Apparel</span>
-          <img src="./images/work/R2GO/R2GO -No Driver Left Behind.png" alt="R2GO final apparel">
+          <span>Threefold Design Direction 02</span>
+          <img src="./images/work/R2GO/R2GO -No Driver Left Behind.png" alt="R2GO design direction 02">
         </div>
       </div>
       <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around reliability, teamwork, movement, and a strong operational culture that employees can identify with.</p>
@@ -4013,13 +4118,13 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
-          <span>Threefold Design Direction</span>
+          <span>Threefold Design Direction 01</span>
           <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 design direction">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
-          <span>Final Apparel</span>
-          <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 final apparel">
+          <span>Threefold Design Direction 02</span>
+          <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 design direction 02">
         </div>
       </div>
       <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around team pride, competition, achievement, and a recognizable visual identity that feels larger than a standard company shirt.</p>
