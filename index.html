@@ -1560,6 +1560,12 @@ body::after { display: none !important; }
   color: rgba(196,154,42,0.62);
 }
 
+/* ── AI image removal — neutral placeholder surfaces ── */
+/* Process step image containers: dark gradient fills 340px slot when no img present */
+.proc-step-img { background: linear-gradient(160deg, #1d1b16 0%, #252119 100%); }
+/* Portal left column: warm dark surface fills column when no img present */
+.portal-img-col { background: linear-gradient(135deg, #1a1715 0%, #0f0d0a 100%); }
+
 /* ── Our Work — case study card ── */
 #collection { padding: 100px 0 80px; }
 @media(max-width:768px) { #collection { padding: 72px 0 60px; } }
@@ -1915,7 +1921,7 @@ body::after { display: none !important; }
 
     <!-- LEFT: Generic Print Shop -->
     <div class="split-panel split-left" id="split-left">
-      <div class="split-bg" style="background-image:url(./images/process-03.jpg);background-position:center center"></div>
+      <div class="split-bg" style="background:linear-gradient(160deg,#1a1815 0%,#2a2722 100%)"></div>
       <div class="split-overlay split-overlay-left"></div>
       <div class="split-content">
         <div class="split-cat">Generic Print Shop</div>
@@ -1936,7 +1942,7 @@ body::after { display: none !important; }
 
     <!-- RIGHT: Threefold -->
     <div class="split-panel split-right" id="split-right">
-      <div class="split-bg" style="background-image:url(./images/portal.jpg);background-position:center top"></div>
+      <div class="split-bg" style="background:linear-gradient(160deg,#1A1815 0%,#201e13 60%,#161310 100%)"></div>
       <div class="split-overlay split-overlay-right"></div>
       <div class="split-content">
         <div class="split-cat" style="color:var(--gold)">Design Partner</div>
@@ -1972,7 +1978,6 @@ body::after { display: none !important; }
 
     <div class="proc-step reveal">
       <div class="proc-step-img">
-        <img src="./images/comparison-left.jpg" alt="Design consultation at DSF7 warehouse — Threefold meeting the POPS team on their floor" loading="lazy">
         <div class="proc-step-img-vignette"></div>
       </div>
       <div class="proc-step-body">
@@ -1985,7 +1990,6 @@ body::after { display: none !important; }
 
     <div class="proc-step reveal d1">
       <div class="proc-step-img">
-        <img src="./images/comparison-right.jpg" alt="Mockup review — full POPS collection presented on screen" loading="lazy">
         <div class="proc-step-img-vignette"></div>
       </div>
       <div class="proc-step-body">
@@ -1998,7 +2002,6 @@ body::after { display: none !important; }
 
     <div class="proc-step reveal d2">
       <div class="proc-step-img">
-        <img src="./images/texture.jpg" alt="Production and delivery — POPS order being QC'd and packed" loading="lazy">
         <div class="proc-step-img-vignette"></div>
       </div>
       <div class="proc-step-body">
@@ -2274,7 +2277,6 @@ body::after { display: none !important; }
   <div class="portal-grid">
 
     <div class="portal-img-col reveal">
-      <img src="./images/image-15.jpg" alt="Threefold order QC and production — POPS collection" loading="lazy">
     </div>
 
     <div class="portal-text-col">
