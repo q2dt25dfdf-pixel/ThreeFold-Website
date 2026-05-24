@@ -3082,6 +3082,203 @@ footer { order: 8; }
   margin: 0 auto 30px;
 }
 
+/* ══════════════════════════════════════════
+   FEATURED WORK + COMPARISON CLEANUP
+══════════════════════════════════════════ */
+
+#collection {
+  padding: clamp(78px, 8vw, 112px) 0;
+}
+#collection .work-header {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.featured-grid {
+  width: min(100% - 40px, 1320px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(18px, 2vw, 28px);
+}
+.featured-card {
+  min-height: clamp(330px, 36vw, 460px);
+  display: grid;
+  grid-template-columns: minmax(220px, .82fr) minmax(260px, 1fr);
+  align-items: stretch;
+  overflow: hidden;
+  color: var(--off-white);
+  background:
+    radial-gradient(circle at 72% 28%, rgba(184,137,26,.14), transparent 38%),
+    #15130F;
+  border: 1px solid rgba(184,137,26,.24);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.featured-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(184,137,26,.5);
+  box-shadow: 0 28px 70px rgba(0,0,0,.26);
+}
+.featured-copy {
+  position: relative;
+  z-index: 2;
+  padding: clamp(28px, 4vw, 46px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.featured-kicker,
+.featured-subtitle,
+.featured-link {
+  font-family: 'Barlow Condensed', sans-serif;
+  text-transform: uppercase;
+}
+.featured-kicker {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+.featured-title {
+  font-size: clamp(42px, 4.6vw, 72px);
+  line-height: .9;
+  color: var(--off-white);
+  margin-bottom: 14px;
+}
+.featured-subtitle {
+  font-size: 13px;
+  letter-spacing: .13em;
+  color: rgba(248,245,240,.58);
+  margin-bottom: auto;
+}
+.featured-link {
+  margin-top: 34px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  color: var(--gold);
+}
+.featured-image {
+  position: relative;
+  min-height: 100%;
+  background: #0E0C09;
+}
+.featured-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(21,19,15,.7), rgba(21,19,15,0) 42%);
+  pointer-events: none;
+}
+.featured-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.01);
+  display: block;
+}
+@media(max-width:1050px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+  .featured-card {
+    min-height: 340px;
+  }
+}
+@media(max-width:640px) {
+  .featured-card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .featured-copy {
+    min-height: 230px;
+  }
+  .featured-image {
+    min-height: 270px;
+  }
+  .featured-image::after {
+    background: linear-gradient(180deg, rgba(21,19,15,.72), rgba(21,19,15,0) 48%);
+  }
+}
+
+#comparison .split-wrap {
+  min-height: clamp(560px, 47vw, 700px);
+}
+#comparison .split-panel {
+  min-height: clamp(560px, 47vw, 700px);
+}
+#comparison .comparison-visual {
+  background: #0E0C09;
+}
+#comparison .compare-feature-img {
+  object-fit: contain;
+  transform: none;
+}
+#comparison .split-left .compare-feature-img {
+  object-position: center center;
+}
+#comparison .split-right .compare-feature-img {
+  object-position: center center;
+}
+#comparison .split-overlay-left {
+  background:
+    linear-gradient(180deg, rgba(8,7,5,.03), rgba(8,7,5,.34)),
+    linear-gradient(90deg, rgba(8,7,5,.06), rgba(8,7,5,.22)) !important;
+}
+#comparison .split-overlay-right {
+  background:
+    linear-gradient(180deg, rgba(8,7,5,.02), rgba(8,7,5,.32)),
+    linear-gradient(90deg, rgba(8,7,5,.18), rgba(8,7,5,.06)) !important;
+}
+#comparison .split-content {
+  width: min(318px, 46%) !important;
+  padding: 20px 22px !important;
+  bottom: clamp(20px, 3vw, 42px) !important;
+  background: rgba(8,7,5,.5) !important;
+  border: 1px solid rgba(184,137,26,.38) !important;
+  box-shadow: 0 18px 48px rgba(0,0,0,.24);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+#comparison .split-left .split-content {
+  left: clamp(22px, 4vw, 54px) !important;
+  right: auto !important;
+}
+#comparison .split-right .split-content {
+  left: auto !important;
+  right: clamp(22px, 4vw, 54px) !important;
+}
+#comparison .split-cat {
+  font-size: 10px;
+  letter-spacing: .18em;
+  margin-bottom: 10px;
+}
+#comparison .split-title {
+  font-size: clamp(34px, 3.6vw, 56px) !important;
+  margin-bottom: 10px !important;
+}
+#comparison .split-copy {
+  font-size: clamp(20px, 1.9vw, 30px);
+  line-height: 1.12;
+  color: rgba(248,245,240,.78);
+}
+@media(max-width:900px) {
+  #comparison .split-wrap,
+  #comparison .split-panel {
+    min-height: 560px;
+  }
+  #comparison .split-content {
+    width: min(300px, calc(100% - 40px)) !important;
+    left: 20px !important;
+    right: auto !important;
+    bottom: 20px !important;
+  }
+  #comparison .split-right .split-content {
+    left: auto !important;
+    right: 20px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3220,99 +3417,30 @@ footer { order: 8; }
     </h2>
   </div>
 
-  <div class="case-grid reveal d1">
-    <article class="work-card">
-      <div class="work-card-top">
-        <div>
-          <div class="work-index">01 / Case Study</div>
-          <h3 class="work-name">HELE</h3>
-        </div>
+  <div class="featured-grid reveal d1" id="featured-work">
+    <a class="featured-card" href="#collection" aria-label="See how we designed POPS Piranha Ops">
+      <div class="featured-copy">
+        <div class="featured-kicker">01 / Featured Work</div>
+        <h3 class="featured-title f-display">POPS &ndash; Piranha Ops</h3>
+        <p class="featured-subtitle">Amazon DSP &middot; DSF7 &middot; Bay Area</p>
+        <span class="featured-link">See how we designed this &rarr;</span>
       </div>
-      <div class="work-logo-slot">
-        <span class="asset-label">Client Logo</span>
-        <img src="./images/work/HELE/Logo.png" alt="HELE logo">
+      <div class="featured-image">
+        <img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS Piranha Ops apparel design">
       </div>
-      <div class="work-assets">
-        <div class="work-shot"><span class="asset-label">Design 01</span><img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE design 01"></div>
-        <div class="work-shot"><span class="asset-label">Design 02</span><img src="./images/work/HELE/HELE - DESIGN 3.png" alt="HELE design 02"></div>
-      </div>
-      <details class="work-thinking">
-        <summary>See the design thinking &rarr;</summary>
-        <div class="work-thinking-body">HELE leans into a clean brand mark and dark athletic apparel direction, letting the identity feel sharp, simple, and wearable.</div>
-      </details>
-    </article>
+    </a>
 
-    <article class="work-card">
-      <div class="work-card-top">
-        <div>
-          <div class="work-index">02 / Case Study</div>
-          <h3 class="work-name">POPS</h3>
-        </div>
+    <a class="featured-card" href="#collection" aria-label="See how we designed HELE">
+      <div class="featured-copy">
+        <div class="featured-kicker">02 / Featured Work</div>
+        <h3 class="featured-title f-display">HELE</h3>
+        <p class="featured-subtitle">Amazon DSP &middot; Oahu, Hawaii</p>
+        <span class="featured-link">See how we designed this &rarr;</span>
       </div>
-      <div class="work-logo-slot">
-        <span class="asset-label">Client Logo</span>
-        <div>
-          <div class="work-logo-text">POPS</div>
-          <div class="work-logo-note">Logo pending</div>
-        </div>
+      <div class="featured-image">
+        <img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE apparel design">
       </div>
-      <div class="work-assets">
-        <div class="work-shot"><span class="asset-label">Design 01</span><img src="./images/work/POPS/PIRANHA OPS - DESIGN 2 .png" alt="POPS design 01"></div>
-        <div class="work-shot"><span class="asset-label">Design 02</span><img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS design 02"></div>
-      </div>
-      <details class="work-thinking">
-        <summary>See the design thinking &rarr;</summary>
-        <div class="work-thinking-body">POPS uses bold back graphics, delivery culture, and station pride to turn a team shirt into a recognizable collection piece.</div>
-      </details>
-    </article>
-
-    <article class="work-card">
-      <div class="work-card-top">
-        <div>
-          <div class="work-index">03 / Case Study</div>
-          <h3 class="work-name">R2GO</h3>
-        </div>
-      </div>
-      <div class="work-logo-slot">
-        <span class="asset-label">Client Logo</span>
-        <div>
-          <div class="work-logo-text">R2GO</div>
-          <div class="work-logo-note">Logo pending</div>
-        </div>
-      </div>
-      <div class="work-assets">
-        <div class="work-shot"><span class="asset-label">Design 01</span><img src="./images/work/R2GO/R2GO - We do it together Design .png" alt="R2GO design 01"></div>
-        <div class="work-shot"><span class="asset-label">Design 02</span><img src="./images/work/R2GO/R2GO -No Driver Left Behind.png" alt="R2GO design 02"></div>
-      </div>
-      <details class="work-thinking">
-        <summary>See the design thinking &rarr;</summary>
-        <div class="work-thinking-body">R2GO centers team language and driver pride, with graphic treatments built to feel specific instead of templated.</div>
-      </details>
-    </article>
-
-    <article class="work-card">
-      <div class="work-card-top">
-        <div>
-          <div class="work-index">04 / Case Study</div>
-          <h3 class="work-name">DUR3</h3>
-        </div>
-      </div>
-      <div class="work-logo-slot">
-        <span class="asset-label">Client Logo</span>
-        <div>
-          <div class="work-logo-text">DUR3</div>
-          <div class="work-logo-note">Logo pending</div>
-        </div>
-      </div>
-      <div class="work-assets">
-        <div class="work-shot"><span class="asset-label">Design 01</span><img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 design 01"></div>
-        <div class="work-shot work-placeholder"><span class="asset-label">Design 02</span><span>Design 02 pending</span></div>
-      </div>
-      <details class="work-thinking">
-        <summary>See the design thinking &rarr;</summary>
-        <div class="work-thinking-body">DUR3 currently shows the first approved direction, with room for the next design and final logo system as the collection develops.</div>
-      </details>
-    </article>
+    </a>
   </div>
 </section>
 
