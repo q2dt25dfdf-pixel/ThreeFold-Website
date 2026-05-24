@@ -1521,6 +1521,44 @@ body::after { display: none !important; }
 @media(max-width:900px) {
   .diff-card { padding: 40px 28px 36px; border-left: none; border-top: 3px solid var(--gold); }
 }
+.diff-card-headline {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(48px, 5.4vw, 76px);
+  line-height: 0.87; letter-spacing: 0.03em;
+  color: var(--off-white); margin-bottom: 26px;
+}
+.diff-card-headline .dc-gold { color: var(--gold); }
+.diff-card-body {
+  font-size: 14px; color: rgba(240,237,231,0.52);
+  line-height: 1.72; max-width: 300px;
+  border-left: 1px solid rgba(196,154,42,0.32);
+  padding-left: 16px; margin-bottom: 40px;
+}
+.diff-card-proofs { display: flex; flex-direction: column; flex: 1; }
+.diff-card-proof {
+  display: flex; gap: 14px; align-items: baseline;
+  padding: 14px 0; border-bottom: 1px solid rgba(196,154,42,0.1);
+}
+.diff-card-proof:first-child { border-top: 1px solid rgba(196,154,42,0.1); }
+.diff-card-proof-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
+  color: rgba(196,154,42,0.48); min-width: 20px;
+}
+.diff-card-proof-text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14.5px; font-weight: 500;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: rgba(240,237,231,0.68);
+}
+.diff-card-bottom {
+  margin-top: 32px; padding-top: 18px;
+  border-top: 1px solid rgba(196,154,42,0.2);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(196,154,42,0.62);
+}
 
 /* ── Our Work — case study card ── */
 #collection { padding: 100px 0 80px; }
@@ -1756,41 +1794,23 @@ body::after { display: none !important; }
 
     <div class="diff-img-col reveal">
       <div class="diff-card">
-        <div class="diff-card-header">Threefold Process</div>
-        <div class="diff-card-items">
-          <div class="diff-card-item">
-            <div class="diff-card-num">01</div>
-            <div>
-              <div class="diff-card-item-title">Brand Identity</div>
-              <div class="diff-card-item-text">We learn who you are before a single concept starts.</div>
-            </div>
+        <div class="diff-card-headline">Not Merch.<br><span class="dc-gold">Identity.</span></div>
+        <p class="diff-card-body">We turn team culture into apparel people actually want to wear.</p>
+        <div class="diff-card-proofs">
+          <div class="diff-card-proof">
+            <span class="diff-card-proof-num">01</span>
+            <span class="diff-card-proof-text">Logo becomes direction</span>
           </div>
-          <div class="diff-card-item">
-            <div class="diff-card-num">02</div>
-            <div>
-              <div class="diff-card-item-title">Custom Design Direction</div>
-              <div class="diff-card-item-text">Every concept built around your team&rsquo;s story, culture, and identity.</div>
-            </div>
+          <div class="diff-card-proof">
+            <span class="diff-card-proof-num">02</span>
+            <span class="diff-card-proof-text">Story becomes design</span>
           </div>
-          <div class="diff-card-item">
-            <div class="diff-card-num">03</div>
-            <div>
-              <div class="diff-card-item-title">Mockup Before Production</div>
-              <div class="diff-card-item-text">You approve the full design before anything is printed. Unlimited revisions.</div>
-            </div>
-          </div>
-          <div class="diff-card-item">
-            <div class="diff-card-num">04</div>
-            <div>
-              <div class="diff-card-item-title">Apparel Built Around Your Team</div>
-              <div class="diff-card-item-text">Made to be worn — not just to check a box.</div>
-            </div>
+          <div class="diff-card-proof">
+            <span class="diff-card-proof-num">03</span>
+            <span class="diff-card-proof-text">Mockup becomes approved product</span>
           </div>
         </div>
-        <div class="diff-card-footer">
-          <div class="diff-card-footer-name">Threefold Supply Co.</div>
-          <div class="diff-card-footer-tag">Made by three, worn by all</div>
-        </div>
+        <div class="diff-card-bottom">Design partner first. Apparel second.</div>
       </div>
     </div>
 
