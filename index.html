@@ -2092,6 +2092,7 @@ body::after { display: none !important; }
 
 @media(min-width:901px) {
   .comparison-visual { width: min(30%, 260px); }
+  .split-right .comparison-visual { width: min(34%, 340px); }
   .shirt-board { width: min(100%, 230px); padding: 20px; }
   .split-left .split-content,
   .split-right .split-content {
@@ -2103,6 +2104,307 @@ body::after { display: none !important; }
   .split-right .split-content {
     padding-left: clamp(72px, 8vw, 118px) !important;
   }
+}
+
+/* ══════════════════════════════════════════
+   REAL ASSET POLISH PASS
+══════════════════════════════════════════ */
+
+#hero { min-height: 720px; }
+.hero-content { align-items: center; }
+.hero-text {
+  max-width: 460px;
+  padding-left: clamp(28px, 5vw, 64px);
+}
+.hero-headline {
+  font-size: clamp(58px, 7vw, 104px) !important;
+  margin-bottom: 1.25rem !important;
+}
+.hero-sub { max-width: 390px; font-size: 15px; }
+.hero-text .hero-stats {
+  gap: clamp(22px, 3.4vw, 46px) !important;
+  margin-top: 26px !important;
+}
+.hero-stat-n { font-size: clamp(36px, 4vw, 52px) !important; }
+.hero-stat-l { font-size: 10px !important; }
+.hero-badge { display: none !important; }
+.hero-lockup {
+  width: min(58vw, 820px);
+  right: clamp(22px, 4vw, 58px);
+  top: 52%;
+  z-index: 2;
+}
+.hero-brand-mark {
+  width: 100%;
+  max-width: 760px;
+  aspect-ratio: 1.42;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.hero-brand-mark img {
+  transform: scale(1.08);
+  filter: drop-shadow(0 34px 72px rgba(0,0,0,.62));
+}
+.hero-brand-line { width: 68%; margin-top: 10px; }
+.hero-brand-caption { color: rgba(248,245,240,.64); }
+@media(max-width:900px) {
+  #hero { min-height: 760px; }
+  .hero-lockup {
+    display: flex;
+    width: 88vw;
+    right: 6vw;
+    top: 116px;
+    opacity: .24;
+  }
+  .hero-brand-line,
+  .hero-brand-caption { display: none; }
+  .hero-content { align-items: flex-end; padding-bottom: 44px; }
+  .hero-text { padding: 0 20px; }
+  .hero-headline { font-size: clamp(62px, 18vw, 92px) !important; }
+}
+
+#diff { padding: 104px 0; }
+.diff-grid {
+  display: block;
+  min-height: 0;
+}
+.diff-text-col {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 48px !important;
+  display: grid;
+  grid-template-columns: minmax(260px,.85fr) minmax(0,1.15fr);
+  gap: clamp(36px, 6vw, 82px);
+  align-items: start;
+}
+.diff-copy-main { max-width: 430px; }
+.diff-h { margin-bottom: 1.2rem; }
+.diff-intro {
+  max-width: 620px;
+  margin-bottom: 0;
+  font-size: 17px;
+  color: var(--text-2);
+}
+.diff-list {
+  border-top: 1px solid var(--border-l);
+  margin-top: 28px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 0;
+}
+.diff-list li {
+  padding: 20px 18px;
+  border-bottom: 1px solid var(--border-l);
+  border-right: 1px solid var(--border-l);
+  display: block;
+}
+.diff-list li:last-child { border-right: 0; }
+.diff-list-num { display: block; margin-bottom: 18px; }
+.diff-list-text strong { margin-bottom: 8px; }
+.diff-quote-strip {
+  margin-top: 28px;
+  padding: 22px 26px;
+  border-left: 0;
+  border-top: 2px solid var(--gold);
+}
+.diff-img-col { display: none; }
+@media(max-width:900px) {
+  #diff { padding: 72px 0; }
+  .diff-text-col { grid-template-columns: 1fr; padding: 0 20px !important; }
+  .diff-list { grid-template-columns: 1fr 1fr; }
+  .diff-list li:nth-child(2n) { border-right: 0; }
+}
+@media(max-width:560px) {
+  .diff-list { grid-template-columns: 1fr; }
+  .diff-list li { border-right: 0; }
+}
+
+.case-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+.work-card { min-height: 0; }
+.work-card-top { padding: 18px 20px 14px; }
+.work-logo-slot {
+  min-height: 74px;
+  margin: 14px 20px 0;
+  padding: 12px 16px;
+}
+.work-logo-slot img { height: 54px; }
+.work-logo-text { font-size: 36px; }
+.work-assets {
+  padding: 14px 20px 16px;
+  gap: 12px;
+}
+.work-shot { aspect-ratio: 1.16; }
+.work-shot img { object-fit: cover; }
+.work-thinking {
+  margin-top: auto;
+  border-top: 1px solid var(--border-l);
+}
+.work-thinking summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 16px 20px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+.work-thinking summary::-webkit-details-marker { display: none; }
+.work-thinking summary:hover { color: var(--gold); }
+.work-thinking[open] summary { color: var(--gold); border-bottom: 1px solid var(--border-l); }
+.work-thinking-body {
+  padding: 16px 20px 20px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-3);
+  background: #F5F0E7;
+}
+@media(max-width:760px){.case-grid{grid-template-columns:1fr}.work-shot{aspect-ratio:1.08}}
+
+.hele-flow-card {
+  width: min(100%, 360px);
+  border: 1px solid rgba(184,137,26,.24);
+  background: rgba(248,245,240,.045);
+  padding: 18px;
+}
+.hele-flow-top {
+  display: grid;
+  grid-template-columns: .72fr auto 1fr;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.hele-flow-logo,
+.hele-flow-design {
+  min-height: 92px;
+  display: grid;
+  place-items: center;
+  background: #F8F5F0;
+  border: 1px solid rgba(248,245,240,.14);
+  overflow: hidden;
+}
+.hele-flow-logo img { width: 84%; height: 70px; object-fit: contain; }
+.hele-flow-design img { width: 100%; height: 100%; object-fit: cover; }
+.hele-flow-arrow {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--gold);
+}
+.hele-flow-caption {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(248,245,240,.58);
+}
+
+.proc-step-img { height: 300px; padding: 26px; }
+.discovery-map {
+  position: absolute;
+  inset: 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.discovery-tile {
+  border: 1px solid rgba(184,137,26,.22);
+  display: grid;
+  place-items: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(248,245,240,.62);
+}
+.discovery-center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  width: 92px;
+  height: 92px;
+  border: 1px solid var(--gold);
+  background: #11100E;
+  display: grid;
+  place-items: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 34px;
+  color: var(--gold);
+}
+.mockup-sheet { inset: 24px 34px; grid-template-columns: .85fr 1.15fr; }
+.mockup-shirt { position: relative; }
+.mockup-shirt::after {
+  content: 'MOCKUP';
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  transform: translate(-50%,-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: var(--gold);
+}
+.approval-track {
+  position: absolute;
+  left: 34px;
+  right: 34px;
+  top: 50%;
+  height: 1px;
+  background: rgba(184,137,26,.45);
+}
+.delivery-flow { inset: 32px; gap: 16px; }
+.delivery-box {
+  position: relative;
+  height: 120px;
+  background: rgba(248,245,240,.025);
+}
+.delivery-box::after {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.portal-img-col { padding: clamp(28px, 4vw, 58px); }
+.portal-dashboard-shot {
+  width: min(100%, 780px);
+  border: 1px solid rgba(184,137,26,.32);
+  background: #F8F5F0;
+  box-shadow: 0 34px 90px rgba(0,0,0,.38);
+  overflow: hidden;
+}
+.portal-dashboard-shot img {
+  position: static;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1.42;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+.portal-shot-label {
+  padding: 13px 16px;
+  border-top: 1px solid #D6CEBD;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: #F8F5F0;
 }
 
 </style>
@@ -2205,10 +2507,13 @@ body::after { display: none !important; }
   <div class="diff-grid">
 
     <div class="diff-text-col">
-      <div class="eyebrow reveal"><span>Not a Print Shop</span></div>
-      <h2 class="diff-h f-display reveal">
-        Built<br>around<br>your<br><span class="acc">culture.</span>
-      </h2>
+      <div class="diff-copy-main">
+        <div class="eyebrow reveal"><span>Not a Print Shop</span></div>
+        <h2 class="diff-h f-display reveal">
+          Built<br>around<br>your<br><span class="acc">culture.</span>
+        </h2>
+      </div>
+      <div>
       <p class="diff-intro reveal">
         <strong>Threefold is not a generic print shop.</strong> We design around culture, story, identity, and team. Every mockup is approved before production, and every piece is built to be worn beyond the event.
       </p>
@@ -2216,50 +2521,36 @@ body::after { display: none !important; }
         <li>
           <span class="diff-list-num">01</span>
           <div class="diff-list-text">
-            <strong>Identity First</strong>
-            Before design starts, we understand the company, the culture, the people, and the story behind the brand.
+            <strong>Culture</strong>
+            We look at how your team works, talks, moves, and takes pride in the brand.
           </div>
         </li>
         <li>
           <span class="diff-list-num">02</span>
           <div class="diff-list-text">
-            <strong>Mockup Before Production</strong>
-            You see the full direction before a single item is printed. Unlimited revisions until it feels right.
+            <strong>Story</strong>
+            Every collection starts with the reason the apparel should exist.
           </div>
         </li>
         <li>
           <span class="diff-list-num">03</span>
           <div class="diff-list-text">
-            <strong>Pieces That Last</strong>
-            Premium blanks, quality-checked production, and designs your team actually wants in rotation.
+            <strong>Identity</strong>
+            Logos, colors, language, and symbols become a real design direction.
+          </div>
+        </li>
+        <li>
+          <span class="diff-list-num">04</span>
+          <div class="diff-list-text">
+            <strong>Team</strong>
+            Mockups are approved before production. Pieces are made to actually be worn.
           </div>
         </li>
       </ul>
       <div class="diff-quote-strip reveal">
-        <div class="diff-quote-text">&ldquo;Workers wear gear they&rsquo;re proud of. Proud workers in branded gear is free advertising, team identity, and repeat orders — all in one piece of apparel.&rdquo;</div>
-        <div class="diff-quote-source">— Threefold Supply Co. &middot; Bay Area &middot; 2026</div>
+        <div class="diff-quote-text">&ldquo;Not merch for a drawer. Apparel your team recognizes, approves, and actually wears.&rdquo;</div>
+        <div class="diff-quote-source">— Threefold Supply Co.</div>
       </div>
-    </div>
-
-    <div class="diff-img-col reveal">
-      <div class="diff-card">
-        <div class="diff-card-headline">Not Merch.<br><span class="dc-gold">Identity.</span></div>
-        <p class="diff-card-body">We turn team culture into apparel people actually want to wear.</p>
-        <div class="diff-card-proofs">
-          <div class="diff-card-proof">
-            <span class="diff-card-proof-num">01</span>
-            <span class="diff-card-proof-text">Logo becomes direction</span>
-          </div>
-          <div class="diff-card-proof">
-            <span class="diff-card-proof-num">02</span>
-            <span class="diff-card-proof-text">Story becomes design</span>
-          </div>
-          <div class="diff-card-proof">
-            <span class="diff-card-proof-num">03</span>
-            <span class="diff-card-proof-text">Mockup becomes approved product</span>
-          </div>
-        </div>
-        <div class="diff-card-bottom">Culture first. Product second.</div>
       </div>
     </div>
 
@@ -2294,7 +2585,10 @@ body::after { display: none !important; }
         <div class="work-shot"><img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE design 01"></div>
         <div class="work-shot"><img src="./images/work/HELE/HELE - DESIGN 3.png" alt="HELE design 02"></div>
       </div>
-      <div class="work-card-cta">See the design thinking &rarr;</div>
+      <details class="work-thinking">
+        <summary>See the design thinking &rarr;</summary>
+        <div class="work-thinking-body">HELE leans into a clean brand mark and dark athletic apparel direction, letting the identity feel sharp, simple, and wearable.</div>
+      </details>
     </article>
 
     <article class="work-card">
@@ -2314,7 +2608,10 @@ body::after { display: none !important; }
         <div class="work-shot"><img src="./images/work/POPS/PIRANHA OPS - DESIGN 2 .png" alt="POPS design 01"></div>
         <div class="work-shot"><img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS design 02"></div>
       </div>
-      <div class="work-card-cta">See the design thinking &rarr;</div>
+      <details class="work-thinking">
+        <summary>See the design thinking &rarr;</summary>
+        <div class="work-thinking-body">POPS uses bold back graphics, delivery culture, and station pride to turn a team shirt into a recognizable collection piece.</div>
+      </details>
     </article>
 
     <article class="work-card">
@@ -2334,7 +2631,10 @@ body::after { display: none !important; }
         <div class="work-shot"><img src="./images/work/R2GO/R2GO - We do it together Design .png" alt="R2GO design 01"></div>
         <div class="work-shot"><img src="./images/work/R2GO/R2GO -No Driver Left Behind.png" alt="R2GO design 02"></div>
       </div>
-      <div class="work-card-cta">See the design thinking &rarr;</div>
+      <details class="work-thinking">
+        <summary>See the design thinking &rarr;</summary>
+        <div class="work-thinking-body">R2GO centers team language and driver pride, with graphic treatments built to feel specific instead of templated.</div>
+      </details>
     </article>
 
     <article class="work-card">
@@ -2354,7 +2654,10 @@ body::after { display: none !important; }
         <div class="work-shot"><img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 design 01"></div>
         <div class="work-shot work-placeholder"><span>Design 02 pending</span></div>
       </div>
-      <div class="work-card-cta">See the design thinking &rarr;</div>
+      <details class="work-thinking">
+        <summary>See the design thinking &rarr;</summary>
+        <div class="work-thinking-body">DUR3 currently shows the first approved direction, with room for the next design and final logo system as the collection develops.</div>
+      </details>
     </article>
   </div>
 </section>
@@ -2409,12 +2712,16 @@ body::after { display: none !important; }
       <div class="split-bg" style="background:linear-gradient(160deg,#1A1815 0%,#201e13 60%,#161310 100%)"></div>
       <div class="split-overlay split-overlay-right"></div>
       <div class="comparison-visual" aria-hidden="true">
-        <div>
-          <div class="design-flow"><span>logo</span><span>&rarr;</span><span>custom design</span></div>
-          <div class="shirt-board">
-            <div class="shirt-shape dark-shirt">
-              <div class="custom-design-mark">3F</div>
-            </div>
+        <div class="hele-flow-card">
+          <div class="design-flow"><span>HELE logo</span><span>&rarr;</span><span>custom design</span></div>
+          <div class="hele-flow-top">
+            <div class="hele-flow-logo"><img src="./images/work/HELE/Logo.png" alt=""></div>
+            <div class="hele-flow-arrow">&rarr;</div>
+            <div class="hele-flow-design"><img src="./images/work/HELE/HELE - DESIGN 2.png" alt=""></div>
+          </div>
+          <div class="hele-flow-top" style="grid-template-columns:1fr 1fr;margin-bottom:0">
+            <div class="hele-flow-design"><img src="./images/work/HELE/HELE - DESIGN 3.png" alt=""></div>
+            <div class="hele-flow-caption">Logo becomes a collection system</div>
           </div>
         </div>
       </div>
@@ -2453,11 +2760,13 @@ body::after { display: none !important; }
     <div class="proc-step reveal">
       <div class="proc-step-img">
         <div class="proc-visual" aria-hidden="true">
-          <div class="proc-line"></div>
-          <div class="proc-node n1">1</div>
-          <div class="proc-node n2">2</div>
-          <div class="proc-node n3">3</div>
-          <div class="proc-panel"><span></span><span></span><span></span></div>
+          <div class="discovery-map">
+            <div class="discovery-tile">Culture</div>
+            <div class="discovery-tile">Story</div>
+            <div class="discovery-tile">Identity</div>
+            <div class="discovery-tile">Team</div>
+          </div>
+          <div class="discovery-center">01</div>
         </div>
       </div>
       <div class="proc-step-body">
@@ -2488,6 +2797,7 @@ body::after { display: none !important; }
     <div class="proc-step reveal d2">
       <div class="proc-step-img">
         <div class="proc-visual" aria-hidden="true">
+          <div class="approval-track"></div>
           <div class="delivery-flow">
             <div class="delivery-box">Approve</div>
             <div class="delivery-box">Produce</div>
@@ -2768,27 +3078,10 @@ body::after { display: none !important; }
   <div class="portal-grid">
 
     <div class="portal-img-col reveal">
-      <div class="portal-dashboard" aria-hidden="true">
-        <div class="portal-dash-top">
-          <div class="portal-dash-brand">Threefold Portal</div>
-          <div class="portal-dash-pill">Preview Data</div>
-        </div>
-        <div class="portal-dash-body">
-          <div class="portal-dash-side">
-            <div class="portal-dash-nav"></div>
-            <div class="portal-dash-nav"></div>
-            <div class="portal-dash-nav"></div>
-            <div class="portal-dash-nav"></div>
-          </div>
-          <div class="portal-dash-main">
-            <div class="portal-status"></div>
-            <div class="portal-timeline"><span></span><span></span><span></span><span></span><span></span></div>
-            <div class="portal-file-row"></div>
-            <div class="portal-file-row"></div>
-            <div class="portal-file-row"></div>
-          </div>
-        </div>
-      </div>
+      <figure class="portal-dashboard-shot">
+        <img src="./images/portal/client-portal-preview.jpeg" alt="Threefold client portal dashboard preview">
+        <figcaption class="portal-shot-label">Demo client portal preview</figcaption>
+      </figure>
     </div>
 
     <div class="portal-text-col">
