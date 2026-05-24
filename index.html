@@ -1468,6 +1468,60 @@ body::after { display: none !important; }
   .hero-lockup { display: none; }
 }
 
+/* ── Diff card — replaces gallery-02.jpg ── */
+.diff-img-col { display: flex; align-items: stretch; }
+.diff-card {
+  width: 100%;
+  background: #1A1815;
+  border-left: 3px solid var(--gold);
+  padding: 52px 44px 48px;
+  display: flex;
+  flex-direction: column;
+}
+.diff-card-header {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 36px;
+}
+.diff-card-items { display: flex; flex-direction: column; flex: 1; }
+.diff-card-item {
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(196,154,42,0.14);
+  display: flex; gap: 18px; align-items: flex-start;
+}
+.diff-card-item:first-child { border-top: 1px solid rgba(196,154,42,0.14); }
+.diff-card-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px; letter-spacing: 0.1em;
+  color: rgba(196,154,42,0.5); min-width: 22px; padding-top: 2px;
+}
+.diff-card-item-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px; font-weight: 600;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--off-white); margin-bottom: 4px;
+}
+.diff-card-item-text { font-size: 12.5px; color: rgba(240,237,231,0.44); line-height: 1.6; }
+.diff-card-footer {
+  margin-top: 32px; padding-top: 20px;
+  border-top: 1px solid rgba(196,154,42,0.18);
+}
+.diff-card-footer-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 20px; letter-spacing: 0.08em;
+  color: rgba(240,237,231,0.3); line-height: 1;
+}
+.diff-card-footer-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 9.5px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: rgba(196,154,42,0.38); margin-top: 5px;
+}
+@media(max-width:900px) {
+  .diff-card { padding: 40px 28px 36px; border-left: none; border-top: 3px solid var(--gold); }
+}
+
 /* ── Our Work — case study card ── */
 #collection { padding: 100px 0 80px; }
 @media(max-width:768px) { #collection { padding: 72px 0 60px; } }
@@ -1701,7 +1755,43 @@ body::after { display: none !important; }
     </div>
 
     <div class="diff-img-col reveal">
-      <img src="./images/gallery-02.jpg" alt="Threefold founders reviewing POPS 2026 collection designs" loading="lazy">
+      <div class="diff-card">
+        <div class="diff-card-header">Threefold Process</div>
+        <div class="diff-card-items">
+          <div class="diff-card-item">
+            <div class="diff-card-num">01</div>
+            <div>
+              <div class="diff-card-item-title">Brand Identity</div>
+              <div class="diff-card-item-text">We learn who you are before a single concept starts.</div>
+            </div>
+          </div>
+          <div class="diff-card-item">
+            <div class="diff-card-num">02</div>
+            <div>
+              <div class="diff-card-item-title">Custom Design Direction</div>
+              <div class="diff-card-item-text">Every concept built around your team&rsquo;s story, culture, and identity.</div>
+            </div>
+          </div>
+          <div class="diff-card-item">
+            <div class="diff-card-num">03</div>
+            <div>
+              <div class="diff-card-item-title">Mockup Before Production</div>
+              <div class="diff-card-item-text">You approve the full design before anything is printed. Unlimited revisions.</div>
+            </div>
+          </div>
+          <div class="diff-card-item">
+            <div class="diff-card-num">04</div>
+            <div>
+              <div class="diff-card-item-title">Apparel Built Around Your Team</div>
+              <div class="diff-card-item-text">Made to be worn — not just to check a box.</div>
+            </div>
+          </div>
+        </div>
+        <div class="diff-card-footer">
+          <div class="diff-card-footer-name">Threefold Supply Co.</div>
+          <div class="diff-card-footer-tag">Made by three, worn by all</div>
+        </div>
+      </div>
     </div>
 
   </div>
