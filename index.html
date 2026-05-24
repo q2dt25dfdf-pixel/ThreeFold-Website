@@ -101,7 +101,7 @@ a{color:inherit;text-decoration:none}
    HERO — Full bleed cinematic
 ══════════════════════════════════════════ */
 #hero{position:relative;height:100vh;min-height:640px;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background-image:url(HERO_IMG);background-size:cover;background-position:center 30%}
+.hero-bg{position:absolute;inset:0;background:var(--black);background-size:cover;background-position:center 30%}
 .hero-vignette{position:absolute;inset:0;background:linear-gradient(95deg,rgba(8,8,8,.82) 0%,rgba(8,8,8,.55) 45%,rgba(8,8,8,.1) 100%)}
 .hero-vignette-bottom{position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to top,rgba(8,8,8,.9),transparent)}
 .hero-content{position:relative;z-index:2;height:100%;display:flex;align-items:center;padding-top:var(--nav-h)}
@@ -1662,6 +1662,449 @@ body::after { display: none !important; }
 .case-back-list li::before { content: '—'; color: var(--gold); font-size: 10px; flex-shrink: 0; }
 .case-back .case-flip-hint { color: rgba(240,237,231,0.32); }
 
+/* ══════════════════════════════════════════
+   MARKETING VISUAL REFINEMENT
+══════════════════════════════════════════ */
+
+.hero-lockup {
+  width: min(42vw, 520px);
+  right: clamp(32px, 6vw, 84px);
+  padding-right: 0;
+  align-items: center;
+  opacity: 1;
+}
+.hero-brand-mark {
+  width: min(100%, 460px);
+  aspect-ratio: 1.38;
+  display: grid;
+  place-items: center;
+  padding: clamp(22px, 3vw, 38px);
+  border: 1px solid rgba(184,137,26,.24);
+  background:
+    linear-gradient(135deg, rgba(248,245,240,.06), rgba(184,137,26,.08)),
+    rgba(8,7,5,.36);
+  box-shadow: 0 28px 90px rgba(0,0,0,.28);
+}
+.hero-brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 18px 34px rgba(0,0,0,.32));
+}
+.hero-brand-line {
+  width: 82%;
+  height: 1px;
+  margin: 20px 0 12px;
+  background: linear-gradient(90deg, transparent, rgba(184,137,26,.55), transparent);
+}
+.hero-brand-caption {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(248,245,240,.58);
+}
+@media(max-width:1100px) {
+  .hero-lockup { width: min(34vw, 360px); right: 32px; }
+}
+@media(max-width:900px) {
+  .hero-lockup { display: none; }
+}
+
+.diff-grid { grid-template-columns: minmax(0,1.04fr) minmax(360px,.96fr); }
+.diff-intro { max-width: 500px; }
+.diff-img-col { background: #171410; }
+.diff-card { min-height: 100%; justify-content: center; }
+.diff-card-body { max-width: 380px; }
+@media(max-width:900px){.diff-grid{grid-template-columns:1fr}}
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+.work-card {
+  min-height: 520px;
+  border: 1px solid var(--border-l);
+  background: #FCF8F1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.work-card-top {
+  padding: 22px 22px 18px;
+  border-bottom: 1px solid var(--border-l);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.work-index {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.work-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 42px;
+  line-height: .88;
+  letter-spacing: .035em;
+  color: var(--text-1);
+}
+.work-logo-slot {
+  min-height: 106px;
+  margin: 18px 22px 0;
+  border: 1px solid rgba(184,137,26,.24);
+  background:
+    linear-gradient(135deg, rgba(184,137,26,.08), transparent),
+    #F5F0E7;
+  display: grid;
+  place-items: center;
+  padding: 18px;
+}
+.work-logo-slot img { width: 100%; height: 72px; object-fit: contain; }
+.work-logo-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: .06em;
+  color: var(--text-1);
+}
+.work-logo-note {
+  margin-top: 4px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  text-align: center;
+}
+.work-assets {
+  padding: 18px 22px 22px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.work-shot {
+  aspect-ratio: 1 / 1.05;
+  border: 1px solid var(--border-l);
+  background: #EFE8DC;
+  position: relative;
+  overflow: hidden;
+}
+.work-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.work-placeholder {
+  display: grid;
+  place-items: center;
+  padding: 14px;
+  text-align: center;
+}
+.work-placeholder span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.work-card-cta {
+  margin-top: auto;
+  padding: 18px 22px 22px;
+  border-top: 1px solid var(--border-l);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--text-1);
+}
+.work-card:hover .work-card-cta { color: var(--gold); }
+@media(max-width:1180px){.case-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.case-grid{grid-template-columns:1fr}.work-card{min-height:auto}}
+
+.comp-intro { padding-bottom: 46px !important; }
+.comp-intro-h { color: var(--text-1); }
+.comparison-visual {
+  position: absolute;
+  top: 34px;
+  bottom: 34px;
+  width: min(42%, 360px);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+.split-left .comparison-visual { left: 34px; }
+.split-right .comparison-visual { right: 34px; }
+.shirt-board {
+  width: min(100%, 300px);
+  aspect-ratio: .82;
+  border: 1px solid rgba(248,245,240,.12);
+  background: rgba(248,245,240,.045);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+.shirt-shape {
+  width: 74%;
+  aspect-ratio: .78;
+  position: relative;
+  display: grid;
+  place-items: center;
+  clip-path: polygon(27% 0, 73% 0, 88% 13%, 100% 34%, 83% 43%, 78% 100%, 22% 100%, 17% 43%, 0 34%, 12% 13%);
+  background: #E9E2D6;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.16);
+}
+.shirt-shape.dark-shirt { background: #11100E; box-shadow: inset 0 0 0 1px rgba(248,245,240,.12); }
+.shirt-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #26231D;
+  border: 1px solid rgba(0,0,0,.2);
+  padding: 8px 14px;
+}
+.custom-design-mark {
+  width: 58%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(184,137,26,.55);
+  display: grid;
+  place-items: center;
+  color: var(--gold);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 54px;
+  line-height: 1;
+  letter-spacing: .04em;
+  background:
+    radial-gradient(circle at center, rgba(184,137,26,.16), transparent 58%),
+    linear-gradient(135deg, transparent 44%, rgba(184,137,26,.28) 45%, rgba(184,137,26,.28) 55%, transparent 56%);
+}
+.design-flow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(248,245,240,.5);
+}
+.design-flow span:nth-child(2) { color: var(--gold); }
+@media(max-width:1100px){.comparison-visual{opacity:.42}.split-left .comparison-visual{left:18px}.split-right .comparison-visual{right:18px}}
+@media(max-width:900px){.comparison-visual{position:relative;inset:auto;width:100%;height:220px;margin:20px 0 0;opacity:1}.shirt-board{height:200px;aspect-ratio:auto}.split-left .comparison-visual,.split-right .comparison-visual{left:auto;right:auto}}
+
+.proc-step-img {
+  height: 280px;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+}
+.proc-visual {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(184,137,26,.22);
+  background:
+    linear-gradient(135deg, rgba(248,245,240,.05), rgba(184,137,26,.08)),
+    #191714;
+  overflow: hidden;
+}
+.proc-visual::before {
+  content: '';
+  position: absolute;
+  inset: 22px;
+  border: 1px solid rgba(248,245,240,.08);
+}
+.proc-line {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  top: 50%;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(184,137,26,.18), rgba(184,137,26,.64), rgba(184,137,26,.18));
+}
+.proc-node {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(184,137,26,.6);
+  background: #11100E;
+  display: grid;
+  place-items: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 24px;
+  color: var(--gold);
+}
+.proc-node.n1 { left: 13%; top: 38%; }
+.proc-node.n2 { left: 43%; top: 38%; }
+.proc-node.n3 { right: 13%; top: 38%; }
+.proc-panel {
+  position: absolute;
+  left: 28px;
+  right: 28px;
+  bottom: 24px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 8px;
+}
+.proc-panel span {
+  height: 8px;
+  background: rgba(248,245,240,.12);
+}
+.mockup-sheet {
+  position: absolute;
+  inset: 28px 42px;
+  border: 1px solid rgba(248,245,240,.12);
+  background: #F8F5F0;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.mockup-shirt {
+  background: #15130F;
+  clip-path: polygon(27% 0, 73% 0, 88% 13%, 100% 34%, 83% 43%, 78% 100%, 22% 100%, 17% 43%, 0 34%, 12% 13%);
+}
+.mockup-lines { display: grid; align-content: center; gap: 9px; }
+.mockup-lines span { height: 8px; background: #D8CEBD; }
+.mockup-lines span:nth-child(2) { width: 76%; }
+.mockup-lines span:nth-child(3) { width: 52%; background: var(--gold); }
+.delivery-flow {
+  position: absolute;
+  inset: 30px;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+  align-items: center;
+}
+.delivery-box {
+  border: 1px solid rgba(184,137,26,.28);
+  height: 96px;
+  display: grid;
+  place-items: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(248,245,240,.62);
+}
+.proc-step-img-vignette { display: none; }
+
+.portal-img-col { display: grid; place-items: center; padding: clamp(28px, 5vw, 64px); }
+.portal-dashboard {
+  width: min(100%, 620px);
+  border: 1px solid rgba(184,137,26,.24);
+  background: #F8F5F0;
+  box-shadow: 0 30px 80px rgba(0,0,0,.32);
+  color: #111;
+}
+.portal-dash-top {
+  padding: 16px 18px;
+  border-bottom: 1px solid #D6CEBD;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18px;
+}
+.portal-dash-brand {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: .06em;
+}
+.portal-dash-pill {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(184,137,26,.35);
+  padding: 6px 10px;
+}
+.portal-dash-body {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 0;
+}
+.portal-dash-side {
+  border-right: 1px solid #D6CEBD;
+  padding: 18px;
+  display: grid;
+  gap: 10px;
+}
+.portal-dash-nav {
+  height: 34px;
+  background: #EEE6D8;
+}
+.portal-dash-main { padding: 18px; }
+.portal-status {
+  height: 78px;
+  background: #15130F;
+  margin-bottom: 14px;
+  position: relative;
+}
+.portal-status::after {
+  content: 'APPROVED MOCKUP';
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: var(--gold);
+}
+.portal-timeline {
+  display: grid;
+  grid-template-columns: repeat(5,1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.portal-timeline span {
+  height: 8px;
+  background: #D6CEBD;
+}
+.portal-timeline span:nth-child(-n+3) { background: var(--gold); }
+.portal-file-row {
+  height: 36px;
+  border: 1px solid #D6CEBD;
+  margin-top: 8px;
+  background: #FCF8F1;
+}
+@media(max-width:900px){.portal-dash-body{grid-template-columns:1fr}.portal-dash-side{border-right:none;border-bottom:1px solid #D6CEBD}.portal-img-col{min-height:420px}}
+
+@media(min-width:901px) {
+  .comparison-visual { width: min(30%, 260px); }
+  .shirt-board { width: min(100%, 230px); padding: 20px; }
+  .split-left .split-content,
+  .split-right .split-content {
+    width: min(390px, 62%) !important;
+  }
+  .split-left .split-content {
+    padding-right: clamp(72px, 8vw, 118px) !important;
+  }
+  .split-right .split-content {
+    padding-left: clamp(72px, 8vw, 118px) !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -1705,10 +2148,11 @@ body::after { display: none !important; }
   <div class="hero-vignette-bottom"></div>
 
   <div class="hero-lockup" aria-hidden="true">
-    <div class="hero-lockup-name">THREEFOLD</div>
-    <div class="hero-lockup-sub">SUPPLY CO.</div>
-    <div class="hero-lockup-rule"></div>
-    <div class="hero-lockup-tag">Made by three, worn by all.</div>
+    <div class="hero-brand-mark">
+      <img src="./images/brand/Logo (BG removed) (2).png" alt="">
+    </div>
+    <div class="hero-brand-line"></div>
+    <div class="hero-brand-caption">Made by Three, Worn by All</div>
   </div>
 
   <div class="hero-content">
@@ -1766,29 +2210,28 @@ body::after { display: none !important; }
         Built<br>around<br>your<br><span class="acc">culture.</span>
       </h2>
       <p class="diff-intro reveal">
-        <strong>CustomInk and 4imprint are order takers.</strong> You upload a logo, pick a blank, and get something your team tolerates.<br><br>
-        Threefold is a design partner. We learn who you are before we design anything.
+        <strong>Threefold is not a generic print shop.</strong> We design around culture, story, identity, and team. Every mockup is approved before production, and every piece is built to be worn beyond the event.
       </p>
       <ul class="diff-list reveal">
         <li>
           <span class="diff-list-num">01</span>
           <div class="diff-list-text">
             <strong>Identity First</strong>
-            Before any design starts, we understand your company — the culture, the people, and the story behind the brand.
+            Before design starts, we understand the company, the culture, the people, and the story behind the brand.
           </div>
         </li>
         <li>
           <span class="diff-list-num">02</span>
           <div class="diff-list-text">
             <strong>Mockup Before Production</strong>
-            You see the full design — on a real model, in your colors — before a single item is printed. Unlimited revisions until it&rsquo;s right.
+            You see the full direction before a single item is printed. Unlimited revisions until it feels right.
           </div>
         </li>
         <li>
           <span class="diff-list-num">03</span>
           <div class="diff-list-text">
             <strong>Pieces That Last</strong>
-            Premium blanks. Quality-checked production. Designs built to carry your brand season after season, not just one order.
+            Premium blanks, quality-checked production, and designs your team actually wants in rotation.
           </div>
         </li>
       </ul>
@@ -1816,7 +2259,7 @@ body::after { display: none !important; }
             <span class="diff-card-proof-text">Mockup becomes approved product</span>
           </div>
         </div>
-        <div class="diff-card-bottom">Design partner first. Apparel second.</div>
+        <div class="diff-card-bottom">Culture first. Product second.</div>
       </div>
     </div>
 
@@ -1837,67 +2280,82 @@ body::after { display: none !important; }
   </div>
 
   <div class="case-grid reveal d1">
-    <div class="case-card" id="case-pops" role="button" tabindex="0" aria-label="Piranha Ops case study — click to flip">
-      <div class="case-inner">
-
-        <!-- FRONT -->
-        <div class="case-front">
-          <div class="case-eyebrow">POPS &rarr; Threefold Collection</div>
-          <div class="case-client f-display">Piranha Ops</div>
-          <div class="case-subtitle">Prime Week 2026 Collection</div>
-          <div class="case-rule"></div>
-          <div class="case-stats">
-            <div class="case-stat">
-              <div class="case-stat-val">DSF7</div>
-              <div class="case-stat-key">Station</div>
-            </div>
-            <div class="case-stat">
-              <div class="case-stat-val">6</div>
-              <div class="case-stat-key">Designs</div>
-            </div>
-            <div class="case-stat">
-              <div class="case-stat-val">80</div>
-              <div class="case-stat-key">Shirts</div>
-            </div>
-          </div>
-          <div class="case-flip-hint">
-            <span class="case-flip-hint-desk">Hover to see the story &rarr;</span>
-            <span class="case-flip-hint-mob">Tap to see the story &rarr;</span>
-          </div>
+    <article class="work-card">
+      <div class="work-card-top">
+        <div>
+          <div class="work-index">01 / Case Study</div>
+          <h3 class="work-name">HELE</h3>
         </div>
-
-        <!-- BACK -->
-        <div class="case-back">
-          <div class="case-back-section">
-            <div class="case-back-label">Challenge</div>
-            <p class="case-back-body">Create apparel drivers would actually want to wear during Prime Week.</p>
-          </div>
-          <div class="case-back-section">
-            <div class="case-back-label">Vision</div>
-            <p class="case-back-body">Blend Bay Area identity, delivery culture, and premium streetwear aesthetics into a collection specific to DSF7.</p>
-          </div>
-          <div class="case-back-section">
-            <div class="case-back-label">Design Decisions</div>
-            <ul class="case-back-list">
-              <li>Golden Gate references</li>
-              <li>Delivery inspired iconography</li>
-              <li>Prime 2026 branding</li>
-              <li>Oversized heavyweight black tee direction</li>
-              <li>Navy, gold, white, and charcoal palette</li>
-            </ul>
-          </div>
-          <div class="case-back-section">
-            <div class="case-back-label">Result</div>
-            <p class="case-back-body">Six custom shirt concepts created for an 80 piece Prime Week collection.</p>
-          </div>
-          <div class="case-flip-hint">
-            <span class="case-flip-hint-desk">Hover away to flip back</span>
-            <span class="case-flip-hint-mob">Tap to flip back</span>
-          </div>
-        </div>
-
       </div>
-    </div>
+      <div class="work-logo-slot">
+        <img src="./images/work/HELE/Logo.png" alt="HELE logo">
+      </div>
+      <div class="work-assets">
+        <div class="work-shot"><img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE design 01"></div>
+        <div class="work-shot"><img src="./images/work/HELE/HELE - DESIGN 3.png" alt="HELE design 02"></div>
+      </div>
+      <div class="work-card-cta">See the design thinking &rarr;</div>
+    </article>
+
+    <article class="work-card">
+      <div class="work-card-top">
+        <div>
+          <div class="work-index">02 / Case Study</div>
+          <h3 class="work-name">POPS</h3>
+        </div>
+      </div>
+      <div class="work-logo-slot">
+        <div>
+          <div class="work-logo-text">POPS</div>
+          <div class="work-logo-note">Logo pending</div>
+        </div>
+      </div>
+      <div class="work-assets">
+        <div class="work-shot"><img src="./images/work/POPS/PIRANHA OPS - DESIGN 2 .png" alt="POPS design 01"></div>
+        <div class="work-shot"><img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS design 02"></div>
+      </div>
+      <div class="work-card-cta">See the design thinking &rarr;</div>
+    </article>
+
+    <article class="work-card">
+      <div class="work-card-top">
+        <div>
+          <div class="work-index">03 / Case Study</div>
+          <h3 class="work-name">R2GO</h3>
+        </div>
+      </div>
+      <div class="work-logo-slot">
+        <div>
+          <div class="work-logo-text">R2GO</div>
+          <div class="work-logo-note">Logo pending</div>
+        </div>
+      </div>
+      <div class="work-assets">
+        <div class="work-shot"><img src="./images/work/R2GO/R2GO - We do it together Design .png" alt="R2GO design 01"></div>
+        <div class="work-shot"><img src="./images/work/R2GO/R2GO -No Driver Left Behind.png" alt="R2GO design 02"></div>
+      </div>
+      <div class="work-card-cta">See the design thinking &rarr;</div>
+    </article>
+
+    <article class="work-card">
+      <div class="work-card-top">
+        <div>
+          <div class="work-index">04 / Case Study</div>
+          <h3 class="work-name">DUR3</h3>
+        </div>
+      </div>
+      <div class="work-logo-slot">
+        <div>
+          <div class="work-logo-text">DUR3</div>
+          <div class="work-logo-note">Logo pending</div>
+        </div>
+      </div>
+      <div class="work-assets">
+        <div class="work-shot"><img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 design 01"></div>
+        <div class="work-shot work-placeholder"><span>Design 02 pending</span></div>
+      </div>
+      <div class="work-card-cta">See the design thinking &rarr;</div>
+    </article>
   </div>
 </section>
 
@@ -1911,9 +2369,8 @@ body::after { display: none !important; }
   <div class="wrap">
     <div class="comp-intro reveal">
       <div class="eyebrow" style="justify-content:center"><span>What Makes Us Different</span></div>
-      <h2 class="comp-intro-h f-display">Designed with purpose.<br>Built around your culture.</h2>
-      <p class="comp-intro-body">More than branded apparel. A reflection of the people behind the company.</p>
-      <p class="comp-intro-body">At Threefold, we work closely with teams to understand what their brand stands for, what their people take pride in, and how they want to be represented. From first concept to final production, every collection is created with identity, story, and wearability in mind.</p>
+      <h2 class="comp-intro-h f-display">Print shops vs.<br>Threefold.</h2>
+      <p class="comp-intro-body">One side prints a logo. The other turns identity into a collection your team recognizes as their own.</p>
     </div>
   </div>
 
@@ -1923,6 +2380,13 @@ body::after { display: none !important; }
     <div class="split-panel split-left" id="split-left">
       <div class="split-bg" style="background:linear-gradient(160deg,#1a1815 0%,#2a2722 100%)"></div>
       <div class="split-overlay split-overlay-left"></div>
+      <div class="comparison-visual" aria-hidden="true">
+        <div class="shirt-board">
+          <div class="shirt-shape">
+            <div class="shirt-logo">logo</div>
+          </div>
+        </div>
+      </div>
       <div class="split-content">
         <div class="split-cat">Generic Print Shop</div>
         <h3 class="split-title split-title-left f-display">Print<br>Shops</h3>
@@ -1944,6 +2408,16 @@ body::after { display: none !important; }
     <div class="split-panel split-right" id="split-right">
       <div class="split-bg" style="background:linear-gradient(160deg,#1A1815 0%,#201e13 60%,#161310 100%)"></div>
       <div class="split-overlay split-overlay-right"></div>
+      <div class="comparison-visual" aria-hidden="true">
+        <div>
+          <div class="design-flow"><span>logo</span><span>&rarr;</span><span>custom design</span></div>
+          <div class="shirt-board">
+            <div class="shirt-shape dark-shirt">
+              <div class="custom-design-mark">3F</div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="split-content">
         <div class="split-cat" style="color:var(--gold)">Design Partner</div>
         <h3 class="split-title split-title-right f-display">Three<br>fold</h3>
@@ -1978,7 +2452,13 @@ body::after { display: none !important; }
 
     <div class="proc-step reveal">
       <div class="proc-step-img">
-        <div class="proc-step-img-vignette"></div>
+        <div class="proc-visual" aria-hidden="true">
+          <div class="proc-line"></div>
+          <div class="proc-node n1">1</div>
+          <div class="proc-node n2">2</div>
+          <div class="proc-node n3">3</div>
+          <div class="proc-panel"><span></span><span></span><span></span></div>
+        </div>
       </div>
       <div class="proc-step-body">
         <div class="proc-step-num f-display">01</div>
@@ -1990,19 +2470,30 @@ body::after { display: none !important; }
 
     <div class="proc-step reveal d1">
       <div class="proc-step-img">
-        <div class="proc-step-img-vignette"></div>
+        <div class="proc-visual" aria-hidden="true">
+          <div class="mockup-sheet">
+            <div class="mockup-shirt"></div>
+            <div class="mockup-lines"><span></span><span></span><span></span></div>
+          </div>
+        </div>
       </div>
       <div class="proc-step-body">
         <div class="proc-step-num f-display">02</div>
         <div class="proc-step-label">Step Two</div>
         <div class="proc-step-title f-display">Custom<br>Mockup</div>
-        <p class="proc-step-text">We design and deliver a full editorial mockup before anything is printed. You see exactly what you're getting — on a real model, in your colors, with your identity.</p>
+        <p class="proc-step-text">We design and deliver a full editorial mockup before anything is printed. You see the direction, the placement, the colors, and the identity.</p>
       </div>
     </div>
 
     <div class="proc-step reveal d2">
       <div class="proc-step-img">
-        <div class="proc-step-img-vignette"></div>
+        <div class="proc-visual" aria-hidden="true">
+          <div class="delivery-flow">
+            <div class="delivery-box">Approve</div>
+            <div class="delivery-box">Produce</div>
+            <div class="delivery-box">Deliver</div>
+          </div>
+        </div>
       </div>
       <div class="proc-step-body">
         <div class="proc-step-num f-display">03</div>
@@ -2277,6 +2768,27 @@ body::after { display: none !important; }
   <div class="portal-grid">
 
     <div class="portal-img-col reveal">
+      <div class="portal-dashboard" aria-hidden="true">
+        <div class="portal-dash-top">
+          <div class="portal-dash-brand">Threefold Portal</div>
+          <div class="portal-dash-pill">Preview Data</div>
+        </div>
+        <div class="portal-dash-body">
+          <div class="portal-dash-side">
+            <div class="portal-dash-nav"></div>
+            <div class="portal-dash-nav"></div>
+            <div class="portal-dash-nav"></div>
+            <div class="portal-dash-nav"></div>
+          </div>
+          <div class="portal-dash-main">
+            <div class="portal-status"></div>
+            <div class="portal-timeline"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="portal-file-row"></div>
+            <div class="portal-file-row"></div>
+            <div class="portal-file-row"></div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="portal-text-col">
@@ -2318,7 +2830,7 @@ body::after { display: none !important; }
         <ul class="footer-links">
           <li><a href="#diff">Our Approach</a></li>
           <li><a href="#comparison">How We Compare</a></li>
-          <li><a href="#collection">POPS 2026 Collection</a></li>
+          <li><a href="#collection">Our Work</a></li>
           <li><a href="#process">Our Process</a></li>
           <li><a href="#portal">Client Portal</a></li>
           <li><a href="#quote">Start a Project</a></li>
