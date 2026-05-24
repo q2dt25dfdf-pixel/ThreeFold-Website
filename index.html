@@ -3540,6 +3540,206 @@ footer { order: 8; }
   }
 }
 
+/* ══════════════════════════════════════════
+   VISUAL FIX — FEATURED WORK + PROCESS
+══════════════════════════════════════════ */
+
+#collection .featured-card {
+  position: relative;
+  display: block;
+  min-height: clamp(320px, 31vw, 420px);
+  overflow: hidden;
+  border: 1px solid rgba(184,137,26,.24);
+  background: #0E0C09;
+}
+#collection .featured-card.is-active,
+body:has(#case-pops:target) #collection .featured-card[href="#case-pops"],
+body:has(#case-hele:target) #collection .featured-card[href="#case-hele"],
+body:has(#case-r2go:target) #collection .featured-card[href="#case-r2go"],
+body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
+#collection .featured-card:hover {
+  border-color: rgba(184,137,26,.78);
+  box-shadow: 0 26px 70px rgba(0,0,0,.32);
+}
+#collection .featured-image {
+  position: absolute;
+  inset: 0;
+  min-height: 0;
+}
+#collection .featured-image::after {
+  background:
+    linear-gradient(180deg, rgba(8,7,5,.05) 0%, rgba(8,7,5,.22) 40%, rgba(8,7,5,.88) 100%),
+    linear-gradient(90deg, rgba(8,7,5,.82) 0%, rgba(8,7,5,.24) 62%, rgba(8,7,5,.08) 100%);
+}
+#collection .featured-image img {
+  transform: none;
+  filter: contrast(1.02) saturate(.96);
+}
+#collection .featured-copy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3;
+  min-height: 0;
+  padding: clamp(24px, 3vw, 38px);
+  display: block;
+}
+#collection .featured-title {
+  max-width: 420px;
+}
+#collection .featured-subtitle {
+  margin-bottom: 0;
+}
+#collection .featured-link {
+  display: inline-block;
+  margin-top: 22px;
+}
+.case-study-panel.is-active {
+  display: block;
+}
+@media(max-width:640px) {
+  #collection .featured-card {
+    min-height: 360px;
+  }
+  #collection .featured-image {
+    min-height: 0;
+  }
+}
+
+#process {
+  padding: clamp(78px, 8vw, 112px) 0;
+  background:
+    linear-gradient(90deg, rgba(184,137,26,.055) 0 1px, transparent 1px) 0 0 / 20% 100%,
+    #11100D !important;
+  overflow: hidden;
+}
+#process .proc-header {
+  margin-bottom: clamp(38px, 5vw, 62px);
+  padding-bottom: 0;
+}
+#process .proc-h {
+  color: var(--off-white) !important;
+  text-shadow: none;
+}
+#process .proc-sub {
+  color: rgba(248,245,240,.62) !important;
+}
+#process .proc-steps {
+  width: min(100% - 40px, 1320px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(18px, 2vw, 26px);
+  background: transparent !important;
+  overflow: visible;
+}
+#process .proc-steps::before {
+  left: calc(16.66% + 26px);
+  right: calc(16.66% + 26px);
+  top: 44%;
+  height: 1px;
+  transform: none;
+  border: 0;
+  border-top: 1px solid rgba(184,137,26,.42);
+  border-radius: 0;
+  opacity: .6;
+  z-index: 0;
+}
+#process .proc-step {
+  z-index: 1;
+  overflow: hidden;
+  background: #15130F !important;
+  border: 1px solid rgba(184,137,26,.24);
+  transform: none !important;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+#process .proc-step:hover {
+  transform: translateY(-6px) !important;
+  border-color: rgba(184,137,26,.64);
+  box-shadow: 0 24px 60px rgba(0,0,0,.28);
+  filter: none;
+}
+#process .proc-step::after {
+  content: '→';
+  width: 30px;
+  height: 30px;
+  right: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #11100D;
+  border: 1px solid rgba(184,137,26,.58);
+  box-shadow: none;
+  color: var(--gold);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 17px;
+  line-height: 1;
+}
+#process .proc-step:last-child::after {
+  display: none;
+}
+#process .proc-step-img {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  height: auto !important;
+  padding: 0 !important;
+  background: #0E0C09;
+}
+#process .proc-step-img img {
+  position: static !important;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  border: 0;
+  transform: none;
+}
+#process .proc-step:hover .proc-step-img img {
+  transform: scale(1.018);
+}
+#process .proc-step-body {
+  padding: 28px 30px 34px !important;
+}
+#process .proc-step-num {
+  color: rgba(184,137,26,.52);
+}
+#process .proc-step-label {
+  color: var(--gold);
+}
+#process .proc-step-title {
+  color: var(--off-white);
+  text-transform: uppercase;
+}
+#process .proc-step-text {
+  color: rgba(248,245,240,.66);
+}
+@media(max-width:980px) {
+  #process .proc-steps {
+    grid-template-columns: 1fr;
+    max-width: 680px;
+  }
+  #process .proc-steps::before {
+    left: 50%;
+    top: 80px;
+    bottom: 80px;
+    right: auto;
+    width: 1px;
+    height: auto;
+    border-top: 0;
+    border-left: 1px solid rgba(184,137,26,.32);
+  }
+  #process .proc-step::after {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: -28px;
+    transform: translateX(-50%) rotate(90deg);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4600,6 +4800,33 @@ document.querySelectorAll('.case-card').forEach(card=>{
     if(e.key==='Enter'||e.key===' '){e.preventDefault();card.classList.toggle('flipped');}
   });
 });
+
+// ── Featured Work case study reveal
+const featuredCards=document.querySelectorAll('#collection .featured-card');
+const featuredPanels=document.querySelectorAll('#collection .case-study-panel');
+function showFeaturedCase(id,shouldScroll=true){
+  if(!id)return;
+  const panel=document.getElementById(id);
+  if(!panel)return;
+  featuredPanels.forEach(p=>p.classList.toggle('is-active',p===panel));
+  featuredCards.forEach(card=>card.classList.toggle('is-active',card.getAttribute('href')==='#'+id));
+  if(shouldScroll){
+    const top=panel.getBoundingClientRect().top+window.scrollY-86;
+    window.scrollTo({top,behavior:'smooth'});
+  }
+}
+featuredCards.forEach(card=>{
+  card.addEventListener('click',e=>{
+    const href=card.getAttribute('href')||'';
+    if(!href.startsWith('#case-'))return;
+    e.preventDefault();
+    history.replaceState(null,'',href);
+    showFeaturedCase(href.slice(1),true);
+  });
+});
+if(window.location.hash&&window.location.hash.startsWith('#case-')){
+  showFeaturedCase(window.location.hash.slice(1),false);
+}
 
 // ── Smooth scroll with nav offset
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
