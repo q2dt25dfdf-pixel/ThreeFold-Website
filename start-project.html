@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Threefold Supply Co. — Made by Three, Worn by All</title>
+<title>Start a Project — Threefold Supply Co.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=block" rel="stylesheet">
@@ -2861,230 +2861,30 @@ body::after { display: none !important; }
   }
 }
 
-/* ══════════════════════════════════════════
-   HOMEPAGE SIMPLIFICATION — IMAGE-LED STRUCTURE
-══════════════════════════════════════════ */
-
-body {
-  display: flex;
-  flex-direction: column;
+</style>
+<style>
+body.start-page #hero,
+body.start-page #diff,
+body.start-page #collection,
+body.start-page #comparison,
+body.start-page #process,
+body.start-page #portal,
+body.start-page .gold-rule {
+  display: none !important;
 }
-
-#hero { order: 1; }
-#collection { order: 2; }
-#comparison { order: 3; }
-#diff { order: 4; }
-#process { order: 5; }
-#portal { order: 6; }
-#final-cta { order: 7; }
-footer { order: 8; }
-.gold-rule { display: none; }
-#quote { display: none; }
-
-#hero {
-  min-height: clamp(680px, 88vh, 880px);
-  background: #080705;
+body.start-page #quote {
+  display: block !important;
+  padding-top: 150px;
 }
-#hero .hero-bg {
-  background-size: cover !important;
-  background-position: 74% center !important;
-  opacity: 1 !important;
-  filter: none !important;
+body.start-page footer {
+  border-top: 1px solid var(--border);
 }
-#hero .hero-vignette {
-  background:
-    linear-gradient(90deg, rgba(8,7,5,.96) 0%, rgba(8,7,5,.78) 34%, rgba(8,7,5,.28) 58%, rgba(8,7,5,.08) 100%) !important;
+@media(max-width:768px) {
+  body.start-page #quote { padding-top: 118px; }
 }
-#hero .hero-vignette-bottom {
-  background: linear-gradient(to top, rgba(8,7,5,.74), transparent 54%) !important;
-}
-#hero .hero-content {
-  align-items: center;
-  padding-top: 112px;
-  padding-bottom: 80px;
-}
-#hero .hero-text {
-  max-width: 620px;
-  padding-left: clamp(20px, 6vw, 86px);
-}
-#hero .hero-headline {
-  font-size: clamp(74px, 9vw, 132px) !important;
-  line-height: .86;
-  letter-spacing: .01em;
-}
-#hero .hero-sub {
-  max-width: 430px;
-  font-size: clamp(16px, 1.3vw, 19px);
-}
-#hero .hero-btns {
-  display: flex !important;
-  gap: 14px;
-  margin-top: 30px;
-  opacity: 1 !important;
-  animation: none !important;
-}
-#hero .btn-gold,
-#hero .btn-ghost {
-  color: #111;
-}
-#hero .btn-ghost {
-  color: var(--off-white);
-  border-color: rgba(248,245,240,.36);
-}
-@media(max-width:900px) {
-  #hero {
-    min-height: 740px;
-  }
-  #hero .hero-bg {
-    background-position: 68% center !important;
-  }
-  #hero .hero-vignette {
-    background:
-      linear-gradient(180deg, rgba(8,7,5,.34) 0%, rgba(8,7,5,.72) 58%, rgba(8,7,5,.95) 100%) !important;
-  }
-  #hero .hero-content {
-    align-items: flex-end;
-    padding-bottom: 48px;
-  }
-  #hero .hero-text {
-    padding: 0 20px;
-  }
-  #hero .hero-headline {
-    font-size: clamp(62px, 17vw, 94px) !important;
-  }
-}
-
-#comparison {
-  padding: 88px 0 0 !important;
-}
-#comparison .comp-intro {
-  background: transparent;
-  color: var(--off-white);
-}
-#comparison .comp-intro-h {
-  color: var(--off-white);
-}
-#comparison .comp-intro-body {
-  max-width: 500px;
-  color: rgba(248,245,240,.62);
-}
-#comparison .split-wrap {
-  min-height: 620px;
-  background: #0E0C09;
-}
-#comparison .split-panel {
-  min-height: 620px;
-}
-#comparison .comparison-visual {
-  position: absolute !important;
-  inset: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  opacity: 1 !important;
-}
-.compare-feature-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  display: block;
-}
-#comparison .split-left .compare-feature-img { object-position: center; }
-#comparison .split-right .compare-feature-img { object-position: center; }
-#comparison .split-overlay-left {
-  background:
-    linear-gradient(180deg, rgba(8,7,5,.06), rgba(8,7,5,.62)),
-    linear-gradient(90deg, rgba(8,7,5,.08), rgba(8,7,5,.5)) !important;
-}
-#comparison .split-overlay-right {
-  background:
-    linear-gradient(180deg, rgba(8,7,5,.04), rgba(8,7,5,.58)),
-    linear-gradient(90deg, rgba(8,7,5,.5), rgba(8,7,5,.1)) !important;
-}
-#comparison .split-content {
-  bottom: 34px !important;
-  width: min(340px, 58%) !important;
-  padding: 28px !important;
-  background: rgba(8,7,5,.7);
-  border: 1px solid rgba(184,137,26,.24);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
-#comparison .split-left .split-content {
-  left: clamp(22px, 4vw, 58px) !important;
-  right: auto !important;
-}
-#comparison .split-right .split-content {
-  left: auto !important;
-  right: clamp(22px, 4vw, 58px) !important;
-}
-#comparison .split-title {
-  font-size: clamp(42px, 5vw, 76px) !important;
-  line-height: .9;
-  margin-bottom: 14px !important;
-}
-.split-copy {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(24px, 2.6vw, 38px);
-  line-height: 1.08;
-  letter-spacing: .02em;
-  color: rgba(248,245,240,.82);
-  text-transform: uppercase;
-}
-@media(max-width:900px) {
-  #comparison {
-    padding-top: 68px !important;
-  }
-  #comparison .split-wrap,
-  #comparison .split-panel {
-    min-height: 560px;
-  }
-  #comparison .split-left .split-content,
-  #comparison .split-right .split-content {
-    left: 20px !important;
-    right: 20px !important;
-    width: auto !important;
-    bottom: 22px !important;
-  }
-}
-
-#diff {
-  background:
-    linear-gradient(90deg, rgba(184,137,26,.07) 0 1px, transparent 1px) 0 0 / 20% 100%,
-    #F8F5F0;
-}
-#diff .diff-h {
-  color: #111;
-}
-#diff .diff-intro {
-  color: #3D3930;
-}
-
-#final-cta {
-  padding: clamp(88px, 10vw, 132px) 0;
-  background: #0E0C09;
-  text-align: center;
-}
-.final-cta-inner {
-  max-width: 880px;
-}
-.final-cta-h {
-  color: var(--off-white);
-  font-size: clamp(58px, 8vw, 112px);
-  line-height: .88;
-  margin-bottom: 22px;
-}
-.final-cta-body {
-  color: rgba(248,245,240,.62);
-  font-size: 16px;
-  line-height: 1.7;
-  max-width: 520px;
-  margin: 0 auto 30px;
-}
-
 </style>
 </head>
-<body>
+<body class="start-page">
 <!-- TODO before final launch: extract embedded base64 images into /images files for faster mobile loading and cleaner Netlify deploys. -->
 
 <!-- LIGHTBOX -->
@@ -3099,17 +2899,17 @@ footer { order: 8; }
 ══════════════════════════════════════════ -->
 <nav id="nav">
   <div class="nav-inner">
-    <a href="#" class="nav-logo-wrap">
+    <a href="index.html" class="nav-logo-wrap">
       <span class="nav-logo-main">Threefold Supply Co.</span>
       <span class="nav-logo-tag">Made by Three, Worn by All</span>
     </a>
     <ul class="nav-links">
-      <li><a href="#collection">Featured Work</a></li>
-      <li><a href="#comparison">Compare</a></li>
-      <li><a href="#diff">Why Threefold</a></li>
-      <li><a href="#process">Process</a></li>
-      <li><a href="#portal">Portal</a></li>
-      <li><a href="start-project.html" class="nav-cta">Start a Project</a></li>
+      <li><a href="index.html#collection">Featured Work</a></li>
+      <li><a href="index.html#comparison">Compare</a></li>
+      <li><a href="index.html#diff">Why Threefold</a></li>
+      <li><a href="index.html#process">Process</a></li>
+      <li><a href="index.html#portal">Portal</a></li>
+      <li><a href="#quote" class="nav-cta">Start a Project</a></li>
     </ul>
     <button class="nav-burger" id="nav-burger" aria-label="Menu">
       <span></span><span></span><span></span>
@@ -3121,9 +2921,17 @@ footer { order: 8; }
      HERO
 ══════════════════════════════════════════ -->
 <section id="hero">
-  <div class="hero-bg" style="background-image:url('./images/hero-main.png')"></div>
+  <div class="hero-bg" style="background:var(--black);background-image:none"></div>
   <div class="hero-vignette"></div>
   <div class="hero-vignette-bottom"></div>
+
+  <div class="hero-lockup" aria-hidden="true">
+    <div class="hero-brand-mark">
+      <img src="./images/brand/Logo (BG removed) (2).png" alt="">
+    </div>
+    <div class="hero-brand-line"></div>
+    <div class="hero-brand-caption">Made by Three, Worn by All</div>
+  </div>
 
   <div class="hero-content">
     <div class="hero-text">
@@ -3132,19 +2940,37 @@ footer { order: 8; }
         <span class="hero-label-text">B2B Custom Apparel &mdash; Bay Area, CA</span>
       </div>
       <h1 class="hero-headline f-display">
-        Made by Three.<br>
-        <span class="acc">Worn by All.</span>
+        Designed<br>
+        with<br>
+        <span class="acc">Purpose.</span>
       </h1>
       <div class="hero-rule"></div>
       <p class="hero-sub">
-        Custom apparel collections shaped around your team, story, and culture.
+        <strong>We don't take orders. We build identities.</strong><br>
+        Custom apparel designed around your culture, your people, and your story — the kind your team wears on and off the clock.
       </p>
 
-      <div class="hero-btns">
-        <a href="#collection" class="btn-gold">View Featured Work &rarr;</a>
-        <a href="start-project.html" class="btn-ghost">Start a Project &rarr;</a>
+      <div class="hero-stats">
+        <div>
+          <div class="hero-stat-n">100%</div>
+          <div class="hero-stat-l">Custom Design</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">0</div>
+          <div class="hero-stat-l">Generic Templates</div>
+        </div>
+        <div>
+          <div class="hero-stat-n">&infin;</div>
+          <div class="hero-stat-l">Revisions</div>
+        </div>
       </div>
     </div>
+  </div>
+
+  <div class="hero-badge">
+    <div class="hero-badge-code">DSF7</div>
+    <div class="hero-badge-label">Piranha Ops &mdash; Bay Area</div>
+    <div class="hero-badge-label" style="color:var(--gold);margin-top:3px">First Client &middot; 2026</div>
   </div>
 </section>
 
@@ -3214,7 +3040,7 @@ footer { order: 8; }
 ══════════════════════════════════════════ -->
 <section id="collection">
   <div class="work-header wrap">
-    <div class="eyebrow reveal"><span>Featured Work</span></div>
+    <div class="eyebrow reveal"><span>Our Work</span></div>
     <h2 class="work-h f-display reveal">
       Built for<br>real <span style="color:var(--gold)">teams.</span>
     </h2>
@@ -3338,12 +3164,23 @@ footer { order: 8; }
       <div class="split-bg" style="background:linear-gradient(160deg,#1a1815 0%,#2a2722 100%)"></div>
       <div class="split-overlay split-overlay-left"></div>
       <div class="comparison-visual" aria-hidden="true">
-        <img class="compare-feature-img" src="./images/process/print-shop-generic.png" alt="">
+        <div class="shirt-board">
+          <div class="shirt-shape">
+            <div class="shirt-logo">logo</div>
+          </div>
+        </div>
       </div>
       <div class="split-content">
         <div class="split-cat">Generic Print Shop</div>
-        <h3 class="split-title split-title-left f-display">Print Shop</h3>
-        <p class="split-copy">Upload logo.<br>Print shirt.</p>
+        <h3 class="split-title split-title-left f-display">Print<br>Shops</h3>
+        <ul class="split-list">
+          <li><span class="si si-x">&#10005;</span>Take your logo and print it.</li>
+          <li><span class="si si-x">&#10005;</span>Limited design collaboration.</li>
+          <li><span class="si si-x">&#10005;</span>Generic templates.</li>
+          <li><span class="si si-x">&#10005;</span>No story or identity.</li>
+          <li><span class="si si-x">&#10005;</span>One-size-fits-all approach.</li>
+          <li><span class="si si-x">&#10005;</span>Transactional experience.</li>
+        </ul>
       </div>
     </div>
 
@@ -3355,12 +3192,22 @@ footer { order: 8; }
       <div class="split-bg" style="background:linear-gradient(160deg,#1A1815 0%,#201e13 60%,#161310 100%)"></div>
       <div class="split-overlay split-overlay-right"></div>
       <div class="comparison-visual" aria-hidden="true">
-        <img class="compare-feature-img" src="./images/process/threefold-creative-direction-board.png" alt="">
+        <div class="hele-design-bg">
+          <img src="./images/work/HELE/HELE - DESIGN 2.png" alt="">
+          <div class="hele-design-kicker">HELE custom design direction</div>
+        </div>
       </div>
       <div class="split-content">
         <div class="split-cat" style="color:var(--gold)">Design Partner</div>
         <h3 class="split-title split-title-right f-display">Threefold</h3>
-        <p class="split-copy">Strategy.<br>Concepts.<br>Collection.</p>
+        <ul class="split-list">
+          <li><span class="si si-check">&#10003;</span>Built around your team and culture.</li>
+          <li><span class="si si-check">&#10003;</span>Custom concepts with intention.</li>
+          <li><span class="si si-check">&#10003;</span>Real mockups before production.</li>
+          <li><span class="si si-check">&#10003;</span>Collaborative creative process.</li>
+          <li><span class="si si-check">&#10003;</span>Unlimited revisions.</li>
+          <li><span class="si si-check">&#10003;</span>Apparel designed to actually be worn.</li>
+        </ul>
       </div>
     </div>
 
@@ -3704,22 +3551,10 @@ footer { order: 8; }
         <li><span class="portal-check">&#10003;</span><span><strong>Full stage tracking:</strong> Design &rarr; Revision &rarr; Approved &rarr; Production &rarr; QC &rarr; Shipped &rarr; Delivered</span></li>
       </ul>
 
-      <a href="start-project.html" class="btn-gold reveal d2" style="display:inline-block;align-self:flex-start">Start a Project &rarr;</a>
+      <a href="#quote" class="btn-gold reveal d2" style="display:inline-block;align-self:flex-start">Start a Project &rarr;</a>
       <p class="portal-cta-label reveal d3">Portal access granted upon project confirmation</p>
     </div>
 
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════
-     FINAL CTA
-══════════════════════════════════════════ -->
-<section id="final-cta">
-  <div class="wrap final-cta-inner">
-    <div class="eyebrow reveal" style="justify-content:center"><span>Start Your Collection</span></div>
-    <h2 class="final-cta-h f-display reveal">Ready to build apparel your team actually wears?</h2>
-    <p class="final-cta-body reveal d1">Bring the story. We&rsquo;ll shape the direction, mockup, and production path.</p>
-    <a href="start-project.html" class="btn-gold reveal d2">Start a Project &rarr;</a>
   </div>
 </section>
 
@@ -3738,12 +3573,12 @@ footer { order: 8; }
       <div>
         <div class="footer-col-title">Navigate</div>
         <ul class="footer-links">
-          <li><a href="#diff">Our Approach</a></li>
-          <li><a href="#comparison">How We Compare</a></li>
-          <li><a href="#collection">Our Work</a></li>
-          <li><a href="#process">Our Process</a></li>
-          <li><a href="#portal">Client Portal</a></li>
-          <li><a href="start-project.html">Start a Project</a></li>
+          <li><a href="index.html#diff">Our Approach</a></li>
+          <li><a href="index.html#comparison">How We Compare</a></li>
+          <li><a href="index.html#collection">Our Work</a></li>
+          <li><a href="index.html#process">Our Process</a></li>
+          <li><a href="index.html#portal">Client Portal</a></li>
+          <li><a href="#quote">Start a Project</a></li>
         </ul>
       </div>
       <div>
@@ -3758,17 +3593,17 @@ footer { order: 8; }
         <div class="footer-col-title">Contact</div>
         <div class="footer-contact">
           <a href="mailto:threefoldsupplycompany@gmail.com">threefoldsupplycompany@gmail.com</a>
-          <a href="start-project.html">Start a Project &rarr;</a>
-          <a href="#portal">Client Portal &rarr;</a>
+          <a href="#quote">Start a Project &rarr;</a>
+          <a href="index.html#portal">Client Portal &rarr;</a>
         </div>
         <div style="margin-top:24px">
           <div class="footer-col-title">We Serve</div>
           <ul class="footer-links" style="font-size:12px">
-            <li><a href="start-project.html">Amazon DSP Operators</a></li>
-            <li><a href="start-project.html">Dental &amp; Medical Practices</a></li>
-            <li><a href="start-project.html">Local Businesses</a></li>
-            <li><a href="start-project.html">Corporate Teams</a></li>
-            <li><a href="start-project.html">Sports &amp; Fitness</a></li>
+            <li><a href="#quote">Amazon DSP Operators</a></li>
+            <li><a href="#quote">Dental &amp; Medical Practices</a></li>
+            <li><a href="#quote">Local Businesses</a></li>
+            <li><a href="#quote">Corporate Teams</a></li>
+            <li><a href="#quote">Sports &amp; Fitness</a></li>
           </ul>
         </div>
       </div>
