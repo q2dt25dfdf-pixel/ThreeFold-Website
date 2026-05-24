@@ -3273,9 +3273,270 @@ footer { order: 8; }
     right: auto !important;
     bottom: 20px !important;
   }
-  #comparison .split-right .split-content {
+#comparison .split-right .split-content {
     left: auto !important;
     right: 20px !important;
+  }
+}
+
+/* ══════════════════════════════════════════
+   FEATURED CASE STUDIES + PROCESS JOURNEY
+══════════════════════════════════════════ */
+
+#collection {
+  padding: clamp(70px, 7vw, 104px) 0 clamp(76px, 8vw, 118px);
+}
+#collection .work-header {
+  max-width: 1320px;
+}
+.featured-grid {
+  width: min(100% - 40px, 1320px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(16px, 1.8vw, 24px);
+}
+.featured-card {
+  min-height: clamp(300px, 28vw, 390px);
+  grid-template-columns: minmax(190px, .74fr) minmax(230px, 1fr);
+  background:
+    linear-gradient(135deg, rgba(248,245,240,.035), transparent 46%),
+    #14120F;
+}
+.featured-copy {
+  padding: clamp(24px, 3vw, 36px);
+}
+.featured-kicker {
+  margin-bottom: 12px;
+}
+.featured-title {
+  font-size: clamp(36px, 3.9vw, 58px);
+  margin-bottom: 10px;
+}
+.featured-subtitle {
+  margin-bottom: 0;
+}
+.featured-link {
+  margin-top: 26px;
+}
+.featured-image img {
+  object-position: center;
+}
+.case-study-stage {
+  margin-top: clamp(24px, 3.5vw, 42px);
+}
+.case-study-panel {
+  display: none;
+  border: 1px solid rgba(184,137,26,.28);
+  background:
+    linear-gradient(135deg, rgba(184,137,26,.08), transparent 36%),
+    #15130F;
+  color: var(--off-white);
+  padding: clamp(22px, 3vw, 34px);
+}
+.case-study-panel:target {
+  display: block;
+}
+.case-study-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  align-items: center;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(184,137,26,.22);
+}
+.case-study-index,
+.case-study-close,
+.case-study-step span {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .17em;
+  text-transform: uppercase;
+}
+.case-study-index,
+.case-study-step span {
+  color: var(--gold);
+}
+.case-study-close {
+  color: rgba(248,245,240,.58);
+}
+.case-study-close:hover {
+  color: var(--gold);
+}
+.case-study-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr);
+  gap: clamp(12px, 1.6vw, 22px);
+  align-items: center;
+  margin-top: 24px;
+}
+.case-study-step {
+  min-height: 230px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  gap: 12px;
+}
+.case-study-step img,
+.case-logo-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 190px;
+  object-fit: cover;
+  object-position: center;
+  border: 1px solid rgba(184,137,26,.24);
+  background: #F3EBDD;
+}
+.case-study-step:first-child img {
+  object-fit: contain;
+  padding: 22px;
+}
+.case-logo-placeholder {
+  display: grid;
+  place-items: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: .9;
+  letter-spacing: .02em;
+  text-align: center;
+  color: #15130F;
+}
+.case-arrow {
+  color: var(--gold);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(26px, 3vw, 42px);
+}
+.case-study-why {
+  max-width: 920px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(184,137,26,.18);
+  color: rgba(248,245,240,.72);
+  font-size: 14px;
+  line-height: 1.75;
+}
+.case-study-why strong {
+  color: var(--off-white);
+  font-weight: 500;
+}
+@media(max-width:980px) {
+  .featured-grid {
+    grid-template-columns: 1fr;
+  }
+  .featured-card {
+    min-height: 330px;
+  }
+  .case-study-flow {
+    grid-template-columns: 1fr;
+  }
+  .case-arrow {
+    transform: rotate(90deg);
+    justify-self: center;
+    line-height: 1;
+  }
+}
+@media(max-width:640px) {
+  .featured-card {
+    grid-template-columns: 1fr;
+  }
+  .featured-copy {
+    min-height: 0;
+    padding: 26px;
+  }
+  .featured-image {
+    min-height: 220px;
+  }
+  .case-study-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+#process {
+  background:
+    linear-gradient(90deg, rgba(184,137,26,.06) 0 1px, transparent 1px) 0 0 / 20% 100%,
+    #11100D;
+}
+.proc-steps {
+  position: relative;
+  overflow: visible;
+}
+.proc-steps::before {
+  content: '';
+  position: absolute;
+  left: 16.5%;
+  right: 16.5%;
+  top: 50%;
+  height: 160px;
+  transform: translateY(-50%);
+  border-top: 1px solid rgba(184,137,26,.42);
+  border-right: 1px solid rgba(184,137,26,.34);
+  border-bottom: 1px solid rgba(184,137,26,.42);
+  border-left: 1px solid rgba(184,137,26,.34);
+  border-radius: 999px;
+  opacity: .55;
+  pointer-events: none;
+}
+.proc-step {
+  position: relative;
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease, filter .25s ease;
+  border-color: rgba(184,137,26,.22);
+}
+.proc-step:nth-child(2) {
+  transform: translateY(42px);
+}
+.proc-step:hover {
+  transform: translateY(-8px);
+  border-color: rgba(184,137,26,.56);
+  box-shadow: 0 28px 70px rgba(0,0,0,.24);
+  filter: brightness(1.05);
+}
+.proc-step:nth-child(2):hover {
+  transform: translateY(30px);
+}
+.proc-step::after {
+  content: '';
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--gold);
+  box-shadow: 0 0 0 7px rgba(184,137,26,.1);
+  right: -5px;
+  top: 50%;
+  z-index: 2;
+}
+.proc-step:last-child::after {
+  display: none;
+}
+.proc-step-img img {
+  transition: transform .35s ease, filter .35s ease;
+}
+.proc-step:hover .proc-step-img img {
+  transform: scale(1.025);
+  filter: brightness(1.05) contrast(1.02);
+}
+@media(max-width:980px) {
+  .proc-steps::before {
+    left: 50%;
+    right: auto;
+    top: 120px;
+    bottom: 120px;
+    width: 1px;
+    height: auto;
+    transform: none;
+    border: 0;
+    background: linear-gradient(180deg, transparent, rgba(184,137,26,.48), transparent);
+  }
+  .proc-step:nth-child(2),
+  .proc-step:nth-child(2):hover,
+  .proc-step:hover {
+    transform: none;
+  }
+  .proc-step::after {
+    left: 50%;
+    right: auto;
+    top: auto;
+    bottom: -28px;
+    transform: translateX(-50%);
   }
 }
 
@@ -3418,7 +3679,7 @@ footer { order: 8; }
   </div>
 
   <div class="featured-grid reveal d1" id="featured-work">
-    <a class="featured-card" href="#collection" aria-label="See how we designed POPS Piranha Ops">
+    <a class="featured-card" href="#case-pops" aria-label="See how we designed POPS Piranha Ops">
       <div class="featured-copy">
         <div class="featured-kicker">01 / Featured Work</div>
         <h3 class="featured-title f-display">POPS &ndash; Piranha Ops</h3>
@@ -3430,7 +3691,7 @@ footer { order: 8; }
       </div>
     </a>
 
-    <a class="featured-card" href="#collection" aria-label="See how we designed HELE">
+    <a class="featured-card" href="#case-hele" aria-label="See how we designed HELE">
       <div class="featured-copy">
         <div class="featured-kicker">02 / Featured Work</div>
         <h3 class="featured-title f-display">HELE</h3>
@@ -3441,6 +3702,128 @@ footer { order: 8; }
         <img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE apparel design">
       </div>
     </a>
+
+    <a class="featured-card" href="#case-r2go" aria-label="See how we designed R2GO">
+      <div class="featured-copy">
+        <div class="featured-kicker">03 / Featured Work</div>
+        <h3 class="featured-title f-display">R2GO</h3>
+        <p class="featured-subtitle">Transportation Team &middot; California</p>
+        <span class="featured-link">See how we designed this &rarr;</span>
+      </div>
+      <div class="featured-image">
+        <img src="./images/work/R2GO/R2GO -No Driver Left Behind.png" alt="R2GO apparel design">
+      </div>
+    </a>
+
+    <a class="featured-card" href="#case-dur3" aria-label="See how we designed DUR3">
+      <div class="featured-copy">
+        <div class="featured-kicker">04 / Featured Work</div>
+        <h3 class="featured-title f-display">DUR3</h3>
+        <p class="featured-subtitle">Team Identity Collection</p>
+        <span class="featured-link">See how we designed this &rarr;</span>
+      </div>
+      <div class="featured-image">
+        <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 apparel design">
+      </div>
+    </a>
+  </div>
+
+  <div class="case-study-stage wrap reveal d2">
+    <article class="case-study-panel" id="case-pops">
+      <div class="case-study-head">
+        <div class="case-study-index">01 / POPS &ndash; Piranha Ops</div>
+        <a href="#collection" class="case-study-close" aria-label="Close POPS case study">Close</a>
+      </div>
+      <div class="case-study-flow">
+        <div class="case-study-step">
+          <span>Client Logo</span>
+          <div class="case-logo-placeholder">Logo Coming Soon</div>
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Threefold Design Direction</span>
+          <img src="./images/work/POPS/PIRANHA OPS - DESIGN 2 .png" alt="POPS design direction">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Final Apparel</span>
+          <img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS final apparel">
+        </div>
+      </div>
+      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around DSF7, Prime Week energy, Bay Area delivery culture, and a team identity bold enough to wear beyond work.</p>
+    </article>
+
+    <article class="case-study-panel" id="case-hele">
+      <div class="case-study-head">
+        <div class="case-study-index">02 / HELE</div>
+        <a href="#collection" class="case-study-close" aria-label="Close HELE case study">Close</a>
+      </div>
+      <div class="case-study-flow">
+        <div class="case-study-step">
+          <span>Client Logo</span>
+          <img src="./images/work/HELE/Logo.png" alt="HELE client logo">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Threefold Design Direction</span>
+          <img src="./images/work/HELE/HELE - DESIGN 3.png" alt="HELE design direction">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Final Apparel</span>
+          <img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE final apparel">
+        </div>
+      </div>
+      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built from a clean transportation identity and expanded into a stronger apparel system using movement, route-inspired graphics, and premium teamwear styling.</p>
+    </article>
+
+    <article class="case-study-panel" id="case-r2go">
+      <div class="case-study-head">
+        <div class="case-study-index">03 / R2GO</div>
+        <a href="#collection" class="case-study-close" aria-label="Close R2GO case study">Close</a>
+      </div>
+      <div class="case-study-flow">
+        <div class="case-study-step">
+          <span>Client Logo</span>
+          <div class="case-logo-placeholder">Logo Coming Soon</div>
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Threefold Design Direction</span>
+          <img src="./images/work/R2GO/R2GO - We do it together Design .png" alt="R2GO design direction">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Final Apparel</span>
+          <img src="./images/work/R2GO/R2GO -No Driver Left Behind.png" alt="R2GO final apparel">
+        </div>
+      </div>
+      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around reliability, teamwork, movement, and a strong operational culture that employees can identify with.</p>
+    </article>
+
+    <article class="case-study-panel" id="case-dur3">
+      <div class="case-study-head">
+        <div class="case-study-index">04 / DUR3</div>
+        <a href="#collection" class="case-study-close" aria-label="Close DUR3 case study">Close</a>
+      </div>
+      <div class="case-study-flow">
+        <div class="case-study-step">
+          <span>Client Logo</span>
+          <div class="case-logo-placeholder">Logo Coming Soon</div>
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Threefold Design Direction</span>
+          <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 design direction">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Final Apparel</span>
+          <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 final apparel">
+        </div>
+      </div>
+      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around team pride, competition, achievement, and a recognizable visual identity that feels larger than a standard company shirt.</p>
+    </article>
   </div>
 </section>
 
@@ -3518,7 +3901,7 @@ footer { order: 8; }
         <div class="proc-step-num f-display">01</div>
         <div class="proc-step-label">Step One</div>
         <div class="proc-step-title f-display">Design<br>Consultation</div>
-        <p class="proc-step-text">We learn your brand — the company, the culture, the people. What do you want this apparel to say? That conversation shapes everything before a design starts.</p>
+        <p class="proc-step-text">We learn your brand, culture, team, and goals before creating a direction.</p>
       </div>
     </div>
 
@@ -3530,7 +3913,7 @@ footer { order: 8; }
         <div class="proc-step-num f-display">02</div>
         <div class="proc-step-label">Step Two</div>
         <div class="proc-step-title f-display">Custom<br>Mockup</div>
-        <p class="proc-step-text">We design and deliver a full editorial mockup before anything is printed. You see the direction, the placement, the colors, and the identity.</p>
+        <p class="proc-step-text">We turn ideas into concepts and mockups before anything is printed.</p>
       </div>
     </div>
 
@@ -3542,7 +3925,7 @@ footer { order: 8; }
         <div class="proc-step-num f-display">03</div>
         <div class="proc-step-label">Step Three</div>
         <div class="proc-step-title f-display">Approval &amp;<br>Delivery</div>
-        <p class="proc-step-text">Revise until it's perfect — unlimited rounds. Then we personally QC every order before it ships. No surprises. Your team gets exactly what was approved.</p>
+        <p class="proc-step-text">You approve the direction. We produce, quality check, and deliver.</p>
       </div>
     </div>
 
