@@ -132,28 +132,6 @@ a{color:inherit;text-decoration:none}
 @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
 
 /* ══════════════════════════════════════════
-   DIFFERENTIATOR
-══════════════════════════════════════════ */
-#diff{background:var(--charcoal);overflow:hidden}
-.diff-grid{display:grid;grid-template-columns:1fr 1fr;min-height:680px}
-.diff-text-col{padding:100px 64px 100px 48px;display:flex;flex-direction:column;justify-content:center}
-.diff-img-col{position:relative;overflow:hidden}
-.diff-img-col img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top}
-.diff-h{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,5.5vw,78px);line-height:.93;color:var(--off-white);margin-bottom:1.5rem}
-.diff-h .acc{color:var(--gold)}
-.diff-intro{font-size:15px;color:var(--muted);line-height:1.8;max-width:420px;margin-bottom:2.5rem}
-.diff-intro strong{color:var(--off-white);font-weight:500}
-.diff-list{list-style:none;display:flex;flex-direction:column;gap:0;border-top:1px solid var(--border)}
-.diff-list li{padding:18px 0;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start}
-.diff-list-num{font-family:'Barlow Condensed',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--gold);min-width:24px;margin-top:3px}
-.diff-list-text{font-size:14.5px;color:var(--muted);line-height:1.6}
-.diff-list-text strong{color:var(--off-white);font-weight:500;display:block;margin-bottom:3px;font-family:'Barlow Condensed',sans-serif;font-size:15px;letter-spacing:.04em;text-transform:uppercase}
-.diff-quote-strip{margin-top:2rem;padding:20px 24px;border-left:2px solid var(--gold);background:rgba(196,154,42,.05)}
-.diff-quote-text{font-size:14px;color:rgba(240,237,231,.7);line-height:1.75;font-style:italic}
-.diff-quote-source{margin-top:8px;font-family:'Barlow Condensed',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
-@media(max-width:900px){.diff-grid{grid-template-columns:1fr}.diff-img-col{height:55vw;min-height:320px;position:relative}.diff-img-col img{position:absolute}.diff-text-col{padding:64px 20px}}
-
-/* ══════════════════════════════════════════
    COLLECTION GALLERY
 ══════════════════════════════════════════ */
 #collection{background:var(--black);padding:0}
@@ -489,9 +467,6 @@ body { background: #0E0D0B; }
   background: linear-gradient(to top, rgba(14,13,11,.92), transparent);
 }
 
-/* Differentiator — warm concrete dark */
-#diff { background: #1C1A15; }
-
 /* Gallery — very warm deep */
 #collection { background: #161410; }
 .sleeve-strip { background: #1E1C17; border-top-color: var(--gold); }
@@ -528,12 +503,6 @@ body { background: #0E0D0B; }
 /* Footer — warm concrete */
 footer { background: #1C1A15; border-top-color: #363228; }
 .footer-bottom { border-top-color: #363228; }
-
-/* Diff section text column */
-.diff-text-col {}
-.diff-list li { border-bottom-color: #2E2C25; }
-.diff-list li:first-child, .diff-list { border-top-color: #2E2C25; }
-.diff-quote-strip { background: rgba(196,154,42,0.06); }
 
 /* Sleeve strip cells */
 .sleeve-cell { border-right-color: #363228; }
@@ -662,21 +631,6 @@ body {
   color: #fff;
   border-color: rgba(248,245,240,.75);
 }
-
-/* ══ DIFFERENTIATOR — light canvas ══ */
-#diff { background: var(--bg-0); }
-.diff-h { color: var(--text-1); }
-.diff-h .acc { color: var(--gold); }
-.diff-intro { color: var(--text-3); }
-.diff-intro strong { color: var(--text-1); }
-.diff-list { border-top-color: var(--border-l); }
-.diff-list li { border-bottom-color: var(--border-l); }
-.diff-list-num { color: var(--gold); }
-.diff-list-text { color: var(--text-3); }
-.diff-list-text strong { color: var(--text-1); font-family: 'Barlow Condensed', sans-serif; }
-.diff-quote-strip { background: rgba(184,137,26,.05); border-left-color: var(--gold); }
-.diff-quote-text { color: var(--text-3); }
-.diff-quote-source { color: var(--gold); }
 
 /* ══ GALLERY / COLLECTION — light ══ */
 #collection { background: var(--bg-0); }
@@ -1018,9 +972,6 @@ body::after { display: none !important; }
   margin-bottom: 12px !important;
 }
 .proc-step-body { padding: 26px 32px 52px !important; }
-
-/* Diff section — breathing room */
-.diff-text-col { padding: 80px 56px 80px 48px; }
 
 /* Gallery — title breathing */
 .coll-h { letter-spacing: 0.02em; }
@@ -1468,98 +1419,6 @@ body::after { display: none !important; }
   .hero-lockup { display: none; }
 }
 
-/* ── Diff card — replaces gallery-02.jpg ── */
-.diff-img-col { display: flex; align-items: stretch; }
-.diff-card {
-  width: 100%;
-  background: #1A1815;
-  border-left: 3px solid var(--gold);
-  padding: 52px 44px 48px;
-  display: flex;
-  flex-direction: column;
-}
-.diff-card-header {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px; font-weight: 700;
-  letter-spacing: 0.26em; text-transform: uppercase;
-  color: var(--gold); margin-bottom: 36px;
-}
-.diff-card-items { display: flex; flex-direction: column; flex: 1; }
-.diff-card-item {
-  padding: 20px 0;
-  border-bottom: 1px solid rgba(196,154,42,0.14);
-  display: flex; gap: 18px; align-items: flex-start;
-}
-.diff-card-item:first-child { border-top: 1px solid rgba(196,154,42,0.14); }
-.diff-card-num {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px; letter-spacing: 0.1em;
-  color: rgba(196,154,42,0.5); min-width: 22px; padding-top: 2px;
-}
-.diff-card-item-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 15px; font-weight: 600;
-  letter-spacing: 0.07em; text-transform: uppercase;
-  color: var(--off-white); margin-bottom: 4px;
-}
-.diff-card-item-text { font-size: 12.5px; color: rgba(240,237,231,0.44); line-height: 1.6; }
-.diff-card-footer {
-  margin-top: 32px; padding-top: 20px;
-  border-top: 1px solid rgba(196,154,42,0.18);
-}
-.diff-card-footer-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 20px; letter-spacing: 0.08em;
-  color: rgba(240,237,231,0.3); line-height: 1;
-}
-.diff-card-footer-tag {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 9.5px; font-weight: 600;
-  letter-spacing: 0.22em; text-transform: uppercase;
-  color: rgba(196,154,42,0.38); margin-top: 5px;
-}
-@media(max-width:900px) {
-  .diff-card { padding: 40px 28px 36px; border-left: none; border-top: 3px solid var(--gold); }
-}
-.diff-card-headline {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(48px, 5.4vw, 76px);
-  line-height: 0.87; letter-spacing: 0.03em;
-  color: var(--off-white); margin-bottom: 26px;
-}
-.diff-card-headline .dc-gold { color: var(--gold); }
-.diff-card-body {
-  font-size: 14px; color: rgba(240,237,231,0.52);
-  line-height: 1.72; max-width: 300px;
-  border-left: 1px solid rgba(196,154,42,0.32);
-  padding-left: 16px; margin-bottom: 40px;
-}
-.diff-card-proofs { display: flex; flex-direction: column; flex: 1; }
-.diff-card-proof {
-  display: flex; gap: 14px; align-items: baseline;
-  padding: 14px 0; border-bottom: 1px solid rgba(196,154,42,0.1);
-}
-.diff-card-proof:first-child { border-top: 1px solid rgba(196,154,42,0.1); }
-.diff-card-proof-num {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 10px; font-weight: 700; letter-spacing: 0.12em;
-  color: rgba(196,154,42,0.48); min-width: 20px;
-}
-.diff-card-proof-text {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14.5px; font-weight: 500;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  color: rgba(240,237,231,0.68);
-}
-.diff-card-bottom {
-  margin-top: 32px; padding-top: 18px;
-  border-top: 1px solid rgba(196,154,42,0.2);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.2em; text-transform: uppercase;
-  color: rgba(196,154,42,0.62);
-}
-
 /* ── AI image removal — neutral placeholder surfaces ── */
 /* Process step image containers: dark gradient fills 340px slot when no img present */
 .proc-step-img { background: linear-gradient(160deg, #1d1b16 0%, #252119 100%); }
@@ -1711,13 +1570,6 @@ body::after { display: none !important; }
 @media(max-width:900px) {
   .hero-lockup { display: none; }
 }
-
-.diff-grid { grid-template-columns: minmax(0,1.04fr) minmax(360px,.96fr); }
-.diff-intro { max-width: 500px; }
-.diff-img-col { background: #171410; }
-.diff-card { min-height: 100%; justify-content: center; }
-.diff-card-body { max-width: 380px; }
-@media(max-width:900px){.diff-grid{grid-template-columns:1fr}}
 
 .case-grid {
   display: grid;
@@ -2165,62 +2017,6 @@ body::after { display: none !important; }
   .hero-headline { font-size: clamp(62px, 18vw, 92px) !important; }
 }
 
-#diff { padding: 104px 0; }
-.diff-grid {
-  display: block;
-  min-height: 0;
-}
-.diff-text-col {
-  max-width: 1120px;
-  margin: 0 auto;
-  padding: 0 48px !important;
-  display: grid;
-  grid-template-columns: minmax(260px,.85fr) minmax(0,1.15fr);
-  gap: clamp(36px, 6vw, 82px);
-  align-items: start;
-}
-.diff-copy-main { max-width: 430px; }
-.diff-h { margin-bottom: 1.2rem; }
-.diff-intro {
-  max-width: 620px;
-  margin-bottom: 0;
-  font-size: 17px;
-  color: var(--text-2);
-}
-.diff-list {
-  border-top: 1px solid var(--border-l);
-  margin-top: 28px;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0,1fr));
-  gap: 0;
-}
-.diff-list li {
-  padding: 20px 18px;
-  border-bottom: 1px solid var(--border-l);
-  border-right: 1px solid var(--border-l);
-  display: block;
-}
-.diff-list li:last-child { border-right: 0; }
-.diff-list-num { display: block; margin-bottom: 18px; }
-.diff-list-text strong { margin-bottom: 8px; }
-.diff-quote-strip {
-  margin-top: 28px;
-  padding: 22px 26px;
-  border-left: 0;
-  border-top: 2px solid var(--gold);
-}
-.diff-img-col { display: none; }
-@media(max-width:900px) {
-  #diff { padding: 72px 0; }
-  .diff-text-col { grid-template-columns: 1fr; padding: 0 20px !important; }
-  .diff-list { grid-template-columns: 1fr 1fr; }
-  .diff-list li:nth-child(2n) { border-right: 0; }
-}
-@media(max-width:560px) {
-  .diff-list { grid-template-columns: 1fr; }
-  .diff-list li { border-right: 0; }
-}
-
 .case-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
@@ -2407,57 +2203,6 @@ body::after { display: none !important; }
   background: #F8F5F0;
 }
 
-/* ══════════════════════════════════════════
-   LOCAL REVIEW REFINEMENTS
-══════════════════════════════════════════ */
-
-#diff {
-  padding: clamp(88px, 9vw, 136px) 0;
-  background:
-    linear-gradient(90deg, rgba(184,137,26,.06) 0 1px, transparent 1px) 0 0 / 25% 100%,
-    var(--bg-0);
-}
-.diff-text-col {
-  max-width: 1320px;
-  grid-template-columns: minmax(340px,.82fr) minmax(0,1.38fr);
-  gap: clamp(44px, 7vw, 112px);
-}
-.diff-copy-main {
-  min-height: 440px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  border-right: 1px solid var(--border-l);
-  padding-right: clamp(28px, 4vw, 64px);
-}
-.diff-text-col > div:last-child { align-self: center; }
-.diff-intro {
-  font-size: clamp(18px, 1.55vw, 24px);
-  line-height: 1.55;
-  max-width: 760px;
-}
-.diff-list {
-  margin-top: 42px;
-  background: rgba(248,245,240,.52);
-  border-left: 1px solid var(--border-l);
-}
-.diff-list li {
-  min-height: 210px;
-  padding: 26px 24px 24px;
-}
-.diff-quote-strip {
-  max-width: 760px;
-  margin-top: 34px;
-}
-@media(max-width:900px) {
-  .diff-copy-main {
-    min-height: 0;
-    border-right: 0;
-    padding-right: 0;
-  }
-  .diff-list li { min-height: 0; }
-}
-
 #collection {
   background: #0E0C09;
   color: var(--off-white);
@@ -2615,113 +2360,6 @@ body::after { display: none !important; }
   border: 1px solid rgba(184,137,26,.25);
 }
 
-/* ══════════════════════════════════════════
-   LOCAL REVIEW — DIFFERENTIATOR + COMPARISON
-══════════════════════════════════════════ */
-
-#diff {
-  position: relative;
-  isolation: isolate;
-  padding: clamp(96px, 10vw, 150px) 0;
-  background:
-    linear-gradient(90deg, rgba(184,137,26,.08) 0 1px, transparent 1px) 0 0 / 16.666% 100%,
-    linear-gradient(180deg, #F8F5F0 0%, #EFE8DC 100%);
-  overflow: hidden;
-}
-#diff::before {
-  content: 'CULTURE';
-  position: absolute;
-  right: -0.08em;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: -1;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(160px, 24vw, 360px);
-  line-height: .8;
-  letter-spacing: .04em;
-  color: rgba(17,17,17,.035);
-}
-#diff::after {
-  content: '';
-  position: absolute;
-  left: clamp(24px, 4vw, 64px);
-  right: clamp(24px, 4vw, 64px);
-  top: clamp(28px, 4vw, 56px);
-  bottom: clamp(28px, 4vw, 56px);
-  z-index: -1;
-  border-top: 1px solid rgba(184,137,26,.24);
-  border-bottom: 1px solid rgba(184,137,26,.24);
-  pointer-events: none;
-}
-#diff .diff-text-col {
-  max-width: 1380px;
-  grid-template-columns: minmax(320px,.78fr) minmax(0,1.32fr);
-  gap: clamp(48px, 8vw, 132px);
-  align-items: center;
-}
-#diff .diff-copy-main {
-  min-height: 520px;
-  justify-content: center;
-  border-right: 1px solid rgba(184,137,26,.26);
-}
-#diff .diff-h {
-  font-size: clamp(66px, 8vw, 126px);
-}
-#diff .diff-intro {
-  max-width: 780px;
-  font-size: clamp(20px, 1.75vw, 28px);
-  line-height: 1.45;
-  color: var(--text-2);
-}
-#diff .diff-list {
-  margin-top: 44px;
-  border: 1px solid rgba(184,137,26,.24);
-  background: rgba(248,245,240,.64);
-  box-shadow: 0 26px 70px rgba(17,17,17,.045);
-}
-#diff .diff-list li {
-  min-height: 190px;
-  padding: 28px 24px 26px;
-  background: rgba(255,255,255,.18);
-}
-#diff .diff-list-num {
-  font-size: 12px;
-  margin-bottom: 24px;
-}
-#diff .diff-list-text strong {
-  font-size: 17px;
-  letter-spacing: .08em;
-}
-#diff .diff-quote-strip {
-  max-width: 780px;
-  margin-top: 34px;
-  background: rgba(14,12,9,.04);
-}
-@media(max-width:900px) {
-  #diff {
-    padding: 72px 0 64px;
-  }
-  #diff .diff-text-col {
-    display: block;
-    grid-template-columns: 1fr;
-  }
-  #diff .diff-copy-main {
-    min-height: 0;
-    border-right: 0;
-    padding-right: 0;
-    margin-bottom: 28px;
-  }
-  #diff .diff-h { font-size: clamp(58px, 16vw, 92px); }
-  #diff .diff-intro {
-    font-size: 18px;
-    line-height: 1.58;
-  }
-  #diff .diff-list { grid-template-columns: 1fr 1fr; }
-}
-@media(max-width:560px) {
-  #diff .diff-list { grid-template-columns: 1fr; }
-}
-
 #comparison {
   background: #0E0C09 !important;
 }
@@ -2872,12 +2510,11 @@ body {
 
 #hero { order: 1; }
 #collection { order: 2; }
-#comparison { order: 3; }
-#diff { order: 4; }
-#process { order: 5; }
-#portal { order: 6; }
-#final-cta { order: 7; }
-footer { order: 8; }
+#process { order: 3; }
+#comparison { order: 4; }
+#portal { order: 5; }
+#final-cta { order: 6; }
+footer { order: 7; }
 .gold-rule { display: none; }
 #quote { display: none; }
 
@@ -3046,18 +2683,6 @@ footer { order: 8; }
     width: auto !important;
     bottom: 22px !important;
   }
-}
-
-#diff {
-  background:
-    linear-gradient(90deg, rgba(184,137,26,.07) 0 1px, transparent 1px) 0 0 / 20% 100%,
-    #F8F5F0;
-}
-#diff .diff-h {
-  color: #111;
-}
-#diff .diff-intro {
-  color: #3D3930;
 }
 
 #final-cta {
@@ -3845,6 +3470,75 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
   }
 }
 
+/* ══════════════════════════════════════════
+   FEATURED WORK CAROUSEL
+══════════════════════════════════════════ */
+
+#collection .featured-carousel-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: -22px;
+  margin-bottom: 18px;
+}
+.featured-arrow {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(184,137,26,.36);
+  background: rgba(248,245,240,.04);
+  color: var(--gold);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+.featured-arrow:hover {
+  border-color: rgba(184,137,26,.7);
+  background: rgba(184,137,26,.12);
+  transform: translateY(-1px);
+}
+#collection .featured-grid {
+  width: min(100% - 40px, 1320px);
+  display: flex;
+  grid-template-columns: none;
+  gap: clamp(16px, 2vw, 24px);
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 20px;
+  padding: 0 0 18px;
+  -webkit-overflow-scrolling: touch;
+}
+#collection .featured-grid::-webkit-scrollbar {
+  height: 8px;
+}
+#collection .featured-grid::-webkit-scrollbar-track {
+  background: rgba(248,245,240,.06);
+}
+#collection .featured-grid::-webkit-scrollbar-thumb {
+  background: rgba(184,137,26,.4);
+}
+#collection .featured-card {
+  flex: 0 0 clamp(520px, 44vw, 640px);
+  scroll-snap-align: start;
+}
+@media(max-width:720px) {
+  #collection .featured-carousel-controls {
+    justify-content: flex-start;
+    margin-top: -8px;
+  }
+  #collection .featured-grid {
+    width: calc(100% - 20px);
+    margin-left: 20px;
+    padding-right: 20px;
+  }
+  #collection .featured-card {
+    flex-basis: min(84vw, 390px);
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3868,9 +3562,8 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
     </a>
     <ul class="nav-links">
       <li><a href="#collection">Featured Work</a></li>
-      <li><a href="#comparison">Compare</a></li>
-      <li><a href="#diff">Why Threefold</a></li>
       <li><a href="#process">Process</a></li>
+      <li><a href="#comparison">Compare</a></li>
       <li><a href="#portal">Portal</a></li>
       <li><a href="start-project.html" class="nav-cta">Start a Project</a></li>
     </ul>
@@ -3913,64 +3606,6 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
 
 <div class="gold-rule"></div>
 
-<!-- ══════════════════════════════════════════
-     DIFFERENTIATOR
-══════════════════════════════════════════ -->
-<section id="diff">
-  <div class="diff-grid">
-
-    <div class="diff-text-col">
-      <div class="diff-copy-main">
-        <div class="eyebrow reveal"><span>Not a Print Shop</span></div>
-        <h2 class="diff-h f-display reveal">
-          Built<br>around<br>your<br><span class="acc">culture.</span>
-        </h2>
-      </div>
-      <div>
-      <p class="diff-intro reveal">
-        <strong>Threefold is not a generic print shop.</strong> We design around culture, story, identity, and team. Every mockup is approved before production, and every piece is built to be worn beyond the event.
-      </p>
-      <ul class="diff-list reveal">
-        <li>
-          <span class="diff-list-num">01</span>
-          <div class="diff-list-text">
-            <strong>Culture</strong>
-            We look at how your team works, talks, moves, and takes pride in the brand.
-          </div>
-        </li>
-        <li>
-          <span class="diff-list-num">02</span>
-          <div class="diff-list-text">
-            <strong>Story</strong>
-            Every collection starts with the reason the apparel should exist.
-          </div>
-        </li>
-        <li>
-          <span class="diff-list-num">03</span>
-          <div class="diff-list-text">
-            <strong>Identity</strong>
-            Logos, colors, language, and symbols become a real design direction.
-          </div>
-        </li>
-        <li>
-          <span class="diff-list-num">04</span>
-          <div class="diff-list-text">
-            <strong>Team</strong>
-            Mockups are approved before production. Pieces are made to actually be worn.
-          </div>
-        </li>
-      </ul>
-      <div class="diff-quote-strip reveal">
-        <div class="diff-quote-text">&ldquo;Not merch for a drawer. Apparel your team recognizes, approves, and actually wears.&rdquo;</div>
-        <div class="diff-quote-source">— Threefold Supply Co.</div>
-      </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<div class="gold-rule"></div>
 
 <!-- ══════════════════════════════════════════
      OUR WORK
@@ -3981,6 +3616,11 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
     <h2 class="work-h f-display reveal">
       Built for<br>real <span style="color:var(--gold)">teams.</span>
     </h2>
+  </div>
+
+  <div class="featured-carousel-controls wrap reveal d1" aria-label="Featured Work carousel controls">
+    <button type="button" class="featured-arrow" data-featured-dir="-1" aria-label="Scroll Featured Work left">&larr;</button>
+    <button type="button" class="featured-arrow" data-featured-dir="1" aria-label="Scroll Featured Work right">&rarr;</button>
   </div>
 
   <div class="featured-grid reveal d1" id="featured-work">
@@ -4004,7 +3644,7 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
         <span class="featured-link">See how we designed this &rarr;</span>
       </div>
       <div class="featured-image">
-        <img src="./images/work/HELE/HELE - DESIGN 2.png" alt="HELE apparel design">
+        <img src="./images/work/HELE/HELE - DESIGN 3.png" alt="HELE apparel design">
       </div>
     </a>
 
@@ -4028,7 +3668,7 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
         <span class="featured-link">See how we designed this &rarr;</span>
       </div>
       <div class="featured-image">
-        <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 apparel design">
+        <img src="./images/work/DUR3/DUR3 - DESIGN 1.png" alt="DUR3 apparel design">
       </div>
     </a>
   </div>
@@ -4042,7 +3682,7 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
       <div class="case-study-flow">
         <div class="case-study-step">
           <span>Client Logo</span>
-          <div class="case-logo-placeholder">Logo Coming Soon</div>
+          <img src="./images/work/R2GO/Logo.png" alt="R2GO client logo">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
@@ -4114,17 +3754,17 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
       <div class="case-study-flow">
         <div class="case-study-step">
           <span>Client Logo</span>
-          <div class="case-logo-placeholder">Logo Coming Soon</div>
+          <img src="./images/work/DUR3/Logo.png" alt="DUR3 client logo">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
           <span>Threefold Design Direction 01</span>
-          <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 design direction">
+          <img src="./images/work/DUR3/DUR3 - DESIGN 1.png" alt="DUR3 design direction">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
           <span>Threefold Design Direction 02</span>
-          <img src="./images/work/DUR3/DUR3 - DESIGN 1  (2).png" alt="DUR3 design direction 02">
+          <img src="./images/work/DUR3/DUR3 - DESIGN 2.png" alt="DUR3 design direction 02">
         </div>
       </div>
       <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around team pride, competition, achievement, and a recognizable visual identity that feels larger than a standard company shirt.</p>
@@ -4554,10 +4194,9 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
       <div>
         <div class="footer-col-title">Navigate</div>
         <ul class="footer-links">
-          <li><a href="#diff">Our Approach</a></li>
-          <li><a href="#comparison">How We Compare</a></li>
           <li><a href="#collection">Our Work</a></li>
           <li><a href="#process">Our Process</a></li>
+          <li><a href="#comparison">How We Compare</a></li>
           <li><a href="#portal">Client Portal</a></li>
           <li><a href="start-project.html">Start a Project</a></li>
         </ul>
@@ -4932,6 +4571,16 @@ featuredCards.forEach(card=>{
 if(window.location.hash&&window.location.hash.startsWith('#case-')){
   showFeaturedCase(window.location.hash.slice(1),false);
 }
+const featuredTrack=document.getElementById('featured-work');
+document.querySelectorAll('[data-featured-dir]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    if(!featuredTrack)return;
+    const dir=Number(btn.getAttribute('data-featured-dir'))||1;
+    const card=featuredTrack.querySelector('.featured-card');
+    const amount=card?card.getBoundingClientRect().width+24:520;
+    featuredTrack.scrollBy({left:dir*amount,behavior:'smooth'});
+  });
+});
 
 // ── Smooth scroll with nav offset
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
