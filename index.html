@@ -3539,6 +3539,205 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
   }
 }
 
+/* ══════════════════════════════════════════
+   PRESENTATION POLISH — RHYTHM + FRAMING
+══════════════════════════════════════════ */
+
+#collection {
+  position: relative;
+  padding-top: clamp(84px, 8vw, 124px);
+  padding-bottom: clamp(88px, 8vw, 128px);
+  background:
+    radial-gradient(circle at 12% 0%, rgba(184,137,26,.08), transparent 34%),
+    #12100D;
+}
+#collection .work-header {
+  margin-bottom: clamp(18px, 2.4vw, 30px);
+}
+#collection .featured-carousel-controls {
+  align-items: center;
+  margin-top: clamp(-12px, -1vw, -4px);
+  margin-bottom: 18px;
+}
+#collection .featured-carousel-controls::before {
+  content: 'Swipe / drag';
+  margin-right: auto;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: rgba(248,245,240,.34);
+}
+.featured-arrow {
+  border-color: rgba(184,137,26,.28);
+  background: rgba(8,7,5,.34);
+}
+#collection .featured-grid {
+  position: relative;
+  width: min(100% - 24px, 1360px);
+  padding: 0 64px 22px 0;
+  scroll-padding-left: 20px;
+  scrollbar-width: thin;
+}
+#collection .featured-grid::after {
+  content: '';
+  position: sticky;
+  right: 0;
+  flex: 0 0 1px;
+  align-self: stretch;
+  width: 1px;
+  margin-left: -1px;
+  background: linear-gradient(90deg, transparent, #12100D 76%);
+  pointer-events: none;
+}
+#collection .featured-card {
+  min-height: clamp(380px, 34vw, 460px);
+  flex-basis: clamp(560px, 46vw, 690px);
+  border-color: rgba(184,137,26,.2);
+}
+#collection .featured-card:hover {
+  box-shadow: 0 30px 80px rgba(0,0,0,.36);
+}
+#collection .featured-image::after {
+  background:
+    linear-gradient(180deg, rgba(8,7,5,.02), rgba(8,7,5,.22) 38%, rgba(8,7,5,.88) 100%),
+    linear-gradient(90deg, rgba(8,7,5,.82) 0%, rgba(8,7,5,.2) 58%, rgba(8,7,5,.05) 100%);
+}
+#collection .featured-copy {
+  padding: clamp(30px, 3.5vw, 46px);
+}
+#collection .featured-link {
+  border-top: 1px solid rgba(184,137,26,.36);
+  padding-top: 14px;
+}
+.case-study-stage {
+  margin-top: clamp(34px, 5vw, 64px);
+}
+.case-study-panel {
+  border-color: rgba(184,137,26,.22);
+  background:
+    linear-gradient(135deg, rgba(184,137,26,.09), transparent 34%),
+    linear-gradient(180deg, #1B1813 0%, #12100D 100%);
+  padding: clamp(28px, 4vw, 48px);
+  box-shadow: 0 34px 90px rgba(0,0,0,.28);
+}
+.case-study-head {
+  padding-bottom: 22px;
+  margin-bottom: 6px;
+}
+.case-study-flow {
+  gap: clamp(16px, 2vw, 28px);
+}
+.case-study-step {
+  min-height: 260px;
+}
+.case-study-step img,
+.case-logo-placeholder {
+  min-height: 220px;
+  border-color: rgba(184,137,26,.2);
+  box-shadow: 0 18px 48px rgba(0,0,0,.18);
+}
+.case-study-step:first-child img {
+  background: #F3EBDD;
+}
+.case-study-why {
+  max-width: 980px;
+  margin-top: 30px;
+  padding-top: 24px;
+}
+
+#process {
+  background:
+    linear-gradient(90deg, rgba(184,137,26,.045) 0 1px, transparent 1px) 0 0 / 20% 100%,
+    #17140F !important;
+}
+#process .proc-header {
+  margin-bottom: clamp(48px, 6vw, 82px);
+}
+#process .proc-steps {
+  gap: clamp(42px, 6vw, 76px);
+}
+#process .proc-step {
+  background:
+    linear-gradient(135deg, rgba(248,245,240,.025), transparent 44%),
+    #0F0D0A !important;
+  border-color: rgba(184,137,26,.18);
+  box-shadow: 0 22px 70px rgba(0,0,0,.2);
+}
+#process .proc-step-img {
+  min-height: clamp(390px, 36vw, 560px);
+  background: #0A0907;
+}
+#process .proc-step-img img {
+  padding: clamp(10px, 1.6vw, 18px);
+}
+#process .proc-step-body {
+  padding: clamp(42px, 5.5vw, 70px) !important;
+}
+#process .proc-steps::before {
+  border-left-color: rgba(184,137,26,.22);
+}
+
+#comparison {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(184,137,26,.07), transparent 36%),
+    #0D0B08 !important;
+}
+#comparison .comp-intro {
+  padding-bottom: clamp(34px, 4vw, 54px) !important;
+}
+#comparison .split-wrap {
+  border-top: 1px solid rgba(184,137,26,.18);
+  border-bottom: 1px solid rgba(184,137,26,.18);
+}
+#comparison .split-content {
+  background: rgba(8,7,5,.46) !important;
+  border-color: rgba(184,137,26,.32) !important;
+}
+
+#portal {
+  background:
+    linear-gradient(180deg, #17140F 0%, #100E0B 100%) !important;
+}
+#final-cta {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(184,137,26,.1), transparent 38%),
+    #0D0B08;
+}
+@media(max-width:720px) {
+  #collection {
+    padding-top: 74px;
+  }
+  #collection .featured-carousel-controls::before {
+    content: 'Swipe';
+  }
+  #collection .featured-grid {
+    width: calc(100% - 20px);
+    padding-right: 20px;
+  }
+  #collection .featured-card {
+    min-height: 390px;
+    flex-basis: min(86vw, 400px);
+  }
+  .case-study-panel {
+    padding: 24px 20px;
+  }
+  .case-study-step img,
+  .case-logo-placeholder {
+    min-height: 200px;
+  }
+  #process .proc-header {
+    margin-bottom: 38px;
+  }
+  #process .proc-step-img {
+    min-height: 0;
+  }
+  #process .proc-step-body {
+    padding: 32px 26px 36px !important;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -3682,7 +3881,7 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
       <div class="case-study-flow">
         <div class="case-study-step">
           <span>Client Logo</span>
-          <img src="./images/work/R2GO/Logo.png" alt="R2GO client logo">
+          <div class="case-logo-placeholder">Logo Coming Soon</div>
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
@@ -3730,7 +3929,7 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
       <div class="case-study-flow">
         <div class="case-study-step">
           <span>Client Logo</span>
-          <div class="case-logo-placeholder">Logo Coming Soon</div>
+          <img src="./images/work/R2GO/Logo.png" alt="R2GO client logo">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
