@@ -1468,6 +1468,102 @@ body::after { display: none !important; }
   .hero-lockup { display: none; }
 }
 
+/* ── Our Work — case study card ── */
+#collection { padding: 100px 0 80px; }
+@media(max-width:768px) { #collection { padding: 72px 0 60px; } }
+
+.work-header { margin-bottom: 52px; padding: 0 48px; }
+@media(max-width:768px) { .work-header { padding: 0 20px; margin-bottom: 36px; } }
+.work-h { font-size: clamp(56px, 7vw, 96px); line-height: 0.9; color: var(--text-1); }
+
+.case-grid { padding: 0 48px; display: flex; justify-content: center; }
+@media(max-width:768px) { .case-grid { padding: 0 20px; } }
+
+.case-card {
+  width: 100%;
+  max-width: 760px;
+  height: 520px;
+  perspective: 1400px;
+  cursor: pointer;
+  outline: none;
+}
+.case-card:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+@media(max-width:600px) { .case-card { height: 580px; } }
+
+.case-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.62s cubic-bezier(0.4,0,0.2,1);
+}
+.case-card:hover .case-inner,
+.case-card.flipped .case-inner { transform: rotateY(180deg); }
+
+.case-front,
+.case-back {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border: 1px solid var(--border-hi);
+  padding: 44px 48px 36px;
+  display: flex;
+  flex-direction: column;
+}
+@media(max-width:600px) { .case-front, .case-back { padding: 30px 24px 28px; } }
+
+.case-front { background: var(--surface); }
+.case-back { background: #1A1815; transform: rotateY(180deg); }
+
+.case-eyebrow {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 14px;
+}
+.case-client { font-size: clamp(52px, 7vw, 88px); line-height: 0.9; color: var(--text-1); margin-bottom: 10px; }
+.case-subtitle {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-3);
+}
+.case-rule { width: 48px; height: 1px; background: var(--gold); margin: 24px 0; }
+.case-stats { display: flex; gap: 40px; flex-wrap: wrap; }
+.case-stat-val { font-family: 'Bebas Neue', sans-serif; font-size: 38px; color: var(--text-1); line-height: 1; }
+.case-stat-key {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-4); margin-top: 3px;
+}
+.case-flip-hint {
+  margin-top: auto; padding-top: 24px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-4); opacity: 0.65;
+}
+.case-flip-hint-mob { display: none; }
+@media(hover:none), (max-width:900px) {
+  .case-flip-hint-desk { display: none; }
+  .case-flip-hint-mob { display: inline; }
+}
+
+.case-back-section { margin-bottom: 18px; }
+.case-back-section:last-of-type { margin-bottom: 0; }
+.case-back-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px;
+}
+.case-back-body { font-size: 13.5px; color: rgba(240,237,231,0.72); line-height: 1.68; }
+.case-back-list { list-style: none; display: flex; flex-direction: column; gap: 4px; margin-top: 2px; }
+.case-back-list li {
+  font-size: 13px; color: rgba(240,237,231,0.68); line-height: 1.5;
+  display: flex; align-items: baseline; gap: 9px;
+}
+.case-back-list li::before { content: '—'; color: var(--gold); font-size: 10px; flex-shrink: 0; }
+.case-back .case-flip-hint { color: rgba(240,237,231,0.32); }
+
 </style>
 </head>
 <body>
@@ -1614,126 +1710,76 @@ body::after { display: none !important; }
 <div class="gold-rule"></div>
 
 <!-- ══════════════════════════════════════════
-     COLLECTION GALLERY
+     OUR WORK
 ══════════════════════════════════════════ -->
 <section id="collection">
-  <div class="coll-header">
-    <div class="coll-header-inner">
-      <div class="reveal">
-        <div class="eyebrow"><span>Featured Work</span></div>
-        <h2 class="coll-h f-display">
-          POPS
-          <span class="gold-line">2026</span>
-          Collection
-        </h2>
-      </div>
-      <div class="reveal d1">
-        <div class="coll-client-tag">
-          <div class="coll-client-dot"></div>
-          <span class="coll-client-text">Piranha Ops &middot; DSF7 &middot; Bay Area</span>
+  <div class="work-header wrap">
+    <div class="eyebrow reveal"><span>Our Work</span></div>
+    <h2 class="work-h f-display reveal">
+      Built for<br>real <span style="color:var(--gold)">teams.</span>
+    </h2>
+  </div>
+
+  <div class="case-grid reveal d1">
+    <div class="case-card" id="case-pops" role="button" tabindex="0" aria-label="Piranha Ops case study — click to flip">
+      <div class="case-inner">
+
+        <!-- FRONT -->
+        <div class="case-front">
+          <div class="case-eyebrow">POPS &rarr; Threefold Collection</div>
+          <div class="case-client f-display">Piranha Ops</div>
+          <div class="case-subtitle">Prime Week 2026 Collection</div>
+          <div class="case-rule"></div>
+          <div class="case-stats">
+            <div class="case-stat">
+              <div class="case-stat-val">DSF7</div>
+              <div class="case-stat-key">Station</div>
+            </div>
+            <div class="case-stat">
+              <div class="case-stat-val">6</div>
+              <div class="case-stat-key">Designs</div>
+            </div>
+            <div class="case-stat">
+              <div class="case-stat-val">80</div>
+              <div class="case-stat-key">Shirts</div>
+            </div>
+          </div>
+          <div class="case-flip-hint">
+            <span class="case-flip-hint-desk">Hover to see the story &rarr;</span>
+            <span class="case-flip-hint-mob">Tap to see the story &rarr;</span>
+          </div>
         </div>
-        <p class="coll-meta-body">Six designs. Black oversized heavyweight tees. Navy, gold, and white on black. Every piece carries the story of a team that moves.</p>
-      </div>
-    </div>
-  </div>
 
-  <div class="gallery-mosaic">
+        <!-- BACK -->
+        <div class="case-back">
+          <div class="case-back-section">
+            <div class="case-back-label">Challenge</div>
+            <p class="case-back-body">Create apparel drivers would actually want to wear during Prime Week.</p>
+          </div>
+          <div class="case-back-section">
+            <div class="case-back-label">Vision</div>
+            <p class="case-back-body">Blend Bay Area identity, delivery culture, and premium streetwear aesthetics into a collection specific to DSF7.</p>
+          </div>
+          <div class="case-back-section">
+            <div class="case-back-label">Design Decisions</div>
+            <ul class="case-back-list">
+              <li>Golden Gate references</li>
+              <li>Delivery inspired iconography</li>
+              <li>Prime 2026 branding</li>
+              <li>Oversized heavyweight black tee direction</li>
+              <li>Navy, gold, white, and charcoal palette</li>
+            </ul>
+          </div>
+          <div class="case-back-section">
+            <div class="case-back-label">Result</div>
+            <p class="case-back-body">Six custom shirt concepts created for an 80 piece Prime Week collection.</p>
+          </div>
+          <div class="case-flip-hint">
+            <span class="case-flip-hint-desk">Hover away to flip back</span>
+            <span class="case-flip-hint-mob">Tap to flip back</span>
+          </div>
+        </div>
 
-    <!-- g0: Let's Start The Journey (portrait, spans 2 rows) -->
-    <div class="g-item g0 reveal" data-lb-src="./images/gallery-03.jpg" data-lb-cap="Let's Start The Journey — POPS 2026">
-      <img src="./images/gallery-03.jpg" alt="Let's Start The Journey — POPS 2026" loading="lazy">
-      <div class="g-item-overlay"></div>
-      <div class="g-item-info">
-        <div class="g-item-num">Design 06</div>
-        <div class="g-item-name f-display">Let's Start<br>The Journey</div>
-        <div class="g-item-desc">Gold aircraft illustration &middot; POPS + PRIME 2026 sleeves</div>
-      </div>
-    </div>
-
-    <!-- g1: Highway Badge (landscape, 2-col) -->
-    <div class="g-item g1 reveal d1" data-lb-src="./images/gallery-04.jpg" data-lb-cap="Highway Badge — POPS 2026">
-      <img src="./images/gallery-04.jpg" alt="Highway Badge — POPS 2026" loading="lazy">
-      <div class="g-item-overlay"></div>
-      <div class="g-item-info">
-        <div class="g-item-num">Design 01</div>
-        <div class="g-item-name f-display">Highway Badge</div>
-        <div class="g-item-desc">Circular badge &middot; road illustration &middot; Amazon boxes &middot; PRIME 2026</div>
-      </div>
-    </div>
-
-    <!-- g2: Dotted Circle (landscape) -->
-    <div class="g-item g2 reveal d2" data-lb-src="./images/gallery-05.jpg" data-lb-cap="Dotted Circle — POPS 2026">
-      <img src="./images/gallery-05.jpg" alt="Dotted Circle — POPS 2026" loading="lazy">
-      <div class="g-item-overlay"></div>
-      <div class="g-item-info">
-        <div class="g-item-num">Design 02</div>
-        <div class="g-item-name f-display">Dotted Circle</div>
-        <div class="g-item-desc">POPS + PRIME 2026 curved text &middot; isometric box badge</div>
-      </div>
-    </div>
-
-    <!-- g3: Golden Gate (landscape) -->
-    <div class="g-item g3 reveal d3" data-lb-src="./images/gallery-06.jpg" data-lb-cap="Golden Gate — POPS 2026">
-      <img src="./images/gallery-06.jpg" alt="Golden Gate — POPS 2026" loading="lazy">
-      <div class="g-item-overlay"></div>
-      <div class="g-item-info">
-        <div class="g-item-num">Design 03</div>
-        <div class="g-item-name f-display">Golden Gate</div>
-        <div class="g-item-desc">Bay Area exclusive &middot; DSF7 &middot; Golden Gate Bridge &middot; PRIME 2026</div>
-      </div>
-    </div>
-
-    <!-- g4: Classic White on Black (landscape, 2-col) -->
-    <div class="g-item g4 reveal d1" data-lb-src="./images/process-01.jpg" data-lb-cap="Classic White on Black — POPS 2026">
-      <img src="./images/process-01.jpg" alt="Classic White on Black — POPS 2026" loading="lazy">
-      <div class="g-item-overlay"></div>
-      <div class="g-item-info">
-        <div class="g-item-num">Design 04</div>
-        <div class="g-item-name f-display">Classic W/B</div>
-        <div class="g-item-desc">Oversized POPS &middot; ghost piranha watermark &middot; DSF7 coordinates</div>
-      </div>
-    </div>
-
-    <!-- g5: Delivery Badge (portrait) -->
-    <div class="g-item g5 reveal d2" data-lb-src="./images/process-02.jpg" data-lb-cap="Delivery Badge — POPS 2026">
-      <img src="./images/process-02.jpg" alt="Delivery Badge — POPS 2026" loading="lazy">
-      <div class="g-item-overlay"></div>
-      <div class="g-item-info">
-        <div class="g-item-num">Design 05</div>
-        <div class="g-item-name f-display">Delivery Badge</div>
-        <div class="g-item-desc">Shield badge &middot; Piranha Ops Delivery &middot; DSF7 Bay Area</div>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Sleeve detail strip -->
-  <div class="sleeve-strip">
-    <div class="eyebrow" style="margin-bottom:1.25rem;margin-left:0"><span>All Six Designs Include</span></div>
-    <div class="sleeve-inner">
-      <div class="sleeve-cell reveal">
-        <div class="sleeve-cell-label">Left Sleeve</div>
-        <div class="sleeve-cell-val">PRIME 2026 + speed lines</div>
-      </div>
-      <div class="sleeve-cell reveal d1">
-        <div class="sleeve-cell-label">Right Sleeve</div>
-        <div class="sleeve-cell-val">POPS + speed lines</div>
-      </div>
-      <div class="sleeve-cell reveal d2">
-        <div class="sleeve-cell-label">Back Bottom</div>
-        <div class="sleeve-cell-val">Made by three, worn by all</div>
-      </div>
-      <div class="sleeve-cell reveal d3">
-        <div class="sleeve-cell-label">Color Palette</div>
-        <div class="sleeve-cell-val">Navy &middot; Gold &middot; White on Black</div>
-      </div>
-      <div class="sleeve-cell reveal d2">
-        <div class="sleeve-cell-label">Blank</div>
-        <div class="sleeve-cell-val">Oversized heavyweight tee</div>
-      </div>
-      <div class="sleeve-cell reveal d3">
-        <div class="sleeve-cell-label">Credit</div>
-        <div class="sleeve-cell-val">Threefold Supply Co.</div>
       </div>
     </div>
   </div>
@@ -2501,6 +2547,14 @@ if(form){
     else{this.value='('+digits.slice(0,3)+') '+digits.slice(3,6)+'-'+digits.slice(6);}
   });
 })();
+
+// ── Case study card flip (tap/click for mobile + desktop)
+document.querySelectorAll('.case-card').forEach(card=>{
+  card.addEventListener('click',()=>card.classList.toggle('flipped'));
+  card.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){e.preventDefault();card.classList.toggle('flipped');}
+  });
+});
 
 // ── Smooth scroll with nav offset
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
