@@ -881,6 +881,28 @@ body::after { display: none !important; }
   padding-right: 36px !important;
   cursor: pointer;
 }
+
+/* Fix 1c — Windows-readable select option colours
+   On Windows, Chrome and Edge render the native <option> popup using
+   whatever CSS is applied to <option> elements. The original rule on
+   line 309 sets background/color via CSS variables that now resolve to
+   near-white on near-white in the current light theme, making options
+   invisible until highlighted. macOS ignores these rules entirely
+   (native OS picker) so this fix is risk-free on Mac. */
+.fselect option,
+.fselect optgroup {
+  color: #111111;
+  background-color: #FDFAF6;
+}
+.fselect option:checked {
+  color: #111111;
+  background-color: #e7dcc8;
+}
+.fselect option:disabled {
+  color: #999990;
+  background-color: #FDFAF6;
+}
+
 .fcheck-item {
   background-color: #FDFAF6 !important;
   background-image: none !important;
