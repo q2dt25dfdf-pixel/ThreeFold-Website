@@ -4661,106 +4661,98 @@ if(farea&&finput){
   finput.addEventListener('change',()=>{if(finput.files.length)addFiles(finput.files);finput.value='';});
 }
 
-// ── Form submit
+// ── Quote form — Cloudflare Pages–compatible submission
 const form=document.getElementById('qform');
 const successBox=document.getElementById('form-success');
 function shouldSubmitToNetlify(){
   const h=window.location.hostname;
-  return !['localhost','127.0.0.1','::1'].some(x=>h===x)&&!h.includes('.pages.dev');
+  return h&&!['localhost','127.0.0.1','::1'].includes(h)&&!h.endsWith('.pages.dev');
 }
-async function submitToNetlify(form){
+async function submitToNetlify(f){
   if(!shouldSubmitToNetlify())return;
-  const netlifyData=new FormData(form);
-  netlifyData.set('form-name',form.getAttribute('name')||'quote-request');
-  // Files are already stored in Supabase — don't send binaries to Netlify to avoid size limits
-  netlifyData.delete('brand_assets');
-  const res=await fetch('/',{
-    method:'POST',
-    body:netlifyData,
-  });
-  if(!res.ok)throw new Error(`Netlify submission failed with status ${res.status}`);
+  const d=new FormData(f);
+  d.set('form-name',f.getAttribute('name')||'quote-request');
+  d.delete('brand_assets');
+  await fetch('/',{method:'POST',body:d});
 }
-async function submitToHq(form,files){
-  const formData=new FormData(form);
+async function submitToHq(f,files){
+  const formData=new FormData(f);
   const json={};
-  formData.forEach((v,k)=>{ json[k]=v; });
+  formData.forEach((v,k)=>{json[k]=v;});
   json.questionnaire_files=files;
   const res=await fetch('https://three-fold-hq.vercel.app/api/public-lead',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify(json)
   });
-  if(!res.ok)throw new Error(`HQ submission failed with status ${res.status}`);
+  if(!res.ok)throw new Error('HQ submission failed: '+res.status);
 }
-if(form){
-  let _submitting=false;
-  async function handleFormSubmit(e){
-    if(e&&e.preventDefault)e.preventDefault();
-    if(_submitting)return;
+let _submitting=false;
+async function handleFormSubmit(e){
+  if(e&&e.preventDefault)e.preventDefault();
+  if(_submitting)return;
+  _submitting=true;
+  const btn=form.querySelector('.btn-submit');
+  const origText=btn?btn.textContent:'Submit Request →';
+  if(btn){btn.disabled=true;btn.textContent='Checking…';}
+  try{
     updateApparelInput();
     let ok=true;
-    form.querySelectorAll('[required]').forEach(f=>{
-      f.style.borderColor='';
-      if(!String(f.value||'').trim()){f.style.borderColor='#c0392b';ok=false}
+    form.querySelectorAll('[required]').forEach(function(field){
+      field.style.borderColor='';
+      if(!String(field.value||'').trim()){field.style.borderColor='#c0392b';ok=false;}
     });
-    if(!apparelInput.value.trim()){
+    if(!apparelInput||!apparelInput.value.trim()){
       const apparelWrap=document.getElementById('apparel-checks');
       if(apparelWrap){
         apparelWrap.style.outline='1px solid #c0392b';
         apparelWrap.style.outlineOffset='4px';
-        apparelWrap.scrollIntoView({behavior:'smooth',block:'center'});
+        setTimeout(function(){apparelWrap.scrollIntoView({behavior:'smooth',block:'center'});},60);
       }
       ok=false;
     }else{
       const apparelWrap=document.getElementById('apparel-checks');
-      if(apparelWrap){apparelWrap.style.outline='';apparelWrap.style.outlineOffset=''}
+      if(apparelWrap){apparelWrap.style.outline='';apparelWrap.style.outlineOffset='';}
     }
     const fileErr=validateFiles(stagedFiles);
-    if(fileErr){setFileError(fileErr);if(farea)farea.scrollIntoView({behavior:'smooth',block:'center'});ok=false;}
+    if(fileErr){setFileError(fileErr);if(farea)setTimeout(function(){farea.scrollIntoView({behavior:'smooth',block:'center'});},60);ok=false;}
     if(!ok){
-      const first=form.querySelector('[style*="c0392b"]');
-      if(first&&!fileErr){first.scrollIntoView({behavior:'smooth',block:'center'});first.focus()}
+      if(btn){btn.textContent=origText;btn.disabled=false;}
+      _submitting=false;
+      if(!fileErr){
+        const first=form.querySelector('[style*="c0392b"]');
+        if(first)setTimeout(function(){first.scrollIntoView({behavior:'smooth',block:'center'});first.focus();},60);
+      }
       return;
     }
-
-    const btn=form.querySelector('.btn-submit');
-    const originalText=btn.textContent;
-    _submitting=true;
-    btn.disabled=true;
-    btn.textContent='Checking…';
-
-    try{
-      uploadedFileMeta=[];
-      if(stagedFiles.length){
-        btn.textContent='Uploading files…';
-        const uploadResult=await uploadFilesToStorage(stagedFiles);
-        if(uploadResult.failedCount>0){
-          const noun=uploadResult.failedCount===1?'file':'files';
-          setFileError(uploadResult.failedCount+' '+noun+' failed to upload. Please check your connection and try again, or remove the affected file(s).');
-          if(farea)farea.scrollIntoView({behavior:'smooth',block:'center'});
-          btn.textContent=originalText;
-          btn.disabled=false;
-          _submitting=false;
-          return;
-        }
-        uploadedFileMeta=uploadResult.succeeded;
+    uploadedFileMeta=[];
+    if(stagedFiles.length){
+      if(btn)btn.textContent='Uploading files…';
+      const uploadResult=await uploadFilesToStorage(stagedFiles);
+      if(uploadResult.failedCount>0){
+        const noun=uploadResult.failedCount===1?'file':'files';
+        setFileError(uploadResult.failedCount+' '+noun+' failed to upload. Please check your connection and try again, or remove the affected file(s).');
+        if(farea)farea.scrollIntoView({behavior:'smooth',block:'center'});
+        if(btn){btn.textContent=origText;btn.disabled=false;}
+        _submitting=false;
+        return;
       }
-      btn.textContent='Sending…';
-      // HQ/CRM submission is the authoritative gate
-      await submitToHq(form,uploadedFileMeta);
-      // Netlify form submission is best-effort backup — its failures must not surface to the user
-      submitToNetlify(form).catch(err=>console.warn('[Netlify form] non-critical:',err));
-      form.style.display='none';
-      successBox.classList.add('show');
-      successBox.scrollIntoView({behavior:'smooth',block:'center'});
-    }catch(err){
-      console.error(err);
-      alert('Something went wrong submitting your request. Please email threefoldsupplycompany@gmail.com.');
-      btn.textContent=originalText;
-      btn.disabled=false;
-      _submitting=false;
+      uploadedFileMeta=uploadResult.succeeded;
     }
+    if(btn)btn.textContent='Sending…';
+    await submitToHq(form,uploadedFileMeta);
+    submitToNetlify(form).catch(function(err){console.warn('[Netlify form] non-critical:',err);});
+    form.style.display='none';
+    successBox.classList.add('show');
+    successBox.scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(err){
+    console.error('[qform]',err);
+    alert('Something went wrong submitting your request. Please email threefoldsupplycompany@gmail.com.');
+    if(btn){btn.textContent=origText;btn.disabled=false;}
+    _submitting=false;
   }
+}
+if(form){
   form.addEventListener('submit',handleFormSubmit);
   const submitBtn=form.querySelector('.btn-submit');
   if(submitBtn){
