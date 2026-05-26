@@ -4150,7 +4150,7 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
 
       <div class="reveal d1" id="qform-wrap">
         <div class="qform" id="qform-inner">
-          <form id="qform" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="/" novalidate>
+          <form id="qform" name="quote-request" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" action="#" novalidate>
             <input type="hidden" name="form-name" value="quote-request">
             <p style="display:none"><label>Do not fill this out: <input name="bot-field"></label></p>
             <input type="hidden" name="apparel_types" id="apparel-types-input" value="">
@@ -4666,11 +4666,12 @@ if(farea&&finput){
   finput.addEventListener('change',()=>{if(finput.files.length)addFiles(finput.files);finput.value='';});
 }
 
-// ── Netlify form submit
+// ── Form submit
 const form=document.getElementById('qform');
 const successBox=document.getElementById('form-success');
 function shouldSubmitToNetlify(){
-  return !['localhost','127.0.0.1','::1'].includes(window.location.hostname);
+  const h=window.location.hostname;
+  return !['localhost','127.0.0.1','::1'].some(x=>h===x)&&!h.includes('.pages.dev');
 }
 async function submitToNetlify(form){
   if(!shouldSubmitToNetlify())return;
@@ -4697,8 +4698,10 @@ async function submitToHq(form,files){
   if(!res.ok)throw new Error(`HQ submission failed with status ${res.status}`);
 }
 if(form){
-  form.addEventListener('submit',async e=>{
-    e.preventDefault();
+  let _submitting=false;
+  async function handleFormSubmit(e){
+    if(e&&e.preventDefault)e.preventDefault();
+    if(_submitting)return;
     updateApparelInput();
     let ok=true;
     form.querySelectorAll('[required]').forEach(f=>{
@@ -4727,7 +4730,9 @@ if(form){
 
     const btn=form.querySelector('.btn-submit');
     const originalText=btn.textContent;
+    _submitting=true;
     btn.disabled=true;
+    btn.textContent='Checking…';
 
     try{
       uploadedFileMeta=[];
@@ -4740,6 +4745,7 @@ if(form){
           if(farea)farea.scrollIntoView({behavior:'smooth',block:'center'});
           btn.textContent=originalText;
           btn.disabled=false;
+          _submitting=false;
           return;
         }
         uploadedFileMeta=uploadResult.succeeded;
@@ -4757,8 +4763,18 @@ if(form){
       alert('Something went wrong submitting your request. Please email threefoldsupplycompany@gmail.com.');
       btn.textContent=originalText;
       btn.disabled=false;
+      _submitting=false;
     }
-  });
+  }
+  form.addEventListener('submit',handleFormSubmit);
+  const submitBtn=form.querySelector('.btn-submit');
+  if(submitBtn){
+    submitBtn.addEventListener('click',function(e){
+      if(submitBtn.disabled)return;
+      e.preventDefault();
+      handleFormSubmit(e);
+    });
+  }
 }
 
 // ── Phone number auto-format
