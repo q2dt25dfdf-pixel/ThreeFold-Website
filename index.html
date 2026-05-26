@@ -3178,6 +3178,7 @@ footer { order: 7; }
   background: #0E0C09;
 }
 #collection .featured-card.is-active,
+body:has(#case-dsf7:target) #collection .featured-card[href="#case-dsf7"],
 body:has(#case-pops:target) #collection .featured-card[href="#case-pops"],
 body:has(#case-hele:target) #collection .featured-card[href="#case-hele"],
 body:has(#case-r2go:target) #collection .featured-card[href="#case-r2go"],
@@ -3593,7 +3594,7 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
 }
 #collection .featured-card {
   min-height: clamp(380px, 34vw, 460px);
-  flex-basis: clamp(560px, 46vw, 690px);
+  flex-basis: clamp(300px, 30vw, 430px);
   border-color: rgba(184,137,26,.2);
 }
 #collection .featured-card:hover {
@@ -3823,9 +3824,21 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
   </div>
 
   <div class="featured-grid reveal d1" id="featured-work">
-    <a class="featured-card" href="#case-dur3" aria-label="See how we designed DUR3">
+    <a class="featured-card" href="#case-dsf7" aria-label="See how we designed DSF7">
       <div class="featured-copy">
         <div class="featured-kicker">01 / Featured Work</div>
+        <h3 class="featured-title f-display">DSF7</h3>
+        <p class="featured-subtitle">Amazon Delivery Station</p>
+        <span class="featured-link">See how we designed this &rarr;</span>
+      </div>
+      <div class="featured-image">
+        <img src="./images/work/DSF7/DESIGN 1 .png" alt="DSF7 apparel design">
+      </div>
+    </a>
+
+    <a class="featured-card" href="#case-dur3" aria-label="See how we designed DUR3">
+      <div class="featured-copy">
+        <div class="featured-kicker">02 / Featured Work</div>
         <h3 class="featured-title f-display">DUR3</h3>
         <p class="featured-subtitle">Team Identity Collection</p>
         <span class="featured-link">See how we designed this &rarr;</span>
@@ -3837,7 +3850,7 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
 
     <a class="featured-card" href="#case-hele" aria-label="See how we designed HELE">
       <div class="featured-copy">
-        <div class="featured-kicker">02 / Featured Work</div>
+        <div class="featured-kicker">03 / Featured Work</div>
         <h3 class="featured-title f-display">HELE</h3>
         <p class="featured-subtitle">Amazon DSP &middot; Oahu, Hawaii</p>
         <span class="featured-link">See how we designed this &rarr;</span>
@@ -3847,9 +3860,21 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
       </div>
     </a>
 
+    <a class="featured-card" href="#case-pops" aria-label="See how we designed Piranha Ops">
+      <div class="featured-copy">
+        <div class="featured-kicker">04 / Featured Work</div>
+        <h3 class="featured-title f-display">Piranha Ops</h3>
+        <p class="featured-subtitle">Amazon DSP &middot; Bay Area</p>
+        <span class="featured-link">See how we designed this &rarr;</span>
+      </div>
+      <div class="featured-image">
+        <img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="Piranha Ops apparel design">
+      </div>
+    </a>
+
     <a class="featured-card" href="#case-r2go" aria-label="See how we designed R2GO">
       <div class="featured-copy">
-        <div class="featured-kicker">03 / Featured Work</div>
+        <div class="featured-kicker">05 / Featured Work</div>
         <h3 class="featured-title f-display">R2GO</h3>
         <p class="featured-subtitle">Transportation Team &middot; California</p>
         <span class="featured-link">See how we designed this &rarr;</span>
@@ -3858,48 +3883,60 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
         <img src="./images/work/R2GO/R2GO -No Driver Left Behind.png" alt="R2GO apparel design">
       </div>
     </a>
-
-    <a class="featured-card" href="#case-pops" aria-label="See how we designed POPS Piranha Ops">
-      <div class="featured-copy">
-        <div class="featured-kicker">04 / Featured Work</div>
-        <h3 class="featured-title f-display">POPS &ndash; Piranha Ops</h3>
-        <p class="featured-subtitle">Amazon DSP &middot; DSF7 &middot; Bay Area</p>
-        <span class="featured-link">See how we designed this &rarr;</span>
-      </div>
-      <div class="featured-image">
-        <img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS Piranha Ops apparel design">
-      </div>
-    </a>
   </div>
 
   <div class="case-study-stage wrap reveal d2">
-    <article class="case-study-panel" id="case-pops">
+    <article class="case-study-panel" id="case-dsf7">
       <div class="case-study-head">
-        <div class="case-study-index">01 / POPS &ndash; Piranha Ops</div>
-        <a href="#collection" class="case-study-close" aria-label="Close POPS case study">Close</a>
+        <div class="case-study-index">01 / DSF7</div>
+        <a href="#collection" class="case-study-close" aria-label="Close DSF7 case study">Close</a>
       </div>
       <div class="case-study-flow">
         <div class="case-study-step">
           <span>Client Logo</span>
-          <div class="case-logo-placeholder">Logo Coming Soon</div>
+          <img src="./images/work/DSF7/Logo.png" alt="DSF7 client logo">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
           <span>Threefold Design Direction 01</span>
-          <img src="./images/work/POPS/PIRANHA OPS - DESIGN 2 .png" alt="POPS design direction">
+          <img src="./images/work/DSF7/DESIGN 1 .png" alt="DSF7 design direction">
         </div>
         <div class="case-arrow">&rarr;</div>
         <div class="case-study-step">
           <span>Threefold Design Direction 02</span>
-          <img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="POPS design direction 02">
+          <img src="./images/work/DSF7/DESIGN 1 .png" alt="DSF7 design direction 02">
         </div>
       </div>
-      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around DSF7, Prime Week energy, Bay Area delivery culture, and a team identity bold enough to wear beyond work.</p>
+      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around Amazon delivery station identity, team pride, and a bold visual system your crew can wear on and off the clock.</p>
+    </article>
+
+    <article class="case-study-panel" id="case-dur3">
+      <div class="case-study-head">
+        <div class="case-study-index">02 / DUR3</div>
+        <a href="#collection" class="case-study-close" aria-label="Close DUR3 case study">Close</a>
+      </div>
+      <div class="case-study-flow">
+        <div class="case-study-step">
+          <span>Client Logo</span>
+          <img src="./images/work/DUR3/Logo.png" alt="DUR3 client logo">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Threefold Design Direction 01</span>
+          <img src="./images/work/DUR3/DUR3 - DESIGN 1.png" alt="DUR3 design direction">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Threefold Design Direction 02</span>
+          <img src="./images/work/DUR3/DUR3 - DESIGN 2.png" alt="DUR3 design direction 02">
+        </div>
+      </div>
+      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around team pride, competition, achievement, and a recognizable visual identity that feels larger than a standard company shirt.</p>
     </article>
 
     <article class="case-study-panel" id="case-hele">
       <div class="case-study-head">
-        <div class="case-study-index">02 / HELE</div>
+        <div class="case-study-index">03 / HELE</div>
         <a href="#collection" class="case-study-close" aria-label="Close HELE case study">Close</a>
       </div>
       <div class="case-study-flow">
@@ -3921,9 +3958,33 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
       <p class="case-study-why"><strong>Why we designed it this way:</strong> Built from a clean transportation identity and expanded into a stronger apparel system using movement, route-inspired graphics, and premium teamwear styling.</p>
     </article>
 
+    <article class="case-study-panel" id="case-pops">
+      <div class="case-study-head">
+        <div class="case-study-index">04 / Piranha Ops</div>
+        <a href="#collection" class="case-study-close" aria-label="Close Piranha Ops case study">Close</a>
+      </div>
+      <div class="case-study-flow">
+        <div class="case-study-step">
+          <span>Client Logo</span>
+          <img src="./images/work/POPS/Logo.png" alt="Piranha Ops client logo">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Threefold Design Direction 01</span>
+          <img src="./images/work/POPS/PIRANHA OPS - DESIGN 2 .png" alt="Piranha Ops design direction">
+        </div>
+        <div class="case-arrow">&rarr;</div>
+        <div class="case-study-step">
+          <span>Threefold Design Direction 02</span>
+          <img src="./images/work/POPS/PIRANHA OPS - DESIGN 3 .png" alt="Piranha Ops design direction 02">
+        </div>
+      </div>
+      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around Prime Week energy, Bay Area delivery culture, and a team identity bold enough to wear beyond work.</p>
+    </article>
+
     <article class="case-study-panel" id="case-r2go">
       <div class="case-study-head">
-        <div class="case-study-index">03 / R2GO</div>
+        <div class="case-study-index">05 / R2GO</div>
         <a href="#collection" class="case-study-close" aria-label="Close R2GO case study">Close</a>
       </div>
       <div class="case-study-flow">
@@ -3943,30 +4004,6 @@ body:has(#case-dur3:target) #collection .featured-card[href="#case-dur3"],
         </div>
       </div>
       <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around reliability, teamwork, movement, and a strong operational culture that employees can identify with.</p>
-    </article>
-
-    <article class="case-study-panel" id="case-dur3">
-      <div class="case-study-head">
-        <div class="case-study-index">04 / DUR3</div>
-        <a href="#collection" class="case-study-close" aria-label="Close DUR3 case study">Close</a>
-      </div>
-      <div class="case-study-flow">
-        <div class="case-study-step">
-          <span>Client Logo</span>
-          <img src="./images/work/DUR3/Logo.png" alt="DUR3 client logo">
-        </div>
-        <div class="case-arrow">&rarr;</div>
-        <div class="case-study-step">
-          <span>Threefold Design Direction 01</span>
-          <img src="./images/work/DUR3/DUR3 - DESIGN 1.png" alt="DUR3 design direction">
-        </div>
-        <div class="case-arrow">&rarr;</div>
-        <div class="case-study-step">
-          <span>Threefold Design Direction 02</span>
-          <img src="./images/work/DUR3/DUR3 - DESIGN 2.png" alt="DUR3 design direction 02">
-        </div>
-      </div>
-      <p class="case-study-why"><strong>Why we designed it this way:</strong> Built around team pride, competition, achievement, and a recognizable visual identity that feels larger than a standard company shirt.</p>
     </article>
   </div>
 </section>
