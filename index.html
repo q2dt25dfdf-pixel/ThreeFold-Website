@@ -4795,12 +4795,19 @@ document.querySelectorAll('.case-card').forEach(card=>{
 // ── Featured Work case study reveal
 const featuredCards=document.querySelectorAll('#collection .featured-card');
 const featuredPanels=document.querySelectorAll('#collection .case-study-panel');
+function closeFeaturedCase(){
+  featuredPanels.forEach(p=>p.classList.remove('is-active'));
+  featuredCards.forEach(c=>c.classList.remove('is-active'));
+  history.replaceState(null,'',location.pathname+location.search);
+}
 function showFeaturedCase(id,shouldScroll=true){
   if(!id)return;
   const panel=document.getElementById(id);
   if(!panel)return;
+  if(panel.classList.contains('is-active')){closeFeaturedCase();return;}
   featuredPanels.forEach(p=>p.classList.toggle('is-active',p===panel));
-  featuredCards.forEach(card=>card.classList.toggle('is-active',card.getAttribute('href')==='#'+id));
+  featuredCards.forEach(c=>c.classList.toggle('is-active',c.getAttribute('href')==='#'+id));
+  history.replaceState(null,'','#'+id);
   if(shouldScroll){
     const top=panel.getBoundingClientRect().top+window.scrollY-86;
     window.scrollTo({top,behavior:'smooth'});
@@ -4811,8 +4818,13 @@ featuredCards.forEach(card=>{
     const href=card.getAttribute('href')||'';
     if(!href.startsWith('#case-'))return;
     e.preventDefault();
-    history.replaceState(null,'',href);
     showFeaturedCase(href.slice(1),true);
+  });
+});
+document.querySelectorAll('#collection .case-study-close').forEach(btn=>{
+  btn.addEventListener('click',e=>{
+    e.preventDefault();
+    closeFeaturedCase();
   });
 });
 if(window.location.hash&&window.location.hash.startsWith('#case-')){
