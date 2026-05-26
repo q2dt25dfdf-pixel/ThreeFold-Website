@@ -330,12 +330,17 @@ a{color:inherit;text-decoration:none}
 .ffile-list-size{font-size:11px;color:var(--muted);white-space:nowrap;flex-shrink:0}
 .ffile-list-remove{font-size:15px;line-height:1;color:var(--muted);background:none;border:none;cursor:pointer;padding:0 2px;flex-shrink:0;transition:color .15s}
 .ffile-list-remove:hover{color:#c0392b}
-.fsubmit-row{display:flex;align-items:center;justify-content:center;padding:36px 44px 44px}
-@media(max-width:768px){.fsubmit-row{padding:24px 20px 32px}}
+.fsubmit-row{display:flex;flex-direction:column;align-items:center;padding:28px 44px 44px;gap:20px}
+@media(max-width:768px){.fsubmit-row{padding:20px 20px 32px;gap:16px}}
+.fsubmit-ack{display:flex;align-items:flex-start;gap:10px;max-width:520px;width:100%;cursor:pointer}
+.fsubmit-ack input[type="checkbox"]{margin-top:3px;flex-shrink:0;width:15px;height:15px;accent-color:var(--gold);cursor:pointer}
+.fsubmit-ack-text{font-size:12px;color:var(--muted);line-height:1.6}
+.fsubmit-ack-note{font-size:11px;color:var(--muted);max-width:520px;width:100%;line-height:1.55;opacity:.75}
 .fsubmit-note{font-size:13px;color:var(--muted);max-width:360px;line-height:1.65}
 .fsubmit-note strong{color:var(--off-white);font-weight:500}
-.btn-submit{background:var(--gold);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;padding:15px 44px;border:none;cursor:pointer;transition:background .25s,transform .2s;flex-shrink:0}
-.btn-submit:hover{background:var(--gold-light);transform:translateY(-1px)}
+.btn-submit{background:var(--gold);color:var(--black);font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:.1em;padding:15px 44px;border:none;cursor:pointer;transition:background .25s,transform .2s,opacity .2s;flex-shrink:0}
+.btn-submit:hover:not(:disabled){background:var(--gold-light);transform:translateY(-1px)}
+.btn-submit:disabled{opacity:.45;cursor:not-allowed;transform:none}
 .form-success{display:none;text-align:center;padding:64px 40px}
 .form-success.show{display:block}
 .form-success-check{width:52px;height:52px;border:1.5px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-size:18px;color:var(--gold)}
@@ -773,6 +778,8 @@ body {
 .ffile-list-size { color: var(--text-4); }
 .fhint { color: var(--muted-2); }
 .fsubmit-row { border-top-color: var(--border-l); }
+.fsubmit-ack-text { color: var(--text-3); }
+.fsubmit-ack-note { color: var(--text-4); }
 .fsubmit-note { color: var(--text-3); }
 .fsubmit-note strong { color: var(--text-1); }
 .form-success-h { color: var(--text-1); }
@@ -3525,7 +3532,12 @@ body.start-page footer {
 
             <!-- Submit -->
             <div class="fsubmit-row">
-              <button type="submit" class="btn-submit">Submit Request &rarr;</button>
+              <label class="fsubmit-ack" id="fsubmit-ack-label">
+                <input type="checkbox" id="fsubmit-ack-check" />
+                <span class="fsubmit-ack-text">I understand that all products are custom made specifically for my order. Once artwork is approved and production begins, orders cannot be canceled, returned, or refunded.</span>
+              </label>
+              <p class="fsubmit-ack-note">If there is an issue caused by a manufacturing defect or production error, please contact us and we will work with you to make it right.</p>
+              <button type="submit" class="btn-submit" id="fsubmit-btn" disabled>Submit Request &rarr;</button>
             </div>
 
           </form>
@@ -3889,8 +3901,18 @@ async function handleFormSubmit(e){
     }
     const fileErr=validateFiles(stagedFiles);
     if(fileErr){setFileError(fileErr);if(farea)setTimeout(function(){farea.scrollIntoView({behavior:'smooth',block:'center'});},60);ok=false;}
+    const ackCheck=document.getElementById('fsubmit-ack-check');
+    if(!ackCheck||!ackCheck.checked){
+      const ackLabel=document.getElementById('fsubmit-ack-label');
+      if(ackLabel){ackLabel.style.outline='1px solid #c0392b';ackLabel.style.outlineOffset='4px';setTimeout(function(){ackLabel.scrollIntoView({behavior:'smooth',block:'center'});},60);}
+      ok=false;
+    }else{
+      const ackLabel=document.getElementById('fsubmit-ack-label');
+      if(ackLabel){ackLabel.style.outline='';ackLabel.style.outlineOffset='';}
+    }
     if(!ok){
-      if(btn){btn.textContent=origText;btn.disabled=false;}
+      const ackOk=ackCheck&&ackCheck.checked;
+      if(btn){btn.textContent=origText;btn.disabled=!ackOk;}
       _submitting=false;
       if(!fileErr){
         const first=form.querySelector('[style*="c0392b"]');
@@ -3921,7 +3943,8 @@ async function handleFormSubmit(e){
   }catch(err){
     console.error(err);
     alert('Something went wrong submitting your request. Please email threefoldsupplycompany@gmail.com.');
-    if(btn){btn.textContent=origText;btn.disabled=false;}
+    const ackCheckErr=document.getElementById('fsubmit-ack-check');
+    if(btn){btn.textContent=origText;btn.disabled=!(ackCheckErr&&ackCheckErr.checked);}
     _submitting=false;
   }
 }
@@ -3941,6 +3964,16 @@ if(form){
     });
   }
 }
+// Acknowledgement checkbox: enable submit only when checked
+(function(){
+  const ackCheck=document.getElementById('fsubmit-ack-check');
+  const submitBtn=document.getElementById('fsubmit-btn');
+  if(ackCheck&&submitBtn){
+    ackCheck.addEventListener('change',function(){
+      submitBtn.disabled=!ackCheck.checked;
+    });
+  }
+})();
 
 // ── Phone number auto-format
 (function(){
