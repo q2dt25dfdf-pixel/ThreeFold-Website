@@ -3827,7 +3827,7 @@ async function submitToHq(f,files){
   const json={};
   formData.forEach((v,k)=>{json[k]=v;});
   json.questionnaire_files=files;
-  const res=await fetch('https://three-fold-hq.vercel.app/api/public-lead',{
+  const res=await fetch('https://hq.threefoldsupply.com/api/public-lead',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify(json)
