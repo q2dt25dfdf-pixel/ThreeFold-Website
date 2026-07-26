@@ -3272,7 +3272,7 @@ body.start-page footer {
         </h2>
         <p class="quote-sidebar-body reveal">This isn&rsquo;t a basic quote form. We need to understand who you are before we design anything.</p>
         <p class="quote-sidebar-body reveal">Fill this out honestly and completely. The more you share, the better we can design something your team is proud to represent.</p>
-        <p class="quote-sidebar-body reveal">Bay Area clients can book an <strong>in-person consultation</strong> at your location. We&rsquo;ll reach out within <strong>24 hours</strong>.</p>
+        <p class="quote-sidebar-body reveal">Based in the Bay Area. We&rsquo;ll reach out within 24 hours.</p>
         <div class="quote-sidebar-note reveal">No obligation until you approve the mockup. Mockup is free. Production only begins when you say go.
         </div>
         <div class="quote-support reveal d2">
@@ -3356,11 +3356,10 @@ body.start-page footer {
                   <label class="flabel">Preferred Contact Method <span class="req">*</span></label>
                   <select class="fselect" name="contact_method" required>
                     <option value="" disabled selected>How should we reach you?</option>
-                    <option>Email first, then phone</option>
-                    <option>Phone call</option>
-                    <option>Virtual meeting (Zoom / Google Meet)</option>
-                    <option>In-person consultation (Bay Area only)</option>
+                    <option>Email</option>
                     <option>Text message</option>
+                    <option>Phone call</option>
+                    <option>Virtual meeting</option>
                   </select>
                 </div>
               </div>
@@ -3506,6 +3505,11 @@ body.start-page footer {
             <h3 class="form-success-h f-display">We Got You.</h3>
             <p class="form-success-body">Your project brief is in. We&rsquo;ll reach out within 24 hours to schedule your design consultation. Keep an eye on your inbox.</p>
             <p style="margin-top:1rem;font-family:'Barlow Condensed',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)">— Threefold Supply Co.</p>
+            <div id="form-success-booking" style="display:none;margin-top:28px;padding-top:24px;border-top:1px solid var(--border)">
+              <p class="form-success-body" style="color:var(--off-white);margin-bottom:6px">Your request has been sent.</p>
+              <p class="form-success-body" style="margin-bottom:18px">Want to talk it through? Book your initial meeting below.</p>
+              <a class="btn-gold" href="https://cal.com/threefold-fwkchj/initial-meeting" target="_blank" rel="noopener noreferrer" style="display:inline-block">Book Initial Meeting</a>
+            </div>
           </div>
         </div>
       </div>
@@ -3896,6 +3900,9 @@ async function handleFormSubmit(e){
     if(btn)btn.textContent='Sending…';
     await submitToHq(form,uploadedFileMeta);
     submitToNetlify(form).catch(function(err){console.warn('[Netlify form] non-critical:',err);});
+    const contactMethod=form.querySelector('[name="contact_method"]');
+    const bookingBlock=document.getElementById('form-success-booking');
+    if(bookingBlock){bookingBlock.style.display=(contactMethod&&contactMethod.value==='Virtual meeting')?'block':'none';}
     form.style.display='none';
     successBox.classList.add('show');
     successBox.scrollIntoView({behavior:'smooth',block:'center'});
