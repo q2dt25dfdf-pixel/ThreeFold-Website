@@ -4679,6 +4679,7 @@ async function handleFormSubmit(e){
     const contactMethod=form.querySelector('[name="contact_method"]');
     const bookingBlock=document.getElementById('form-success-booking');
     if(bookingBlock){bookingBlock.style.display=(contactMethod&&contactMethod.value==='Virtual meeting')?'block':'none';}
+    if(btn){btn.textContent=origText;btn.disabled=false;btn.style.display='none';}
     form.style.display='none';
     successBox.classList.add('show');
     successBox.scrollIntoView({behavior:'smooth',block:'center'});
