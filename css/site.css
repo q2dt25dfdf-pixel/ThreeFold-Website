@@ -300,22 +300,19 @@ body.cart-open .cart-drawer{transform:translateX(0)}
 body.lb-open{overflow:hidden}
 body.lb-open .lightbox{display:block}
 .lb-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.85)}
-.lb-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:20px;overflow:auto}
+/* Image alone + separate fixed-width bar, both centered in a flex column. No JS sizing. */
+.lb-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:20px;overflow:auto}
 .lb-x{position:absolute;top:14px;right:18px;background:none;border:none;color:#fff;font-size:34px;line-height:1;cursor:pointer;z-index:2}
-/* card shrink-wraps the (large) image; the bar spans the full image width */
-/* Card width is set in JS to the image's rendered width (min of 90vw / 80vh-by-aspect),
-   so the whole image always shows (never cropped) and the bar spans exactly that width. */
-.lb-card{display:block;width:max-content;max-width:90vw;background:var(--paper);border-radius:12px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.5)}
-.lb-media{background:#0e0e0e;font-size:0}
-.lb-media img{display:block;width:100%;height:auto;object-fit:contain}
-.lb-bar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px 22px;box-sizing:border-box;width:100%}
+.lb-img{max-height:80vh;max-width:92vw;width:auto;height:auto;object-fit:contain;display:block;border-radius:8px}
+/* Controls bar — fixed width, independent of the image size. */
+.lb-card{width:min(680px,92vw);box-sizing:border-box;background:var(--paper);border-radius:12px;padding:18px 22px;box-shadow:0 20px 60px rgba(0,0,0,.5);display:flex;align-items:center;justify-content:space-between;gap:16px}
 .lb-meta{display:flex;flex-direction:column;gap:2px;min-width:0}
-.lb-meta b{font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb-meta b{font-size:16px}
 .lb-meta span{font-family:var(--mono);font-size:14px;color:var(--ink-soft)}
 .lb-buy{display:flex;gap:10px;align-items:center;flex:none}
 .lb-buy .size-select{min-width:84px}
 .lb-buy .add-btn{white-space:nowrap}
-@media(max-width:560px){.lb-bar{flex-direction:column;align-items:stretch}.lb-buy{width:100%}.lb-buy .add-btn{flex:1;justify-content:center}.lb-meta b{white-space:normal}}
+@media(max-width:560px){.lb-card{flex-direction:column;align-items:stretch}.lb-buy{width:100%}.lb-buy .add-btn{flex:1;justify-content:center}}
 
 
 /* ---------- custom checkout ---------- */

@@ -9,20 +9,6 @@
 
   function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]; }); }
 
-  // Size the card to the image's rendered size so the WHOLE image shows (contain, no crop):
-  // width = naturalW * min(90vw/naturalW, 80vh/naturalH), capped at natural size (no upscale).
-  function fitCard() {
-    if (!overlay) return;
-    var card = overlay.querySelector(".lb-card");
-    var im = overlay.querySelector(".lb-img");
-    if (!card || !im || !im.naturalWidth) return;
-    var maxW = window.innerWidth * 0.90;
-    var maxH = window.innerHeight * 0.80;
-    var scale = Math.min(maxW / im.naturalWidth, maxH / im.naturalHeight);
-    if (scale > 1) scale = 1; // don't upscale past the file's real pixels
-    card.style.width = Math.round(im.naturalWidth * scale) + "px";
-  }
-
   function build() {
     overlay = document.createElement("div");
     overlay.id = "tf-lightbox";
@@ -35,8 +21,6 @@
     // image/card is clicked (image, card, and their children are not the inner itself).
     var inner = overlay.querySelector(".lb-inner");
     inner.addEventListener("click", function (e) { if (e.target === inner) close(); });
-    // Re-fit the card if the viewport changes while the lightbox is open.
-    window.addEventListener("resize", function () { if (document.body.classList.contains("lb-open")) fitCard(); });
   }
 
   function open(card) {
@@ -47,23 +31,17 @@
     var name = addBtn.dataset.name, price = addBtn.dataset.price, slug = addBtn.dataset.slug;
     overlay.querySelector(".lb-inner").innerHTML =
       '<button class="lb-x" aria-label="Close">×</button>' +
+      '<img class="lb-img" src="' + img.getAttribute("src") + '" alt="' + esc(name) + '">' +
       '<div class="pcard lb-card">' +
-        '<div class="lb-media"><img class="lb-img" src="' + img.getAttribute("src") + '" alt="' + esc(name) + '"></div>' +
-        '<div class="lb-bar">' +
-          '<div class="lb-meta"><b>' + esc(name) + '</b><span>$' + esc(price) + '</span></div>' +
-          '<div class="lb-buy">' +
-            '<select class="size-select" aria-label="Size — ' + esc(name) + '"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>' +
-            '<button class="btn add-btn" type="button" data-slug="' + esc(slug) + '" data-name="' + esc(name) + '" data-price="' + esc(price) + '">Add to Cart</button>' +
-          '</div>' +
+        '<div class="lb-meta"><b>' + esc(name) + '</b><span>$' + esc(price) + '</span></div>' +
+        '<div class="lb-buy">' +
+          '<select class="size-select" aria-label="Size — ' + esc(name) + '"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>' +
+          '<button class="btn add-btn" type="button" data-slug="' + esc(slug) + '" data-name="' + esc(name) + '" data-price="' + esc(price) + '">Add to Cart</button>' +
         '</div>' +
       '</div>';
     overlay.querySelector(".lb-x").addEventListener("click", close);
     document.body.classList.add("lb-open");
     overlay.setAttribute("aria-hidden", "false");
-    // Fit once the natural dimensions are known (immediately if cached).
-    var lbImg = overlay.querySelector(".lb-img");
-    if (lbImg.complete && lbImg.naturalWidth) fitCard();
-    else lbImg.addEventListener("load", fitCard);
   }
   function close() { if (overlay) { document.body.classList.remove("lb-open"); overlay.setAttribute("aria-hidden", "true"); } }
 
