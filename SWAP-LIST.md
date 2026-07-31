@@ -118,6 +118,15 @@ _DUR3 was removed from `clients.html` + `index.html` (lineup is now POPS, DSF7, 
 
 ## 4. Non-image pre-launch TODOs (not asset swaps, but track them)
 
+### Shop sort — "Bestsellers" is disabled (post-launch)
+The shop Sort dropdown (`shop.html`) has Featured / Newest / A–Z working now. A
+**Bestsellers** option exists but is `disabled hidden` because it needs real sales data.
+Post-launch, wire it to Stripe sales data (e.g. a scheduled job that reads paid
+PaymentIntents/line items per product, writes a rank into a committed JSON the shop reads)
+and then un-hide the option in `shop.html` + sort by that rank in `js/shop-filter.js`.
+_Note: "Newest" currently uses a proxy (reverse of the curated Featured order) since we have
+no per-product timestamps yet._
+
 ### 🚫 LAUNCH BLOCKER — Policy pages need owner review
 `privacy.html`, `refunds.html`, and `terms.html` are **DRAFTS** (each starts with an
 `<!-- DRAFT: requires owner review before launch -->` comment). Have the owner (and ideally

@@ -53,7 +53,7 @@ const PAYMENT_LINKS = {
 </script>
 <nav>
   <div class="nav-inner">
-    <a class="brand" href="index.html"><img src="images/brand/threefold-logo-dark.png" alt="ThreeFold Supply Co."></a>
+    <a class="brand" href="index.html"><img src="images/brand/ThreeFold%20Logo.png" alt="ThreeFold Supply Co."></a>
     <div class="nav-links">
       <a href="index.html">Home</a>
       <a href="custom-printing.html">Custom Printing</a>
@@ -69,17 +69,29 @@ const PAYMENT_LINKS = {
       <div class="eyebrow">ThreeFold Originals</div>
       <h1 style="font-size:clamp(36px,5.5vw,68px)">Our designs.<br>Same press.</h1>
       <p class="sub">Original pieces from our creative team, organized by collection. Printed on the same equipment we trust with client work. Small batches. No restocks. Scroll through each collection below.</p>
-      <div class="drop-banner">
-        <div><span class="spec">STAY IN THE LOOP</span><h3 style="color:var(--paper);margin-top:4px">Get first access to future drops</h3></div>
-        <form id="notifyForm" class="notify-form" novalidate>
-          <input type="email" id="notifyEmail" name="contact_email" placeholder="you@email.com" aria-label="Email address" required>
-          <button class="btn" type="submit" style="background:var(--paper);color:var(--ink)">Get Notified →</button>
-        </form>
-        <p id="notifyDone" class="notify-done" style="display:none">You're on the list — we'll email you before the next drop.</p>
-      </div>
       <p class="ship-note" style="margin-top:14px;font-family:var(--mono);font-size:13px;color:var(--ink-soft)">Every piece is pressed to order by our small team. Orders ship within 5-7 business days.</p>
   </div></header>
   <div id="orderedBanner" class="ordered-banner" style="display:none"><div class="wrap"><b>Order received.</b> Ships within 5-7 business days. Tracking arrives by email.</div></div>
+
+  <div class="wrap shop-controls">
+    <div class="chips">
+      <button class="chip active" type="button" data-filter="all">All</button>
+      <button class="chip" type="button" data-filter="bay-area">Bay Area</button>
+      <button class="chip" type="button" data-filter="superheroes">Superheroes</button>
+      <button class="chip" type="button" data-filter="3-ball">3 Ball</button>
+      <button class="chip" type="button" data-filter="chrollo">Chrollo</button>
+      <button class="chip" type="button" data-filter="aloha">Aloha</button>
+    </div>
+    <div class="sort">
+      <label for="sortSel">Sort</label>
+      <select id="sortSel">
+        <option value="featured">Featured</option>
+        <option value="newest">Newest</option>
+        <option value="az">A–Z</option>
+        <option value="bestsellers" disabled hidden>Bestsellers (soon)</option>
+      </select>
+    </div>
+  </div>
 
   <section class="coll">
     <div class="coll-head">
@@ -325,6 +337,17 @@ const PAYMENT_LINKS = {
         </div>
       </div></div>
   </section>
+
+  <section class="coll" style="border-top:1px solid var(--line)"><div class="wrap">
+    <div class="drop-banner">
+      <div><span class="spec">STAY IN THE LOOP</span><h3 style="color:var(--paper);margin-top:4px">Get first access to future drops</h3></div>
+      <form id="notifyForm" class="notify-form" novalidate>
+        <input type="email" id="notifyEmail" name="contact_email" placeholder="you@email.com" aria-label="Email address" required>
+        <button class="btn" type="submit" style="background:var(--paper);color:var(--ink)">Get Notified →</button>
+      </form>
+      <p id="notifyDone" class="notify-done" style="display:none">You're on the list — we'll email you before the next drop.</p>
+    </div>
+  </div></section>
 <footer>
   <div class="footer-inner">
     <div><div class="brand"><img src="images/brand/Logo%20(BG%20removed)%20(2).png" alt="ThreeFold Supply Co." style="height:84px;width:auto"></div>
@@ -348,6 +371,7 @@ function scrollRow(id,dir){var r=document.getElementById('rail-'+id); if(r) r.sc
     }catch(err){console.error('[notifyForm]',err); if(btn){btn.disabled=false;btn.textContent=orig;} emailEl.style.outline='2px solid #c0392b'; sending=false;}});
 })();
 </script>
+<script src="js/shop-filter.js" defer></script>
 <script src="js/lightbox.js" defer></script>
 <script src="js/cart.js" defer></script>
 </body>
