@@ -56,22 +56,29 @@ Each client folder holds a **logo** (card face) and one or more **design directi
 
 | Client (case) | Card logo | Design-direction slots (case popup) |
 |---------------|-----------|--------------------------------------|
-| **R2GO** | `images/work/R2GO/Logo.png` | `images/work/R2GO/R2GO - READY 2 GO .png`, `images/work/R2GO/R2GO - BULT _ SUPPORT .png` |
 | **DSF7** | `images/work/DSF7/Logo.png` | `images/work/DSF7/DESIGN 1 .png` |
 | **POPS** | `images/work/POPS/Logo.png` | `images/work/POPS/Design 1.png`, `images/work/POPS/PIRANHA OPS - DESIGN 2 .png`, `images/work/POPS/PIRANHA OPS - DESIGN 3 .png` |
-| **HELE** | `images/work/HELE/Logo.png` | `images/work/HELE/HELE - DESIGN 2.png`, `images/work/HELE/HELE - DESIGN 3.png` |
-| **The Breakfast Club** | `images/work/THE BREAKFAST CLUB/Logo.png` | `images/work/THE BREAKFAST CLUB/Design 1.png` |
 | **DUR3** | `images/work/DUR3/Logo.png` | `images/work/DUR3/DUR3 - DESIGN 1.png`, `images/work/DUR3/DUR3 - DESIGN 2.png` |
+| **Echo of Christ Ministries** | `images/work/Echo of Christ Ministries/Logo.png` | — (none yet — card shows a "Collection in production" tag, no case popup) |
 
 **Client card faces on the Home page** reuse these same files:
-- R2GO card → `images/work/R2GO/R2GO - READY 2 GO .png`
-- The Breakfast Club card → `images/work/THE BREAKFAST CLUB/Design 1.png`
 - POPS card → `images/work/POPS/Design 1.png`
+- DSF7 card → `images/work/DSF7/DESIGN 1 .png`
+- DUR3 card → `images/work/DUR3/DUR3 - DESIGN 1.png`
 
 > **If a client filename changes** (or you add/remove a design direction), edit the matching
 > `src="..."` inside `clients.html` (and `index.html` for the three Home cards above).
 > Adding a new direction = add another `<div class="imgbox"><img src="..."></div>` inside that
 > client's `<div class="work-detail" id="case-...">` block.
+
+### Echo of Christ Ministries — pending assets
+
+- [ ] Replace `images/work/ECHO OF CHRIST/Logo.png` with official client-provided logo
+      (current file is a screenshot extraction). *(Saved on this branch at
+      `images/work/Echo of Christ Ministries/Logo.png`.)*
+- [ ] Add Echo of Christ design photos + case popup when collection is produced.
+      Until then the card on `clients.html` is non-clickable and shows a
+      "Collection in production" tag.
 
 ---
 
