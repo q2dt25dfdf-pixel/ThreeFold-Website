@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon_16.png">
 <link rel="apple-touch-icon" href="/favicon_180.png">
 <title>Shop: ThreeFold Originals — ThreeFold Supply Co.</title>
-<meta name="description" content="ThreeFold Originals: our creative team's own designs, organized by collection — Bay Area, Aloha, 3 Ball, and Chrollo. Printed in-house, small batches, no restocks.">
+<meta name="description" content="ThreeFold Originals by collection — Bay Area, Superheroes, 3 Ball, Chrollo, Aloha. Printed in-house, small batches, no restocks.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
@@ -17,29 +17,38 @@
 <body>
 
 <script>
-// Stripe Payment Links — one per product. Paste dashboard URLs over each placeholder.
-// See SETUP-STRIPE.md. Keys match each Buy button's data-product.
+// Legacy per-product Stripe Payment Links — UNUSED fallback (cart uses /api/checkout).
 const PAYMENT_LINKS = {
   // Bay Area
-  "san-francisco-tee": "https://buy.stripe.com/28EeVc6du2KR6N8bMkdby01",    // San Francisco Tee — $35
+  "san-francisco-tee": "https://buy.stripe.com/28EeVc6du2KR6N8bMkdby01",// San Francisco Tee — $35
   "san-francisco-tee-camo": "https://buy.stripe.com/eVq3cu9pGgBH2wS8A8dby02",// San Francisco Tee — Camo — $35
-  "san-jose-tee": "https://buy.stripe.com/fZu14mcBSetz5J417Gdby03",         // San Jose Tee — $35
-  "san-jose-tee-camo": "https://buy.stripe.com/9B63cu45mclr8VgbMkdby04",    // San Jose Tee — Camo — $35
-  "san-francisco-bridge": "https://buy.stripe.com/aFa7sK1XeetzfjEeYwdby05", // San Francisco Bridge — $35
-  "san-francisco-city": "https://buy.stripe.com/7sY9AS9pG85bdbwaIgdby06",   // San Francisco City — $35
-  "san-jose-red": "https://buy.stripe.com/14A9ASdFW2KR7RcaIgdby07",         // San Jose — Red — $35
-  // Aloha
-  "hawaii-map": "https://buy.stripe.com/fZucN459q3OVb3oaIgdby08",           // Hawaii Map — $35
-  "surfboard": "https://buy.stripe.com/4gM6oG31ietzfjE5nWdby09",            // Surfboard — $35
+  "san-jose-tee": "https://buy.stripe.com/fZu14mcBSetz5J417Gdby03",// San Jose Tee — $35
+  "san-jose-tee-camo": "https://buy.stripe.com/9B63cu45mclr8VgbMkdby04",// San Jose Tee — Camo — $35
+  "san-francisco-bridge": "https://buy.stripe.com/aFa7sK1XeetzfjEeYwdby05",// San Francisco Bridge — $35
+  "san-francisco-city": "https://buy.stripe.com/7sY9AS9pG85bdbwaIgdby06",// San Francisco City — $35
+  "san-jose-red": "https://buy.stripe.com/14A9ASdFW2KR7RcaIgdby07",// San Jose — Red — $35
+  // Superheroes
+  "marvel-spiderman": "TODO",           // Marvel Spiderman — $35
+  "spider-man-3": "TODO",               // Spider Man 3 — $35
+  "marvel-iron-man": "TODO",            // Marvel Iron Man — $35
+  "iron-man-3": "TODO",                 // Iron Man 3 — $35
+  "marvel-hulk": "TODO",                // Marvel Hulk — $35
+  "marvel-black-panther": "TODO",       // Marvel Black Panther — $35
+  "marvel-black-panther-1": "TODO",     // Marvel Black Panther (1) — $35
+  "marvel-captain-america": "TODO",     // Marvel Captain America — $35
+  "venom-3": "TODO",                    // Venom 3 — $35
   // 3 Ball
-  "3-ball-camo": "https://buy.stripe.com/bJe00idFW3OV9Zk17Gdby0a",          // 3 Ball — Camo — $35
-  "3-ball-fire": "https://buy.stripe.com/4gM9ASfO4adjb3odUsdby0b",          // 3 Ball — Fire — $35
-  "3-ball-pink-camo": "https://buy.stripe.com/cNi9AS8lC99f1sOcQodby0c",     // 3 Ball — Pink Camo — $35
-  "3-ball-waves": "https://buy.stripe.com/00wdR845m3OV1sO4jSdby0d",         // 3 Ball — Waves — $35
+  "3-ball-camo": "https://buy.stripe.com/bJe00idFW3OV9Zk17Gdby0a",// 3 Ball — Camo — $35
+  "3-ball-fire": "https://buy.stripe.com/4gM9ASfO4adjb3odUsdby0b",// 3 Ball — Fire — $35
+  "3-ball-pink-camo": "https://buy.stripe.com/cNi9AS8lC99f1sOcQodby0c",// 3 Ball — Pink Camo — $35
+  "3-ball-waves": "https://buy.stripe.com/00wdR845m3OV1sO4jSdby0d",// 3 Ball — Waves — $35
   "3-ball-black-and-white": "https://buy.stripe.com/aFacN4cBSfxDgnI2bKdby0e",// 3 Ball — Black & White — $35
   // Chrollo
-  "chrollo-full-back": "https://buy.stripe.com/00wcN46du85bgnI7w4dby0f",    // Chrollo — Full Back — $35
-  "chrollo-chain": "https://buy.stripe.com/14A6oGfO41GN3AWeYwdby0g",        // Chrollo — Chain — $35
+  "chrollo-full-back": "https://buy.stripe.com/00wcN46du85bgnI7w4dby0f",// Chrollo — Full Back — $35
+  "chrollo-chain": "https://buy.stripe.com/14A6oGfO41GN3AWeYwdby0g",// Chrollo — Chain — $35
+  // Aloha
+  "hawaii-map": "https://buy.stripe.com/fZucN459q3OVb3oaIgdby08",// Hawaii Map — $35
+  "surfboard": "https://buy.stripe.com/4gM6oG31ietzfjE5nWdby09",// Surfboard — $35
 };
 </script>
 <nav>
@@ -50,265 +59,295 @@ const PAYMENT_LINKS = {
       <a href="custom-printing.html">Custom Printing</a>
       <a href="clients.html">Clients</a>
       <a href="shop.html" class="active">Shop</a>
+      <button type="button" id="cartBtn" class="cart-link" aria-label="Open cart">Cart <span id="cartCount" class="cart-count">0</span></button>
       <a href="start.html" class="nav-cta">Start a Project</a>
     </div>
   </div>
 </nav>
 
-  <header class="shop-hero">
-    <div class="wrap">
+  <header class="shop-hero"><div class="wrap">
       <div class="eyebrow">ThreeFold Originals</div>
       <h1 style="font-size:clamp(36px,5.5vw,68px)">Our designs.<br>Same press.</h1>
       <p class="sub">Original pieces from our creative team, organized by collection. Printed on the same equipment we trust with client work. Small batches. No restocks. Scroll through each collection below.</p>
-
       <div class="drop-banner">
-        <div>
-          <span class="spec">STAY IN THE LOOP</span>
-          <h3 style="color:var(--paper);margin-top:4px">Get first access to future drops</h3>
-        </div>
+        <div><span class="spec">STAY IN THE LOOP</span><h3 style="color:var(--paper);margin-top:4px">Get first access to future drops</h3></div>
         <form id="notifyForm" class="notify-form" novalidate>
           <input type="email" id="notifyEmail" name="contact_email" placeholder="you@email.com" aria-label="Email address" required>
           <button class="btn" type="submit" style="background:var(--paper);color:var(--ink)">Get Notified →</button>
         </form>
         <p id="notifyDone" class="notify-done" style="display:none">You're on the list — we'll email you before the next drop.</p>
       </div>
-    </div>
-  </header>
+      <p class="ship-note" style="margin-top:14px;font-family:var(--mono);font-size:13px;color:var(--ink-soft)">Every piece is pressed to order by our small team. Orders ship within 5-7 business days.</p>
+  </div></header>
+  <div id="orderedBanner" class="ordered-banner" style="display:none"><div class="wrap"><b>Order received.</b> Ships within 5-7 business days. Tracking arrives by email.</div></div>
 
   <section class="coll">
     <div class="coll-head">
-      <div>
-        <span class="coll-kicker">Collection</span>
-        <h2>Bay Area</h2>
-        <p class="coll-sub">Blackletter city tees and hometown pride. San Francisco, San Jose, and the rest of the Bay.</p>
-      </div>
-      <div class="coll-arrows">
-        <button onclick="scrollRow('bay-area',-1)" aria-label="scroll left">←</button>
-        <button onclick="scrollRow('bay-area',1)" aria-label="scroll right">→</button>
-      </div>
+      <div><span class="coll-kicker">Collection</span><h2>Bay Area</h2><p class="coll-sub">Blackletter city tees and hometown pride. San Francisco, San Jose, and the rest of the Bay.</p></div>
+      <div class="coll-arrows"><button onclick="scrollRow('bay-area',-1)" aria-label="scroll left">←</button><button onclick="scrollRow('bay-area',1)" aria-label="scroll right">→</button></div>
     </div>
-    <div class="rail-wrap">
-      <div class="rail" id="rail-bay-area">
+    <div class="rail-wrap"><div class="rail" id="rail-bay-area">
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/SF%20FONT%20.png" alt="San Francisco Tee"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>San Francisco Tee</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="san-francisco-tee">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — San Francisco Tee"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="san-francisco-tee" data-name="San Francisco Tee" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
-          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/SF%20FONT%20(CAMO)%20.png" alt="San Francisco Tee — Camo"><span class="ptag">NEW</span></div>
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/SF%20FONT%20(CAMO).png" alt="San Francisco Tee — Camo"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>San Francisco Tee — Camo</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="san-francisco-tee-camo">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — San Francisco Tee — Camo"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="san-francisco-tee-camo" data-name="San Francisco Tee — Camo" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/SJ%20FONT.png" alt="San Jose Tee"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>San Jose Tee</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="san-jose-tee">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — San Jose Tee"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="san-jose-tee" data-name="San Jose Tee" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
-          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/SJ%20FONT%20(CAMO)%20.png" alt="San Jose Tee — Camo"><span class="ptag">NEW</span></div>
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/SJ%20FONT%20(CAMO).png" alt="San Jose Tee — Camo"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>San Jose Tee — Camo</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="san-jose-tee-camo">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — San Jose Tee — Camo"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="san-jose-tee-camo" data-name="San Jose Tee — Camo" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/San%20Francisco%20Bridge.png" alt="San Francisco Bridge"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>San Francisco Bridge</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="san-francisco-bridge">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — San Francisco Bridge"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="san-francisco-bridge" data-name="San Francisco Bridge" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/SAN%20FRANCISCO%20CITY.png" alt="San Francisco City"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>San Francisco City</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="san-francisco-city">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — San Francisco City"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="san-francisco-city" data-name="San Francisco City" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Bay%20Area/SJ%20(%20RED%20).png" alt="San Jose — Red"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>San Jose — Red</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="san-jose-red">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — San Jose — Red"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="san-jose-red" data-name="San Jose — Red" data-price="35">Add to Cart</button>
+          </div>
         </div>
-      </div>
-    </div>
+      </div></div>
   </section>
 
   <section class="coll">
     <div class="coll-head">
-      <div>
-        <span class="coll-kicker">Collection</span>
-        <h2>Aloha</h2>
-        <p class="coll-sub">Island energy, ThreeFold treatment.</p>
-      </div>
-      <div class="coll-arrows">
-        <button onclick="scrollRow('aloha',-1)" aria-label="scroll left">←</button>
-        <button onclick="scrollRow('aloha',1)" aria-label="scroll right">→</button>
-      </div>
+      <div><span class="coll-kicker">Collection</span><h2>Superheroes</h2><p class="coll-sub">Hero-energy varsity '3' tees — bold colorways on our oversized black tee.</p></div>
+      <div class="coll-arrows"><button onclick="scrollRow('superheroes',-1)" aria-label="scroll left">←</button><button onclick="scrollRow('superheroes',1)" aria-label="scroll right">→</button></div>
     </div>
-    <div class="rail-wrap">
-      <div class="rail" id="rail-aloha">
+    <div class="rail-wrap"><div class="rail" id="rail-superheroes">
         <div class="pcard">
-          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Aloha/Hawaii%20Map.png" alt="Hawaii Map"><span class="ptag">NEW</span></div>
-          <div class="pmeta"><b>Hawaii Map</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="hawaii-map">Buy · $35</button></div>
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/MARVEL%20_%20SPIDERMAN%20_.png" alt="Marvel Spiderman"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Marvel Spiderman</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Marvel Spiderman"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="marvel-spiderman" data-name="Marvel Spiderman" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
-          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Aloha/SURFBOARD_.png" alt="Surfboard"><span class="ptag">NEW</span></div>
-          <div class="pmeta"><b>Surfboard</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="surfboard">Buy · $35</button></div>
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/Spider%20Man%203_.png" alt="Spider Man 3"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Spider Man 3</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Spider Man 3"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="spider-man-3" data-name="Spider Man 3" data-price="35">Add to Cart</button>
+          </div>
         </div>
-      </div>
-    </div>
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/MARVEL%20_%20IRON%20MAN%20_.png" alt="Marvel Iron Man"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Marvel Iron Man</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Marvel Iron Man"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="marvel-iron-man" data-name="Marvel Iron Man" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/Iron%20man%203.png" alt="Iron Man 3"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Iron Man 3</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Iron Man 3"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="iron-man-3" data-name="Iron Man 3" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/MARVEL%20_%20HULK%20_.png" alt="Marvel Hulk"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Marvel Hulk</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Marvel Hulk"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="marvel-hulk" data-name="Marvel Hulk" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/MARVEL%20_%20BLACK%20PANTHER_.png" alt="Marvel Black Panther"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Marvel Black Panther</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Marvel Black Panther"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="marvel-black-panther" data-name="Marvel Black Panther" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/MARVEL%20_%20BLACK%20PANTHER_(1).png" alt="Marvel Black Panther (1)"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Marvel Black Panther (1)</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Marvel Black Panther (1)"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="marvel-black-panther-1" data-name="Marvel Black Panther (1)" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/MARVEL%20_%20CAPTAIN%20AMERICA_.png" alt="Marvel Captain America"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Marvel Captain America</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Marvel Captain America"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="marvel-captain-america" data-name="Marvel Captain America" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Marvel/Venom%203.png" alt="Venom 3"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Venom 3</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Venom 3"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="venom-3" data-name="Venom 3" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+      </div></div>
   </section>
 
   <section class="coll">
     <div class="coll-head">
-      <div>
-        <span class="coll-kicker">Collection</span>
-        <h2>3 Ball</h2>
-        <p class="coll-sub">Built for the court.</p>
-      </div>
-      <div class="coll-arrows">
-        <button onclick="scrollRow('3-ball',-1)" aria-label="scroll left">←</button>
-        <button onclick="scrollRow('3-ball',1)" aria-label="scroll right">→</button>
-      </div>
+      <div><span class="coll-kicker">Collection</span><h2>3 Ball</h2><p class="coll-sub">Built for the court.</p></div>
+      <div class="coll-arrows"><button onclick="scrollRow('3-ball',-1)" aria-label="scroll left">←</button><button onclick="scrollRow('3-ball',1)" aria-label="scroll right">→</button></div>
     </div>
-    <div class="rail-wrap">
-      <div class="rail" id="rail-3-ball">
+    <div class="rail-wrap"><div class="rail" id="rail-3-ball">
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/3%20Ball/3%20BALL%20CAMO_.png" alt="3 Ball — Camo"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>3 Ball — Camo</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="3-ball-camo">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — 3 Ball — Camo"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="3-ball-camo" data-name="3 Ball — Camo" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/3%20Ball/3%20BALL%20FIRE%20-%20DESIGN.png" alt="3 Ball — Fire"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>3 Ball — Fire</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="3-ball-fire">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — 3 Ball — Fire"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="3-ball-fire" data-name="3 Ball — Fire" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/3%20Ball/3%20BALL%20PINK%20CAMO.png" alt="3 Ball — Pink Camo"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>3 Ball — Pink Camo</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="3-ball-pink-camo">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — 3 Ball — Pink Camo"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="3-ball-pink-camo" data-name="3 Ball — Pink Camo" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/3%20Ball/3%20BALL%20WAVES.png" alt="3 Ball — Waves"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>3 Ball — Waves</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="3-ball-waves">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — 3 Ball — Waves"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="3-ball-waves" data-name="3 Ball — Waves" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
-          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/3%20Ball/3%20BALL%20W_B.png" alt="3 Ball — Black & White"><span class="ptag">NEW</span></div>
-          <div class="pmeta"><b>3 Ball — Black & White</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="3-ball-black-and-white">Buy · $35</button></div>
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/3%20Ball/3%20BALL%20W_B.png" alt="3 Ball — Black &amp; White"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>3 Ball — Black &amp; White</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — 3 Ball — Black &amp; White"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="3-ball-black-and-white" data-name="3 Ball — Black &amp; White" data-price="35">Add to Cart</button>
+          </div>
         </div>
-      </div>
-    </div>
+      </div></div>
   </section>
 
   <section class="coll">
     <div class="coll-head">
-      <div>
-        <span class="coll-kicker">Collection</span>
-        <h2>Chrollo</h2>
-        <p class="coll-sub">The statement pieces.</p>
-      </div>
-      <div class="coll-arrows">
-        <button onclick="scrollRow('chrollo',-1)" aria-label="scroll left">←</button>
-        <button onclick="scrollRow('chrollo',1)" aria-label="scroll right">→</button>
-      </div>
+      <div><span class="coll-kicker">Collection</span><h2>Chrollo</h2><p class="coll-sub">The statement pieces.</p></div>
+      <div class="coll-arrows"><button onclick="scrollRow('chrollo',-1)" aria-label="scroll left">←</button><button onclick="scrollRow('chrollo',1)" aria-label="scroll right">→</button></div>
     </div>
-    <div class="rail-wrap">
-      <div class="rail" id="rail-chrollo">
+    <div class="rail-wrap"><div class="rail" id="rail-chrollo">
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Chrollo/Chrollo%20full%20back%20Design.png" alt="Chrollo — Full Back"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>Chrollo — Full Back</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="chrollo-full-back">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Chrollo — Full Back"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="chrollo-full-back" data-name="Chrollo — Full Back" data-price="35">Add to Cart</button>
+          </div>
         </div>
         <div class="pcard">
           <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Chrollo/Chrollo_Chain%20Design.png" alt="Chrollo — Chain"><span class="ptag">NEW</span></div>
           <div class="pmeta"><b>Chrollo — Chain</b><span>$35</span></div>
-          <div class="pbuy"><button class="btn buy-btn" type="button" data-product="chrollo-chain">Buy · $35</button></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Chrollo — Chain"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="chrollo-chain" data-name="Chrollo — Chain" data-price="35">Add to Cart</button>
+          </div>
         </div>
-      </div>
+      </div></div>
+  </section>
+
+  <section class="coll">
+    <div class="coll-head">
+      <div><span class="coll-kicker">Collection</span><h2>Aloha</h2><p class="coll-sub">Island energy, ThreeFold treatment.</p></div>
+      <div class="coll-arrows"><button onclick="scrollRow('aloha',-1)" aria-label="scroll left">←</button><button onclick="scrollRow('aloha',1)" aria-label="scroll right">→</button></div>
     </div>
+    <div class="rail-wrap"><div class="rail" id="rail-aloha">
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Aloha/Hawaii%20Map.png" alt="Hawaii Map"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Hawaii Map</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Hawaii Map"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="hawaii-map" data-name="Hawaii Map" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+        <div class="pcard">
+          <div class="pmedia"><img src="images/work/Threefold%20(Our%20Work)/Aloha/SURFBOARD_.png" alt="Surfboard"><span class="ptag">NEW</span></div>
+          <div class="pmeta"><b>Surfboard</b><span>$35</span></div>
+          <div class="pbuy">
+            <select class="size-select" aria-label="Size — Surfboard"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>
+            <button class="btn add-btn" type="button" data-slug="surfboard" data-name="Surfboard" data-price="35">Add to Cart</button>
+          </div>
+        </div>
+      </div></div>
   </section>
 <footer>
   <div class="footer-inner">
-    <div>
-      <div class="brand"><img src="images/brand/Logo%20(BG%20removed)%20(2).png" alt="ThreeFold Supply Co." style="height:84px;width:auto"></div>
-      <p style="font-size:14px;max-width:280px">Custom print shop in the Bay Area. Client apparel first, original drops on the side. Est. 2026.</p>
-    </div>
-    <div>
-      <h4>Navigate</h4>
-      <ul>
-        <li><a href="custom-printing.html">Custom Printing</a></li>
-        <li><a href="clients.html">Client Collections</a></li>
-        <li><a href="shop.html">Shop Originals</a></li>
-        <li><a href="start.html">Start a Project</a></li>
-      </ul>
-    </div>
-    <div>
-      <h4>The Team</h4>
-      <ul>
-        <li>Alliyah — Operations &amp; Business Development</li>
-        <li>Hannah — Creative &amp; Concept</li>
-      </ul>
-    </div>
-    <div>
-      <h4>We Print For</h4>
-      <ul>
-        <li>Amazon DSP Operators</li>
-        <li>Dental &amp; Medical</li>
-        <li>Restaurants &amp; Local Biz</li>
-        <li>Sports &amp; Fitness</li>
-      </ul>
-    </div>
+    <div><div class="brand"><img src="images/brand/Logo%20(BG%20removed)%20(2).png" alt="ThreeFold Supply Co." style="height:84px;width:auto"></div>
+      <p style="font-size:14px;max-width:280px">Custom print shop in the Bay Area. Client apparel first, original drops on the side. Est. 2026.</p></div>
+    <div><h4>Navigate</h4><ul><li><a href="custom-printing.html">Custom Printing</a></li><li><a href="clients.html">Client Collections</a></li><li><a href="shop.html">Shop Originals</a></li><li><a href="start.html">Start a Project</a></li></ul></div>
+    <div><h4>The Team</h4><ul><li>Alliyah — Operations &amp; Business Development</li><li>Hannah — Creative &amp; Concept</li></ul></div>
+    <div><h4>We Print For</h4><ul><li>Amazon DSP Operators</li><li>Dental &amp; Medical</li><li>Restaurants &amp; Local Biz</li><li>Sports &amp; Fitness</li></ul></div>
   </div>
   <div class="footer-bottom">© 2026 ThreeFold Supply Co. — Bay Area, CA · <a href="privacy.html">Privacy Policy</a> · <a href="refunds.html">Refund Policy</a> · <a href="terms.html">Terms</a></div>
 </footer>
 
 <script>
-function scrollRow(id, dir){
-  const r = document.getElementById('rail-'+id);
-  if (r) r.scrollBy({left: dir * (r.clientWidth * 0.7), behavior:'smooth'});
-}
-
-// Buy → open the product's Stripe Payment Link in a new tab. TODO links show a brief note.
-document.querySelectorAll('.buy-btn').forEach(function(b){
-  b.addEventListener('click', function(){
-    const url = PAYMENT_LINKS[b.dataset.product];
-    if (url && url.indexOf('http') === 0){ window.open(url, '_blank', 'noopener'); }
-    else { const t = b.textContent; b.textContent = 'Link coming soon'; b.disabled = true;
-           setTimeout(function(){ b.textContent = t; b.disabled = false; }, 1600); }
-  });
-});
-
-// "Get Notified" → same HQ lead capture as the Start form, tagged lead_source "drop-signup".
-(function(){
-  const HQ_ENDPOINT = 'https://hq.threefoldsupply.com/api/public-lead';
-  const form = document.getElementById('notifyForm');
-  if (!form) return;
-  const emailEl = document.getElementById('notifyEmail');
-  const doneEl = document.getElementById('notifyDone');
-  let sending = false;
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    if (sending) return;
-    const email = String(emailEl.value||'').trim();
-    if (email.indexOf('@') < 1){ emailEl.focus(); emailEl.style.outline = '2px solid #c0392b'; return; }
-    emailEl.style.outline = '';
-    sending = true;
-    const btn = form.querySelector('button');
-    const orig = btn ? btn.textContent : '';
-    if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
-    try {
-      const payload = { company_name:'Drop Signup', contact_name:'Drop Signup', contact_email:email,
-        meaning:'Wants early access to future ThreeFold Originals drops.', lead_source:'drop-signup', questionnaire_files:[] };
-      const res = await fetch(HQ_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
-      if (!res.ok) throw new Error('HQ submission failed: ' + res.status);
-      form.style.display = 'none';
-      if (doneEl) doneEl.style.display = 'block';
-    } catch (err) {
-      console.error('[notifyForm]', err);
-      if (btn){ btn.disabled = false; btn.textContent = orig; }
-      emailEl.style.outline = '2px solid #c0392b'; sending = false;
-    }
-  });
+function scrollRow(id,dir){var r=document.getElementById('rail-'+id); if(r) r.scrollBy({left:dir*(r.clientWidth*0.7),behavior:'smooth'});}
+(function(){var HQ='https://hq.threefoldsupply.com/api/public-lead';var form=document.getElementById('notifyForm'); if(!form)return;
+  var emailEl=document.getElementById('notifyEmail'),doneEl=document.getElementById('notifyDone'),sending=false;
+  form.addEventListener('submit',async function(e){e.preventDefault(); if(sending)return; var email=String(emailEl.value||'').trim();
+    if(email.indexOf('@')<1){emailEl.focus();emailEl.style.outline='2px solid #c0392b';return;} emailEl.style.outline=''; sending=true;
+    var btn=form.querySelector('button'),orig=btn?btn.textContent:''; if(btn){btn.disabled=true;btn.textContent='Sending…';}
+    try{var res=await fetch(HQ,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({company_name:'Drop Signup',contact_name:'Drop Signup',contact_email:email,meaning:'Wants early access to future ThreeFold Originals drops.',lead_source:'drop-signup',questionnaire_files:[]})});
+      if(!res.ok)throw new Error('HQ '+res.status); form.style.display='none'; if(doneEl)doneEl.style.display='block';
+    }catch(err){console.error('[notifyForm]',err); if(btn){btn.disabled=false;btn.textContent=orig;} emailEl.style.outline='2px solid #c0392b'; sending=false;}});
 })();
 </script>
+<script src="js/cart.js" defer></script>
 </body>
 </html>

@@ -89,15 +89,16 @@ Each client folder holds a **logo** (card face) and one or more **design directi
 
 | Client (case) | Card logo | Design-direction slots (case popup) |
 |---------------|-----------|--------------------------------------|
-| **DSF7** | `images/work/DSF7/Logo.png` | `images/work/DSF7/DESIGN 1 .png` |
 | **POPS** | `images/work/POPS/Logo.png` | `images/work/POPS/Design 1.png`, `images/work/POPS/PIRANHA OPS - DESIGN 2 .png`, `images/work/POPS/PIRANHA OPS - DESIGN 3 .png` |
-| **DUR3** | `images/work/DUR3/Logo.png` | `images/work/DUR3/DUR3 - DESIGN 1.png`, `images/work/DUR3/DUR3 - DESIGN 2.png` |
+| **DSF7** | `images/work/DSF7/Logo.png` | `images/work/DSF7/DESIGN 1 .png` |
 | **Echo of Christ Ministries** | `images/work/Echo of Christ Ministries/Logo.png` | — (none yet — card shows a "Collection in production" tag, no case popup) |
+
+_DUR3 was removed from `clients.html` + `index.html` (lineup is now POPS, DSF7, Echo). The
+`images/work/DUR3/` folder is kept on disk; only the HTML references were removed._
 
 **Client card faces on the Home page** reuse these same files:
 - POPS card → `images/work/POPS/Design 1.png`
 - DSF7 card → `images/work/DSF7/DESIGN 1 .png`
-- DUR3 card → `images/work/DUR3/DUR3 - DESIGN 1.png`
 
 > **If a client filename changes** (or you add/remove a design direction), edit the matching
 > `src="..."` inside `clients.html` (and `index.html` for the three Home cards above).
@@ -123,9 +124,28 @@ Each client folder holds a **logo** (card face) and one or more **design directi
 a lawyer) review the content, set the "Last updated" date, and confirm the CA LLC details,
 contact email, and refund windows before launch.
 
+### 🚫 LAUNCH BLOCKER — Cart checkout (Cloudflare)
+The shop now uses an add-to-cart flow + single Stripe Checkout Session via the Pages
+Function `functions/api/checkout.js`. To make it work:
+1. **Populate the price map:** run `node scripts/stripe-seed.mjs` (with `STRIPE_SECRET_KEY`
+   set) to create the Superheroes products and (re)write `functions/api/price-map.js` with
+   real price IDs; commit `functions/api/price-map.js`. Until then every product's `price`
+   is `""` and checkout returns a clear error.
+2. **Set the Cloudflare env var** `STRIPE_SECRET_KEY` (Production + Preview) — see
+   **`SETUP-CLOUDFLARE.md`** — and redeploy.
+3. **Live cart test on the preview:** add items, Checkout, confirm the Stripe page shows the
+   items, collects US shipping, and adds tax.
+
 ### 🚫 LAUNCH BLOCKER — Stripe checkout + tax
 See the two Stripe blockers in section 2 and the full checklist in **`SETUP-STRIPE.md`**
 (paste Payment Link URLs; enable Stripe Tax + CA registration; order notifications).
+
+### 🚫 LAUNCH BLOCKER — "Superheroes" collection is unlicensed Marvel IP
+The Superheroes collection (folder `Marvel/`) uses Marvel character designs and the designs
+themselves print the **MARVEL** wordmark on the sleeve; product names carry character/brand
+names (Spiderman, Iron Man, Hulk, Black Panther, Captain America, Venom). Selling these
+commercially is trademark/copyright infringement unless licensed. **Confirm rights or pull
+the collection before launch.**
 
 ### 🚫 LAUNCH BLOCKER — Echo of Christ logo
 Replace the TEMP screenshot logo with the official client-provided logo (see section 3).

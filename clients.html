@@ -8,11 +8,11 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon_16.png">
 <link rel="apple-touch-icon" href="/favicon_180.png">
 <title>Clients — ThreeFold Supply Co.</title>
-<meta name="description" content="Real apparel collections we designed and printed for Bay Area teams. DSF7, POPS, and DUR3.">
+<meta name="description" content="Real apparel collections we designed and printed for Bay Area teams. POPS, DSF7, and Echo of Christ Ministries.">
 <link rel="canonical" href="https://threefoldsupply.com/clients.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Clients — ThreeFold Supply Co.">
-<meta property="og:description" content="Real apparel collections we designed and printed for Bay Area teams. DSF7, POPS, and DUR3.">
+<meta property="og:description" content="Real apparel collections we designed and printed for Bay Area teams. POPS, DSF7, and Echo of Christ Ministries.">
 <meta property="og:image" content="https://threefoldsupply.com/images/hero-main.png">
 <meta property="og:url" content="https://threefoldsupply.com/clients.html">
 <meta name="twitter:card" content="summary_large_image">
@@ -32,6 +32,7 @@
       <a href="custom-printing.html">Custom Printing</a>
       <a href="clients.html" class="active">Clients</a>
       <a href="shop.html">Shop</a>
+      <button type="button" id="cartBtn" class="cart-link" aria-label="Open cart">Cart <span id="cartCount" class="cart-count">0</span></button>
       <a href="start.html" class="nav-cta">Start a Project</a>
     </div>
   </div>
@@ -45,17 +46,13 @@
       <p class="sub">Real collections we designed and printed for real teams. Click any project to see the design directions.</p>
 
       <div class="work-grid">
-        <div class="work-card" onclick="openCase('dsf7')">
-          <div class="imgbox"><img src="images/work/DSF7/Logo.png" alt="DSF7 logo" style="object-fit:contain;padding:24px" onerror="phSwap(this,'images/work/DSF7/Logo.png')"></div>
-          <div class="work-meta"><h3>DSF7</h3><span class="spec">Amazon Delivery Station</span></div>
-        </div>
         <div class="work-card" onclick="openCase('pops')">
           <div class="imgbox"><img src="images/work/POPS/Logo.png" alt="POPS logo" style="object-fit:contain;padding:24px" onerror="phSwap(this,'images/work/POPS/Logo.png')"></div>
           <div class="work-meta"><h3>POPS</h3><span class="spec">Amazon DSP · Milpitas</span></div>
         </div>
-        <div class="work-card" onclick="openCase('dur3')">
-          <div class="imgbox"><img src="images/work/DUR3/Logo.png" alt="DUR3 logo" style="object-fit:contain;padding:24px"></div>
-          <div class="work-meta"><h3>DUR3</h3><span class="spec">Client Collection</span></div>
+        <div class="work-card" onclick="openCase('dsf7')">
+          <div class="imgbox"><img src="images/work/DSF7/Logo.png" alt="DSF7 logo" style="object-fit:contain;padding:24px" onerror="phSwap(this,'images/work/DSF7/Logo.png')"></div>
+          <div class="work-meta"><h3>DSF7</h3><span class="spec">Amazon Delivery Station</span></div>
         </div>
         <div class="work-card" style="cursor:default">
           <div class="imgbox"><img src="images/work/Echo%20of%20Christ%20Ministries/Logo.png" alt="Echo of Christ Ministries logo" style="object-fit:contain;padding:24px;background:#fff"></div>
@@ -63,20 +60,9 @@
         </div>
       </div>
 
-      <div class="work-detail" id="case-dsf7">
-        <div class="work-detail-head">
-          <div><span class="spec" style="color:var(--accent)">CASE / 01</span><h2 style="font-size:32px">DSF7</h2></div>
-          <button class="close-x" onclick="closeCases()">Close ×</button>
-        </div>
-        <div class="work-detail-imgs">
-          <div class="imgbox"><img src="images/work/DSF7/DESIGN%201%20.png" alt="DSF7 direction 1"></div>
-        </div>
-        <div class="work-why"><strong>Why we designed it this way:</strong> Built around Amazon delivery station identity, team pride, and a bold visual system the crew can wear on and off the clock.</div>
-      </div>
-
       <div class="work-detail" id="case-pops">
         <div class="work-detail-head">
-          <div><span class="spec" style="color:var(--accent)">CASE / 02</span><h2 style="font-size:32px">POPS</h2></div>
+          <div><span class="spec" style="color:var(--accent)">CASE / 01</span><h2 style="font-size:32px">POPS</h2></div>
           <button class="close-x" onclick="closeCases()">Close ×</button>
         </div>
         <div class="work-detail-imgs">
@@ -87,15 +73,15 @@
         <div class="work-why"><strong>Why we designed it this way:</strong> Built around Prime Week energy, Bay Area delivery culture, and a team identity bold enough to wear beyond work.</div>
       </div>
 
-      <div class="work-detail" id="case-dur3">
+      <div class="work-detail" id="case-dsf7">
         <div class="work-detail-head">
-          <div><span class="spec" style="color:var(--accent)">CASE / 03</span><h2 style="font-size:32px">DUR3</h2></div>
+          <div><span class="spec" style="color:var(--accent)">CASE / 02</span><h2 style="font-size:32px">DSF7</h2></div>
           <button class="close-x" onclick="closeCases()">Close ×</button>
         </div>
         <div class="work-detail-imgs">
-          <div class="imgbox"><img src="images/work/DUR3/DUR3%20-%20DESIGN%201.png" alt="DUR3 direction 1"></div>
-          <div class="imgbox"><img src="images/work/DUR3/DUR3%20-%20DESIGN%202.png" alt="DUR3 direction 2"></div>
+          <div class="imgbox"><img src="images/work/DSF7/DESIGN%201%20.png" alt="DSF7 direction 1"></div>
         </div>
+        <div class="work-why"><strong>Why we designed it this way:</strong> Built around Amazon delivery station identity, team pride, and a bold visual system the crew can wear on and off the clock.</div>
       </div>
 
       <div style="margin-top:48px"><a class="btn" href="start.html">Your Team Next →</a></div>
@@ -158,5 +144,6 @@ document.addEventListener('DOMContentLoaded',function(){
   if(h&&document.getElementById('case-'+h))setTimeout(()=>openCase(h),60);
 });
 </script>
+<script src="js/cart.js" defer></script>
 </body>
 </html>
