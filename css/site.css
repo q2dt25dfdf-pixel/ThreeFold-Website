@@ -211,3 +211,47 @@ footer li button{background:none;border:none;color:#c9c9c3;font-size:14px;font-f
 /* ---------- start form success banner ---------- */
 .sent-banner{background:var(--cyan);color:#00323b;font-family:var(--mono);font-size:14px;font-weight:700;padding:16px 20px;border-radius:6px;margin-bottom:24px;display:flex;align-items:center;gap:10px}
 .form-error{color:#c0392b;font-family:var(--mono);font-size:13px;margin-top:12px;display:none}
+
+
+/* ---------- shop collections (horizontal rails) ---------- */
+.shop-hero{padding:56px 0 8px}
+.shop-hero .sub{max-width:600px}
+.notify-form{display:flex;gap:8px;flex-wrap:wrap}
+.notify-form input{font-family:var(--mono);font-size:13px;padding:12px 14px;border:none;border-radius:4px;min-width:210px}
+.notify-done{font-family:var(--mono);font-size:13px;color:var(--paper);margin:0}
+.coll{padding:38px 0 8px;border-top:1px solid var(--line);margin-top:30px}
+.coll:first-of-type{border-top:none;margin-top:10px}
+.coll-head{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:flex-end;gap:18px}
+.coll-kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.coll-head h2{font-size:clamp(24px,3.4vw,38px);margin-top:4px}
+.coll-sub{color:var(--ink-soft);font-size:14px;margin-top:6px;max-width:520px}
+.coll-arrows{display:flex;gap:8px;flex-shrink:0}
+.coll-arrows button{width:40px;height:40px;border:1.5px solid var(--ink);background:#fff;border-radius:50%;font-size:16px;transition:.15s}
+.coll-arrows button:hover{background:var(--ink);color:var(--paper)}
+@media(max-width:640px){.coll-arrows{display:none}}
+.rail-wrap{position:relative}
+.rail{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:22px 24px 30px;max-width:1200px;margin:0 auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.rail::-webkit-scrollbar{display:none}
+.pcard{flex:0 0 250px;scroll-snap-align:start;background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;transition:.15s}
+.pcard:hover{border-color:var(--ink);transform:translateY(-4px)}
+.pmedia{position:relative;aspect-ratio:1;border-bottom:1px solid var(--line);background:#0e0e0e}
+.pmedia img{width:100%;height:100%;object-fit:cover}
+.ptag{position:absolute;top:10px;left:10px;background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.08em;padding:4px 8px;border-radius:3px}
+.pmeta{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.pmeta b{font-size:14px}
+.pmeta span{font-family:var(--mono);font-size:13px;color:var(--ink-soft)}
+@media(max-width:640px){.pcard{flex:0 0 78%}}
+
+
+/* ---------- buy buttons + legal pages ---------- */
+.pbuy{padding:0 16px 16px}
+.buy-btn{width:100%;justify-content:center;font-size:12px;padding:11px 14px}
+.footer-bottom a{color:inherit;text-decoration:underline}
+.footer-bottom a:hover{color:var(--paper)}
+.legal{max-width:760px}
+.legal h2{font-size:22px;margin-top:34px}
+.legal p,.legal li{color:var(--ink-soft);font-size:15px;line-height:1.7;margin-top:12px}
+.legal ul{margin-top:12px;padding-left:22px}
+.legal li{margin-top:8px}
+.legal a{text-decoration:underline}
+.legal-updated{font-family:var(--mono);font-size:12px;color:var(--ink-soft);margin-top:14px}

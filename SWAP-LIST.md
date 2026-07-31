@@ -21,30 +21,63 @@ Keep it high-resolution and roughly 1717×916 (the hero box is `aspect-ratio:171
 
 ---
 
-## 2. Shop product photos — ThreeFold Originals "Day One" (`shop.html`)
+## 2. Shop product photos — ThreeFold Originals collections (`shop.html`)
 
-Re-shoots from Hannah drop straight onto these paths:
+`shop.html` is now horizontally-scrolling collection rows. Product photos live in
+per-collection subfolders under `images/work/Threefold (Our Work)/`. Re-shoots from Hannah
+drop straight onto these paths (keep the exact filename, incl. any trailing space, and the
+HTML needs no edit). **Product names below are PROVISIONAL (from filenames) — pending
+Alliyah's rename.**
 
-| Product card | Overwrite this file |
-|--------------|--------------------|
-| San Francisco Tee | `images/work/Threefold (Our Work)/SF FONT .png`  *(note trailing space before `.png`)* |
-| San Francisco Tee — Camo | `images/work/Threefold (Our Work)/SF FONT (CAMO).png` |
-| San Jose Tee | `images/work/Threefold (Our Work)/SJ FONT.png` |
-| San Jose Tee — Camo | `images/work/Threefold (Our Work)/SJ FONT (CAMO).png` |
+**Bay Area** (`images/work/Threefold (Our Work)/Bay Area/`) — row leads with the four SF/SJ tees:
+| Card (provisional) | File |
+|--------------------|------|
+| San Francisco Tee | `SF FONT .png` *(trailing space before `.png`)* |
+| San Francisco Tee — Camo | `SF FONT (CAMO) .png` *(trailing space before `.png`)* |
+| San Jose Tee | `SJ FONT.png` |
+| San Jose Tee — Camo | `SJ FONT (CAMO) .png` *(trailing space before `.png`)* |
+| San Francisco Bridge | `San Francisco Bridge.png` |
+| San Francisco City | `SAN FRANCISCO CITY.png` |
+| San Jose — Red | `SJ ( RED ).png` |
 
-> `SF FONT (CAMO).png` is also reused as the "ThreeFold Originals" teaser image in the
-> split banner on `index.html`. Overwriting it updates both places.
+**Aloha** (`images/work/Threefold (Our Work)/Aloha/`): `Hawaii Map.png`, `SURFBOARD_.png`
+**3 Ball** (`images/work/Threefold (Our Work)/3 Ball/`): `3 BALL CAMO_.png`, `3 BALL FIRE - DESIGN.png`, `3 BALL PINK CAMO.png`, `3 BALL WAVES.png`, `3 BALL W_B.png`
+**Chrollo** (`images/work/Threefold (Our Work)/Chrollo/`): `Chrollo full back Design.png`, `Chrollo_Chain Design.png`
 
-### Shop prices — PLACEHOLDERS
+> The Bay Area `SF FONT (CAMO) .png` is also reused as the "ThreeFold Originals" teaser
+> image in the split banner on `index.html`. Overwriting it updates both places.
 
-All four shop cards show a `$—` placeholder price. **Grep before launch:**
+### Shop prices — SET to $35
+
+All 16 product cards are priced at **$35** (all treated as shirts). No `$—` placeholders
+remain on `shop.html`. If any item is **not** a shirt and needs a different price, tell
+Claude — flag candidates are "Hawaii Map", "Surfboard", "Chrollo — Full Back",
+"Chrollo — Chain" (all currently assumed to be tee designs at $35).
+
+### 🚫 LAUNCH BLOCKER — Stripe Payment Links not yet pasted
+
+Each Buy button reads its checkout URL from the `PAYMENT_LINKS` map at the top of
+`shop.html`; every entry is currently `"TODO"`, so no button charges yet. Follow
+**`SETUP-STRIPE.md`** to create one Payment Link per product ($35, quantity on, shipping
+address on, Stripe Tax on) and paste the URLs. Confirm none remain:
 
 ```bash
-grep -n '\$—' shop.html
+grep -c '"TODO"' shop.html   # must be 0 at launch (currently 16)
 ```
 
-Replace each `<span class="price">$—</span>` with the real price.
-(These `$—` are intentional per the work order and are the only remaining placeholders in copy.)
+### 🚫 LAUNCH BLOCKER — Complete the Stripe setup checklist
+
+Work through **`SETUP-STRIPE.md`**: enable Stripe Tax, add the CA CDTFA seller's-permit
+registration, turn on new-order email notifications, and confirm the Pirate Ship label
+workflow. Do one test purchase before launch.
+
+### 🚫 LAUNCH BLOCKER — "Get Notified" posts real leads to HQ
+
+The shop banner "Get Notified" button now posts live to
+`https://hq.threefoldsupply.com/api/public-lead` with `lead_source: "drop-signup"`
+(same endpoint as the Start form). Any submission — including from the staging/preview URL —
+creates a **real lead** in Threefold HQ (name/company come in as "Drop Signup"; filter by
+`lead_source = drop-signup`). Send one test signup at launch to confirm it lands.
 
 ---
 
@@ -84,10 +117,24 @@ Each client folder holds a **logo** (card face) and one or more **design directi
 
 ## 4. Non-image pre-launch TODOs (not asset swaps, but track them)
 
-- [ ] **Shop "Get Notified" button** (`shop.html`) still shows a mock `alert()` — it has no
-      email-capture backend yet. Wire it up or hide it before launch.
-- [ ] **Old page `start-project.html`** (previous dark-theme design) is now orphaned/unlinked.
-      Recommend deleting it before launch so it isn't deployed.
-- [ ] **Start form → CRM:** the form posts live to `https://hq.threefoldsupply.com/api/public-lead`.
-      Any submission from the staging/preview URL creates a **real lead** in Threefold HQ.
-      Send one test submission at launch to confirm it lands.
+### 🚫 LAUNCH BLOCKER — Policy pages need owner review
+`privacy.html`, `refunds.html`, and `terms.html` are **DRAFTS** (each starts with an
+`<!-- DRAFT: requires owner review before launch -->` comment). Have the owner (and ideally
+a lawyer) review the content, set the "Last updated" date, and confirm the CA LLC details,
+contact email, and refund windows before launch.
+
+### 🚫 LAUNCH BLOCKER — Stripe checkout + tax
+See the two Stripe blockers in section 2 and the full checklist in **`SETUP-STRIPE.md`**
+(paste Payment Link URLs; enable Stripe Tax + CA registration; order notifications).
+
+### 🚫 LAUNCH BLOCKER — Echo of Christ logo
+Replace the TEMP screenshot logo with the official client-provided logo (see section 3).
+
+### 🚫 LAUNCH BLOCKER — Form → CRM live test
+Both the **Start form** and the shop **"Get Notified"** button post live to
+`https://hq.threefoldsupply.com/api/public-lead` and create **real leads** in Threefold HQ.
+Send one test submission of each at launch to confirm they land (Get Notified is tagged
+`lead_source: "drop-signup"`).
+
+_Done:_ ~~Get Notified was a mock `alert()`~~ → now wired to HQ lead capture.
+~~Orphaned `start-project.html`~~ → deleted on this branch.
