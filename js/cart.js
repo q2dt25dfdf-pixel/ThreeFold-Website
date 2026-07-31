@@ -82,7 +82,15 @@
       '</div>';
   }
 
-  async function checkout() {
+  // Go to the custom checkout page (checkout.html).
+  function checkout() {
+    if (!read().length) return;
+    window.location.href = "checkout.html";
+  }
+
+  // Fallback: hosted Stripe Checkout Session via /api/checkout. Kept for reference; not used
+  // by the drawer button anymore (custom checkout replaced it).
+  async function checkoutHosted() {
     var items = read();
     if (!items.length) return;
     var btn = document.getElementById("cartCheckout");

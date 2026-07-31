@@ -312,3 +312,32 @@ body.lb-open .lightbox{display:block}
 .lb-buy{display:flex;gap:8px;align-items:center}
 .lb-buy .add-btn{white-space:nowrap}
 @media(max-width:560px){.lb-bar{flex-direction:column;align-items:stretch}.lb-buy{width:100%}.lb-buy .add-btn{flex:1;justify-content:center}.lb-media img{max-height:60vh}}
+
+
+/* ---------- custom checkout ---------- */
+.co-grid{display:grid;grid-template-columns:1fr .95fr;gap:28px;align-items:start}
+@media(max-width:860px){.co-grid{grid-template-columns:1fr}}
+.co-panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:28px}
+.co-h{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+.co-item{display:flex;gap:14px;padding:14px 0;border-top:1px solid var(--line);align-items:center}
+.co-item:first-child{border-top:none}
+.co-thumb{width:64px;height:64px;border-radius:8px;background:#0e0e0e;object-fit:cover;flex:none}
+.co-thumb-txt{display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--display);font-style:italic;font-size:18px}
+.co-it-main b{font-size:15px;display:block}
+.co-it-main small{font-family:var(--mono);font-size:12px;color:var(--ink-soft)}
+.co-amt{margin-left:auto;font-family:var(--mono);font-size:14px}
+.co-totals{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;font-size:14px}
+.co-trow{display:flex;justify-content:space-between;padding:5px 0;color:var(--ink-soft)}
+.co-trow.co-grand{color:var(--ink);font-weight:700;font-size:17px;border-top:1px solid var(--line);margin-top:8px;padding-top:12px}
+.co-ship-note{margin-top:16px;font-size:13px;color:var(--ink-soft)}
+.co-field{margin-bottom:14px}
+.co-field label{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px}
+.co-field input{width:100%;font-family:var(--body);font-size:15px;padding:13px 14px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink)}
+.co-field input:focus{outline:2px solid var(--accent);border-color:transparent}
+.co-three{display:grid;grid-template-columns:1fr .6fr .8fr;gap:12px}
+@media(max-width:480px){.co-three{grid-template-columns:1fr}}
+.co-pe{margin:8px 0 16px;min-height:44px}
+.co-error{color:#c0392b;font-family:var(--mono);font-size:13px;margin-bottom:12px}
+.co-pay{width:100%;justify-content:center;font-size:15px;padding:16px}
+.co-pay:disabled{opacity:.5;cursor:not-allowed}
+.co-secure{text-align:center;font-family:var(--mono);font-size:11px;color:var(--ink-soft);margin-top:12px}

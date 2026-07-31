@@ -124,17 +124,29 @@ _DUR3 was removed from `clients.html` + `index.html` (lineup is now POPS, DSF7, 
 a lawyer) review the content, set the "Last updated" date, and confirm the CA LLC details,
 contact email, and refund windows before launch.
 
-### 🚫 LAUNCH BLOCKER — Cart checkout (Cloudflare)
-The shop now uses an add-to-cart flow + single Stripe Checkout Session via the Pages
-Function `functions/api/checkout.js`. To make it work:
-1. **Populate the price map:** run `node scripts/stripe-seed.mjs` (with `STRIPE_SECRET_KEY`
-   set) to create the Superheroes products and (re)write `functions/api/price-map.js` with
-   real price IDs; commit `functions/api/price-map.js`. Until then every product's `price`
-   is `""` and checkout returns a clear error.
-2. **Set the Cloudflare env var** `STRIPE_SECRET_KEY` (Production + Preview) — see
-   **`SETUP-CLOUDFLARE.md`** — and redeploy.
-3. **Live cart test on the preview:** add items, Checkout, confirm the Stripe page shows the
-   items, collects US shipping, and adds tax.
+### 🚫 LAUNCH BLOCKER — Custom checkout (Cloudflare + Stripe)
+The cart Checkout button now goes to the custom **`checkout.html`** (Stripe Payment Element),
+backed by Pages Functions `/api/config`, `/api/tax-quote`, `/api/create-intent`. (The old
+hosted `/api/checkout` + `PAYMENT_LINKS` are kept as a code fallback.)
+1. **Set Cloudflare env vars** (Production + Preview) — see **`SETUP-CLOUDFLARE.md`**:
+   `STRIPE_SECRET_KEY` (sk_live_…) AND `STRIPE_PUBLISHABLE_KEY` (pk_live_…). Redeploy.
+2. `functions/api/price-map.js` is already populated (25 price IDs). Re-run the seeder if you
+   add products.
+3. **Shipping = free**: matches the hosted Payment Links (no shipping rate). If you later add
+   a flat rate, set it in Stripe AND in `functions/api/_lib.js` `SHIPPING_CENTS`.
+4. **Stripe Tax transaction (v2):** create-intent records `metadata.tax_calculation` but does
+   NOT yet create a Tax Transaction post-payment (needs a Stripe webhook). Add that before
+   relying on Stripe Tax reporting/filing.
+
+#### Must test LIVE with a real card (test mode covers the rest)
+- Full purchase: add to cart → checkout.html → enter email + US address → tax line appears
+  as a dollar amount and Total updates → Pay → lands on order-confirmed.html, cart cleared,
+  receipt email arrives.
+- Tax by address: change state/ZIP → tax re-quotes and Total changes.
+- Declined card (Stripe test card `4000000000000002` in test mode) → error shows, no order.
+- Wallets (Apple Pay / Google Pay) appear in the Payment Element on a real device/browser
+  (requires the live domain + HTTPS; not visible in local/preview sometimes).
+- Empty cart → visiting checkout.html redirects to shop.html.
 
 ### 🚫 LAUNCH BLOCKER — Stripe checkout + tax
 See the two Stripe blockers in section 2 and the full checklist in **`SETUP-STRIPE.md`**

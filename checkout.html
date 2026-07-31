@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_16.png">
+<link rel="apple-touch-icon" href="/favicon_180.png">
+<title>Checkout — ThreeFold Supply Co.</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="index.html"><img src="images/brand/threefold-logo-dark.png" alt="ThreeFold Supply Co."></a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="custom-printing.html">Custom Printing</a>
+      <a href="clients.html">Clients</a>
+      <a href="shop.html">Shop</a>
+      <button type="button" id="cartBtn" class="cart-link" aria-label="Open cart">Cart <span id="cartCount" class="cart-count">0</span></button>
+      <a href="start.html" class="nav-cta">Start a Project</a>
+    </div>
+  </div>
+</nav>
+
+  <section>
+    <div class="wrap">
+      <h1 style="font-size:clamp(30px,4.5vw,52px);margin-bottom:22px">Checkout</h1>
+      <div class="co-grid">
+
+        <div class="panel co-panel">
+          <h2 class="co-h">Your Order</h2>
+          <div id="co-items"></div>
+          <div class="co-totals">
+            <div class="co-trow"><span>Subtotal</span><span id="co-subtotal">—</span></div>
+            <div class="co-trow"><span>Shipping</span><span id="co-shipping">Free</span></div>
+            <div class="co-trow"><span>Sales tax</span><span id="co-tax">—</span></div>
+            <div class="co-trow co-grand"><span>Total</span><span id="co-total">—</span></div>
+          </div>
+          <p class="co-ship-note">Every piece is pressed to order by our small team. Ships within 5 to 7 business days.</p>
+        </div>
+
+        <div class="panel co-panel">
+          <h2 class="co-h">Shipping &amp; Payment</h2>
+          <div class="co-field"><label for="co-email">Email</label><input id="co-email" type="email" placeholder="you@email.com" autocomplete="email"></div>
+          <div class="co-field"><label for="co-name">Full name</label><input id="co-name" placeholder="First and last" autocomplete="name"></div>
+          <div class="co-field"><label for="co-line1">Address</label><input id="co-line1" placeholder="Street address" autocomplete="address-line1"></div>
+          <div class="co-field"><label for="co-line2">Apt / Suite (optional)</label><input id="co-line2" placeholder="" autocomplete="address-line2"></div>
+          <div class="co-three">
+            <div class="co-field"><label for="co-city">City</label><input id="co-city" placeholder="San Jose" autocomplete="address-level2"></div>
+            <div class="co-field"><label for="co-state">State</label><input id="co-state" placeholder="CA" maxlength="2" autocomplete="address-level1"></div>
+            <div class="co-field"><label for="co-zip">ZIP</label><input id="co-zip" placeholder="95035" inputmode="numeric" autocomplete="postal-code"></div>
+          </div>
+          <div id="payment-element" class="co-pe"></div>
+          <p id="co-error" class="co-error" style="display:none"></p>
+          <button id="co-pay" class="btn co-pay" disabled>Pay <span id="co-pay-amt"></span></button>
+          <p class="co-secure">🔒 Payments processed securely by Stripe. ThreeFold never sees your card.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="brand"><img src="images/brand/Logo%20(BG%20removed)%20(2).png" alt="ThreeFold Supply Co." style="height:84px;width:auto"></div>
+      <p style="font-size:14px;max-width:280px">Custom print shop in the Bay Area. Client apparel first, original drops on the side. Est. 2026.</p>
+    </div>
+    <div>
+      <h4>Navigate</h4>
+      <ul>
+        <li><a href="custom-printing.html">Custom Printing</a></li>
+        <li><a href="clients.html">Client Collections</a></li>
+        <li><a href="shop.html">Shop Originals</a></li>
+        <li><a href="start.html">Start a Project</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>The Team</h4>
+      <ul>
+        <li>Alliyah — Operations &amp; Business Development</li>
+        <li>Hannah — Creative &amp; Concept</li>
+      </ul>
+    </div>
+    <div>
+      <h4>We Print For</h4>
+      <ul>
+        <li>Amazon DSP Operators</li>
+        <li>Dental &amp; Medical</li>
+        <li>Restaurants &amp; Local Biz</li>
+        <li>Sports &amp; Fitness</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">© 2026 ThreeFold Supply Co. — Bay Area, CA · <a href="privacy.html">Privacy Policy</a> · <a href="refunds.html">Refund Policy</a> · <a href="terms.html">Terms</a></div>
+</footer>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script src="js/catalog.js"></script>
+<script src="js/checkout-page.js" defer></script>
+<script src="js/cart.js" defer></script>
+</body>
+</html>

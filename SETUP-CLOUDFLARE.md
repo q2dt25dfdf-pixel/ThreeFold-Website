@@ -4,21 +4,23 @@ The cart checkout is a Cloudflare Pages Function at `functions/api/checkout.js`
 (served at `/api/checkout`). It creates one Stripe Checkout Session server-side, so it
 needs the Stripe **secret** key available as an environment variable in Cloudflare.
 
-The key is **never** stored in the repo. Add it in the Cloudflare dashboard as an
-**encrypted** environment variable. Use the **same** secret key you used for the
-"Product Seeder" (`STRIPE_SECRET_KEY`, `sk_live_…`).
+The keys are **never** stored in the repo. Add them in the Cloudflare dashboard as
+environment variables. You need **two**:
+- `STRIPE_SECRET_KEY` (`sk_live_…`) — **encrypted**. Same secret key used for the Product
+  Seeder. Used by `/api/checkout`, `/api/tax-quote`, and `/api/create-intent`.
+- `STRIPE_PUBLISHABLE_KEY` (`pk_live_…`) — not secret, but add it the same way. Served by
+  `/api/config` so the custom checkout page (`checkout.html`) can initialize Stripe.js and
+  mount the Payment Element.
 
 ## Add STRIPE_SECRET_KEY
 
 1. Cloudflare dashboard → **Workers & Pages** → open the **ThreeFold-Website** Pages project.
 2. **Settings → Environment variables** (also called Variables and Secrets).
-3. Under **Production**, click **Add variable**:
-   - **Variable name:** `STRIPE_SECRET_KEY`
-   - **Value:** paste your `sk_live_…` key
-   - Click **Encrypt** so it's stored as a secret (value hidden after saving).
-   - **Save.**
-4. Repeat under **Preview** (add the same `STRIPE_SECRET_KEY`, Encrypt, Save) so
-   checkout also works on branch/preview deploys of `feat/site-revamp`.
+3. Under **Production**, click **Add variable** and add BOTH:
+   - `STRIPE_SECRET_KEY` = your `sk_live_…` key → click **Encrypt** → Save.
+   - `STRIPE_PUBLISHABLE_KEY` = your `pk_live_…` key → Save (Encrypt optional).
+4. Repeat both under **Preview** so checkout works on branch/preview deploys of
+   `feat/site-revamp`.
 5. **Redeploy** the project (Deployments → latest → Retry deploy, or push a commit) so
    the function picks up the new variable. Cloudflare injects it as `context.env.STRIPE_SECRET_KEY`.
 
