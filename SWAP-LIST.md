@@ -143,9 +143,23 @@ hosted `/api/checkout` + `PAYMENT_LINKS` are kept as a code fallback.)
    add products.
 3. **Shipping = free**: matches the hosted Payment Links (no shipping rate). If you later add
    a flat rate, set it in Stripe AND in `functions/api/_lib.js` `SHIPPING_CENTS`.
-4. **Stripe Tax transaction (v2):** create-intent records `metadata.tax_calculation` but does
-   NOT yet create a Tax Transaction post-payment (needs a Stripe webhook). Add that before
-   relying on Stripe Tax reporting/filing.
+4. **Shipping = free**: see above.
+
+### 🚫 LAUNCH BLOCKER — Stripe webhook (order recording + tax transaction)
+`functions/api/stripe-webhook.js` handles `payment_intent.succeeded`: creates the Stripe Tax
+transaction (JOB 1) and records the order into Supabase `shop_orders` (JOB 2, deduped on the
+PaymentIntent id; retry-safe). To activate — full steps in **`SETUP-CLOUDFLARE.md`**:
+1. Run `supabase/shop_orders.sql` in Supabase (creates the table).
+2. Add Cloudflare env vars (Prod + Preview): `STRIPE_WEBHOOK_SECRET` (whsec_),
+   `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, `SHOP_EXPORT_TOKEN`. Redeploy.
+3. Create the Stripe webhook endpoint(s) → URL `/api/stripe-webhook`, event
+   **payment_intent.succeeded only**; paste each endpoint's whsec_ into the matching
+   Cloudflare environment.
+- **JOB 3 (not done, by design):** HQ-branded order emails are a stubbed TODO hook in the
+  webhook — no emails send yet. Wire HQ templates when ready.
+- **JOB 4:** unshipped-orders Pirate Ship CSV at `/api/shop-orders-export?key=<SHOP_EXPORT_TOKEN>`.
+  PII-gated by the token. Flip `data.shipped` to `true` in Supabase after shipping. (Future:
+  an HQ button + a "mark shipped" action.)
 
 #### Must test LIVE with a real card (test mode covers the rest)
 - Full purchase: add to cart → checkout.html → enter email + US address → tax line appears
