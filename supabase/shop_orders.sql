@@ -10,10 +10,14 @@ create table if not exists shop_orders (
   data jsonb not null default '{}'::jsonb
 );
 
--- HQ-internal only; service-role key (the webhook) bypasses RLS anyway.
-alter table shop_orders disable row level security;
+-- Enable RLS with NO policies: shop_orders holds customer PII (names + addresses), so the
+-- anon/browser key must NOT be able to read it. The service-role key used by the webhook and
+-- the CSV export bypasses RLS regardless, so server-side access is unaffected. Server-only.
+alter table shop_orders enable row level security;
 
--- Optional: realtime so an open HQ view updates without polling. Safe to re-run.
+-- Optional: add to the realtime publication. Note: with RLS enabled and no policies, the
+-- anon key receives no rows here (as intended) — server code reads via the service role.
+-- Safe to re-run.
 do $$
 begin
   if not exists (
