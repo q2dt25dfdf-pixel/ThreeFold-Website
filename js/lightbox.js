@@ -31,12 +31,14 @@
     var name = addBtn.dataset.name, price = addBtn.dataset.price, slug = addBtn.dataset.slug;
     overlay.querySelector(".lb-inner").innerHTML =
       '<button class="lb-x" aria-label="Close">×</button>' +
-      '<img class="lb-img" src="' + img.getAttribute("src") + '" alt="' + esc(name) + '">' +
       '<div class="pcard lb-card">' +
-        '<div class="lb-meta"><b>' + esc(name) + '</b><span>$' + esc(price) + '</span></div>' +
-        '<div class="lb-buy">' +
-          '<select class="size-select" aria-label="Size — ' + esc(name) + '"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>' +
-          '<button class="btn add-btn" type="button" data-slug="' + esc(slug) + '" data-name="' + esc(name) + '" data-price="' + esc(price) + '">Add to Cart</button>' +
+        '<div class="lb-media"><img class="lb-img" src="' + img.getAttribute("src") + '" alt="' + esc(name) + '"></div>' +
+        '<div class="lb-bar">' +
+          '<div class="lb-meta"><b>' + esc(name) + '</b><span>$' + esc(price) + '</span></div>' +
+          '<div class="lb-buy">' +
+            '<select class="size-select" aria-label="Size — ' + esc(name) + '"><option value="">Size</option><option>S</option><option>M</option><option>L</option><option>XL</option><option>2XL</option></select>' +
+            '<button class="btn add-btn" type="button" data-slug="' + esc(slug) + '" data-name="' + esc(name) + '" data-price="' + esc(price) + '">Add to Cart</button>' +
+          '</div>' +
         '</div>' +
       '</div>';
     overlay.querySelector(".lb-x").addEventListener("click", close);

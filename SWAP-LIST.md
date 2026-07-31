@@ -110,9 +110,9 @@ _DUR3 was removed from `clients.html` + `index.html` (lineup is now POPS, DSF7, 
 - [ ] Replace `images/work/ECHO OF CHRIST/Logo.png` with official client-provided logo
       (current file is a screenshot extraction). *(Saved on this branch at
       `images/work/Echo of Christ Ministries/Logo.png`.)*
-- [ ] Add Echo of Christ design photos + case popup when collection is produced.
-      Until then the card on `clients.html` is non-clickable and shows a
-      "Collection in production" tag.
+- [x] Echo design added: `HIM-POSSIBLE.png` now shows in the clients.html case popup
+      (case 03) and as the third card on the index.html "Printed for Real Teams" grid.
+      The card is clickable and the "Collection in production" tag is removed.
 
 ---
 
