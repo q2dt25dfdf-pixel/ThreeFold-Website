@@ -140,12 +140,10 @@ Function `functions/api/checkout.js`. To make it work:
 See the two Stripe blockers in section 2 and the full checklist in **`SETUP-STRIPE.md`**
 (paste Payment Link URLs; enable Stripe Tax + CA registration; order notifications).
 
-### 🚫 LAUNCH BLOCKER — "Superheroes" collection is unlicensed Marvel IP
-The Superheroes collection (folder `Marvel/`) uses Marvel character designs and the designs
-themselves print the **MARVEL** wordmark on the sleeve; product names carry character/brand
-names (Spiderman, Iron Man, Hulk, Black Panther, Captain America, Venom). Selling these
-commercially is trademark/copyright infringement unless licensed. **Confirm rights or pull
-the collection before launch.**
+### Superheroes collection — IP acknowledged (not a blocker)
+The Superheroes collection (folder `Marvel/`) uses Marvel character designs/names and the
+art prints the MARVEL wordmark. Owner reviewed and accepted this IP risk (2026-07-31) and
+elected to keep the collection. Not a launch blocker per owner decision.
 
 ### 🚫 LAUNCH BLOCKER — Echo of Christ logo
 Replace the TEMP screenshot logo with the official client-provided logo (see section 3).
