@@ -16,10 +16,12 @@ environment variables. You need **two**:
 
 1. Cloudflare dashboard → **Workers & Pages** → open the **ThreeFold-Website** Pages project.
 2. **Settings → Environment variables** (also called Variables and Secrets).
-3. Under **Production**, click **Add variable** and add BOTH:
+3. Under **Production**, click **Add variable** and add:
    - `STRIPE_SECRET_KEY` = your `sk_live_…` key → click **Encrypt** → Save.
    - `STRIPE_PUBLISHABLE_KEY` = your `pk_live_…` key → Save (Encrypt optional).
-4. Repeat both under **Preview** so checkout works on branch/preview deploys of
+   - `SHIP_CODE_VIP3` = `VIP3` → **Encrypt** → Save. (Free-shipping code; kept out of client
+     source so it's validated server-side only. Change the value to rotate the code.)
+4. Repeat all three under **Preview** so checkout works on branch/preview deploys of
    `feat/site-revamp`.
 5. **Redeploy** the project (Deployments → latest → Retry deploy, or push a commit) so
    the function picks up the new variable. Cloudflare injects it as `context.env.STRIPE_SECRET_KEY`.

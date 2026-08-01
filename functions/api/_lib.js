@@ -7,8 +7,23 @@ import PRICE_MAP from "./price-map.js";
 export const TAX_CODE = "txcd_30011000"; // general clothing
 export const CURRENCY = "usd";
 export const ALLOWED_SIZES = new Set(["s", "m", "l", "xl", "2xl"]);
-// Match the hosted Payment Links, which set no shipping rate → free shipping.
-export const SHIPPING_CENTS = 0;
+
+export const FLAT_SHIP_CENTS = 595;        // $5.95 flat rate
+export const FREE_SHIP_THRESHOLD_CENTS = 10000; // free at $100.00+
+
+// Single source of truth for shipping. Rules in order:
+//   1. valid ship code (matches validCode, case-insensitive/trimmed) → free
+//   2. subtotal >= $100 → free
+//   3. otherwise $5.95
+// validCode is the expected code from env (env.SHIP_CODE_VIP3) — kept out of client source.
+// Returns { cents, free, reason: 'code'|'threshold'|null, codeValid }.
+export function computeShipping(items, subtotalCents, shipCode, validCode) {
+  const submitted = String(shipCode || "").trim();
+  const codeValid = !!validCode && submitted.toLowerCase() === String(validCode).trim().toLowerCase();
+  if (codeValid) return { cents: 0, free: true, reason: "code", codeValid: true };
+  if (subtotalCents >= FREE_SHIP_THRESHOLD_CENTS) return { cents: 0, free: true, reason: "threshold", codeValid: false };
+  return { cents: FLAT_SHIP_CENTS, free: false, reason: null, codeValid: false };
+}
 
 export function json(obj, status) {
   return new Response(JSON.stringify(obj), {
@@ -53,8 +68,10 @@ export function addressComplete(a) {
   return !!(a.line1 && a.city && a.state && a.postal_code && a.country);
 }
 
-// Stripe Tax calculation. Returns { id, subtotalCents, shippingCents, taxCents, totalCents }.
-export async function taxCalculate(key, lineItems, address) {
+// Stripe Tax calculation. shippingCents is taxed as shipping (CA taxes shipping on taxable
+// goods). Returns { id, subtotalCents, shippingCents, taxCents, totalCents }.
+export async function taxCalculate(key, lineItems, address, shippingCents) {
+  shippingCents = shippingCents || 0;
   const p = new URLSearchParams();
   p.set("currency", CURRENCY);
   p.set("customer_details[address][country]", address.country);
@@ -63,7 +80,7 @@ export async function taxCalculate(key, lineItems, address) {
   if (address.city) p.set("customer_details[address][city]", address.city);
   if (address.line1) p.set("customer_details[address][line1]", address.line1);
   p.set("customer_details[address_source]", "shipping");
-  p.set("shipping_cost[amount]", String(SHIPPING_CENTS));
+  p.set("shipping_cost[amount]", String(shippingCents));
   lineItems.forEach((li, i) => {
     p.set(`line_items[${i}][amount]`, String(li.amountCents));
     p.set(`line_items[${i}][reference]`, li.slug + "-" + li.size);
@@ -81,8 +98,8 @@ export async function taxCalculate(key, lineItems, address) {
   return {
     id: data.id,
     subtotalCents: subtotal,
-    shippingCents: SHIPPING_CENTS,
-    taxCents: typeof data.tax_amount_exclusive === "number" ? data.tax_amount_exclusive : (data.amount_total - subtotal - SHIPPING_CENTS),
+    shippingCents: shippingCents,
+    taxCents: typeof data.tax_amount_exclusive === "number" ? data.tax_amount_exclusive : (data.amount_total - subtotal - shippingCents),
     totalCents: data.amount_total,
   };
 }

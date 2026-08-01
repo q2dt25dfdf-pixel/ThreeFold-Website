@@ -84,6 +84,8 @@ export function buildOrderRow(pi) {
       order_items: m.order_items || "",
       amount: typeof pi.amount === "number" ? pi.amount / 100 : null,
       tax_amount: m.tax != null ? Number(m.tax) : null,
+      shipping_cents: m.shipping_cents != null ? Number(m.shipping_cents) : null,
+      ship_code_used: m.ship_code_used === "true",
       payment_intent: pi.id,
       created_at: pi.created ? new Date(pi.created * 1000).toISOString() : null,
       shipped: false,

@@ -3,7 +3,7 @@
 // Validates the cart, computes the tax-inclusive total via Stripe Tax, and creates a
 // PaymentIntent (automatic_payment_methods on, receipt_email, shipping, order_items metadata).
 // Returns { client_secret, amount } (amount in cents) for the deferred Payment Element.
-import { json, validateCart, orderSummary, cleanAddress, addressComplete, taxCalculate } from "./_lib.js";
+import { json, validateCart, orderSummary, cleanAddress, addressComplete, taxCalculate, computeShipping } from "./_lib.js";
 
 export async function onRequestPost(context) {
   const key = context.env && context.env.STRIPE_SECRET_KEY;
@@ -22,8 +22,10 @@ export async function onRequestPost(context) {
   if (!addressComplete(address)) return json({ error: "A complete US shipping address is required." }, 400);
   const name = String((body.address && body.address.name) || "").trim() || "Customer";
 
+  const ship = computeShipping(cart.items, cart.subtotalCents, body.ship_code, context.env && context.env.SHIP_CODE_VIP3);
+
   let calc;
-  try { calc = await taxCalculate(key, cart.items, address); }
+  try { calc = await taxCalculate(key, cart.items, address, ship.cents); }
   catch (e) { return json({ error: e.message || "Tax calculation failed." }, e.status || 502); }
 
   const p = new URLSearchParams();
@@ -39,9 +41,12 @@ export async function onRequestPost(context) {
   p.set("shipping[address][postal_code]", address.postal_code);
   p.set("shipping[address][country]", address.country);
   p.set("metadata[order_items]", orderSummary(cart.items));
-  p.set("metadata[tax_calculation]", calc.id);   // for post-payment Tax Transaction (webhook, v2)
+  p.set("metadata[tax_calculation]", calc.id);   // for the post-payment Tax Transaction (webhook)
   p.set("metadata[subtotal]", (calc.subtotalCents / 100).toFixed(2));
   p.set("metadata[tax]", (calc.taxCents / 100).toFixed(2));
+  p.set("metadata[shipping_cents]", String(ship.cents));
+  // Boolean only — never store the attempted code text.
+  p.set("metadata[ship_code_used]", ship.codeValid ? "true" : "false");
 
   let res, data;
   try {

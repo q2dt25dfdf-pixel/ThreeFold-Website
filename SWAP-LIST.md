@@ -138,12 +138,15 @@ The cart Checkout button now goes to the custom **`checkout.html`** (Stripe Paym
 backed by Pages Functions `/api/config`, `/api/tax-quote`, `/api/create-intent`. (The old
 hosted `/api/checkout` + `PAYMENT_LINKS` are kept as a code fallback.)
 1. **Set Cloudflare env vars** (Production + Preview) — see **`SETUP-CLOUDFLARE.md`**:
-   `STRIPE_SECRET_KEY` (sk_live_…) AND `STRIPE_PUBLISHABLE_KEY` (pk_live_…). Redeploy.
+   `STRIPE_SECRET_KEY` (sk_live_…), `STRIPE_PUBLISHABLE_KEY` (pk_live_…), and `SHIP_CODE_VIP3`
+   (`VIP3`). Redeploy.
 2. `functions/api/price-map.js` is already populated (25 price IDs). Re-run the seeder if you
    add products.
-3. **Shipping = free**: matches the hosted Payment Links (no shipping rate). If you later add
-   a flat rate, set it in Stripe AND in `functions/api/_lib.js` `SHIPPING_CENTS`.
-4. **Shipping = free**: see above.
+3. **Shipping**: flat **$5.95**, **free at $100+**, and free with the **VIP3** code. One
+   source of truth: `functions/api/_lib.js` `computeShipping()` (tax-quote + create-intent +
+   the Stripe Tax calc all use it; shipping IS taxed). Change `FLAT_SHIP_CENTS` /
+   `FREE_SHIP_THRESHOLD_CENTS` to adjust; the code is env `SHIP_CODE_VIP3` (server-side only,
+   never in client source — change its value to rotate).
 
 ### 🚫 LAUNCH BLOCKER — Stripe webhook (order recording + tax transaction)
 `functions/api/stripe-webhook.js` handles `payment_intent.succeeded`: creates the Stripe Tax

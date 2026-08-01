@@ -29,7 +29,7 @@
         '<span class="co-amt">' + money(i.price * i.qty) + '</span></div>';
     }).join("");
     $("co-subtotal").textContent = money(subtotal);
-    $("co-shipping").textContent = "Free";
+    $("co-shipping").textContent = "—";
     $("co-tax").textContent = "—";
     $("co-total").textContent = money(subtotal);
   }
@@ -43,33 +43,57 @@
   function emailValid() { return val("email").indexOf("@") > 0; }
 
   var quoteTimer, elements, stripe, paymentReady = false, quoting = false, taxKnown = false;
+  var shipCode = ""; // applied ship code (validated server-side; never hard-coded here)
 
-  function setTotals(sub, ship, tax, total) {
-    $("co-subtotal").textContent = money(sub);
-    $("co-shipping").textContent = ship > 0 ? money(ship) : "Free";
-    $("co-tax").textContent = tax == null ? "—" : money(tax);
-    $("co-total").textContent = total == null ? money(sub) : money(total);
-    if ($("co-pay-amt")) $("co-pay-amt").textContent = total == null ? money(sub) : money(total);
+  function cartLine(i) { return { slug: i.slug, size: i.size, qty: i.qty }; }
+
+  function setShipMsg(free, reason, subtotalDollars) {
+    var hint = $("co-freeship-hint"); if (!hint) return;
+    if (free) {
+      hint.style.display = "";
+      hint.textContent = reason === "code" ? "Free shipping — code applied." : "Free shipping on orders $100+.";
+    } else {
+      var remain = Math.max(0, 100 - subtotalDollars);
+      if (remain > 0) { hint.style.display = ""; hint.textContent = "Add " + money(remain) + " more for free shipping."; }
+      else { hint.style.display = "none"; }
+    }
+  }
+  function setCodeMsg(applied, valid) {
+    var msg = $("co-code-msg"); if (!msg) return;
+    if (!applied) { msg.style.display = "none"; return; }
+    msg.style.display = "";
+    msg.textContent = valid ? "Code applied." : "Code not recognized.";
+    msg.className = "co-code-msg " + (valid ? "ok" : "bad");
+  }
+
+  // d = tax-quote response: { subtotal, shipping, shipping_free, shipping_reason, tax, total, complete }
+  function setTotals(d) {
+    $("co-subtotal").textContent = money(d.subtotal);
+    $("co-shipping").textContent = d.shipping_free ? "Free" : money(d.shipping);
+    $("co-tax").textContent = d.tax == null ? "—" : money(d.tax);
+    var shown = d.total == null ? (d.subtotal + d.shipping) : d.total;
+    $("co-total").textContent = money(shown);
+    if ($("co-pay-amt")) $("co-pay-amt").textContent = money(shown);
+    setShipMsg(d.shipping_free, d.shipping_reason, d.subtotal);
   }
 
   async function quoteTax() {
-    var a = address();
-    if (!addressComplete(a)) { taxKnown = false; setTotals(subtotal, 0, null, null); updatePayState(); return; }
     quoting = true; updatePayState();
     try {
-      var res = await fetch("/api/tax-quote", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: cart.map(cartLine), address: a }) });
+      var res = await fetch("/api/tax-quote", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: cart.map(cartLine), address: address(), ship_code: shipCode }),
+      });
       var d = await res.json();
-      if (!res.ok) throw new Error(d.error || "Could not calculate tax.");
-      if (d.complete) {
-        taxKnown = true;
-        setTotals(d.subtotal, d.shipping, d.tax, d.total);
-        lastTotalCents = Math.round(d.total * 100);
-        if (elements) elements.update({ amount: lastTotalCents });
-      }
+      if (!res.ok) throw new Error(d.error || "Could not calculate totals.");
+      taxKnown = !!d.complete;
+      setTotals(d);
+      setCodeMsg(d.code_applied, d.code_valid);
+      lastTotalCents = Math.round((d.total != null ? d.total : (d.subtotal + d.shipping)) * 100);
+      if (elements) elements.update({ amount: lastTotalCents });
     } catch (e) { showError(e.message); }
     finally { quoting = false; updatePayState(); }
   }
-  function cartLine(i) { return { slug: i.slug, size: i.size, qty: i.qty }; }
 
   function debounceQuote() { clearTimeout(quoteTimer); quoteTimer = setTimeout(quoteTax, 500); }
 
@@ -79,11 +103,22 @@
     el.addEventListener("blur", function () { if (k !== "email") quoteTax(); });
   });
 
+  // "Have a code?" toggle + apply → re-quote (shipping AND tax recompute server-side).
+  var codeToggle = $("co-code-toggle"), codeRow = $("co-code-row"), codeApply = $("co-code-apply"), codeInput = $("co-code-input");
+  if (codeToggle && codeRow) codeToggle.addEventListener("click", function () {
+    codeRow.style.display = codeRow.style.display === "none" ? "flex" : "none";
+    if (codeInput && codeRow.style.display !== "none") codeInput.focus();
+  });
+  function applyCode() { shipCode = codeInput ? codeInput.value.trim() : ""; quoteTax(); }
+  if (codeApply) codeApply.addEventListener("click", applyCode);
+  if (codeInput) codeInput.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); applyCode(); } });
+
   function showError(msg) { var e = $("co-error"); if (e) { e.textContent = msg; e.style.display = msg ? "block" : "none"; } }
   function updatePayState() {
     var btn = $("co-pay"); if (!btn) return;
     btn.disabled = !(paymentReady && emailValid() && addressComplete(address()) && taxKnown && !quoting);
   }
+  quoteTax(); // initial: show shipping (flat/free/threshold) even before the address is entered
 
   // ---- Stripe ----
   async function initStripe() {
