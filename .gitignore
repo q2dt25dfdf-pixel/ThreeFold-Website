@@ -1,1 +1,9 @@
 .DS_Store
+
+# Stripe seeder, its source-of-truth CSV, and its output — never commit (secret-key workflow)
+scripts/stripe-seed.mjs
+scripts/products.csv
+scripts/stripe-links.json
+node_modules/
+package.json
+package-lock.json
