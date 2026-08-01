@@ -32,10 +32,6 @@ window.TF_CATALOG = {
     "name": "Marvel Spiderman",
     "img": "images/work/Threefold%20(Our%20Work)/Marvel/MARVEL%20_%20SPIDERMAN%20_.png"
   },
-  "spider-man-3": {
-    "name": "Spider Man 3",
-    "img": "images/work/Threefold%20(Our%20Work)/Marvel/Spider%20Man%203_.png"
-  },
   "marvel-iron-man": {
     "name": "Marvel Iron Man",
     "img": "images/work/Threefold%20(Our%20Work)/Marvel/MARVEL%20_%20IRON%20MAN%20_.png"

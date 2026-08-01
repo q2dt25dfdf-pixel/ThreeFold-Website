@@ -9,7 +9,6 @@ export default {
   "san-francisco-city": { "name": "San Francisco City", "price": "price_1Tz5oSCg2TkYQBjUniJqq8zd" },
   "san-jose-red": { "name": "San Jose — Red", "price": "price_1Tz5oVCg2TkYQBjUnNmpvRHE" },
   "marvel-spiderman": { "name": "Marvel Spiderman", "price": "price_1TzAwiCg2TkYQBjUSv8Ke2uY" },
-  "spider-man-3": { "name": "Spider Man 3", "price": "price_1TzAwjCg2TkYQBjUVhhFxM7T" },
   "marvel-iron-man": { "name": "Marvel Iron Man", "price": "price_1TzAwlCg2TkYQBjUOyUB5NM6" },
   "iron-man-3": { "name": "Iron Man 3", "price": "price_1TzAwmCg2TkYQBjUJIAFyvEX" },
   "marvel-hulk": { "name": "Marvel Hulk", "price": "price_1TzAwnCg2TkYQBjUF54mIceW" },
