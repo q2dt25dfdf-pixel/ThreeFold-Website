@@ -114,10 +114,12 @@ export function buildOrderRow(pi) {
 }
 
 // JOB 2 — insert into Supabase shop_orders; dedupe on the primary key (PI id).
+// Returns true only when a NEW row was inserted (return=representation → non-empty body), so a
+// Stripe retry/resend of the same event doesn't fire a duplicate HQ push.
 async function recordShopOrder(env, pi) {
   if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
     console.warn("[webhook] Supabase env not set; skipping shop_orders for", pi.id);
-    return;
+    return false;
   }
   const base = env.SUPABASE_URL.replace(/\/rest\/v1\/?$/, "").replace(/\/$/, "");
   const res = await fetch(base + "/rest/v1/shop_orders?on_conflict=id", {
@@ -126,7 +128,7 @@ async function recordShopOrder(env, pi) {
       apikey: env.SUPABASE_SERVICE_ROLE_KEY,
       Authorization: "Bearer " + env.SUPABASE_SERVICE_ROLE_KEY,
       "Content-Type": "application/json",
-      Prefer: "resolution=ignore-duplicates,return=minimal",
+      Prefer: "resolution=ignore-duplicates,return=representation",
     },
     body: JSON.stringify(buildOrderRow(pi)),
   });
@@ -134,6 +136,8 @@ async function recordShopOrder(env, pi) {
     const t = await res.text().catch(function () { return ""; });
     throw new Error("supabase " + res.status + " " + t);
   }
+  const rows = await res.json().catch(function () { return []; });
+  return Array.isArray(rows) && rows.length > 0; // true = newly inserted, false = duplicate
 }
 
 // JOB 3 — TODO hook: HQ-branded order emails plug in here (customer confirmation + internal
@@ -207,13 +211,17 @@ export async function onRequestPost(context) {
     console.warn("[webhook] no metadata.tax_calculation on", pi.id, "- skipping tax transaction");
   }
 
-  // JOB 2 — record order (never gates)
-  try { await recordShopOrder(env, pi); }
+  // JOB 2 — record order (never gates). inserted=false on a duplicate (retry/resend).
+  let inserted = false;
+  try { inserted = await recordShopOrder(env, pi); }
   catch (e) { console.error("[webhook] shop_orders insert failed for", pi.id, e && e.message); }
 
-  // Push to HQ (bell + web push), same channel as New Lead. Never gates the 200.
-  try { await notifyHq(env, pi); }
-  catch (e) { console.error("[webhook] HQ notify error for", pi.id, e && e.message); }
+  // Push to HQ (bell + web push), same channel as New Lead. Only on a NEW order (no dup push
+  // on retries/resends). Best-effort, never gates the 200.
+  if (inserted) {
+    try { await notifyHq(env, pi); }
+    catch (e) { console.error("[webhook] HQ notify error for", pi.id, e && e.message); }
+  }
 
   // JOB 3 — email hook (stub)
   try { await maybeSendOrderEmails(pi, env); }
