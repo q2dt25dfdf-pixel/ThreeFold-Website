@@ -352,6 +352,9 @@
       await submitToHq(uploaded);
       var cm = form.querySelector('[name="contact_method"]'), bk = document.getElementById("form-success-booking");
       if (bk) bk.style.display = (cm && cm.value === "Virtual meeting") ? "block" : "none";
+      // Reset the button state (in case the user navigates back to the still-hidden form).
+      if (submitBtn) { submitBtn.textContent = origText; submitBtn.disabled = false; }
+      submitting = false;
       form.style.display = "none";
       successBox.classList.add("show");
       successBox.scrollIntoView({ behavior: "smooth", block: "center" });
