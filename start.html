@@ -12,15 +12,13 @@
 <link rel="canonical" href="https://threefoldsupply.com/start.html">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Start a Project — ThreeFold Supply Co.">
-<meta property="og:description" content="Tell us about your team and start a custom apparel project with ThreeFold. Free mockup, production only starts when you approve.">
+<meta property="og:description" content="Tell us about your team and start a custom apparel project with ThreeFold.">
 <meta property="og:image" content="https://threefoldsupply.com/images/hero-main.png">
-<meta property="og:url" content="https://threefoldsupply.com/start.html">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
-
 </head>
 <body>
 
@@ -39,31 +37,152 @@
 </nav>
 
   <section>
-    <div class="wrap" style="max-width:820px">
+    <div class="wrap">
       <div class="eyebrow">Start a Project</div>
-      <h1 style="font-size:clamp(36px,5.5vw,64px)">Tell us about your team.</h1>
-      <p class="sub">Five minutes now saves a week of back and forth later. Mockup is free, and production only starts when you say go.</p>
+      <h1 style="font-size:clamp(36px,5.5vw,68px)">Tell us about<br>your team.</h1>
+      <p class="sub">The more real you are here, the better the design gets. We reply within 24 hours, send a free mockup, and nothing prints until you approve it.</p>
 
-      <div id="sent-banner" class="sent-banner" style="display:none;margin-top:28px">Got it. We reply within 24 hours.</div>
+      <form id="qform" class="qform" novalidate>
+        <p style="display:none"><label>Do not fill this out: <input name="bot-field"></label></p>
+        <input type="hidden" name="apparel_types" id="apparel-types-input" value="">
 
-      <form id="startForm" method="POST" action="#" novalidate>
-        <div class="form-grid">
-          <div class="field"><label>Company Name *</label><input type="text" name="company_name" placeholder="Piranha Ops LLC" required></div>
-          <div class="field"><label>Company Type *</label>
-            <select name="company_type" required><option value="">Select one</option><option>Amazon DSP Operator</option><option>Dental / Medical Practice</option><option>Warehouse / Logistics</option><option>Gym / Fitness Studio</option><option>Restaurant / Food</option><option>Sports Team</option><option>Local Small Business</option><option>Other</option></select>
+        <!-- 01 Company -->
+        <div class="fsec">
+          <div class="fsec-title">01 · About your company</div>
+          <div class="form-grid">
+            <div class="field"><label>Company Name <span class="req">*</span></label><input type="text" name="company_name" placeholder="Piranha Ops (POPS)" required></div>
+            <div class="field"><label>Company Type <span class="req">*</span></label>
+              <select name="company_type" required>
+                <option value="" disabled selected>Select one</option>
+                <option>Amazon DSP Operator</option><option>Dental / Medical Practice</option>
+                <option>Warehouse / Logistics</option><option>Gym / Fitness Studio</option>
+                <option>Sports Team</option><option>Local Small Business</option>
+                <option>Corporation / Enterprise</option><option>Contractor / Trades</option><option>Other</option>
+              </select>
+            </div>
           </div>
-          <div class="field"><label>Your Name *</label><input type="text" name="contact_name" placeholder="First and last" required></div>
-          <div class="field"><label>Phone or Email *</label><input type="text" name="contact" placeholder="Best way to reach you" required></div>
-          <div class="field"><label>Quantity *</label>
-            <select name="quantity" required><option value="">Estimate</option><option>24–50 pieces</option><option>51–100 pieces</option><option>101–250 pieces</option><option>251–500 pieces</option><option>500+ pieces</option><option>Not sure yet</option></select>
-          </div>
-          <div class="field"><label>Timeline</label><input type="text" name="project_timeline" placeholder="Any dates or events we should know?"></div>
-          <div class="field full"><label>What should this apparel represent? *</label><textarea name="meaning" placeholder="Your team, your culture, the vibe you want. The more real you are here, the better the design gets." required></textarea></div>
+          <div class="field"><label>What does your company do? <span class="req">*</span></label><textarea name="company_description" rows="3" placeholder="Brief overview of your company, what you do, and who your team is." required></textarea></div>
         </div>
-        <div style="margin-top:24px"><button type="submit" class="btn" id="startSubmit">Submit Project Brief →</button></div>
-        <p class="form-error" id="startError">Something went wrong. Please email threefoldsupplycompany@gmail.com.</p>
-        <p class="form-note">We reply within 24 hours. Based in the Bay Area, printing in-house.</p>
+
+        <!-- 02 Contact -->
+        <div class="fsec">
+          <div class="fsec-title">02 · About you</div>
+          <div class="form-grid three">
+            <div class="field"><label>Contact Name <span class="req">*</span></label><input type="text" name="contact_name" placeholder="First and last name" required></div>
+            <div class="field"><label>Your Role / Title</label><input type="text" name="contact_title" placeholder="Owner, Ops Manager, etc."></div>
+            <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" name="contact_phone" placeholder="(415) 000-0000" required></div>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Email <span class="req">*</span></label><input type="email" name="contact_email" placeholder="you@company.com" required></div>
+            <div class="field"><label>Preferred Contact Method <span class="req">*</span></label>
+              <select name="contact_method" required>
+                <option value="" disabled selected>How should we reach you?</option>
+                <option>Email</option><option>Text message</option><option>Phone call</option><option>Virtual meeting</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Order -->
+        <div class="fsec">
+          <div class="fsec-title">03 · Order details</div>
+          <div class="form-grid three">
+            <div class="field"><label>Quantity Range <span class="req">*</span></label>
+              <select name="quantity" required>
+                <option value="" disabled selected>Estimate</option>
+                <option>24–50 pieces</option><option>51–100 pieces</option><option>101–250 pieces</option>
+                <option>251–500 pieces</option><option>500+ pieces</option><option>Not sure yet</option>
+              </select>
+            </div>
+            <div class="field"><label>Project Timeline</label><textarea name="project_timeline" rows="3" placeholder="PRIME week rollout, onboarding in August, holiday event, or no hard deadline yet."></textarea></div>
+            <div class="field"><label>Budget Range</label>
+              <select name="budget">
+                <option value="" disabled selected>Approximate</option>
+                <option>Under $500</option><option>$500–$1,000</option><option>$1,000–$2,500</option>
+                <option>$2,500–$5,000</option><option>$5,000–$10,000</option><option>$10,000+</option><option>Flexible / unknown</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label>Apparel Type <span class="req">*</span> — select all that apply</label>
+            <div class="fcheck-wrap" id="apparel-checks">
+              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>T-Shirts</div>
+              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Hoodies</div>
+              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Jackets</div>
+              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Hats</div>
+              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Tumblers</div>
+              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Mugs</div>
+              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Accessories</div>
+              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Not sure yet</div>
+            </div>
+          </div>
+          <div class="form-grid">
+            <div class="field"><label>Who is the apparel for? <span class="req">*</span></label>
+              <select name="audience" required>
+                <option value="" disabled selected>Select</option>
+                <option>Drivers / Delivery Team</option><option>Warehouse Staff</option><option>Office / Admin Team</option>
+                <option>All Employees</option><option>Client Gifts / Corporate</option><option>Event / Team</option>
+                <option>Customers / Public</option><option>Mixed</option>
+              </select>
+            </div>
+            <div class="field"><label>Station Code / Location</label><input type="text" name="station_code" placeholder="e.g. DSF7 — Bay Area"><div class="fhint">DSP operators: include your station code and we'll build it into the design.</div></div>
+          </div>
+        </div>
+
+        <!-- 04 Design -->
+        <div class="fsec">
+          <div class="fsec-title">04 · Design direction</div>
+          <div class="field"><label>What do you want this apparel to represent? <span class="req">*</span></label><textarea name="meaning" rows="4" placeholder="Team pride? A launch? Company culture? Tell us what this collection needs to say." required></textarea></div>
+          <div class="form-grid">
+            <div class="field"><label>Style Direction</label>
+              <select name="style">
+                <option value="" disabled selected>General aesthetic</option>
+                <option>Streetwear / Urban</option><option>Premium / Minimalist</option><option>Workwear / Uniform</option>
+                <option>Bold / Graphic</option><option>Classic / Corporate</option><option>Athletic / Sport</option><option>Open to your recommendation</option>
+              </select>
+            </div>
+            <div class="field"><label>Color Preferences</label><input type="text" name="colors" placeholder="Company colors, palette, or open to ideas"></div>
+          </div>
+          <div class="field"><label>Notes, Inspiration, Additional Context</label><textarea name="notes" rows="4" placeholder="Links, references, brands you admire, things you don't want, specific text. More detail = better design."></textarea></div>
+        </div>
+
+        <!-- 05 Files -->
+        <div class="fsec">
+          <div class="fsec-title">05 · Existing assets</div>
+          <div class="field">
+            <label>Logo, existing designs, or brand assets</label>
+            <div class="ffile-area" id="ffile-area">
+              <div class="ffile-icon">↑</div>
+              <div class="ffile-text"><strong>Drop files or click to upload</strong><br>PNG, JPG, WEBP, SVG, PDF · Max 5 files · 10MB each</div>
+              <input type="file" id="ffile-input" name="brand_assets" style="display:none" multiple accept=".png,.jpg,.jpeg,.webp,.svg,.pdf">
+            </div>
+            <div class="ffile-error-msg" id="ffile-error"></div>
+            <div id="ffile-list" class="ffile-list"></div>
+            <div class="fhint">Optional — skip if you don't have assets yet. For large brand kits, paste a Google Drive link in Notes above.</div>
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="fsubmit-row">
+          <label class="fsubmit-ack" id="fsubmit-ack-label">
+            <input type="checkbox" id="fsubmit-ack-check">
+            <span>I understand that all products are custom made specifically for my order. Once artwork is approved and production begins, orders cannot be canceled, returned, or refunded.</span>
+          </label>
+          <p class="fsubmit-ack-note">If there is an issue caused by a manufacturing defect or production error, contact us and we will make it right.</p>
+          <button type="submit" class="btn btn-submit" id="fsubmit-btn" disabled>Submit Request →</button>
+          <p id="startError" class="form-note" style="display:none;color:#c0392b">Something went wrong sending your request. Please try again or email threefoldsupplycompany@gmail.com.</p>
+        </div>
       </form>
+
+      <div class="form-success" id="form-success">
+        <div class="form-success-check">✓</div>
+        <h2 class="form-success-h">We Got You.</h2>
+        <p class="form-success-body">Your project brief is in. We'll reach out within 24 hours to schedule your design consultation. Keep an eye on your inbox.</p>
+        <div id="form-success-booking" style="display:none;margin-top:28px">
+          <p class="form-success-body" style="margin-bottom:16px">Want to talk it through? Book your initial meeting below.</p>
+          <a class="btn" href="https://cal.com/threefold-fwkchj/initial-meeting" target="_blank" rel="noopener">Book Initial Meeting →</a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -101,64 +220,149 @@
   </div>
   <div class="footer-bottom">© 2026 ThreeFold Supply Co. — Bay Area, CA · <a href="privacy.html">Privacy Policy</a> · <a href="refunds.html">Refund Policy</a> · <a href="terms.html">Terms</a></div>
 </footer>
+
 <script>
-// Lead pipeline: posts to the ThreeFold HQ CRM intake endpoint.
-const HQ_ENDPOINT = 'https://hq.threefoldsupply.com/api/public-lead';
-(function(){
-  const params = new URLSearchParams(location.search);
-  if (params.get('sent') === '1') {
-    const b = document.getElementById('sent-banner');
-    const f = document.getElementById('startForm');
-    if (b) b.style.display = 'flex';
-    if (f) f.style.display = 'none';
-    if (b) b.scrollIntoView({behavior:'smooth', block:'center'});
-  }
-  const form = document.getElementById('startForm');
+// ThreeFold intake questionnaire → HQ CRM (/api/public-lead). Files upload to Supabase
+// Storage (public anon key + intake-files bucket), same as the production form.
+(function () {
+  var form = document.getElementById("qform");
   if (!form) return;
-  const btn = document.getElementById('startSubmit');
-  const errEl = document.getElementById('startError');
-  let submitting = false;
-  form.addEventListener('submit', async function(e){
-    e.preventDefault();
-    if (submitting) return;
-    if (errEl) errEl.style.display = 'none';
-    let ok = true;
-    form.querySelectorAll('[required]').forEach(function(field){
-      field.style.borderColor = '';
-      if (!String(field.value||'').trim()){ field.style.borderColor = '#c0392b'; ok = false; }
-    });
-    if (!ok){
-      const first = form.querySelector('[style*="c0392b"]');
-      if (first){ first.scrollIntoView({behavior:'smooth', block:'center'}); first.focus(); }
-      return;
-    }
-    submitting = true;
-    const orig = btn ? btn.textContent : '';
-    if (btn){ btn.disabled = true; btn.textContent = 'Sending…'; }
-    try {
-      const fd = new FormData(form);
-      const payload = {};
-      fd.forEach(function(v,k){ payload[k] = v; });
-      // route single "Phone or Email" field to the CRM's contact keys
-      const contact = String(payload.contact||'').trim();
-      if (contact.indexOf('@') > -1){ payload.contact_email = contact; }
-      else { payload.contact_phone = contact; }
-      payload.lead_source = 'website / start a project';
-      payload.questionnaire_files = [];
-      const res = await fetch(HQ_ENDPOINT, {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(payload)
+  var successBox = document.getElementById("form-success");
+  var errEl = document.getElementById("startError");
+
+  // ── Apparel checkboxes → hidden apparel_types
+  var apparelInput = document.getElementById("apparel-types-input");
+  function updateApparelInput() {
+    if (!apparelInput) return;
+    apparelInput.value = Array.prototype.slice.call(document.querySelectorAll(".fcheck-item.sel"))
+      .map(function (i) { return i.textContent.trim(); }).join(", ");
+  }
+  document.querySelectorAll(".fcheck-item").forEach(function (item) {
+    function toggle() { item.classList.toggle("sel"); item.setAttribute("aria-checked", String(item.classList.contains("sel"))); updateApparelInput(); }
+    item.addEventListener("click", toggle);
+    item.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  });
+
+  // ── File upload (Supabase Storage — public anon key, client-side by design)
+  var SB_URL = "https://frfpmsjfjsiffkuhgvri.supabase.co";
+  var SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZyZnBtc2pmanNpZmZrdWhndnJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg3MTE0NzUsImV4cCI6MjA5NDI4NzQ3NX0._3ZGiixXAvQruOzUE5G1CtfT3_yQh8VQmQsEJ8PUrL4";
+  var SB_BUCKET = "intake-files";
+  function sbCategory(m) { if (m === "image/svg+xml") return "logo"; if (m === "application/pdf") return "pdf"; return "inspiration"; }
+  async function uploadFilesToStorage(files) {
+    if (!files.length) return { succeeded: [], failedCount: 0 };
+    var folder = "questionnaire/" + Date.now() + "-" + Math.random().toString(36).slice(2, 8);
+    var results = await Promise.allSettled(files.map(async function (f) {
+      var path = folder + "/" + f.name.replace(/\s+/g, "_");
+      var res = await fetch(SB_URL + "/storage/v1/object/" + SB_BUCKET + "/" + path, {
+        method: "POST",
+        headers: { Authorization: "Bearer " + SB_KEY, "Content-Type": f.type || "application/octet-stream", "x-upsert": "false" },
+        body: f,
       });
-      if (!res.ok) throw new Error('HQ submission failed: ' + res.status);
-      window.location.href = 'start.html?sent=1';
+      if (!res.ok) { throw new Error('"' + f.name + '": ' + (await res.text())); }
+      return { id: Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2), name: f.name, path: path, size: f.size, mime_type: f.type, category: sbCategory(f.type), visible_to_client: true, uploaded_at: new Date().toISOString() };
+    }));
+    var succeeded = [], failedCount = 0;
+    results.forEach(function (r) { if (r.status === "fulfilled") succeeded.push(r.value); else { failedCount++; console.warn("File upload failed:", r.reason && r.reason.message); } });
+    return { succeeded: succeeded, failedCount: failedCount };
+  }
+
+  var farea = document.getElementById("ffile-area"), finput = document.getElementById("ffile-input");
+  var flist = document.getElementById("ffile-list"), ferror = document.getElementById("ffile-error");
+  var ALLOWED = [".png", ".jpg", ".jpeg", ".webp", ".svg", ".pdf"], MAX_FILES = 5, MAX_BYTES = 10 * 1024 * 1024;
+  var stagedFiles = [];
+  function fmtSize(b) { if (b < 1024) return b + " B"; if (b < 1048576) return (b / 1024).toFixed(1) + " KB"; return (b / 1048576).toFixed(1) + " MB"; }
+  function validateFiles(files) {
+    if (files.length > MAX_FILES) return "Maximum " + MAX_FILES + " files. You selected " + files.length + ".";
+    for (var i = 0; i < files.length; i++) {
+      var f = files[i], ext = "." + f.name.split(".").pop().toLowerCase();
+      if (ALLOWED.indexOf(ext) < 0) return '"' + f.name + '" is not an accepted type. Use PNG, JPG, WEBP, SVG, or PDF.';
+      if (f.size > MAX_BYTES) return '"' + f.name + '" is too large (' + fmtSize(f.size) + "). Max 10MB.";
+    }
+    return null;
+  }
+  function setFileError(msg) { if (msg) { ferror.textContent = msg; ferror.classList.add("show"); farea.classList.add("error"); } else { ferror.classList.remove("show"); farea.classList.remove("error"); } }
+  function syncInput() { try { var dt = new DataTransfer(); stagedFiles.forEach(function (f) { dt.items.add(f); }); finput.files = dt.files; } catch (e) {} }
+  function renderList() {
+    flist.innerHTML = "";
+    stagedFiles.forEach(function (f, i) {
+      var row = document.createElement("div"); row.className = "ffile-list-item";
+      row.innerHTML = '<span class="ffile-list-name"></span><span class="ffile-list-size"></span><button type="button" class="ffile-list-remove" aria-label="Remove">×</button>';
+      row.querySelector(".ffile-list-name").textContent = f.name;
+      row.querySelector(".ffile-list-size").textContent = fmtSize(f.size);
+      row.querySelector(".ffile-list-remove").addEventListener("click", function () { stagedFiles.splice(i, 1); syncInput(); setFileError(null); renderList(); });
+      flist.appendChild(row);
+    });
+  }
+  function addFiles(nf) { var c = stagedFiles.concat(Array.prototype.slice.call(nf)); var err = validateFiles(c); if (err) { setFileError(err); return; } setFileError(null); stagedFiles = c; syncInput(); renderList(); }
+  if (farea && finput) {
+    farea.addEventListener("click", function () { finput.click(); });
+    farea.addEventListener("dragover", function (e) { e.preventDefault(); farea.style.borderColor = "var(--ink)"; });
+    farea.addEventListener("dragleave", function () { farea.style.borderColor = ""; });
+    farea.addEventListener("drop", function (e) { e.preventDefault(); farea.style.borderColor = ""; if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files); });
+    finput.addEventListener("change", function () { if (finput.files.length) addFiles(finput.files); finput.value = ""; });
+  }
+
+  // ── Phone auto-format
+  var phone = form.querySelector('input[name="contact_phone"]');
+  if (phone) phone.addEventListener("input", function () {
+    var d = this.value.replace(/\D/g, "").slice(0, 10);
+    this.value = d.length < 4 ? d : d.length < 7 ? "(" + d.slice(0, 3) + ") " + d.slice(3) : "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+  });
+
+  // ── Acknowledgement enables submit
+  var ack = document.getElementById("fsubmit-ack-check"), submitBtn = document.getElementById("fsubmit-btn");
+  if (ack && submitBtn) ack.addEventListener("change", function () { submitBtn.disabled = !ack.checked; });
+
+  // ── Submit → HQ
+  async function submitToHq(files) {
+    var fd = new FormData(form), json = {};
+    fd.forEach(function (v, k) { json[k] = v; });
+    delete json.brand_assets;
+    json.questionnaire_files = files;
+    json.lead_source = "website / start a project";
+    var res = await fetch("https://hq.threefoldsupply.com/api/public-lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(json) });
+    if (!res.ok) throw new Error("HQ submission failed: " + res.status);
+  }
+
+  var submitting = false;
+  async function handleSubmit(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    if (submitting) return;
+    if (errEl) errEl.style.display = "none";
+    var origText = submitBtn ? submitBtn.textContent : "Submit Request →";
+    updateApparelInput();
+    var ok = true;
+    form.querySelectorAll("[required]").forEach(function (field) { field.style.borderColor = ""; if (!String(field.value || "").trim()) { field.style.borderColor = "#c0392b"; ok = false; } });
+    var aw = document.getElementById("apparel-checks");
+    if (!apparelInput.value.trim()) { if (aw) { aw.style.outline = "1px solid #c0392b"; aw.style.outlineOffset = "4px"; } ok = false; } else if (aw) { aw.style.outline = ""; }
+    var fileErr = validateFiles(stagedFiles); if (fileErr) { setFileError(fileErr); ok = false; }
+    if (!ack || !ack.checked) ok = false;
+    if (!ok) { var first = form.querySelector('[style*="c0392b"]'); if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); if (first.focus) first.focus(); } return; }
+    submitting = true;
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
+    try {
+      var uploaded = [];
+      if (stagedFiles.length) {
+        if (submitBtn) submitBtn.textContent = "Uploading files…";
+        var up = await uploadFilesToStorage(stagedFiles);
+        if (up.failedCount > 0) { setFileError(up.failedCount + " file(s) failed to upload. Check your connection or remove them, then retry."); if (submitBtn) { submitBtn.textContent = origText; submitBtn.disabled = false; } submitting = false; return; }
+        uploaded = up.succeeded;
+      }
+      if (submitBtn) submitBtn.textContent = "Sending…";
+      await submitToHq(uploaded);
+      var cm = form.querySelector('[name="contact_method"]'), bk = document.getElementById("form-success-booking");
+      if (bk) bk.style.display = (cm && cm.value === "Virtual meeting") ? "block" : "none";
+      form.style.display = "none";
+      successBox.classList.add("show");
+      successBox.scrollIntoView({ behavior: "smooth", block: "center" });
     } catch (err) {
-      console.error('[startForm]', err);
-      if (errEl) errEl.style.display = 'block';
-      if (btn){ btn.disabled = false; btn.textContent = orig; }
+      console.error("[startForm]", err);
+      if (errEl) errEl.style.display = "block";
+      if (submitBtn) { submitBtn.textContent = origText; submitBtn.disabled = !(ack && ack.checked); }
       submitting = false;
     }
-  });
+  }
+  form.addEventListener("submit", handleSubmit);
 })();
 </script>
 <script src="js/cart.js" defer></script>

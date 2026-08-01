@@ -366,7 +366,7 @@ function scrollRow(id,dir){var r=document.getElementById('rail-'+id); if(r) r.sc
   form.addEventListener('submit',async function(e){e.preventDefault(); if(sending)return; var email=String(emailEl.value||'').trim();
     if(email.indexOf('@')<1){emailEl.focus();emailEl.style.outline='2px solid #c0392b';return;} emailEl.style.outline=''; sending=true;
     var btn=form.querySelector('button'),orig=btn?btn.textContent:''; if(btn){btn.disabled=true;btn.textContent='Sending…';}
-    try{var res=await fetch(HQ,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({company_name:'Drop Signup',contact_name:'Drop Signup',contact_email:email,meaning:'Wants early access to future ThreeFold Originals drops.',lead_source:'drop-signup',questionnaire_files:[]})});
+    try{var res=await fetch(HQ,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({company_name:'Drop Signup',company_type:'Drop Signup',contact_name:'Drop Signup',contact_email:email,meaning:'Wants early access to future ThreeFold Originals drops.',lead_source:'drop-signup',questionnaire_files:[]})});
       if(!res.ok)throw new Error('HQ '+res.status); form.style.display='none'; if(doneEl)doneEl.style.display='block';
     }catch(err){console.error('[notifyForm]',err); if(btn){btn.disabled=false;btn.textContent=orig;} emailEl.style.outline='2px solid #c0392b'; sending=false;}});
 })();
