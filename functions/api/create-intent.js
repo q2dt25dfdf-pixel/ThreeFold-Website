@@ -47,6 +47,10 @@ export async function onRequestPost(context) {
   p.set("metadata[shipping_cents]", String(ship.cents));
   // Boolean only — never store the attempted code text.
   p.set("metadata[ship_code_used]", ship.codeValid ? "true" : "false");
+  // Structured line items for HQ's Shop Orders detail (falls back to parsing order_items if
+  // absent/oversized). Stripe metadata values cap at 500 chars — omit if a big cart exceeds it.
+  const liJson = JSON.stringify(cart.items.map((li) => ({ name: li.name, size: li.size, qty: li.qty, unit_cents: li.unitCents })));
+  if (liJson.length <= 490) p.set("metadata[line_items]", liJson);
 
   let res, data;
   try {
