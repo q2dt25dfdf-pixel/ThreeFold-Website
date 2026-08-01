@@ -412,15 +412,17 @@ body.lb-open .lightbox{display:block}
 .co-code-msg.bad{color:#c0392b}
 
 
-/* ---------- mobile nav: links row on line 2 with Cart pinned to its right edge (after
-   Shop); Start a Project wraps to the next line. Desktop unchanged. ---------- */
+/* ---------- mobile nav: 3 rows ---------- */
+/* ROW 1: logo only (brand). ROW 2: Home/Custom Printing/Clients/Shop grouped left + Cart
+   pinned to the right edge (margin-left:auto = space-between). ROW 3: Start a Project alone,
+   full-width. Row-2 items are shrunk to fit ~390px so they never wrap to a 3rd line and Cart
+   stays on row 2. Desktop (>600px) unchanged. */
 @media(max-width:600px){
   .nav-inner{height:auto;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;gap:8px}
-  .nav-links{width:100%;flex-wrap:wrap;gap:6px;align-items:center}
-  /* Font trimmed to 10px so Home/Custom Printing/Clients/Shop + Cart fit on one row at ~390px
-     (they overflow at 11px because of "Custom Printing"). */
-  .nav-links a{font-size:10px;padding:6px 7px}
-  /* margin-left:auto shoves Cart to the right edge of the links row (right after Shop); the
-     .nav-cta ("Start a Project") that follows it in the markup then wraps to the next line. */
+  .nav-links{width:100%;flex-wrap:wrap;gap:4px;align-items:center}
+  .nav-links a{font-size:10px;padding:6px 5px;white-space:nowrap}
+  /* Cart hugs the right edge of row 2, vertically centered, keeps its pill + count styling. */
   #cartBtn{margin-left:auto;padding:6px 8px;font-size:10px}
+  /* Start a Project: forced onto its own full-width row (row 3); never shares Cart's row. */
+  .nav-links .nav-cta{flex-basis:100%;margin-left:0;margin-top:2px;text-align:center;font-size:12px;padding:11px}
 }
