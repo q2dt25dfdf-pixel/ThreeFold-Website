@@ -144,7 +144,7 @@
     try {
       var sub = await elements.submit();
       if (sub.error) throw new Error(sub.error.message);
-      var res = await fetch("/api/create-intent", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: cart.map(cartLine), address: a, email: val("email") }) });
+      var res = await fetch("/api/create-intent", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: cart.map(cartLine), address: a, email: val("email"), ship_code: shipCode }) });
       var d = await res.json();
       if (!res.ok || !d.client_secret) throw new Error(d.error || "Could not start payment.");
       // Snapshot the order BEFORE confirm so order-confirmed.html can render it even on redirect.
