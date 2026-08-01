@@ -412,12 +412,15 @@ body.lb-open .lightbox{display:block}
 .co-code-msg.bad{color:#c0392b}
 
 
-/* ---------- mobile nav: Cart pinned top-right by the logo; links wrap below ---------- */
+/* ---------- mobile nav: links row on line 2 with Cart pinned to its right edge (after
+   Shop); Start a Project wraps to the next line. Desktop unchanged. ---------- */
 @media(max-width:600px){
-  .nav-inner{height:auto;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;gap:8px;position:relative}
-  .nav-links{width:100%;flex-wrap:wrap;gap:6px;justify-content:flex-start}
-  .nav-links a{font-size:11px;padding:7px 10px}
-  /* #cartBtn (.cart-link) lives inside .nav-links in the markup; pull it out visually and
-     pin it to the top-right on the logo's row. It stays out of the wrapped links flow. */
-  #cartBtn{position:absolute;top:14px;right:24px;padding:7px 10px;font-size:11px;margin:0}
+  .nav-inner{height:auto;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;gap:8px}
+  .nav-links{width:100%;flex-wrap:wrap;gap:6px;align-items:center}
+  /* Font trimmed to 10px so Home/Custom Printing/Clients/Shop + Cart fit on one row at ~390px
+     (they overflow at 11px because of "Custom Printing"). */
+  .nav-links a{font-size:10px;padding:6px 7px}
+  /* margin-left:auto shoves Cart to the right edge of the links row (right after Shop); the
+     .nav-cta ("Start a Project") that follows it in the markup then wraps to the next line. */
+  #cartBtn{margin-left:auto;padding:6px 8px;font-size:10px}
 }
