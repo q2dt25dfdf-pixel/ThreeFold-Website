@@ -66,6 +66,25 @@ async function createTaxTransaction(key, calculationId, reference) {
   return { ok: false, duplicate: isDuplicateTaxError(data.error), message: (data.error && (data.error.message || data.error.code)) || ("HTTP " + res.status) };
 }
 
+// Parse structured line items from metadata.line_items (set by create-intent). Returns
+// undefined if absent/invalid so HQ falls back to parsing the order_items summary string.
+function parseMetaLineItems(raw) {
+  if (!raw) return undefined;
+  try {
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr) || !arr.length) return undefined;
+    const out = arr
+      .map((li) => ({
+        name: String(li.name || ""),
+        size: String(li.size || ""),
+        qty: parseInt(li.qty, 10) || 1,
+        unit_cents: typeof li.unit_cents === "number" ? li.unit_cents : null,
+      }))
+      .filter((li) => li.name);
+    return out.length ? out : undefined;
+  } catch (e) { return undefined; }
+}
+
 // Build the shop_orders row from the PaymentIntent (id = PI id → dedupe key).
 export function buildOrderRow(pi) {
   const sh = pi.shipping || {};
@@ -82,6 +101,7 @@ export function buildOrderRow(pi) {
         state: a.state || "", postal_code: a.postal_code || "", country: a.country || "US",
       },
       order_items: m.order_items || "",
+      line_items: parseMetaLineItems(m.line_items), // structured; omitted (undefined) if absent
       amount: typeof pi.amount === "number" ? pi.amount / 100 : null,
       tax_amount: m.tax != null ? Number(m.tax) : null,
       shipping_cents: m.shipping_cents != null ? Number(m.shipping_cents) : null,
@@ -94,10 +114,12 @@ export function buildOrderRow(pi) {
 }
 
 // JOB 2 — insert into Supabase shop_orders; dedupe on the primary key (PI id).
+// Returns true only when a NEW row was inserted (return=representation → non-empty body), so a
+// Stripe retry/resend of the same event doesn't fire a duplicate HQ push.
 async function recordShopOrder(env, pi) {
   if (!env.SUPABASE_URL || !env.SUPABASE_SERVICE_ROLE_KEY) {
     console.warn("[webhook] Supabase env not set; skipping shop_orders for", pi.id);
-    return;
+    return false;
   }
   const base = env.SUPABASE_URL.replace(/\/rest\/v1\/?$/, "").replace(/\/$/, "");
   const res = await fetch(base + "/rest/v1/shop_orders?on_conflict=id", {
@@ -106,7 +128,7 @@ async function recordShopOrder(env, pi) {
       apikey: env.SUPABASE_SERVICE_ROLE_KEY,
       Authorization: "Bearer " + env.SUPABASE_SERVICE_ROLE_KEY,
       "Content-Type": "application/json",
-      Prefer: "resolution=ignore-duplicates,return=minimal",
+      Prefer: "resolution=ignore-duplicates,return=representation",
     },
     body: JSON.stringify(buildOrderRow(pi)),
   });
@@ -114,12 +136,47 @@ async function recordShopOrder(env, pi) {
     const t = await res.text().catch(function () { return ""; });
     throw new Error("supabase " + res.status + " " + t);
   }
+  const rows = await res.json().catch(function () { return []; });
+  return Array.isArray(rows) && rows.length > 0; // true = newly inserted, false = duplicate
 }
 
 // JOB 3 — TODO hook: HQ-branded order emails plug in here (customer confirmation + internal
 // alert). Intentionally a no-op for now; do NOT send until HQ templates are wired.
 async function maybeSendOrderEmails(/* pi, env */) {
   return; // TODO(JOB 3): wire HQ-branded emails here.
+}
+
+// Notify HQ so it fires the same bell + web push as "New Lead". Best-effort; never gates 200.
+async function notifyHq(env, pi) {
+  const secret = env.INTERNAL_API_SECRET;
+  if (!secret) { console.warn("[webhook] INTERNAL_API_SECRET not set; skipping HQ notify"); return; }
+  const base = (env.HQ_BASE_URL || "https://hq.threefoldsupply.com").replace(/\/$/, "");
+  const m = pi.metadata || {};
+
+  let firstItem = "", moreCount = 0;
+  const li = parseMetaLineItems(m.line_items);
+  if (li && li.length) {
+    firstItem = li[0].name; moreCount = li.length - 1;
+  } else if (m.order_items) {
+    const chunks = String(m.order_items).split(/;|·/).map((s) => s.trim()).filter(Boolean);
+    if (chunks.length) {
+      firstItem = chunks[0].replace(/\s*\([^)]*\)\s*[x×]\s*\d+\s*$/i, "").trim();
+      moreCount = chunks.length - 1;
+    }
+  }
+
+  const res = await fetch(base + "/api/internal/shop-order-created", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + secret, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      customer_name: (pi.shipping && pi.shipping.name) || "",
+      first_item: firstItem,
+      more_count: moreCount,
+      total: typeof pi.amount === "number" ? pi.amount / 100 : 0,
+      payment_intent_id: pi.id,
+    }),
+  });
+  if (!res.ok) console.error("[webhook] HQ notify failed", res.status);
 }
 
 function json(obj, status) {
@@ -154,9 +211,17 @@ export async function onRequestPost(context) {
     console.warn("[webhook] no metadata.tax_calculation on", pi.id, "- skipping tax transaction");
   }
 
-  // JOB 2 — record order (never gates)
-  try { await recordShopOrder(env, pi); }
+  // JOB 2 — record order (never gates). inserted=false on a duplicate (retry/resend).
+  let inserted = false;
+  try { inserted = await recordShopOrder(env, pi); }
   catch (e) { console.error("[webhook] shop_orders insert failed for", pi.id, e && e.message); }
+
+  // Push to HQ (bell + web push), same channel as New Lead. Only on a NEW order (no dup push
+  // on retries/resends). Best-effort, never gates the 200.
+  if (inserted) {
+    try { await notifyHq(env, pi); }
+    catch (e) { console.error("[webhook] HQ notify error for", pi.id, e && e.message); }
+  }
 
   // JOB 3 — email hook (stub)
   try { await maybeSendOrderEmails(pi, env); }

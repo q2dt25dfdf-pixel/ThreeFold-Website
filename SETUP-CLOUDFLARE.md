@@ -50,6 +50,7 @@ env vars (Production **and** Preview), in addition to `STRIPE_SECRET_KEY`:
 | `SUPABASE_URL` | the HQ Supabase project URL (`https://<ref>.supabase.co`) | no |
 | `SUPABASE_SERVICE_ROLE_KEY` | HQ Supabase **service_role** key (same one HQ uses) | yes |
 | `SHOP_EXPORT_TOKEN` | any long random string you pick (gates the CSV export) | yes |
+| `INTERNAL_API_SECRET` | shared secret so the webhook can push a "New Order" to HQ; must MATCH the same var in HQ/Vercel | yes |
 
 ### One-time: create the table
 Run `supabase/shop_orders.sql` in the Supabase SQL editor (same project as HQ). Creates the
