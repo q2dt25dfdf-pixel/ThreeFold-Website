@@ -7,3 +7,4 @@ scripts/stripe-links.json
 node_modules/
 package.json
 package-lock.json
+.dev.vars

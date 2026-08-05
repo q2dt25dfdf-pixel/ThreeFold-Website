@@ -211,6 +211,18 @@ export async function onRequestPost(context) {
     console.warn("[webhook] no metadata.tax_calculation on", pi.id, "- skipping tax transaction");
   }
 
+  // Custom-order payments (deposit / final invoice originated in HQ) must NEVER become shop
+  // orders — that is the blank-phantom-card bug. HQ stamps payment_type on the PaymentIntent
+  // metadata; when present we skip recordShopOrder entirely. Nothing is forwarded: HQ's own
+  // checkout.session.completed webhook is the sole writer of the finances paid-state (it keys
+  // off session metadata finance_id and already records the PaymentIntent id). Storefront PIs
+  // have no payment_type and fall through unchanged.
+  const paymentType = pi.metadata && pi.metadata.payment_type;
+  if (paymentType === "final_invoice" || paymentType === "deposit") {
+    console.log("[webhook] custom-order PI", pi.id, "(" + paymentType + ") — skipped shop order (HQ records the payment)");
+    return json({ received: true, custom_order: paymentType });
+  }
+
   // JOB 2 — record order (never gates). inserted=false on a duplicate (retry/resend).
   let inserted = false;
   try { inserted = await recordShopOrder(env, pi); }
