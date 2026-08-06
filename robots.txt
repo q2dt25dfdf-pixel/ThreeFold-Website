@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /checkout
+Disallow: /checkout.html
+Disallow: /order-confirmed
+Disallow: /order-confirmed.html
+
+Sitemap: https://threefoldsupply.com/sitemap.xml
