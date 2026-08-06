@@ -43,8 +43,13 @@ export function validateCart(items) {
     const size = String(it.size || "").toLowerCase();
     if (!ALLOWED_SIZES.has(size)) throw { status: 400, message: "Invalid size for " + it.slug };
     const qty = Math.max(1, Math.min(99, parseInt(it.qty, 10) || 1));
-    // $35 flat for all current products; price is defined per the CSV/seeder ($35).
-    const unitCents = 3500;
+    // Per-product unit price from the committed map (regenerated from products.csv by
+    // stripe-seed.mjs). FAIL LOUD if absent — a missing price must never become a charge.
+    // Client-sent prices are (and stay) ignored.
+    const unitCents = entry.unit_cents;
+    if (!Number.isInteger(unitCents) || unitCents <= 0) {
+      throw { status: 400, message: "No price configured for " + it.slug };
+    }
     const amountCents = unitCents * qty;
     subtotal += amountCents;
     out.push({ slug: it.slug, name: entry.name, size, qty, unitCents, amountCents, priceId: entry.price });

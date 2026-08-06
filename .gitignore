@@ -1,8 +1,7 @@
 .DS_Store
 
-# Stripe seeder, its source-of-truth CSV, and its output — never commit (secret-key workflow)
-scripts/stripe-seed.mjs
-scripts/products.csv
+# Stripe seeder OUTPUT — generated, legacy payment-link record. The seeder itself and its
+# source-of-truth CSV ARE committed (they contain no secrets; the key is env-only).
 scripts/stripe-links.json
 node_modules/
 package.json
