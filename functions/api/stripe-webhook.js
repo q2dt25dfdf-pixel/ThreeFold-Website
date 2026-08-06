@@ -140,10 +140,21 @@ async function recordShopOrder(env, pi) {
   return Array.isArray(rows) && rows.length > 0; // true = newly inserted, false = duplicate
 }
 
-// JOB 3 — TODO hook: HQ-branded order emails plug in here (customer confirmation + internal
-// alert). Intentionally a no-op for now; do NOT send until HQ templates are wired.
-async function maybeSendOrderEmails(/* pi, env */) {
-  return; // TODO(JOB 3): wire HQ-branded emails here.
+// JOB 3 — customer order-confirmation email (E1), sent by HQ. POSTs the PaymentIntent id to
+// HQ's /api/internal/shop-order-confirmation (same Bearer channel as notifyHq); HQ loads the
+// just-inserted shop_orders row, builds the approved copy, and sends via its Gmail/Resend
+// pipeline. HQ dedupes on confirmation_email_sent_at, so a duplicate call cannot re-send.
+// Best-effort: failures log and never gate the webhook 200.
+async function maybeSendOrderEmails(pi, env) {
+  const secret = env.INTERNAL_API_SECRET;
+  if (!secret) { console.warn("[webhook] INTERNAL_API_SECRET not set; skipping confirmation email"); return; }
+  const base = (env.HQ_BASE_URL || "https://hq.threefoldsupply.com").replace(/\/$/, "");
+  const res = await fetch(base + "/api/internal/shop-order-confirmation", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + secret, "Content-Type": "application/json" },
+    body: JSON.stringify({ payment_intent_id: pi.id }),
+  });
+  if (!res.ok) console.error("[webhook] confirmation email call failed", res.status);
 }
 
 // Notify HQ so it fires the same bell + web push as "New Lead". Best-effort; never gates 200.
@@ -235,9 +246,12 @@ export async function onRequestPost(context) {
     catch (e) { console.error("[webhook] HQ notify error for", pi.id, e && e.message); }
   }
 
-  // JOB 3 — email hook (stub)
-  try { await maybeSendOrderEmails(pi, env); }
-  catch (e) { console.error("[webhook] email hook error for", pi.id, e && e.message); }
+  // JOB 3 — customer confirmation email via HQ. Only on a NEW order (inserted=true), so a
+  // Stripe retry/resend can't trigger a duplicate; HQ's sent-stamp dedupes as a second guard.
+  if (inserted) {
+    try { await maybeSendOrderEmails(pi, env); }
+    catch (e) { console.error("[webhook] email hook error for", pi.id, e && e.message); }
+  }
 
   return json({ received: true });
 }
