@@ -425,3 +425,18 @@ body.lb-open .lightbox{display:block}
   /* Start a Project → row 1 right, compact pill, vertically centered with the logo. */
   .nav-links .nav-cta{position:absolute;top:15px;right:24px;flex-basis:auto;margin:0;font-size:11px;padding:7px 13px;white-space:nowrap}
 }
+
+/* ---------- mobile tap targets (buy path) ---------- */
+/* ≤900px: raise buy-path controls to a ≥44px tap area (Apple HIG minimum).
+   Padding/min-height (not fixed height) keeps text vertically centered.
+   min-height also wins over the ≤600px #cartBtn nav rule (which only sets
+   padding). Desktop >900px keeps the original compact sizing.
+   .btn is untouched — it already renders 49px tall. */
+@media(max-width:900px){
+  .qty button{width:44px;height:44px}
+  .size-select{min-height:44px;padding:9px 12px}
+  .buy-btn,.add-btn{min-height:44px;padding:10px 14px}
+  .cart-link{min-height:44px}
+  .ci-remove{display:inline-flex;align-items:center;min-height:44px;padding:0 6px}
+  .cart-x{width:44px;height:44px;display:inline-flex;align-items:center;justify-content:center}
+}
