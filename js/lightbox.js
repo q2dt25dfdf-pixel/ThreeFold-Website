@@ -29,9 +29,21 @@
     var addBtn = card.querySelector(".add-btn");
     if (!img || !addBtn) return;
     var name = addBtn.dataset.name, price = addBtn.dataset.price, slug = addBtn.dataset.slug;
+    // Use what the browser ACTUALLY loaded for the grid (the cached WebP via <picture>),
+    // not the src attribute (the PNG fallback) — avoids a 1MB+ cold fetch on first tap.
+    var src = img.currentSrc || img.getAttribute("src");
+    // Reserve the image box BEFORE the image arrives: aspect-ratio from the grid image's
+    // dimensions (natural if loaded, else its width/height attributes), plus a width using
+    // the same contain-fit math as the .lb-img CSS caps (92vw / 100vh-140px). Pre-load and
+    // post-load boxes are then identical, so the modal never jumps. No dims → no reservation.
+    var w = img.naturalWidth || parseInt(img.getAttribute("width"), 10) || 0;
+    var h = img.naturalHeight || parseInt(img.getAttribute("height"), 10) || 0;
+    var sizeStyle = (w > 0 && h > 0)
+      ? ' style="aspect-ratio:' + w + ' / ' + h + ';width:min(92vw,calc((100vh - 140px)*' + (w / h).toFixed(4) + '))"'
+      : '';
     overlay.querySelector(".lb-inner").innerHTML =
       '<button class="lb-x" aria-label="Close">×</button>' +
-      '<img class="lb-img" src="' + img.getAttribute("src") + '" alt="' + esc(name) + '">' +
+      '<img class="lb-img"' + sizeStyle + ' src="' + src + '" alt="' + esc(name) + '">' +
       '<div class="pcard lb-card">' +
         '<div class="lb-meta"><b>' + esc(name) + '</b><span>· $' + esc(price) + '</span></div>' +
         '<div class="lb-buy">' +
