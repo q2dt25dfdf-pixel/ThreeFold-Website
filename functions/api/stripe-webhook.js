@@ -157,6 +157,21 @@ async function maybeSendOrderEmails(pi, env) {
   if (!res.ok) console.error("[webhook] confirmation email call failed", res.status);
 }
 
+// Ask HQ to auto-decrement inventory for this order. HQ resolves each line's blank via
+// its default+overrides map and draws down stock; it's idempotent on stock_decremented_at.
+// Best-effort; never gates 200.
+async function decrementStock(pi, env) {
+  const secret = env.INTERNAL_API_SECRET;
+  if (!secret) { console.warn("[webhook] INTERNAL_API_SECRET not set; skipping stock decrement"); return; }
+  const base = (env.HQ_BASE_URL || "https://hq.threefoldsupply.com").replace(/\/$/, "");
+  const res = await fetch(base + "/api/internal/shop-order-stock", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + secret, "Content-Type": "application/json" },
+    body: JSON.stringify({ payment_intent_id: pi.id }),
+  });
+  if (!res.ok) console.error("[webhook] stock decrement call failed", res.status);
+}
+
 // Notify HQ so it fires the same bell + web push as "New Lead". Best-effort; never gates 200.
 async function notifyHq(env, pi) {
   const secret = env.INTERNAL_API_SECRET;
@@ -251,6 +266,14 @@ export async function onRequestPost(context) {
   if (inserted) {
     try { await maybeSendOrderEmails(pi, env); }
     catch (e) { console.error("[webhook] email hook error for", pi.id, e && e.message); }
+  }
+
+  // JOB 4 — auto-decrement inventory in HQ. Only on a NEW order; HQ owns inventory + the
+  // design→blank mapping and is idempotent (stock_decremented_at stamp), so a retry can't
+  // double-decrement. Best-effort, never gates the 200.
+  if (inserted) {
+    try { await decrementStock(pi, env); }
+    catch (e) { console.error("[webhook] stock decrement error for", pi.id, e && e.message); }
   }
 
   return json({ received: true });
