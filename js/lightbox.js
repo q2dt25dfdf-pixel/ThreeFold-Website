@@ -52,6 +52,22 @@
         '</div>' +
       '</div>';
     overlay.querySelector(".lb-x").addEventListener("click", close);
+
+    // High-res swap: the small cached image is already showing with its box reserved
+    // (aspect-ratio + width on .lb-img). Load the native-res sibling (<name>@lg.webp)
+    // behind it and swap src when ready — same aspect, so no layout shift. If it fails
+    // to load, the small image simply stays. Grid loading is untouched (still the 900px
+    // WebP); these large files are only fetched here, on open.
+    var lbImg = overlay.querySelector(".lb-img");
+    if (lbImg && /\.(webp|png)$/i.test(src)) {
+      var largeSrc = src.replace(/\.(webp|png)$/i, "@lg.webp");
+      if (largeSrc !== src) {
+        var hi = new Image();
+        hi.onload = function () { lbImg.src = largeSrc; };
+        hi.src = largeSrc; // onerror: no-op — keep the small image
+      }
+    }
+
     document.body.classList.add("lb-open");
     overlay.setAttribute("aria-hidden", "false");
   }
