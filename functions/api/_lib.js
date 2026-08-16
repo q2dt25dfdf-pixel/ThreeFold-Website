@@ -73,6 +73,44 @@ export function addressComplete(a) {
   return !!(a.line1 && a.city && a.state && a.postal_code && a.country);
 }
 
+// ── Signed live-rate quotes ───────────────────────────────────────────────────
+// HQ's /api/internal/ship-rates HMAC-signs every USPS rate it quotes (hex SHA-256
+// over shipment_id|rate_id|postage_cents|expires_at|service, keyed with the shared
+// INTERNAL_API_SECRET, 30-minute expiry). create-intent verifies here before using
+// the amount — a client-supplied price is never trusted. Invalid or expired quotes
+// fall back to FLAT_SHIP_CENTS; they never fail the payment.
+
+function hexOf(buf) {
+  const b = new Uint8Array(buf); let s = "";
+  for (let i = 0; i < b.length; i++) s += b[i].toString(16).padStart(2, "0");
+  return s;
+}
+function constantTimeEqual(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+
+// Returns true only for a well-formed, unexpired, correctly signed rate quote.
+export async function verifySignedRate(secret, rate) {
+  if (!secret || !rate) return false;
+  const shipmentId = String(rate.shipment_id || "");
+  const rateId = String(rate.rate_id || "");
+  const cents = rate.postage_cents;
+  const exp = rate.expires_at;
+  const service = String(rate.service || "");
+  const sig = String(rate.sig || "");
+  if (!shipmentId || !rateId || !service || !sig) return false;
+  if (!Number.isInteger(cents) || cents <= 0) return false;
+  if (!Number.isInteger(exp) || Math.floor(Date.now() / 1000) > exp) return false;
+  const enc = new TextEncoder();
+  const key = await crypto.subtle.importKey("raw", enc.encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
+  const payload = shipmentId + "|" + rateId + "|" + cents + "|" + exp + "|" + service;
+  const mac = await crypto.subtle.sign("HMAC", key, enc.encode(payload));
+  return constantTimeEqual(hexOf(mac), sig);
+}
+
 // Stripe Tax calculation. shippingCents is taxed as shipping (CA taxes shipping on taxable
 // goods). Returns { id, subtotalCents, shippingCents, taxCents, totalCents }.
 export async function taxCalculate(key, lineItems, address, shippingCents) {
