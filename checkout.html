@@ -13,6 +13,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/site.css">
+<style>
+/* Live USPS rate picker (checkout only) */
+.co-rates{margin:10px 0 2px}
+.co-rate{display:flex;align-items:center;gap:10px;padding:10px 12px;border:1px solid #e2e2e2;border-radius:10px;margin-bottom:6px;cursor:pointer;font-size:14px}
+.co-rate.sel{border-color:#141414;background:#fafafa}
+.co-rate.flat{cursor:default}
+.co-rate-svc{font-weight:600}
+.co-rate-days{color:#777;font-size:12.5px}
+.co-rate-amt{margin-left:auto;font-weight:700}
+</style>
 </head>
 <body>
 
@@ -44,6 +54,7 @@
             <div class="co-trow"><span>Sales tax</span><span id="co-tax">—</span></div>
             <div class="co-trow co-grand"><span>Total</span><span id="co-total">—</span></div>
           </div>
+          <div id="co-rates" class="co-rates" style="display:none"></div>
           <p id="co-freeship-hint" class="co-ship-msg" style="display:none"></p>
           <div class="co-code">
             <button type="button" id="co-code-toggle" class="co-code-toggle">Have a code?</button>

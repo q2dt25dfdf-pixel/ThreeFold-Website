@@ -106,6 +106,16 @@ export function buildOrderRow(pi) {
       tax_amount: m.tax != null ? Number(m.tax) : null,
       shipping_cents: m.shipping_cents != null ? Number(m.shipping_cents) : null,
       ship_code_used: m.ship_code_used === "true",
+      // Live USPS rate the customer paid for (signature-verified in create-intent).
+      // HQ's label flow matches on service name; ids are audit trail. Absent on
+      // flat/free-shipping orders.
+      ...(m.ship_service ? {
+        easypost_quote: {
+          shipment_id: m.ship_shipment_id || "",
+          rate_id: m.ship_rate_id || "",
+          service: m.ship_service,
+        },
+      } : {}),
       payment_intent: pi.id,
       created_at: pi.created ? new Date(pi.created * 1000).toISOString() : null,
       shipped: false,
