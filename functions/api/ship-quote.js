@@ -17,14 +17,6 @@ function flatFallback() {
 
 export async function onRequestPost(context) {
   const env = context.env || {};
-  // TEMPORARY diagnostics for preview bring-up (no secret VALUES, presence booleans
-  // + upstream status only). Remove before merge.
-  const debug = new URL(context.request.url).searchParams.get("debug") === "1";
-  const dbg = debug ? {
-    has_secret: !!env.INTERNAL_API_SECRET,
-    has_bypass: !!env.HQ_VERCEL_BYPASS,
-    base: (env.HQ_BASE_URL || "default:hq.threefoldsupply.com"),
-  } : null;
   let body;
   try { body = await context.request.json(); } catch { return json({ error: "Malformed request." }, 400); }
 
@@ -41,7 +33,7 @@ export async function onRequestPost(context) {
   const secret = env.INTERNAL_API_SECRET;
   if (!secret) {
     console.error("[ship-quote] INTERNAL_API_SECRET not set — flat fallback");
-    return json(Object.assign(flatFallback(), dbg ? { debug: Object.assign({ fail: "no_secret" }, dbg) } : {}));
+    return json(flatFallback());
   }
   const base = (env.HQ_BASE_URL || "https://hq.threefoldsupply.com").replace(/\/$/, "");
 
@@ -66,11 +58,11 @@ export async function onRequestPost(context) {
     const d = await res.json().catch(function () { return {}; });
     if (!res.ok || !Array.isArray(d.rates) || !d.rates.length) {
       console.error("[ship-quote] HQ ship-rates failed (HTTP " + res.status + "): " + (d.error || "no rates") + " — flat fallback");
-      return json(Object.assign(flatFallback(), dbg ? { debug: Object.assign({ fail: "hq_" + res.status, hq_error: String(d.error || "").slice(0, 200) }, dbg) } : {}));
+      return json(flatFallback());
     }
     return json({ shipment_id: d.shipment_id, weight_oz: d.weight_oz, rates: d.rates });
   } catch (e) {
     console.error("[ship-quote] rate path error — flat fallback: " + (e && e.message));
-    return json(Object.assign(flatFallback(), dbg ? { debug: Object.assign({ fail: "exception", message: String(e && e.message).slice(0, 200) }, dbg) } : {}));
+    return json(flatFallback());
   }
 }
