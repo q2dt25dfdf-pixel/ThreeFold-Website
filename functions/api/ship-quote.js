@@ -40,9 +40,14 @@ export async function onRequestPost(context) {
   try {
     const ctrl = new AbortController();
     const timer = setTimeout(function () { ctrl.abort(); }, 6000);
+    // HQ_VERCEL_BYPASS: Vercel "Protection Bypass for Automation" secret — needed only
+    // when HQ_BASE_URL points at a protected Vercel PREVIEW (previews sit behind
+    // Vercel SSO). Unset in production; the header is simply omitted.
+    const headers = { Authorization: "Bearer " + secret, "Content-Type": "application/json" };
+    if (env.HQ_VERCEL_BYPASS) headers["x-vercel-protection-bypass"] = env.HQ_VERCEL_BYPASS;
     const res = await fetch(base + "/api/internal/ship-rates", {
       method: "POST",
-      headers: { Authorization: "Bearer " + secret, "Content-Type": "application/json" },
+      headers: headers,
       body: JSON.stringify({
         items: cart.items.map(function (li) { return { name: li.name, size: li.size, qty: li.qty }; }),
         address: address,
