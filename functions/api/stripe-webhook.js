@@ -7,6 +7,10 @@
 //          reference = PaymentIntent id. Attempt-then-classify: a duplicate/already-exists
 //          error for that reference is treated as success (no pre-check lookup). Any OTHER
 //          tax error → 500 so Stripe retries.
+//   GATE (fail closed): custom-order PIs (metadata.payment_type deposit/final_invoice) are
+//          skipped — HQ records those payments. A PI with neither payment_type NOR a
+//          storefront marker (metadata.order_items / tax_calculation, both stamped by
+//          create-intent) is refused: loud log + HQ ops alert, 200 returned, NO row.
 //   JOB 2 (never gates): record the order in Supabase `shop_orders`, keyed on the
 //          PaymentIntent id (dedupe via primary key + ignore-duplicates). Supabase failure
 //          is logged and we still return 200 — only tax gates 200 vs 500.
@@ -215,6 +219,27 @@ async function notifyHq(env, pi) {
   if (!res.ok) console.error("[webhook] HQ notify failed", res.status);
 }
 
+// Ops alert: a PI was refused (no payment_type, no storefront metadata). Real money moved,
+// so it must surface in the HQ bell for investigation — never a silent drop. Best-effort;
+// never gates the 200.
+async function notifyHqRefusedPi(env, pi) {
+  const secret = env.INTERNAL_API_SECRET;
+  if (!secret) { console.warn("[webhook] INTERNAL_API_SECRET not set; skipping refused-PI ops alert"); return; }
+  const base = (env.HQ_BASE_URL || "https://hq.threefoldsupply.com").replace(/\/$/, "");
+  const res = await fetch(base + "/api/internal/ops-alert", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + secret, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      source: "stripe-webhook",
+      reason: "unrecognized_payment_intent",
+      payment_intent_id: pi.id,
+      amount: typeof pi.amount === "number" ? pi.amount / 100 : null,
+      email: pi.receipt_email || "",
+    }),
+  });
+  if (!res.ok) console.error("[webhook] refused-PI ops alert failed", res.status);
+}
+
 function json(obj, status) {
   return new Response(JSON.stringify(obj), { status: status || 200, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" } });
 }
@@ -257,6 +282,20 @@ export async function onRequestPost(context) {
   if (paymentType === "final_invoice" || paymentType === "deposit") {
     console.log("[webhook] custom-order PI", pi.id, "(" + paymentType + ") — skipped shop order (HQ records the payment)");
     return json({ received: true, custom_order: paymentType });
+  }
+
+  // FAIL CLOSED — every real storefront PI is minted by create-intent, which always stamps
+  // order_items + tax_calculation. A PI with neither payment_type nor a storefront marker is
+  // unknown (stale HQ deploy that skipped the payment_type stamp, a future payment path, a
+  // manual Stripe charge); recording it would mint a blank phantom shop order. Refuse the row,
+  // surface it to HQ ops, and return 200 so Stripe stops retrying.
+  const isStorefront = pi.metadata && (pi.metadata.order_items || pi.metadata.tax_calculation);
+  if (!isStorefront) {
+    console.error("[webhook] REFUSED shop order for PI", pi.id,
+      "— no payment_type and no storefront metadata (order_items/tax_calculation); no row created");
+    try { await notifyHqRefusedPi(env, pi); }
+    catch (e) { console.error("[webhook] refused-PI ops alert error for", pi.id, e && e.message); }
+    return json({ received: true, refused: "unrecognized_payment_intent" });
   }
 
   // JOB 2 — record order (never gates). inserted=false on a duplicate (retry/resend).
