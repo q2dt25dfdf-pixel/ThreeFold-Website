@@ -7,11 +7,18 @@
 //          reference = PaymentIntent id. Attempt-then-classify: a duplicate/already-exists
 //          error for that reference is treated as success (no pre-check lookup). Any OTHER
 //          tax error → 500 so Stripe retries.
+//   GATE (fail closed): custom-order PIs (metadata.payment_type deposit/final_invoice) are
+//          skipped — HQ records those payments. A PI with neither payment_type NOR a
+//          storefront marker (metadata.order_items / tax_calculation, both stamped by
+//          create-intent) is refused: loud log + HQ ops alert, 200 returned, NO row.
 //   JOB 2 (never gates): record the order in Supabase `shop_orders`, keyed on the
 //          PaymentIntent id (dedupe via primary key + ignore-duplicates). Supabase failure
 //          is logged and we still return 200 — only tax gates 200 vs 500.
-//   JOB 3: stub hook for HQ-branded emails (no send yet).
-//   JOB 4: see functions/api/shop-orders-export.js (Pirate Ship CSV).
+//   JOBS 3–5 (never gate, run on EVERY delivery): HQ bell notification, E1 confirmation
+//          email, inventory decrement. Each dedupes in HQ via a stamp on the shop_orders
+//          row (notified_at / confirmation_email_sent_at / stock_decremented_at), so
+//          retries self-heal failures without duplicating side effects.
+//   (Pirate Ship CSV export lives in functions/api/shop-orders-export.js.)
 //
 // Env (Cloudflare Pages, Prod + Preview): STRIPE_WEBHOOK_SECRET (whsec_), STRIPE_SECRET_KEY,
 // SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY. See SETUP-CLOUDFLARE.md.
@@ -150,10 +157,10 @@ async function recordShopOrder(env, pi) {
   return Array.isArray(rows) && rows.length > 0; // true = newly inserted, false = duplicate
 }
 
-// JOB 3 — customer order-confirmation email (E1), sent by HQ. POSTs the PaymentIntent id to
+// JOB 4 — customer order-confirmation email (E1), sent by HQ. POSTs the PaymentIntent id to
 // HQ's /api/internal/shop-order-confirmation (same Bearer channel as notifyHq); HQ loads the
-// just-inserted shop_orders row, builds the approved copy, and sends via its Gmail/Resend
-// pipeline. HQ dedupes on confirmation_email_sent_at, so a duplicate call cannot re-send.
+// shop_orders row, builds the approved copy, and sends via its Gmail/Resend pipeline. Called
+// on every delivery; HQ dedupes on confirmation_email_sent_at, so a repeat cannot re-send.
 // Best-effort: failures log and never gate the webhook 200.
 async function maybeSendOrderEmails(pi, env) {
   const secret = env.INTERNAL_API_SECRET;
@@ -167,9 +174,9 @@ async function maybeSendOrderEmails(pi, env) {
   if (!res.ok) console.error("[webhook] confirmation email call failed", res.status);
 }
 
-// Ask HQ to auto-decrement inventory for this order. HQ resolves each line's blank via
-// its default+overrides map and draws down stock; it's idempotent on stock_decremented_at.
-// Best-effort; never gates 200.
+// JOB 5 — ask HQ to auto-decrement inventory for this order. HQ resolves each line's blank
+// via its default+overrides map and draws down stock. Called on every delivery; idempotent
+// on stock_decremented_at. Best-effort; never gates 200.
 async function decrementStock(pi, env) {
   const secret = env.INTERNAL_API_SECRET;
   if (!secret) { console.warn("[webhook] INTERNAL_API_SECRET not set; skipping stock decrement"); return; }
@@ -182,7 +189,9 @@ async function decrementStock(pi, env) {
   if (!res.ok) console.error("[webhook] stock decrement call failed", res.status);
 }
 
-// Notify HQ so it fires the same bell + web push as "New Lead". Best-effort; never gates 200.
+// JOB 3 — notify HQ so it fires the same bell + web push as "New Lead". Called on every
+// delivery; HQ dedupes via the notified_at stamp on the shop_orders row. Best-effort;
+// never gates 200.
 async function notifyHq(env, pi) {
   const secret = env.INTERNAL_API_SECRET;
   if (!secret) { console.warn("[webhook] INTERNAL_API_SECRET not set; skipping HQ notify"); return; }
@@ -213,6 +222,27 @@ async function notifyHq(env, pi) {
     }),
   });
   if (!res.ok) console.error("[webhook] HQ notify failed", res.status);
+}
+
+// Ops alert: a PI was refused (no payment_type, no storefront metadata). Real money moved,
+// so it must surface in the HQ bell for investigation — never a silent drop. Best-effort;
+// never gates the 200.
+async function notifyHqRefusedPi(env, pi) {
+  const secret = env.INTERNAL_API_SECRET;
+  if (!secret) { console.warn("[webhook] INTERNAL_API_SECRET not set; skipping refused-PI ops alert"); return; }
+  const base = (env.HQ_BASE_URL || "https://hq.threefoldsupply.com").replace(/\/$/, "");
+  const res = await fetch(base + "/api/internal/ops-alert", {
+    method: "POST",
+    headers: { Authorization: "Bearer " + secret, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      source: "stripe-webhook",
+      reason: "unrecognized_payment_intent",
+      payment_intent_id: pi.id,
+      amount: typeof pi.amount === "number" ? pi.amount / 100 : null,
+      email: pi.receipt_email || "",
+    }),
+  });
+  if (!res.ok) console.error("[webhook] refused-PI ops alert failed", res.status);
 }
 
 function json(obj, status) {
@@ -259,32 +289,45 @@ export async function onRequestPost(context) {
     return json({ received: true, custom_order: paymentType });
   }
 
+  // FAIL CLOSED — every real storefront PI is minted by create-intent, which always stamps
+  // order_items + tax_calculation. A PI with neither payment_type nor a storefront marker is
+  // unknown (stale HQ deploy that skipped the payment_type stamp, a future payment path, a
+  // manual Stripe charge); recording it would mint a blank phantom shop order. Refuse the row,
+  // surface it to HQ ops, and return 200 so Stripe stops retrying.
+  const isStorefront = pi.metadata && (pi.metadata.order_items || pi.metadata.tax_calculation);
+  if (!isStorefront) {
+    console.error("[webhook] REFUSED shop order for PI", pi.id,
+      "— no payment_type and no storefront metadata (order_items/tax_calculation); no row created");
+    try { await notifyHqRefusedPi(env, pi); }
+    catch (e) { console.error("[webhook] refused-PI ops alert error for", pi.id, e && e.message); }
+    return json({ received: true, refused: "unrecognized_payment_intent" });
+  }
+
   // JOB 2 — record order (never gates). inserted=false on a duplicate (retry/resend).
   let inserted = false;
   try { inserted = await recordShopOrder(env, pi); }
   catch (e) { console.error("[webhook] shop_orders insert failed for", pi.id, e && e.message); }
+  if (!inserted) console.log("[webhook] duplicate delivery for", pi.id, "— jobs re-check via HQ stamps");
 
-  // Push to HQ (bell + web push), same channel as New Lead. Only on a NEW order (no dup push
-  // on retries/resends). Best-effort, never gates the 200.
-  if (inserted) {
-    try { await notifyHq(env, pi); }
-    catch (e) { console.error("[webhook] HQ notify error for", pi.id, e && e.message); }
-  }
+  // JOBS 3–5 run on EVERY delivery — no first-insert gate. Each is idempotent in HQ via a
+  // stamp on the shop_orders row (notified_at / confirmation_email_sent_at /
+  // stock_decremented_at), so a Stripe retry re-attempts anything that failed last time and
+  // can never double-ring, double-send, or double-decrement. This is what makes a lost
+  // insert race (a second webhook subscriber) or a transient HQ failure self-heal on the
+  // next delivery instead of vanishing forever. Best-effort; none gate the 200.
 
-  // JOB 3 — customer confirmation email via HQ. Only on a NEW order (inserted=true), so a
-  // Stripe retry/resend can't trigger a duplicate; HQ's sent-stamp dedupes as a second guard.
-  if (inserted) {
-    try { await maybeSendOrderEmails(pi, env); }
-    catch (e) { console.error("[webhook] email hook error for", pi.id, e && e.message); }
-  }
+  // JOB 3 — HQ bell + web push, same channel as New Lead (HQ no-ops on notified_at).
+  try { await notifyHq(env, pi); }
+  catch (e) { console.error("[webhook] HQ notify error for", pi.id, e && e.message); }
 
-  // JOB 4 — auto-decrement inventory in HQ. Only on a NEW order; HQ owns inventory + the
-  // design→blank mapping and is idempotent (stock_decremented_at stamp), so a retry can't
-  // double-decrement. Best-effort, never gates the 200.
-  if (inserted) {
-    try { await decrementStock(pi, env); }
-    catch (e) { console.error("[webhook] stock decrement error for", pi.id, e && e.message); }
-  }
+  // JOB 4 — customer confirmation email (E1) via HQ (no-ops on confirmation_email_sent_at).
+  try { await maybeSendOrderEmails(pi, env); }
+  catch (e) { console.error("[webhook] email hook error for", pi.id, e && e.message); }
+
+  // JOB 5 — auto-decrement inventory in HQ; HQ owns inventory + the design→blank mapping
+  // (no-ops on stock_decremented_at).
+  try { await decrementStock(pi, env); }
+  catch (e) { console.error("[webhook] stock decrement error for", pi.id, e && e.message); }
 
   return json({ received: true });
 }
