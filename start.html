@@ -41,115 +41,199 @@
     <div class="wrap">
       <div class="eyebrow">Start a Project</div>
       <h1 style="font-size:clamp(36px,5.5vw,68px)">Tell us about<br>your team.</h1>
-      <p class="sub">The more real you are here, the better the design gets. We reply within 24 hours, send a free mockup, and nothing prints until you approve it.</p>
+      <p class="sub">A few quick taps, one question about your story, and we take it from there. We reply within 24 hours, send a free mockup, and nothing prints until you approve it.</p>
 
-      <form id="qform" class="qform" novalidate>
-        <p style="display:none"><label>Do not fill this out: <input name="bot-field"></label></p>
+      <div class="tflow" id="tflow">
+        <p style="display:none"><label>Do not fill this out: <input name="bot-field" id="bot-field" tabindex="-1" autocomplete="off"></label></p>
         <input type="hidden" name="apparel_types" id="apparel-types-input" value="">
 
-        <!-- 01 Company -->
-        <div class="fsec">
-          <div class="fsec-title">01 · About your company</div>
-          <div class="form-grid">
-            <div class="field"><label>Company Name <span class="req">*</span></label><input type="text" name="company_name" placeholder="Piranha Ops (POPS)" required></div>
-            <div class="field"><label>Company Type <span class="req">*</span></label>
-              <select name="company_type" required>
-                <option value="" disabled selected>Select one</option>
-                <option>Amazon DSP Operator</option><option>Dental / Medical Practice</option>
-                <option>Warehouse / Logistics</option><option>Gym / Fitness Studio</option>
-                <option>Sports Team</option><option>Local Small Business</option>
-                <option>Corporation / Enterprise</option><option>Contractor / Trades</option><option>Other</option>
-              </select>
-            </div>
-          </div>
-          <div class="field"><label>What does your company do? <span class="req">*</span></label><textarea name="company_description" rows="3" placeholder="Brief overview of your company, what you do, and who your team is." required></textarea></div>
+        <div class="tprogress" id="tprogress">
+          <span class="tprogress-label" id="tprogress-label">Step 1 of 7</span>
+          <div class="tprogress-track"><div class="tprogress-fill" id="tprogress-fill"></div></div>
         </div>
 
-        <!-- 02 Contact -->
-        <div class="fsec">
-          <div class="fsec-title">02 · About you</div>
-          <div class="form-grid three">
-            <div class="field"><label>Contact Name <span class="req">*</span></label><input type="text" name="contact_name" placeholder="First and last name" required></div>
-            <div class="field"><label>Your Role / Title</label><input type="text" name="contact_title" placeholder="Owner, Ops Manager, etc."></div>
-            <div class="field"><label>Phone <span class="req">*</span></label><input type="tel" name="contact_phone" placeholder="(415) 000-0000" required></div>
+        <!-- 1 · Apparel type (multi) -->
+        <div class="tscreen" id="ts1" data-step="1">
+          <h2 class="tq" tabindex="-1">What are we making?</h2>
+          <p class="tq-hint">Select all that apply.</p>
+          <div class="topt-wrap" id="apparel-checks" role="group" aria-label="Apparel type — select all that apply">
+            <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>T-Shirts</button>
+            <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>Hoodies</button>
+            <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>Jackets</button>
+            <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>Hats</button>
+            <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>Tumblers</button>
+            <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>Mugs</button>
+            <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>Accessories</button>
+            <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>Not sure yet</button>
           </div>
-          <div class="form-grid">
-            <div class="field"><label>Email <span class="req">*</span></label><input type="email" name="contact_email" placeholder="you@company.com" required></div>
-            <div class="field"><label>Preferred Contact Method <span class="req">*</span></label>
-              <select name="contact_method" required>
-                <option value="" disabled selected>How should we reach you?</option>
-                <option>Email</option><option>Text message</option><option>Phone call</option><option>Virtual meeting</option>
-              </select>
-            </div>
+          <p class="terr" id="terr1">Pick at least one — "Not sure yet" counts.</p>
+          <div class="tnav">
+            <button type="button" class="tback" data-back hidden>← Back</button>
+            <button type="button" class="btn" data-continue>Continue →</button>
           </div>
         </div>
 
-        <!-- 03 Order -->
-        <div class="fsec">
-          <div class="fsec-title">03 · Order details</div>
-          <div class="form-grid three">
-            <div class="field"><label>Quantity Range <span class="req">*</span></label>
-              <select name="quantity" required>
-                <option value="" disabled selected>Estimate</option>
-                <option>24–50 pieces</option><option>51–100 pieces</option><option>101–250 pieces</option>
-                <option>251–500 pieces</option><option>500+ pieces</option><option>Not sure yet</option>
-              </select>
-            </div>
-            <div class="field"><label>Project Timeline</label><textarea name="project_timeline" rows="3" placeholder="PRIME week rollout, onboarding in August, holiday event, or no hard deadline yet."></textarea></div>
-            <div class="field"><label>Budget Range</label>
-              <select name="budget">
-                <option value="" disabled selected>Approximate</option>
-                <option>Under $500</option><option>$500–$1,000</option><option>$1,000–$2,500</option>
-                <option>$2,500–$5,000</option><option>$5,000–$10,000</option><option>$10,000+</option><option>Flexible / unknown</option>
-              </select>
-            </div>
+        <!-- 2 · Quantity (single) -->
+        <div class="tscreen" id="ts2" data-step="2">
+          <h2 class="tq" tabindex="-1">Roughly how many pieces?</h2>
+          <p class="tq-hint">A ballpark is fine.</p>
+          <div class="topt-wrap" role="radiogroup" aria-label="Quantity range" data-single="quantity">
+            <button type="button" class="topt" role="radio" aria-checked="false">24–50 pieces</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">51–100 pieces</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">101–250 pieces</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">251–500 pieces</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">500+ pieces</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Not sure yet</button>
           </div>
-          <div class="field">
-            <label>Apparel Type <span class="req">*</span> — select all that apply</label>
-            <div class="fcheck-wrap" id="apparel-checks">
-              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>T-Shirts</div>
-              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Hoodies</div>
-              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Jackets</div>
-              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Hats</div>
-              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Tumblers</div>
-              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Mugs</div>
-              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Accessories</div>
-              <div class="fcheck-item" role="checkbox" aria-checked="false" tabindex="0"><div class="fcheck-box"></div>Not sure yet</div>
-            </div>
-          </div>
-          <div class="form-grid">
-            <div class="field"><label>Who is the apparel for? <span class="req">*</span></label>
-              <select name="audience" required>
-                <option value="" disabled selected>Select</option>
-                <option>Drivers / Delivery Team</option><option>Warehouse Staff</option><option>Office / Admin Team</option>
-                <option>All Employees</option><option>Client Gifts / Corporate</option><option>Event / Team</option>
-                <option>Customers / Public</option><option>Mixed</option>
-              </select>
-            </div>
-            <div class="field"><label>Station Code / Location</label><input type="text" name="station_code" placeholder="e.g. DSF7 — Bay Area"><div class="fhint">DSP operators: include your station code and we'll build it into the design.</div></div>
+          <div class="tnav">
+            <button type="button" class="tback" data-back>← Back</button>
           </div>
         </div>
 
-        <!-- 04 Design -->
-        <div class="fsec">
-          <div class="fsec-title">04 · Design direction</div>
-          <div class="field"><label>What do you want this apparel to represent? <span class="req">*</span></label><textarea name="meaning" rows="4" placeholder="Team pride? A launch? Company culture? Tell us what this collection needs to say." required></textarea></div>
-          <div class="form-grid">
-            <div class="field"><label>Style Direction</label>
-              <select name="style">
-                <option value="" disabled selected>General aesthetic</option>
-                <option>Streetwear / Urban</option><option>Premium / Minimalist</option><option>Workwear / Uniform</option>
-                <option>Bold / Graphic</option><option>Classic / Corporate</option><option>Athletic / Sport</option><option>Open to your recommendation</option>
-              </select>
-            </div>
-            <div class="field"><label>Color Preferences</label><input type="text" name="colors" placeholder="Company colors, palette, or open to ideas"></div>
+        <!-- 3 · Audience (single) -->
+        <div class="tscreen" id="ts3" data-step="3">
+          <h2 class="tq" tabindex="-1">Who is the apparel for?</h2>
+          <div class="topt-wrap" role="radiogroup" aria-label="Who is the apparel for" data-single="audience">
+            <button type="button" class="topt" role="radio" aria-checked="false">Drivers / Delivery Team</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Warehouse Staff</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Office / Admin Team</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">All Employees</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Client Gifts / Corporate</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Event / Team</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Customers / Public</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Mixed</button>
           </div>
-          <div class="field"><label>Notes, Inspiration, Additional Context</label><textarea name="notes" rows="4" placeholder="Links, references, brands you admire, things you don't want, specific text. More detail = better design."></textarea></div>
+          <div class="tnav">
+            <button type="button" class="tback" data-back>← Back</button>
+          </div>
         </div>
 
-        <!-- 05 Files -->
-        <div class="fsec">
-          <div class="fsec-title">05 · Existing assets</div>
+        <!-- 4 · Timeline (single) -->
+        <div class="tscreen" id="ts4" data-step="4">
+          <h2 class="tq" tabindex="-1">When do you need it?</h2>
+          <div class="topt-wrap" role="radiogroup" aria-label="Project timeline" data-single="timeline">
+            <button type="button" class="topt" role="radio" aria-checked="false">Within 2 weeks</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">2–4 weeks</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">1–2 months</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">No hard deadline</button>
+          </div>
+          <div class="tnav">
+            <button type="button" class="tback" data-back>← Back</button>
+          </div>
+        </div>
+
+        <!-- 5 · Company type (single + reveals) -->
+        <div class="tscreen" id="ts5" data-step="5">
+          <h2 class="tq" tabindex="-1">What kind of company are you?</h2>
+          <div class="topt-wrap" role="radiogroup" aria-label="Company type" data-single="companyType">
+            <button type="button" class="topt" role="radio" aria-checked="false">Amazon DSP Operator</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Dental / Medical Practice</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Warehouse / Logistics</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Gym / Fitness Studio</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Sports Team</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Local Small Business</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Corporation / Enterprise</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Contractor / Trades</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Other</button>
+          </div>
+          <div class="treveal field" id="treveal-other">
+            <label for="company-type-other">Tell us what you do <span class="req">*</span></label>
+            <input type="text" id="company-type-other" placeholder="e.g. Coffee roaster, nonprofit, school club">
+          </div>
+          <div class="treveal field" id="treveal-station">
+            <label for="station-code-input">Station Code / Location</label>
+            <input type="text" id="station-code-input" name="station_code" placeholder="e.g. DSF7 — Bay Area">
+            <div class="fhint">DSP operators: include your station code and we'll build it into the design.</div>
+          </div>
+          <p class="terr" id="terr5">Pick your company type — and if it's "Other", tell us what you do.</p>
+          <div class="tnav">
+            <button type="button" class="tback" data-back>← Back</button>
+            <button type="button" class="btn" data-continue>Continue →</button>
+          </div>
+        </div>
+
+        <!-- 6 · Meaning (textarea) -->
+        <div class="tscreen" id="ts6" data-step="6">
+          <h2 class="tq" tabindex="-1">What should this apparel represent?</h2>
+          <p class="tq-hint">Team pride? A launch? Company culture? The only question we ask you to type — it drives the whole design.</p>
+          <div class="field" style="margin-top:24px;max-width:640px">
+            <textarea id="meaning-input" name="meaning" rows="5" placeholder="Tell us what this collection needs to say."></textarea>
+          </div>
+          <p class="terr" id="terr6">A sentence or two is all we need.</p>
+          <div class="tnav">
+            <button type="button" class="tback" data-back>← Back</button>
+            <button type="button" class="btn" data-continue>Continue →</button>
+          </div>
+        </div>
+
+        <!-- 7 · Contact + ack + submit -->
+        <div class="tscreen" id="ts7" data-step="7">
+          <h2 class="tq" tabindex="-1">Where do we send the mockup?</h2>
+          <div class="form-grid" style="max-width:640px">
+            <div class="field"><label for="company-name-input">Company Name <span class="req">*</span></label><input type="text" id="company-name-input" name="company_name" placeholder="Piranha Ops (POPS)" autocomplete="organization"></div>
+            <div class="field"><label for="contact-name-input">Contact Name <span class="req">*</span></label><input type="text" id="contact-name-input" name="contact_name" placeholder="First and last name" autocomplete="name"></div>
+            <div class="field"><label for="contact-email-input">Email <span class="req">*</span></label><input type="email" id="contact-email-input" name="contact_email" placeholder="you@company.com" autocomplete="email"></div>
+            <div class="field"><label for="contact-phone-input">Phone <span class="req">*</span></label><input type="tel" id="contact-phone-input" name="contact_phone" placeholder="(415) 000-0000" autocomplete="tel"></div>
+          </div>
+          <div class="fsubmit-row">
+            <label class="fsubmit-ack" id="fsubmit-ack-label">
+              <input type="checkbox" id="fsubmit-ack-check">
+              <span>I understand that all products are custom made specifically for my order. Once artwork is approved and production begins, orders cannot be canceled, returned, or refunded.</span>
+            </label>
+            <p class="fsubmit-ack-note">If there is an issue caused by a manufacturing defect or production error, contact us and we will make it right.</p>
+            <p class="terr" id="terr7">Fill in the four contact fields so we can reach you.</p>
+            <div class="tnav" style="margin-top:0">
+              <button type="button" class="tback" data-back>← Back</button>
+              <button type="button" class="btn btn-submit" id="fsubmit-btn" disabled>Submit Request →</button>
+            </div>
+            <p id="startError" class="form-note" style="display:none;color:#c0392b;margin-top:14px">Something went wrong sending your request. Please try again or email threefoldsupplycompany@gmail.com.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 · Done -->
+      <div class="form-success" id="form-success">
+        <div class="form-success-check">✓</div>
+        <h2 class="form-success-h">We Got You.</h2>
+        <p class="form-success-body">Your project brief is in. We'll reach out within 24 hours to schedule your design consultation. Keep an eye on your inbox.</p>
+        <div id="form-success-booking" style="margin-top:28px">
+          <p class="form-success-body" style="margin-bottom:16px">Want to talk it through? Book your initial meeting below.</p>
+          <a class="btn" href="https://cal.com/threefold-fwkchj/initial-meeting" target="_blank" rel="noopener">Book Initial Meeting →</a>
+        </div>
+
+        <div class="tsummary" id="tsummary" aria-label="What you told us"></div>
+
+        <div class="tdetails" id="tdetails">
+          <div class="fsec-title">Optional · Add design details</div>
+          <p class="tdetails-sub">Skip this entirely if you want — your request is already in. But if you have a budget, a style, or a logo handy, it gives the first mockup a head start.</p>
+
+          <div class="field"><label id="tdetails-budget-label">Budget Range</label>
+            <div class="topt-wrap" role="radiogroup" aria-labelledby="tdetails-budget-label" data-single="budget" data-noadvance>
+              <button type="button" class="topt" role="radio" aria-checked="false">Under $500</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">$500–$1,000</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">$1,000–$2,500</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">$2,500–$5,000</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">$5,000–$10,000</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">$10,000+</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">Flexible / unknown</button>
+            </div>
+          </div>
+
+          <div class="field"><label id="tdetails-style-label">Style Direction</label>
+            <div class="topt-wrap" role="radiogroup" aria-labelledby="tdetails-style-label" data-single="style" data-noadvance>
+              <button type="button" class="topt" role="radio" aria-checked="false">Streetwear / Urban</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">Premium / Minimalist</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">Workwear / Uniform</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">Bold / Graphic</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">Classic / Corporate</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">Athletic / Sport</button>
+              <button type="button" class="topt" role="radio" aria-checked="false">Open to your recommendation</button>
+            </div>
+          </div>
+
+          <div class="field"><label for="colors-input">Color Preferences</label><input type="text" id="colors-input" name="colors" placeholder="Company colors, palette, or open to ideas"></div>
+          <div class="field"><label for="notes-input">Notes, Inspiration, Additional Context</label><textarea id="notes-input" name="notes" rows="4" placeholder="Links, references, brands you admire, things you don't want, specific text."></textarea></div>
+
           <div class="field">
             <label>Logo, existing designs, or brand assets</label>
             <div class="ffile-area" id="ffile-area">
@@ -159,29 +243,14 @@
             </div>
             <div class="ffile-error-msg" id="ffile-error"></div>
             <div id="ffile-list" class="ffile-list"></div>
-            <div class="fhint">Optional — skip if you don't have assets yet. For large brand kits, paste a Google Drive link in Notes above.</div>
+            <div class="fhint">For large brand kits, paste a Google Drive link in Notes above.</div>
           </div>
-        </div>
 
-        <!-- Submit -->
-        <div class="fsubmit-row">
-          <label class="fsubmit-ack" id="fsubmit-ack-label">
-            <input type="checkbox" id="fsubmit-ack-check">
-            <span>I understand that all products are custom made specifically for my order. Once artwork is approved and production begins, orders cannot be canceled, returned, or refunded.</span>
-          </label>
-          <p class="fsubmit-ack-note">If there is an issue caused by a manufacturing defect or production error, contact us and we will make it right.</p>
-          <button type="submit" class="btn btn-submit" id="fsubmit-btn" disabled>Submit Request →</button>
-          <p id="startError" class="form-note" style="display:none;color:#c0392b">Something went wrong sending your request. Please try again or email threefoldsupplycompany@gmail.com.</p>
-        </div>
-      </form>
-
-      <div class="form-success" id="form-success">
-        <div class="form-success-check">✓</div>
-        <h2 class="form-success-h">We Got You.</h2>
-        <p class="form-success-body">Your project brief is in. We'll reach out within 24 hours to schedule your design consultation. Keep an eye on your inbox.</p>
-        <div id="form-success-booking" style="display:none;margin-top:28px">
-          <p class="form-success-body" style="margin-bottom:16px">Want to talk it through? Book your initial meeting below.</p>
-          <a class="btn" href="https://cal.com/threefold-fwkchj/initial-meeting" target="_blank" rel="noopener">Book Initial Meeting →</a>
+          <div class="tnav">
+            <button type="button" class="btn" id="tdetails-save">Save Details →</button>
+          </div>
+          <p class="tdetails-saved" id="tdetails-saved">✓ Details saved and added to your request.</p>
+          <p class="terr" id="tdetails-error">Couldn't save the extra details. Your request is still in — you can retry, or just reply with them when we reach out.</p>
         </div>
       </div>
     </div>
@@ -223,25 +292,183 @@
 </footer>
 
 <script>
-// ThreeFold intake questionnaire → HQ CRM (/api/public-lead). Files upload to Supabase
-// Storage (public anon key + intake-files bucket), same as the production form.
+// ThreeFold tap-through intake → HQ CRM (/api/public-lead). The lead is created when the
+// contact screen submits (step 7); the post-submit "design details" block PATCHes that
+// same lead. Files upload to Supabase Storage (public anon key + intake-files bucket).
 (function () {
-  var form = document.getElementById("qform");
-  if (!form) return;
+  var flow = document.getElementById("tflow");
+  if (!flow) return;
   var successBox = document.getElementById("form-success");
   var errEl = document.getElementById("startError");
+  // Same origin trick as checkout: local previews talk to a local HQ dev server.
+  var HQ_BASE = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:3000" : "https://hq.threefoldsupply.com";
 
-  // ── Apparel checkboxes → hidden apparel_types
+  var TOTAL_STEPS = 7;
+  var AUTO_ADVANCE_MS = 180;
+  var state = { quantity: "", audience: "", timeline: "", companyType: "", budget: "", style: "", leadId: "" };
+  var current = 1;
+
+  // ── Navigation
+  var screens = Array.prototype.slice.call(flow.querySelectorAll(".tscreen"));
+  var progLabel = document.getElementById("tprogress-label"), progFill = document.getElementById("tprogress-fill");
+  function goTo(step) {
+    current = step;
+    screens.forEach(function (s) { s.classList.toggle("active", Number(s.getAttribute("data-step")) === step); });
+    progLabel.textContent = "Step " + step + " of " + TOTAL_STEPS;
+    progFill.style.width = (step / TOTAL_STEPS) * 100 + "%";
+    var active = flow.querySelector(".tscreen.active .tq");
+    if (active) active.focus({ preventScroll: true });
+    flow.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  flow.querySelectorAll("[data-back]").forEach(function (b) {
+    b.addEventListener("click", function () { if (current > 1) goTo(current - 1); });
+  });
+  function setErr(id, on) { var el = document.getElementById(id); if (el) el.classList.toggle("show", !!on); }
+
+  // ── Multi-select (apparel) → hidden apparel_types
   var apparelInput = document.getElementById("apparel-types-input");
   function updateApparelInput() {
-    if (!apparelInput) return;
-    apparelInput.value = Array.prototype.slice.call(document.querySelectorAll(".fcheck-item.sel"))
-      .map(function (i) { return i.textContent.trim(); }).join(", ");
+    apparelInput.value = Array.prototype.slice.call(flow.querySelectorAll('[data-multi="apparel"].sel'))
+      .map(function (b) { return b.textContent.trim(); }).join(", ");
   }
-  document.querySelectorAll(".fcheck-item").forEach(function (item) {
-    function toggle() { item.classList.toggle("sel"); item.setAttribute("aria-checked", String(item.classList.contains("sel"))); updateApparelInput(); }
-    item.addEventListener("click", toggle);
-    item.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
+  flow.querySelectorAll('[data-multi="apparel"]').forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      btn.classList.toggle("sel");
+      btn.setAttribute("aria-pressed", String(btn.classList.contains("sel")));
+      updateApparelInput();
+      if (apparelInput.value) setErr("terr1", false);
+    });
+  });
+
+  // ── Single-select groups (main flow + optional block share this)
+  var revealOther = document.getElementById("treveal-other"), revealStation = document.getElementById("treveal-station");
+  var otherInput = document.getElementById("company-type-other");
+  function syncCompanyReveals() {
+    var isOther = state.companyType === "Other", isDsp = state.companyType === "Amazon DSP Operator";
+    revealOther.classList.toggle("show", isOther);
+    revealStation.classList.toggle("show", isDsp);
+    if (isOther) otherInput.focus();
+  }
+  document.querySelectorAll("[data-single]").forEach(function (group) {
+    var key = group.getAttribute("data-single");
+    var advance = !group.hasAttribute("data-noadvance") && (key === "quantity" || key === "audience" || key === "timeline");
+    group.querySelectorAll(".topt").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        group.querySelectorAll(".topt").forEach(function (b) { b.classList.remove("sel"); b.setAttribute("aria-checked", "false"); });
+        btn.classList.add("sel");
+        btn.setAttribute("aria-checked", "true");
+        state[key] = btn.textContent.trim();
+        if (key === "companyType") { setErr("terr5", false); syncCompanyReveals(); }
+        // Guard against a second tap landing before the advance fires (would skip a screen).
+        if (advance) { var from = current; setTimeout(function () { if (current === from) goTo(from + 1); }, AUTO_ADVANCE_MS); }
+      });
+    });
+  });
+
+  // ── Continue buttons with per-screen validation
+  function validateStep(step) {
+    if (step === 1) { updateApparelInput(); var ok = !!apparelInput.value.trim(); setErr("terr1", !ok); return ok; }
+    if (step === 5) {
+      var ok5 = !!state.companyType && (state.companyType !== "Other" || !!otherInput.value.trim());
+      setErr("terr5", !ok5); return ok5;
+    }
+    if (step === 6) { var ok6 = !!document.getElementById("meaning-input").value.trim(); setErr("terr6", !ok6); return ok6; }
+    return true;
+  }
+  flow.querySelectorAll("[data-continue]").forEach(function (b) {
+    b.addEventListener("click", function () { if (validateStep(current)) goTo(current + 1); });
+  });
+
+  // ── Phone auto-format
+  var phone = document.getElementById("contact-phone-input");
+  phone.addEventListener("input", function () {
+    var d = this.value.replace(/\D/g, "").slice(0, 10);
+    this.value = d.length < 4 ? d : d.length < 7 ? "(" + d.slice(0, 3) + ") " + d.slice(3) : "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
+  });
+
+  // ── Acknowledgement enables submit
+  var ack = document.getElementById("fsubmit-ack-check"), submitBtn = document.getElementById("fsubmit-btn");
+  ack.addEventListener("change", function () { submitBtn.disabled = !ack.checked; });
+
+  // ── Submit (end of step 7) → POST creates the lead
+  function fieldValue(id) { return document.getElementById(id).value.trim(); }
+  function companyTypeValue() { return state.companyType === "Other" ? otherInput.value.trim() : state.companyType; }
+  function buildPayload() {
+    return {
+      "bot-field": document.getElementById("bot-field").value,
+      apparel_types: apparelInput.value,
+      quantity: state.quantity,
+      audience: state.audience,
+      project_timeline: state.timeline,
+      company_type: companyTypeValue(),
+      station_code: state.companyType === "Amazon DSP Operator" ? fieldValue("station-code-input") : "",
+      meaning: fieldValue("meaning-input"),
+      company_name: fieldValue("company-name-input"),
+      contact_name: fieldValue("contact-name-input"),
+      contact_email: fieldValue("contact-email-input"),
+      contact_phone: fieldValue("contact-phone-input"),
+      questionnaire_files: [],
+      lead_source: "website / start a project",
+    };
+  }
+  function buildSummary() {
+    var rows = [
+      ["Apparel", apparelInput.value],
+      ["Quantity", state.quantity],
+      ["For", state.audience],
+      ["Timeline", state.timeline],
+      ["Company", fieldValue("company-name-input") + " · " + companyTypeValue()],
+      ["Station", state.companyType === "Amazon DSP Operator" ? fieldValue("station-code-input") : ""],
+      ["Contact", fieldValue("contact-name-input") + " · " + fieldValue("contact-email-input") + " · " + fieldValue("contact-phone-input")],
+    ];
+    var box = document.getElementById("tsummary");
+    box.innerHTML = "";
+    rows.forEach(function (r) {
+      if (!r[1] || !r[1].replace(/[·\s]/g, "")) return;
+      var row = document.createElement("div"); row.className = "tsummary-row";
+      var k = document.createElement("span"); k.className = "k"; k.textContent = r[0];
+      var v = document.createElement("span"); v.className = "v"; v.textContent = r[1];
+      row.appendChild(k); row.appendChild(v); box.appendChild(row);
+    });
+  }
+
+  var submitting = false;
+  submitBtn.addEventListener("click", async function () {
+    if (submitting) return;
+    errEl.style.display = "none";
+    var required = ["company-name-input", "contact-name-input", "contact-email-input", "contact-phone-input"];
+    var ok = true;
+    required.forEach(function (id) {
+      var el = document.getElementById(id);
+      el.style.borderColor = "";
+      if (!el.value.trim()) { el.style.borderColor = "#c0392b"; ok = false; }
+    });
+    var email = document.getElementById("contact-email-input");
+    if (email.value.trim() && !/^\S+@\S+\.\S+$/.test(email.value.trim())) { email.style.borderColor = "#c0392b"; ok = false; }
+    setErr("terr7", !ok);
+    if (!ok || !ack.checked) return;
+    submitting = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+    try {
+      var res = await fetch(HQ_BASE + "/api/public-lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(buildPayload()) });
+      if (!res.ok) throw new Error("HQ submission failed: " + res.status);
+      var out = await res.json();
+      state.leadId = out && out.id ? out.id : "";
+      buildSummary();
+      // No lead id back (e.g. honeypot fake success) → nothing to patch, hide the block.
+      document.getElementById("tdetails").style.display = state.leadId ? "" : "none";
+      flow.style.display = "none";
+      successBox.classList.add("show");
+      successBox.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err) {
+      console.error("[startForm]", err);
+      errEl.style.display = "block";
+      submitBtn.disabled = !ack.checked;
+    } finally {
+      submitBtn.textContent = "Submit Request →";
+      submitting = false;
+    }
   });
 
   // ── File upload (Supabase Storage — public anon key, client-side by design)
@@ -295,78 +522,58 @@
     });
   }
   function addFiles(nf) { var c = stagedFiles.concat(Array.prototype.slice.call(nf)); var err = validateFiles(c); if (err) { setFileError(err); return; } setFileError(null); stagedFiles = c; syncInput(); renderList(); }
-  if (farea && finput) {
-    farea.addEventListener("click", function () { finput.click(); });
-    farea.addEventListener("dragover", function (e) { e.preventDefault(); farea.style.borderColor = "var(--ink)"; });
-    farea.addEventListener("dragleave", function () { farea.style.borderColor = ""; });
-    farea.addEventListener("drop", function (e) { e.preventDefault(); farea.style.borderColor = ""; if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files); });
-    finput.addEventListener("change", function () { if (finput.files.length) addFiles(finput.files); finput.value = ""; });
-  }
+  farea.addEventListener("click", function () { finput.click(); });
+  farea.addEventListener("dragover", function (e) { e.preventDefault(); farea.style.borderColor = "var(--ink)"; });
+  farea.addEventListener("dragleave", function () { farea.style.borderColor = ""; });
+  farea.addEventListener("drop", function (e) { e.preventDefault(); farea.style.borderColor = ""; if (e.dataTransfer.files.length) addFiles(e.dataTransfer.files); });
+  finput.addEventListener("change", function () { if (finput.files.length) addFiles(finput.files); finput.value = ""; });
 
-  // ── Phone auto-format
-  var phone = form.querySelector('input[name="contact_phone"]');
-  if (phone) phone.addEventListener("input", function () {
-    var d = this.value.replace(/\D/g, "").slice(0, 10);
-    this.value = d.length < 4 ? d : d.length < 7 ? "(" + d.slice(0, 3) + ") " + d.slice(3) : "(" + d.slice(0, 3) + ") " + d.slice(3, 6) + "-" + d.slice(6);
-  });
-
-  // ── Acknowledgement enables submit
-  var ack = document.getElementById("fsubmit-ack-check"), submitBtn = document.getElementById("fsubmit-btn");
-  if (ack && submitBtn) ack.addEventListener("change", function () { submitBtn.disabled = !ack.checked; });
-
-  // ── Submit → HQ
-  async function submitToHq(files) {
-    var fd = new FormData(form), json = {};
-    fd.forEach(function (v, k) { json[k] = v; });
-    delete json.brand_assets;
-    json.questionnaire_files = files;
-    json.lead_source = "website / start a project";
-    var res = await fetch("https://hq.threefoldsupply.com/api/public-lead", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(json) });
-    if (!res.ok) throw new Error("HQ submission failed: " + res.status);
-  }
-
-  var submitting = false;
-  async function handleSubmit(e) {
-    if (e && e.preventDefault) e.preventDefault();
-    if (submitting) return;
-    if (errEl) errEl.style.display = "none";
-    var origText = submitBtn ? submitBtn.textContent : "Submit Request →";
-    updateApparelInput();
-    var ok = true;
-    form.querySelectorAll("[required]").forEach(function (field) { field.style.borderColor = ""; if (!String(field.value || "").trim()) { field.style.borderColor = "#c0392b"; ok = false; } });
-    var aw = document.getElementById("apparel-checks");
-    if (!apparelInput.value.trim()) { if (aw) { aw.style.outline = "1px solid #c0392b"; aw.style.outlineOffset = "4px"; } ok = false; } else if (aw) { aw.style.outline = ""; }
-    var fileErr = validateFiles(stagedFiles); if (fileErr) { setFileError(fileErr); ok = false; }
-    if (!ack || !ack.checked) ok = false;
-    if (!ok) { var first = form.querySelector('[style*="c0392b"]'); if (first) { first.scrollIntoView({ behavior: "smooth", block: "center" }); if (first.focus) first.focus(); } return; }
-    submitting = true;
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = "Sending…"; }
+  // ── Optional details (post-submit) → PATCH the same lead, never a second POST
+  var saveBtn = document.getElementById("tdetails-save"), savedMsg = document.getElementById("tdetails-saved");
+  var saving = false;
+  saveBtn.addEventListener("click", async function () {
+    if (saving || !state.leadId) return;
+    saving = true;
+    setErr("tdetails-error", false);
+    savedMsg.classList.remove("show");
+    saveBtn.disabled = true;
+    var origText = saveBtn.textContent;
     try {
       var uploaded = [];
       if (stagedFiles.length) {
-        if (submitBtn) submitBtn.textContent = "Uploading files…";
+        saveBtn.textContent = "Uploading files…";
         var up = await uploadFilesToStorage(stagedFiles);
-        if (up.failedCount > 0) { setFileError(up.failedCount + " file(s) failed to upload. Check your connection or remove them, then retry."); if (submitBtn) { submitBtn.textContent = origText; submitBtn.disabled = false; } submitting = false; return; }
+        if (up.failedCount > 0) { setFileError(up.failedCount + " file(s) failed to upload. Check your connection or remove them, then retry."); return; }
         uploaded = up.succeeded;
       }
-      if (submitBtn) submitBtn.textContent = "Sending…";
-      await submitToHq(uploaded);
-      var cm = form.querySelector('[name="contact_method"]'), bk = document.getElementById("form-success-booking");
-      if (bk) bk.style.display = (cm && cm.value === "Virtual meeting") ? "block" : "none";
-      // Reset the button state (in case the user navigates back to the still-hidden form).
-      if (submitBtn) { submitBtn.textContent = origText; submitBtn.disabled = false; }
-      submitting = false;
-      form.style.display = "none";
-      successBox.classList.add("show");
-      successBox.scrollIntoView({ behavior: "smooth", block: "center" });
+      saveBtn.textContent = "Saving…";
+      var res = await fetch(HQ_BASE + "/api/public-lead", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          "bot-field": document.getElementById("bot-field").value,
+          id: state.leadId,
+          budget: state.budget,
+          style: state.style,
+          colors: fieldValue("colors-input"),
+          notes: fieldValue("notes-input"),
+          questionnaire_files: uploaded,
+        }),
+      });
+      if (!res.ok) throw new Error("HQ patch failed: " + res.status);
+      stagedFiles = []; syncInput(); renderList();
+      savedMsg.classList.add("show");
     } catch (err) {
-      console.error("[startForm]", err);
-      if (errEl) errEl.style.display = "block";
-      if (submitBtn) { submitBtn.textContent = origText; submitBtn.disabled = !(ack && ack.checked); }
-      submitting = false;
+      console.error("[startDetails]", err);
+      setErr("tdetails-error", true);
+    } finally {
+      saveBtn.textContent = origText;
+      saveBtn.disabled = false;
+      saving = false;
     }
-  }
-  form.addEventListener("submit", handleSubmit);
+  });
+
+  goTo(1);
 })();
 </script>
 <script src="js/cart.js" defer></script>
