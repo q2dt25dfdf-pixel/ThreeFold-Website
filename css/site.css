@@ -459,11 +459,14 @@ body.lb-open .lightbox{display:block}
 .topt .tcheck{position:relative;width:16px;height:16px;border:1px solid currentColor;border-radius:3px;flex:none}
 .topt.sel .tcheck::after{content:"";position:absolute;top:2px;left:5px;width:4px;height:8px;border:1.5px solid var(--paper);border-top:none;border-left:none;transform:rotate(45deg)}
 .treveal{display:none;margin-top:20px;max-width:420px}
-.treveal.show{display:flex;animation:fadein .2s ease}
+.treveal.show{display:flex;animation:fadein .2s ease;border-left:3px solid var(--accent);background:var(--paper);border-radius:0 6px 6px 0;padding:14px 16px}
 .tnav{display:flex;gap:12px;align-items:center;margin-top:32px}
 .tback{background:none;border:1px solid var(--line);border-radius:4px;font-family:var(--mono);font-size:12px;padding:12px 18px;color:var(--ink-soft);cursor:pointer;transition:.15s}
 .tback:hover{border-color:var(--ink);color:var(--ink)}
 .tback[hidden]{display:none}
+.tnav .btn[hidden]{display:none}
+.tnav .btn:disabled{opacity:.45;cursor:not-allowed}
+.tnav .btn:disabled:hover{background:var(--ink);transform:none}
 .terr{display:none;color:#c0392b;font-family:var(--mono);font-size:12px;margin-top:14px}
 .terr.show{display:block}
 .tsummary{margin:28px auto 0;max-width:520px;text-align:left;border:1px solid var(--line);border-radius:8px;background:#fff;padding:18px 22px}

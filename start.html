@@ -55,7 +55,7 @@
         <!-- 1 · Apparel type (multi) -->
         <div class="tscreen" id="ts1" data-step="1">
           <h2 class="tq" tabindex="-1">What are we making?</h2>
-          <p class="tq-hint">Select all that apply.</p>
+          <p class="tq-hint">Pick as many as apply — you can select more than one.</p>
           <div class="topt-wrap" id="apparel-checks" role="group" aria-label="Apparel type — select all that apply">
             <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>T-Shirts</button>
             <button type="button" class="topt" data-multi="apparel" aria-pressed="false"><span class="tcheck"></span>Hoodies</button>
@@ -69,7 +69,7 @@
           <p class="terr" id="terr1">Pick at least one — "Not sure yet" counts.</p>
           <div class="tnav">
             <button type="button" class="tback" data-back hidden>← Back</button>
-            <button type="button" class="btn" data-continue>Continue →</button>
+            <button type="button" class="btn" id="ts1-continue" data-continue disabled>Pick at least one</button>
           </div>
         </div>
 
@@ -148,7 +148,7 @@
           <p class="terr" id="terr5">Pick your company type — and if it's "Other", tell us what you do.</p>
           <div class="tnav">
             <button type="button" class="tback" data-back>← Back</button>
-            <button type="button" class="btn" data-continue>Continue →</button>
+            <button type="button" class="btn" id="ts5-continue" data-continue hidden>Continue →</button>
           </div>
         </div>
 
@@ -344,27 +344,40 @@
     apparelInput.value = Array.prototype.slice.call(flow.querySelectorAll('[data-multi="apparel"].sel'))
       .map(function (b) { return b.textContent.trim(); }).join(", ");
   }
+  var ts1Continue = document.getElementById("ts1-continue");
+  function syncApparelContinue() {
+    var picked = !!apparelInput.value;
+    ts1Continue.disabled = !picked;
+    ts1Continue.textContent = picked ? "Continue →" : "Pick at least one";
+  }
   flow.querySelectorAll('[data-multi="apparel"]').forEach(function (btn) {
     btn.addEventListener("click", function () {
       btn.classList.toggle("sel");
       btn.setAttribute("aria-pressed", String(btn.classList.contains("sel")));
       updateApparelInput();
+      syncApparelContinue();
       if (apparelInput.value) setErr("terr1", false);
     });
   });
 
   // ── Single-select groups (main flow + optional block share this)
   var revealOther = document.getElementById("treveal-other"), revealStation = document.getElementById("treveal-station");
-  var otherInput = document.getElementById("company-type-other");
+  var otherInput = document.getElementById("company-type-other"), stationInput = document.getElementById("station-code-input");
+  var ts5Continue = document.getElementById("ts5-continue");
+  function companyNeedsReveal() {
+    return state.companyType === "Other" || state.companyType === "Amazon DSP Operator";
+  }
   function syncCompanyReveals() {
     var isOther = state.companyType === "Other", isDsp = state.companyType === "Amazon DSP Operator";
     revealOther.classList.toggle("show", isOther);
     revealStation.classList.toggle("show", isDsp);
+    ts5Continue.hidden = !(isOther || isDsp);
     if (isOther) otherInput.focus();
+    else if (isDsp) stationInput.focus();
   }
   document.querySelectorAll("[data-single]").forEach(function (group) {
     var key = group.getAttribute("data-single");
-    var advance = !group.hasAttribute("data-noadvance") && (key === "quantity" || key === "audience" || key === "timeline" || key === "contactMethod");
+    var autoKey = !group.hasAttribute("data-noadvance") && (key === "quantity" || key === "audience" || key === "timeline" || key === "contactMethod" || key === "companyType");
     group.querySelectorAll(".topt").forEach(function (btn) {
       btn.addEventListener("click", function () {
         group.querySelectorAll(".topt").forEach(function (b) { b.classList.remove("sel"); b.setAttribute("aria-checked", "false"); });
@@ -372,8 +385,16 @@
         btn.setAttribute("aria-checked", "true");
         state[key] = btn.textContent.trim();
         if (key === "companyType") { setErr("terr5", false); syncCompanyReveals(); }
-        // Guard against a second tap landing before the advance fires (would skip a screen).
-        if (advance) { var from = current; setTimeout(function () { if (current === from) goTo(from + 1); }, AUTO_ADVANCE_MS); }
+        // Company type stays put when the choice reveals an input (Other / DSP station).
+        var advance = autoKey && !(key === "companyType" && companyNeedsReveal());
+        // Guard against a second tap landing before the advance fires (would skip a screen,
+        // or advance past a reveal the second tap just opened).
+        if (advance) {
+          var from = current;
+          setTimeout(function () {
+            if (current === from && !(key === "companyType" && companyNeedsReveal())) goTo(from + 1);
+          }, AUTO_ADVANCE_MS);
+        }
       });
     });
   });
