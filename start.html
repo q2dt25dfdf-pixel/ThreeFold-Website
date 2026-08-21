@@ -166,8 +166,21 @@
           </div>
         </div>
 
-        <!-- 7 · Contact + ack + submit -->
+        <!-- 7 · Contact method (single) -->
         <div class="tscreen" id="ts7" data-step="7">
+          <h2 class="tq" tabindex="-1">How should we reach you?</h2>
+          <div class="topt-wrap" role="radiogroup" aria-label="Preferred contact method" data-single="contactMethod">
+            <button type="button" class="topt" role="radio" aria-checked="false">Email</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Phone call</button>
+            <button type="button" class="topt" role="radio" aria-checked="false">Virtual meeting</button>
+          </div>
+          <div class="tnav">
+            <button type="button" class="tback" data-back>← Back</button>
+          </div>
+        </div>
+
+        <!-- 8 · Contact + ack + submit -->
+        <div class="tscreen" id="ts8" data-step="8">
           <h2 class="tq" tabindex="-1">Where do we send the mockup?</h2>
           <div class="form-grid" style="max-width:640px">
             <div class="field"><label for="company-name-input">Company Name <span class="req">*</span></label><input type="text" id="company-name-input" name="company_name" placeholder="Piranha Ops (POPS)" autocomplete="organization"></div>
@@ -181,7 +194,7 @@
               <span>I understand that all products are custom made specifically for my order. Once artwork is approved and production begins, orders cannot be canceled, returned, or refunded.</span>
             </label>
             <p class="fsubmit-ack-note">If there is an issue caused by a manufacturing defect or production error, contact us and we will make it right.</p>
-            <p class="terr" id="terr7">Fill in the four contact fields so we can reach you.</p>
+            <p class="terr" id="terr8">Fill in the four contact fields so we can reach you.</p>
             <div class="tnav" style="margin-top:0">
               <button type="button" class="tback" data-back>← Back</button>
               <button type="button" class="btn btn-submit" id="fsubmit-btn" disabled>Submit Request →</button>
@@ -191,12 +204,12 @@
         </div>
       </div>
 
-      <!-- 8 · Done -->
+      <!-- 9 · Done -->
       <div class="form-success" id="form-success">
         <div class="form-success-check">✓</div>
         <h2 class="form-success-h">We Got You.</h2>
         <p class="form-success-body">Your project brief is in. We'll reach out within 24 hours to schedule your design consultation. Keep an eye on your inbox.</p>
-        <div id="form-success-booking" style="margin-top:28px">
+        <div id="form-success-booking" style="display:none;margin-top:28px">
           <p class="form-success-body" style="margin-bottom:16px">Want to talk it through? Book your initial meeting below.</p>
           <a class="btn" href="https://cal.com/threefold-fwkchj/initial-meeting" target="_blank" rel="noopener">Book Initial Meeting →</a>
         </div>
@@ -303,9 +316,9 @@
   // Same origin trick as checkout: local previews talk to a local HQ dev server.
   var HQ_BASE = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) ? "http://localhost:3000" : "https://hq.threefoldsupply.com";
 
-  var TOTAL_STEPS = 7;
+  var TOTAL_STEPS = 8;
   var AUTO_ADVANCE_MS = 180;
-  var state = { quantity: "", audience: "", timeline: "", companyType: "", budget: "", style: "", leadId: "" };
+  var state = { quantity: "", audience: "", timeline: "", companyType: "", contactMethod: "", budget: "", style: "", leadId: "" };
   var current = 1;
 
   // ── Navigation
@@ -351,7 +364,7 @@
   }
   document.querySelectorAll("[data-single]").forEach(function (group) {
     var key = group.getAttribute("data-single");
-    var advance = !group.hasAttribute("data-noadvance") && (key === "quantity" || key === "audience" || key === "timeline");
+    var advance = !group.hasAttribute("data-noadvance") && (key === "quantity" || key === "audience" || key === "timeline" || key === "contactMethod");
     group.querySelectorAll(".topt").forEach(function (btn) {
       btn.addEventListener("click", function () {
         group.querySelectorAll(".topt").forEach(function (b) { b.classList.remove("sel"); b.setAttribute("aria-checked", "false"); });
@@ -401,6 +414,7 @@
       audience: state.audience,
       project_timeline: state.timeline,
       company_type: companyTypeValue(),
+      contact_method: state.contactMethod,
       station_code: state.companyType === "Amazon DSP Operator" ? fieldValue("station-code-input") : "",
       meaning: fieldValue("meaning-input"),
       company_name: fieldValue("company-name-input"),
@@ -420,6 +434,7 @@
       ["Company", fieldValue("company-name-input") + " · " + companyTypeValue()],
       ["Station", state.companyType === "Amazon DSP Operator" ? fieldValue("station-code-input") : ""],
       ["Contact", fieldValue("contact-name-input") + " · " + fieldValue("contact-email-input") + " · " + fieldValue("contact-phone-input")],
+      ["Reach via", state.contactMethod],
     ];
     var box = document.getElementById("tsummary");
     box.innerHTML = "";
@@ -445,7 +460,7 @@
     });
     var email = document.getElementById("contact-email-input");
     if (email.value.trim() && !/^\S+@\S+\.\S+$/.test(email.value.trim())) { email.style.borderColor = "#c0392b"; ok = false; }
-    setErr("terr7", !ok);
+    setErr("terr8", !ok);
     if (!ok || !ack.checked) return;
     submitting = true;
     submitBtn.disabled = true;
@@ -456,6 +471,7 @@
       var out = await res.json();
       state.leadId = out && out.id ? out.id : "";
       buildSummary();
+      document.getElementById("form-success-booking").style.display = state.contactMethod === "Virtual meeting" ? "block" : "none";
       // No lead id back (e.g. honeypot fake success) → nothing to patch, hide the block.
       document.getElementById("tdetails").style.display = state.leadId ? "" : "none";
       flow.style.display = "none";
